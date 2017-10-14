@@ -7,7 +7,7 @@
 #' @return Dataframe
 #' @author Joel Pick
 #' @export
-extract_points <- function(file, plot_type=c("mean_se","boxplot","scatterplot"), summary_stats=FALSE){
+extract_points <- function(file, plot_type=c("scatterplot"), summary_stats=FALSE){
 	
 	stopifnot(plot_type %in% c("mean_se","boxplot","scatterplot"))
 
