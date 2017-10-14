@@ -1,22 +1,35 @@
 
 #' @title se_to_sd
-#' @desciption Transforms standerd error to standard deviation
+#' @description Transforms standerd error to standard deviation
 #' @param se Standard Error of the mean
 #' @param n Sample Size
 #' @param na.rm Remove NAs
 #' @return Returns vector of standard errors
 #' @author Joel Pick
-#' @example
 #' @export
 se_to_sd <- function(se, n, na.rm=TRUE) {
 	se * sqrt(n)
 }
 
 
-CI95_to_sd <- function(CI95,n) {
-	CI95/1.96 * sqrt(n)
+#' @title CI95_to_sd
+#' @description Transforms standerd error to standard deviation
+#' @param CI Interval difference from the mean
+#' @param n Sample Size
+#' @return Returns vector of standard deviations
+#' @author Joel Pick
+#' @export
+CI95_to_sd <- function(CI,n) {
+	CI/1.96 * sqrt(n)
 }
 
+#' @title rqm_to_mean
+#' @description calculate the mean from the 
+#' @param CI Interval difference from the mean
+#' @param n Sample Size
+#' @return Returns vector of standard deviations
+#' @author Joel Pick
+#' @export
 rqm_to_mean <- function(min,LQ,median,UQ,max){
 	b <- max
 	a <- min

@@ -1,8 +1,4 @@
 
-
-require(magick)
-require(digitize)
-
 ### modified from digitize
 getVals <- function() {
 names <- c("x1","x2","y1","y2")
@@ -10,7 +6,7 @@ names <- c("x1","x2","y1","y2")
   for (p in names) {
     bad <- TRUE
     while (bad) {
-      input <- readline(paste("What is the value of", p, "?\n"))
+      input <- base::readline(paste("What is the value of", p, "?\n"))
       bad <- length(input) > 1
       if (bad) {
         cat("Error in input! Try again\n")
@@ -26,7 +22,7 @@ names <- c("x1","x2","y1","y2")
 ### rotating images
 graph_rotate <- function(image){
 	rotateQ <- NA
-	while(!rotateQ %in% c("y","n")) rotateQ <- readline("Rotate Image? y/n ")
+	while(!rotateQ %in% c("y","n")) rotateQ <- base::readline("Rotate Image? y/n ")
 	while(rotateQ=="y"){
 	print("click left hand then right hand side of x axis")
 	
@@ -39,9 +35,9 @@ graph_rotate <- function(image){
 	y.dist <- rot_angle$y[2] - rot_angle$y[1]
 	
 	f <- atan2(y.dist, x.dist) * 180/pi
-	image <- image_rotate(image, f)
+	image <- magick::image_rotate(image, f)
 	plot(image)
-	rotateQ <- readline("Rotate Image? y/n ")}
+	rotateQ <- base::readline("Rotate Image? y/n ")}
 	return(image)
 }
 
@@ -66,7 +62,7 @@ graph_rotate <- function(image){
 mean_se_points <- function(calpoints,point_vals){
 	cat("Now click on Upper SE, followed by the Mean")
 	group_points <- locator(2, type="o", col="red", lwd=2)
-	group_points_cal <- Calibrate(group_points, calpoints, point_vals[1], point_vals[2], point_vals[3], point_vals[4])
+	group_points_cal <- digitize::Calibrate(group_points, calpoints, point_vals[1], point_vals[2], point_vals[3], point_vals[4])
 	group_mean <- group_points_cal$y[2]
 	group_se <- group_points_cal$y[1] - group_points_cal$y[2]	
 	c(group_mean,group_se,mean(group_points_cal$x))
@@ -75,7 +71,7 @@ mean_se_points <- function(calpoints,point_vals){
 boxplot_points <- function(calpoints,point_vals){
 	cat("Now click on Max, Upper Q, Median, Lower Q, and Minimum\nIn that order")
 	group_points <- locator(5, type="o", col="red", lwd=2)
-	group_points_cal <- Calibrate(group_points, calpoints, point_vals[1], point_vals[2], point_vals[3], point_vals[4])
+	group_points_cal <- digitize::Calibrate(group_points, calpoints, point_vals[1], point_vals[2], point_vals[3], point_vals[4])
 	c(group_points_cal[,"y"],mean(group_points_cal$x))
 	}
 
@@ -85,7 +81,7 @@ boxplot_points <- function(calpoints,point_vals){
 extract_points <- function(file, plot_type=c("mean_se","boxplot","scatterplot")){
 	
 	#"~/Dropbox/0_postdoc/8_PR repeat/shared/extracted graphs/5_fig2a.png"
-	image <- image_read(file)
+	image <- magick::image_read(file)
 	plot(image)
 
 	new_image <- graph_rotate(image)
@@ -131,17 +127,17 @@ Click IN ORDER: x1, x2, y1, y2 \n
 	
 	if(plot_type %in% c("mean_se","boxplot")){
 	
-		nMeans <- as.numeric(readline("Number of groups: "))
+		nMeans <- as.numeric(base::readline("Number of groups: "))
 		group_data <- if(plot_type == "mean_se") {as.data.frame(matrix(NA, ncol=4, nrow=nMeans, dimnames=list(NULL, c("id","mean","se","x"))))}else if(plot_type == "boxplot") {as.data.frame(matrix(NA, ncol=7, nrow=nMeans, dimnames=list(NULL, c("id","max","q3","med","q1","min","x"))))}
 			
 		for(i in 1:nMeans) {
 			add_removeQ <- "r"
 			while(add_removeQ=="r") {
-				group_data[i,1] <- readline(paste("Group identifier",i,":"))
+				group_data[i,1] <- base::readline(paste("Group identifier",i,":"))
 				if(plot_type == "mean_se") group_data[i,2:4] <- mean_se_points(calpoints,point_vals)
 				if(plot_type == "boxplot") group_data[i,2:7] <- boxplot_points(calpoints,point_vals)
-				add_removeQ <- readline("Continue or reclick? c/r ")
-				while(!add_removeQ  %in% c("c","r")) add_removeQ <- readline("Continue or reclick? c/r ")	
+				add_removeQ <- base::readline("Continue or reclick? c/r ")
+				while(!add_removeQ  %in% c("c","r")) add_removeQ <- base::readline("Continue or reclick? c/r ")	
 			}
 		}
 	}
@@ -175,9 +171,9 @@ Click IN ORDER: x1, x2, y1, y2 \n
 					}else{cat("Point not identified")
 				}
 			}
-			add_removeQ <- readline("Add, remove or finish? a/r/f ")		
+			add_removeQ <- base::readline("Add, remove or finish? a/r/f ")		
 		}
-	group_data <- Calibrate(group_points, calpoints, point_vals[1], point_vals[2], point_vals[3], point_vals[4])
+	group_data <- digitize::Calibrate(group_points, calpoints, point_vals[1], point_vals[2], point_vals[3], point_vals[4])
 
 	}	
 	return(group_data)

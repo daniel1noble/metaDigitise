@@ -1,9 +1,15 @@
 Package: metaDigitise
 Title: metaDigitise: Extract and summarise data from published figures in R
 Version: 0.0.0.9000
-Authors@R: person("Joel", "Pick", email = "joel.l.pick@gmail.com", role = c("aut", "cre")), person("Daniel", "Noble", email = "daniel.wa.noble@gmail.com", role = c("aut", "cre"))
+Authors@R: person("Joel", "Pick", email = "joel.l.pick@gmail.com", role = c("aut", "cre")); person("Daniel", "Noble", email = "daniel.wa.noble@gmail.com", role = c("aut", "cre"))
 Description: High-throughput extraction of data from figures in primary research papers. metaDigitise can extract data and / or automatically calculate summary statistics for users from box plots, bar plots (e.g., mean and errors), scatter plots and plots of mean and errors.
 Depends: R (>= 3.4.1)
 License: GNU GENERAL PUBLIC LICENSE
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 6.0.1
+Imports: digitize,
+    magick,
+    stats,
+    graphics,
+    utils
