@@ -9,11 +9,11 @@ rqm_to_mean(min, LQ, median, UQ, max)
 \arguments{
 \item{min}{Minimum value}
 
-\item{LQ}{Lower 75% quartile}
+\item{LQ}{Lower 75th quartile}
 
 \item{median}{Median}
 
-\item{UQ}{Upper 75% quartile}
+\item{UQ}{Upper 75th quartile}
 
 \item{max}{Maximum value}
 }

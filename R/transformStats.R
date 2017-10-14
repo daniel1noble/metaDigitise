@@ -28,14 +28,13 @@ CI95_to_sd <- function(CI,n) {
 #' @title rqm_to_mean
 #' @description Calculate the mean from the box plots
 #' @param min Minimum value
-#' @param LQ Lower 75% quartile
+#' @param LQ Lower 75th quartile
 #' @param median Median
-#' @param UQ Upper 75% quartile
+#' @param UQ Upper 75th quartile
 #' @param max Maximum value
 #' @return Returns vector of mean
 #' @author Joel Pick
 #' @export
-
 rqm_to_mean <- function(min,LQ,median,UQ,max){
 	b <- max
 	a <- min
@@ -51,14 +50,13 @@ rqm_to_mean <- function(min,LQ,median,UQ,max){
 #' @title rqm_to_sd
 #' @description Calculate the standard deviation from box plots
 #' @param min Minimum value
-#' @param LQ Lower 75% quartile
-#' @param UQ Upper 75% quartile
+#' @param LQ Lower 75th quartile
+#' @param UQ Upper 75th quartile
 #' @param max Maximum value
 #' @param n Sample size
 #' @return Returns vector of standard deviation
 #' @author Joel Pick
 #' @export
-
 rqm_to_sd <- function(min,LQ,UQ,max,n) {
 	b <- max
 	a <- min

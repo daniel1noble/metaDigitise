@@ -9,9 +9,9 @@ rqm_to_sd(min, LQ, UQ, max, n)
 \arguments{
 \item{min}{Minimum value}
 
-\item{LQ}{Lower 75% quartile}
+\item{LQ}{Lower 75th quartile}
 
-\item{UQ}{Upper 75% quartile}
+\item{UQ}{Upper 75th quartile}
 
 \item{max}{Maximum value}
 
