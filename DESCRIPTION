@@ -12,4 +12,5 @@ Imports: digitize,
     magick,
     stats,
     graphics,
-    utils
+    utils,
+    testthat
