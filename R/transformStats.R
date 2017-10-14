@@ -1,35 +1,41 @@
 
 #' @title se_to_sd
-#' @description Transforms standerd error to standard deviation
+#' @description Transforms standard error to standard deviation
 #' @param se Standard Error of the mean
 #' @param n Sample Size
 #' @param na.rm Remove NAs
 #' @return Returns vector of standard errors
 #' @author Joel Pick
 #' @export
+
 se_to_sd <- function(se, n, na.rm=TRUE) {
 	se * sqrt(n)
 }
 
 
 #' @title CI95_to_sd
-#' @description Transforms standerd error to standard deviation
+#' @description Transforms standard error to standard deviation
 #' @param CI Interval difference from the mean
 #' @param n Sample Size
 #' @return Returns vector of standard deviations
 #' @author Joel Pick
 #' @export
+
 CI95_to_sd <- function(CI,n) {
 	CI/1.96 * sqrt(n)
 }
 
 #' @title rqm_to_mean
-#' @description calculate the mean from the 
-#' @param CI Interval difference from the mean
-#' @param n Sample Size
-#' @return Returns vector of standard deviations
+#' @description Calculate the mean from the box plots
+#' @param min Minimum value
+#' @param LQ Lower 75% quartile
+#' @param median Median
+#' @param UQ Upper 75% quartile
+#' @param max Maximum value
+#' @return Returns vector of mean
 #' @author Joel Pick
 #' @export
+
 rqm_to_mean <- function(min,LQ,median,UQ,max){
 	b <- max
 	a <- min
@@ -42,6 +48,16 @@ rqm_to_mean <- function(min,LQ,median,UQ,max){
 	return(Xbar)
 }
 
+#' @title rqm_to_sd
+#' @description Calculate the standard deviation from box plots
+#' @param min Minimum value
+#' @param LQ Lower 75% quartile
+#' @param UQ Upper 75% quartile
+#' @param max Maximum value
+#' @param n Sample size
+#' @return Returns vector of standard deviation
+#' @author Joel Pick
+#' @export
 
 rqm_to_sd <- function(min,LQ,UQ,max,n) {
 	b <- max
@@ -56,6 +72,14 @@ rqm_to_sd <- function(min,LQ,UQ,max,n) {
 	return(S)
 }
 
+#' @title range_to_sd
+#' @description Converts a range to a standard deviation
+#' @param min Minimum value
+#' @param max Maximum value
+#' @param n Sample size
+#' @return Returns vector of standard deviation
+#' @author Joel Pick
+#' @export
 
 range_to_sd <- function(min,max,n) {
 	a <- min
@@ -67,16 +91,37 @@ range_to_sd <- function(min,max,n) {
 	return(S)
 }
 
+#' @title grandMean
+#' @description Pooled mean of a set of group means
+#' @param mean Mean
+#' @param n Sample size
+#' @return Returns vector of pooled mean
+#' @author Joel Pick
+#' @export
 
 grandMean <- function(mean,n)	sum(mean*n)/sum(n)
 
+
+#' @title grandSD
+#' @description Pooled standard deviation of a set of groups
+#' @param mean Mean
+#' @param sd standard deviation
+#' @param n Sample size
+#' @param equal Whether to calculate pooled SD assuming groups have the same means (TRUE) or different means (FALSE) 
+#' @return Returns vector of pooled mean
+#' @author Joel Pick
+#' @export
 ## for non-overlapping SDs
 ## https://en.wikipedia.org/w/index.php?title=Standard_deviation&oldid=724302220#Combining_standard_deviations
-grandSD <- function(mean,sd,n){
+
+grandSD <- function(mean,sd,n, equal = FALSE){
+	if(equal == FALSE){
 	sqrt(
 		( sum( (n-1)*sd^2 + n*mean^2 ) - sum(n)*(sum(mean*n)/sum(n))^2 )
 		/
 		(sum(n) -1)
 		)
+	}else{
+	sqrt( sum( (n-1)*sd^2 ) / sum(n -1) )
 	}
-	## grandSD <- function(mean,sd,n)	sqrt( sum( (n-1)*sd^2 ) / sum(n -1) )
+}
