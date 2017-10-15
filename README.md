@@ -12,7 +12,7 @@ library(metaDigitise)
 ```
 
 ```
-extract_points(" /Users/danielnoble/Dropbox/1_Research/1_Manuscripts/1_In_Preparation/packages/metaDigitise/example_figs/mean_se/1269_Ligon_2009_Fig.3.png", "mean_se")
+extract_points("./example_figs/mean_se/1269_Ligon_2009_Fig.3.png", "mean_se")
 
 extract_points("~/Dropbox/0_postdoc/8_PR repeat/shared/extracted graphs/29_fig1a.png", "boxplot")
  
