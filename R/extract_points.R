@@ -7,7 +7,7 @@
 #' @return Dataframe
 #' @author Joel Pick
 #' @export
-extract_points <- function(file, plot_type=c("mean_se","boxplot","scatterplot"), summary_stats=FALSE){
+extract_points <- function(file, plot_type="scatterplot", summary_stats=FALSE){
 	
 	stopifnot(plot_type %in% c("mean_se","boxplot","scatterplot"))
 
@@ -55,9 +55,11 @@ extract_points <- function(file, plot_type=c("mean_se","boxplot","scatterplot"),
 						  )
 				group_points <- rbind(group_points, as.data.frame(locator(type="p", col="red", lwd=2)))}
 			if(add_removeQ=="r") {
+				cat("Click on point you want to remove")
 				remove <- locator(1,type="p", col="green", pch=4, lwd=2)
 				x_remove <- which(abs(group_points$x-remove$x) == min(abs(group_points$x-remove$x)))
 				y_remove <- which(abs(group_points$y-remove$y) == min(abs(group_points$y-remove$y)))
+				## add in a maximum distance to search in; at the moment it searches whole plot area
 				if(x_remove==y_remove) {
 					points(group_points$x[x_remove],group_points$y[y_remove], col="green", lwd=2)
 					group_points <- group_points[-x_remove,]

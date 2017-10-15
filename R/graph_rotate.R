@@ -6,22 +6,22 @@
 #' @export
 graph_rotate <- function(image){
 	plot(image)
-	rotateQ <- NA
-	while(!rotateQ %in% c("y","n")) rotateQ <- base::readline("Rotate Image? y/n ")
-	while(rotateQ=="y"){
-	print("click left hand then right hand side of x axis")
-	
-	##rotate
-	##click left hand then right hand side of x axis
-	rot_angle <- locator(2, col="green")
-	rot_angle$y
-	
-	x.dist <- rot_angle$x[2] - rot_angle$x[1]
-	y.dist <- rot_angle$y[2] - rot_angle$y[1]
-	
-	f <- atan2(y.dist, x.dist) * 180/pi
-	image <- magick::image_rotate(image, f)
-	plot(image)
-	rotateQ <- base::readline("Rotate Image? y/n ")}
+	rotateQ <- "a"
+	while(rotateQ != "n") {
+		if(rotateQ=="y"){
+			print("click left hand then right hand side of x axis")
+			
+			rot_angle <- locator(2, col="green")
+			rot_angle$y
+			
+			x.dist <- rot_angle$x[2] - rot_angle$x[1]
+			y.dist <- rot_angle$y[2] - rot_angle$y[1]
+			
+			f <- atan2(y.dist, x.dist) * 180/pi
+			image <- magick::image_rotate(image, f)
+			plot(image)
+		}
+		rotateQ <- base::readline("Rotate Image? y/n ")
+	}
 	return(image)
 }
