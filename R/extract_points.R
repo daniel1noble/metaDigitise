@@ -2,7 +2,7 @@
 #' @title extract_points
 #' @description Extracts points from a figure and generate summary statistics
 #' @param file Image file
-#' @param plot_type One of "mean_se", "boxplot", or "scatterplot". "mean_se" assumes that there are means and standard error bars, and requires the user to click the upper error bar followed by the mean. "boxplot" assumes that the user will input 5 points, in the order max, upper (75%) quartile, median, lower (25%) quartile, and minimum. "Scatterplot assumes that all points will be clicked"
+#' @param plot_type One of "mean_se", "boxplot", or "scatterplot". "mean_se" assumes that there are means and standard error bars, and requires the user to click the upper error bar followed by the mean. "boxplot" assumes that the user will input 5 points, in the order max, upper (75th) quartile, median, lower (25th) quartile, and minimum. "Scatterplot assumes that all points will be clicked"
 #' @param summary_stats Whether further summary statistics are derived from "mean_se" and "boxplot". Require use to input sample sizes. Currently defunct
 #' @return Dataframe
 #' @author Joel Pick
