@@ -6,12 +6,13 @@ Digitising functions in R for extracting data and summary statistics from figure
 To install `metaDigitise` enter the following code in R:
 
 ```
-install_github("daniel1noble/metaDigitise")
+install.packages("devtools")
+devtools::install_github("daniel1noble/metaDigitise")
 library(metaDigitise)
 ```
 
 ```
-extract_points("~/Dropbox/0_postdoc/8_PR repeat/shared/extracted graphs/5_fig2a.png", "mean_se")
+extract_points(" /Users/danielnoble/Dropbox/1_Research/1_Manuscripts/1_In_Preparation/packages/metaDigitise/example_figs/mean_se/1269_Ligon_2009_Fig.3.png", "mean_se")
 
 extract_points("~/Dropbox/0_postdoc/8_PR repeat/shared/extracted graphs/29_fig1a.png", "boxplot")
  
