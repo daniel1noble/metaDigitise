@@ -2,9 +2,11 @@
 [![Build Status](https://travis-ci.org/daniel1noble/metaDigitise.svg?branch=master)](https://travis-ci.org/daniel1noble/metaDigitise.svg?branch=master) 
 
 # Introduction
-`metaDigitise` is an R package that provides functions for extracting data and summary statistics from figures in primary research papers. Often third party applications are used to do this (e.g., graphClick or dataThief), but often the output from these are handled separately from the analysis package, making this process more laborious than it needs to me. `metaDigitise` allows users to extract information from a figure or set of figures all within the R environment making data extraction, analysis and export more streamlined. It also provides users with options to conduct the necessary calculations from raw data immediately after extraction and will condense multiple figures into data frames or lists (depending on the type of figure) and these objects can easily be exported from R. 
+
+`metaDigitise` is an R package that provides functions for extracting data and summary statistics from figures in primary research papers. Often third party applications are used to do this (e.g., *graphClick* or *dataThief*), but often the output from these are handled separately from the analysis package, making this process more laborious than it needs to me. `metaDigitise` allows users to extract information from a figure or set of figures all within the R environment making data extraction, analysis and export more streamlined. It also provides users with options to conduct the necessary calculations from raw data immediately after extraction and will condense multiple figures into data frames or lists (depending on the type of figure) and these objects can easily be exported from R. 
 
 # Installation
+
 To install `metaDigitise` enter the following code in R:
 
 ```
@@ -16,6 +18,7 @@ library(metaDigitise)
 Installation will make the primary functions for data extraction `extract_points` and `bulk_digitise` accessible to users along with their help files.
 
 # Setting up directory structures
+
 The package is quite flexible and is currently being made even more flexible. Users can extract single figures (if this is all they have) using the `extract_points` function with a path name to the specific file needing extraction. However, often many figures need extracting from a single paper or set of papers and, so, `bulk_digitise` helps expedite this situation preventing users from having to constantly specify the directories were files are stored. `bulk_digitise` essentially will bring up each figure within a folder automatically and allow the user to click and enter the relevant information about a figure as you go. This information is then all stored in a data frame or list at the end of the process, saving quite a bit of time.
 
 Users can get creative in how they set up the directories of figures (.png images) to facilitate extraction. For example, one might have 3–4 figures from a single paper that needs extracting and the user may want to focus on a single paper at a time as the need to extract comes up. This could be done by simply setting up a file structure as follows and then using `bulk_digitise` for each papers folder:
@@ -41,9 +44,10 @@ An alternative directory structure could simply be to have a set of different fi
 			+ P2_Figure2_trait2.png
 			+ P2_Figure3_trait3.png
 
-How users set up there directory is really up to them and there are a number of arguments that allow users to specify whether figures are of `diff` or `same` type so that the correct summary statistics, raw data or whatever are calculated. 
+How users set up their directory is really up to them and there are a number of arguments that allow users to specify whether figures are of `diff` or `same` type so that the correct summary statistics, raw data or whatever are calculated. 
 
 # Example of how it works
+
 We'll first demonstrate how `extract_points` works when the user simply wants to extract data from a single figure. In this case, we have within our `example_figs/` folder two figures (1269_ligon_2009_Fig.3.png and 1269_ligon_2009_Fig.5.png), but we'll just use one for now (1269_ligon_2009_Fig.3.png).  Notice our naming of this file. 1269 is the paper number followed by authors, year and the figure number. This makes it easy to keep track of the figures being digitised. Here is what this figure looks like:
 
 ![1269_ligon_2009_fig 3](https://user-images.githubusercontent.com/3505482/31603164-09481386-b2ab-11e7-95a9-8d4ab2643841.png)
@@ -54,13 +58,13 @@ To extract from 1269_ligon_2009_Fig.3.png all we need to do is use the following
 data <- extract_points("./example_figs/mean_se/1269_Ligon_2009_Fig.3.png", plot_type="mean_se")
 ```
 
-Here the output will be stored to the `data` object, which is great because we can access this after we have clicked. We provide `mean_se` to the `plot_type` argument to specify that the plot is a graph showing the means and error of a set of groups. But, we could also specify `scatterplot` or `boxplot`, which will bring up a different set of prompts. See `?extract_points` for more information. When executing this function the user will be prompted in the console to answer relevant questions as the image / figure is being digitised. The first of these is whether the user would like to rotate the image:
+Here, the output will be stored to the `data` object, which is great because we can access this after we have clicked. We provide `mean_se` to the `plot_type` argument to specify that the plot is a graph showing the means and error of a set of groups. But, we could also specify `scatterplot` or `boxplot`, which will bring up a different set of prompts. See `?extract_points` for more information. When executing this function the user will be prompted in the console to answer relevant questions as the image / figure is being digitised. The first of these is whether the user would like to rotate the image:
 
 ```
 Rotate Image? y/n 
 ```
 
-Specify y for "yes" or n for "no". If yes, this will introduce new prompts to help rotate the image in case this is needed. For now, our image (which appears on screen in the plotting window), looks fine so we'll hit `n` for now. After we do this a new message appears in the console to explain what to do next:
+Specify `y`for "yes" or `n` for "no". If yes, this will introduce new prompts to help rotate the image in case this is needed. For now, our image (which appears on screen in the plotting window), looks fine so we'll hit `n` for now. After we do this a new message appears in the console to explain what to do next:
 
 ```
 Use your mouse, and the image, 
@@ -132,13 +136,24 @@ What you will notice is that the upper SE needs to be clicked first followed by 
 
 # Bulk Digistising Images
 
-Often a paper contains many figures needing extracting and having to open and re-open new files, save data etc takes up a lot of un-ncessary time. `bulk_digitise` solves this problem by gradually working through all files within a directory, allowing users to digitise from them and then saving the output from all digitsiations in a single data frame. This function can be executed simply as:
+Often a paper contains many figures needing extracting and having to open and re-open new files, save data etc takes up a lot of unncessary time. `bulk_digitise` solves this problem by gradually working through all files within a directory, allowing users to digitise from them and then saving the output from all digitsiations in a single data frame. This function can be executed simply as:
 
 ```
 data <- bulk_digitise(dir = "./example_figs/", types = "same")
 ```
 
-Here the user simply specifies the directory folder where all the files are contained. The `types` arguments tells R whether the figures in the folder are different types, in which case `bulk_digitise` will ask the user to specify the type of figure prior to digitising and save all these results to a list. Alternatively, if the type = `same` then it will simply cycle through . An alternative directory structure to the ones specified above to make things easy is to simply put all like figures in the same folder and processes these all at once or in batches.
+Here, the user simply specifies the directory folder where all the files are contained. The `types` arguments tells R whether the figures in the folder are different types, in which case `bulk_digitise` will ask the user to specify the type of figure prior to digitising and save all these results to a list. Alternatively, if the `type = same` then it will simply cycle through all the figures within the folder. An alternative directory structure to the ones specified above, is to simply put all like figures in the same folder and process these all at once or in batches. This can at times speed things up and make life easier. Another trick to digitising in bulk is to include the figure legends in the image, allowing you to quickly get information that is relevant should you need it.
+
+
+
+
+
+
+
+
+
+
+
 
 
 ########################################################################
