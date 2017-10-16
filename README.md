@@ -93,7 +93,7 @@ Click IN ORDER: x1, x2, y1, y2
 
 	....
   ```
-Follow the instructions on screen step by step and in the order specified. The user will be asked to specify the x and y calibration points. As users click the figure, points will come up. Blue points are those that create the calibration and the red points are those that are the specific statistics or data points the user wants. As the user progressed a series of prompts will pop up in the R console asking for relevant information:
+Follow the instructions on screen step by step and in the order specified. The user will be asked to specify the x and y calibration points. As users click the figure, points will come up. Blue points are those that create the calibration and the red points are those that are the specific statistics or data points the user wants. As the user progresses, a series of prompts will pop up in the R console asking for relevant information:
 
 ```
 What is the value of x1 ?
@@ -105,7 +105,7 @@ What is the value of y1 ?
 What is the value of y2 ?
 0.5
 ```
-The first few questions as the user what the calibration points mean. In this figure, only the y-axis is really important, so we just add 1 and 2 for the x-points.
+The first few questions ask the user what the calibration points mean. In this figure, only the y-axis is really important, so we just add 1 and 2 for the x-points.
 
 ```
 Number of groups: 3
