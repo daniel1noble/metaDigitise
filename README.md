@@ -46,7 +46,7 @@ How users set up there directory is really up to them and there are a number of 
 # Example of how it works
 We'll first demonstrate how `extract_points` works when the user simply wants to extract data from a single figure. In this case, we have within our `example_figs/` folder two figures (1269_ligon_2009_Fig.3.png and 1269_ligon_2009_Fig.5.png), but we'll just use one for now (1269_ligon_2009_Fig.3.png).  Notice our naming of this file. 1269 is the paper number followed by authors, year and the figure number. This makes it easy to keep track of the figures being digitised. Here is what this figure looks like:
 
-![image](https://www.dropbox.com/s/j7vf4hfdl97uxl8/1269_Ligon_2009_Fig.3.png)
+![1269_ligon_2009_fig 3](https://user-images.githubusercontent.com/3505482/31603164-09481386-b2ab-11e7-95a9-8d4ab2643841.png)
 
 To extract from 1269_ligon_2009_Fig.3.png all we need to do is use the following code:
 
