@@ -51,10 +51,10 @@ We'll first demonstrate how `extract_points` works when the user simply wants to
 To extract from 1269_ligon_2009_Fig.3.png all we need to do is use the following code:
 
 ```
-data <- extract_points("./example_figs/mean_se/1269_Ligon_2009_Fig.3.png", "mean_se")
+data <- extract_points("./example_figs/mean_se/1269_Ligon_2009_Fig.3.png", plot_type="mean_se")
 ```
 
-Here the output will be stored to the `data` object, which is great because we can access this after we have clicked. When executing this function the user will be prompted in the console to answer relevant questions as the image / figure is being digitised. The first of these is whether the user would like to rotate the image:
+Here the output will be stored to the `data` object, which is great because we can access this after we have clicked. We provide `mean_se` to the `plot_type` argument to specify that the plot is a graph showing the means and error of a set of groups. But, we could also specify `scatterplot` or `boxplot`, which will bring up a different set of prompts. See `?extract_points` for more information. When executing this function the user will be prompted in the console to answer relevant questions as the image / figure is being digitised. The first of these is whether the user would like to rotate the image:
 
 ```
 Rotate Image? y/n 
@@ -76,15 +76,7 @@ Click IN ORDER: x1, x2, y1, y2
   |
   |_____x1__________________
 
-
-    Step 2 ----> Click on x2
-  |
-  |
-  |
-  |
-  |
-  |___________________x2____
-
+	....
 
     Step 3 ----> Click on y1
   |
@@ -95,15 +87,9 @@ Click IN ORDER: x1, x2, y1, y2
   |_________________________
 
 
-    Step 4 ----> Click on y2
-  |
-  y2
-  |
-  |
-  |
-  |_________________________
+	....
   ```
-Follow the instructions on screen step by step and in the order specified. As users click the figure, points will come up. Blue points are those that create the calibration and the red points are those that are the specific statistics or data points the user wants. As the user progressed a series of prompts will pop up in the R console asking for relevant information:
+Follow the instructions on screen step by step and in the order specified. The user will be asked to specify the x and y calibration points. As users click the figure, points will come up. Blue points are those that create the calibration and the red points are those that are the specific statistics or data points the user wants. As the user progressed a series of prompts will pop up in the R console asking for relevant information:
 
 ```
 What is the value of x1 ?
@@ -143,6 +129,16 @@ What you will notice is that the upper SE needs to be clicked first followed by 
 2 28.5  0.2088608 0.1518987 1.508929
 3 30.5 -0.4493671 0.2531646 2.017857
 ```
+
+# Bulk Digistising Images
+
+Often a paper contains many figures needing extracting and having to open and re-open new files, save data etc takes up a lot of un-ncessary time. `bulk_digitise` solves this problem by gradually working through all files within a directory, allowing users to digitise from them and then saving the output from all digitsiations in a single data frame. This function can be executed simply as:
+
+```
+data <- bulk_digitise(dir = "./example_figs/", types = "same")
+```
+
+Here the user simply specifies the directory folder where all the files are contained. The `types` arguments tells R whether the figures in the folder are different types, in which case `bulk_digitise` will ask the user to specify the type of figure prior to digitising and save all these results to a list. Alternatively, if the type = `same` then it will simply cycle through . An alternative directory structure to the ones specified above to make things easy is to simply put all like figures in the same folder and processes these all at once or in batches.
 
 
 ########################################################################
