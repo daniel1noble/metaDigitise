@@ -39,7 +39,9 @@ bulk_digitise <- function(dir, types = c("diff", "same")){
 #' @description Function that allows user to interface with function to specific each type of plot prior to digitising
 specify_type <- function(){
 		#user enters numeric value to specify the plot BEFORE moving on
-	 	pl_type <- readline("Please specify the plot_type numerically as either: 1) mean_se, 2) box plot or 3) scatter plot: ")
-	 	plot_type <- ifelse(pl_type == "1", "mean_se", ifelse(pl_type == "2", "boxplot","scatterplot"))
+	 	pl_type <- NA
+	 	#while keeps asking the user the question until the input is one of the options
+		while(!pl_type %in% c("m","b","s")) pl_type <- readline("Please specify the plot_type as either: mean and error, box plot or scatter plot m/b/s: ")
+	 	plot_type <- ifelse(pl_type == "1", "mean_error", ifelse(pl_type == "2", "boxplot","scatterplot"))
 	 	return(plot_type)
 }
