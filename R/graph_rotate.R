@@ -7,9 +7,27 @@
 graph_rotate <- function(image){
 	plot(image)
 	rotateQ <- "a"
-	while(rotateQ != "n") {
-		if(rotateQ=="y"){
-			print("click left hand then right hand side of x axis")
+cat("mean_error and boxplots should be vertically orientated
+       _ 
+       |	
+  I.E. o    NOT  |-o-|
+       |
+       _
+
+If they are not then chose flip to correct this.
+
+If figures are wonky, chose rotate.
+
+Otherwise chose continue\n
+")
+
+	while(rotateQ != "c") {
+		if(rotateQ=="f"){
+			image <- magick::image_flop(magick::image_rotate(image,270))
+			plot(image)
+		}
+		if(rotateQ=="r"){
+			cat("Click left hand then right hand side of x axis\n")
 			
 			rot_angle <- locator(2, col="green")
 			rot_angle$y
@@ -21,7 +39,10 @@ graph_rotate <- function(image){
 			image <- magick::image_rotate(image, f)
 			plot(image)
 		}
-		rotateQ <- base::readline("Rotate Image? y/n ")
+		rotateQ <- base::readline("Flip, rotate or continue f/r/c ")
 	}
-	return(image)
+#	return(image)
 }
+
+
+## scatterplot - identify trait on x and trait on y
