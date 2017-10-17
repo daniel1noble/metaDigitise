@@ -1,7 +1,7 @@
 #' @title graph_rotate
-#' @description Rotates imported figures in order to align them properly. Asks the user after each rotation if further rotation is required
+#' @description Rotates/flips imported figures in order to align them properly. Asks the user after each change if further alteration is required
 #' @param image Image object from magick::image_read
-#' @return Returns new image object and plots rotated image
+#' @return Returns new image object and plots rotated/flipped image
 #' @author Joel Pick
 #' @export
 graph_rotate <- function(image){
@@ -41,8 +41,5 @@ Otherwise chose continue\n
 		}
 		rotateQ <- base::readline("Flip, rotate or continue f/r/c ")
 	}
-#	return(image)
+	return(image)
 }
-
-
-## scatterplot - identify trait on x and trait on y
