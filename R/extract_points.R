@@ -31,6 +31,8 @@ extract_points <- function(file, plot_type="scatterplot", summary_stats=FALSE){
 				if(plot_type == "boxplot") group_data[i,2:7] <- boxplot_points(axis_coords)
 				add_removeQ <- base::readline("Continue or reclick? c/r ")
 				while(!add_removeQ  %in% c("c","r")) add_removeQ <- base::readline("Continue or reclick? c/r ")	
+				## if(add_removeQ=="r" & plot_type == "mean_se") points(rep(group_data[i,4],2),c(group_data[i,2],group_data[i,2]+group_data[i,3]), col="green", lwd=2)
+				## at the moment points are added to post calibration points, so don't plot at correct place
 			}
 		}
 	}
