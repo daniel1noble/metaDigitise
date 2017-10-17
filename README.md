@@ -1,5 +1,6 @@
 # metaDigitise 
 [![Build Status](https://travis-ci.org/daniel1noble/metaDigitise.svg?branch=master)](https://travis-ci.org/daniel1noble/metaDigitise.svg?branch=master) 
+[![DOI](https://zenodo.org/badge/106883244.svg)](https://zenodo.org/badge/latestdoi/106883244)
 
 # Introduction
 
