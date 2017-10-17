@@ -70,3 +70,24 @@ Click IN ORDER: x1, x2, y1, y2 \n
 	point_vals <- getVals()  
   return(list(calpoints=calpoints,point_vals=point_vals))
 }
+
+#Range <- function(x, na.rm=TRUE) max(x, na.rm=na.rm) - min(x, na.rm=na.rm)
+
+#' @title cal_X
+#' @description Converts x coordinates to using previous identified coordinates and conversion
+#' @return vector
+#' @author Joel Pick
+cal_X <- function(x, axis_coords) {
+  cx <- lm(formula = point_vals[1:2] ~ calpoints$x[1:2])$coeff
+  x * cx[2] + cx[1]
+}
+
+
+#' @title cal_Y
+#' @description Converts x coordinates to using previous identified coordinates and conversion
+#' @return vector
+#' @author Joel Pick
+cal_Y <- function(y axis_coords) {
+  cy <- lm(formula = c(y1, y2) ~ c(y))$coeff
+  y * cy[2] + cy[1]
+}
