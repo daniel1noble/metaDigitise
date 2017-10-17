@@ -3,12 +3,11 @@
 #' @description Transforms standard error to standard deviation
 #' @param se Standard Error of the mean
 #' @param n Sample Size
-#' @param na.rm Remove NAs
 #' @return Returns vector of standard errors
 #' @author Joel Pick
 #' @export
 
-se_to_sd <- function(se, n, na.rm=TRUE) {
+se_to_sd <- function(se, n) {
 	se * sqrt(n)
 }
 
