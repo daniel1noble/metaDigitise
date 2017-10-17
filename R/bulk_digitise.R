@@ -42,6 +42,6 @@ specify_type <- function(){
 	 	pl_type <- NA
 	 	#while keeps asking the user the question until the input is one of the options
 		while(!pl_type %in% c("m","b","s")) pl_type <- readline("Please specify the plot_type as either: mean and error, box plot or scatter plot m/b/s: ")
-	 	plot_type <- ifelse(pl_type == "1", "mean_error", ifelse(pl_type == "2", "boxplot","scatterplot"))
+	 	plot_type <- ifelse(pl_type == "m", "mean_error", ifelse(pl_type == "b", "boxplot","scatterplot"))
 	 	return(plot_type)
 }
