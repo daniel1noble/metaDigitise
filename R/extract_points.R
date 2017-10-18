@@ -21,7 +21,7 @@ metaDigitise <- function(file, summary_stats=FALSE){
 	
 	output$nGroups <- nGroups <- as.numeric(readline("Number of groups: "))
 
-	if(plot_type %in% c("mean_se","boxplot")){
+	if(plot_type %in% c("mean_error","boxplot")){
 		output$raw_data <- raw_data <- groups_extract(plot_type=plot_type, nGroups=nGroups)	
 		cal_data <- calibrate(raw_data=raw_data,calpoints=calpoints, point_vals=point_vals)
 		output$group_data <- group_data <- convert_group_data(cal_data=cal_data, plot_type=plot_type, nGroups=nGroups)
@@ -32,12 +32,12 @@ metaDigitise <- function(file, summary_stats=FALSE){
 		output$raw_data <- raw_data <- group_scatter_extract(nGroups)
 		output$group_data <- group_data <- calibrate(raw_data=raw_data,calpoints=calpoints, point_vals=point_vals)
 	}	
-	class(output) <- 'metaDigitise_data'
+#	class(output) <- 'metaDigitise_data'
 	return(output)
 }
 
-print.metaDigitise_data <- function(x){
-	cat(paste("Data extracted from:", file))
-	## if rotated cat("Figure rotated x degrees")
-	cat(paste("Figure identified as a", plot_type, "with", nGroups, "groups"))
-}
+# print.metaDigitise_data <- function(x){
+# 	cat(paste("Data extracted from:", file))
+# 	## if rotated cat("Figure rotated x degrees")
+# 	cat(paste("Figure identified as a", plot_type, "with", nGroups, "groups"))
+# }
