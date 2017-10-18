@@ -32,6 +32,13 @@ metaDigitise <- function(file, summary_stats=FALSE){
 		output$raw_data <- raw_data <- group_scatter_extract(nGroups)
 		output$group_data <- group_data <- calibrate(raw_data=raw_data,calpoints=calpoints, point_vals=point_vals)
 	}	
+
+	if(plot_type == "histogram"){
+		output$raw_data <- histogram_extract()
+		cal_data <- calibrate(raw_data=raw_data,calpoints=calpoints, point_vals=point_vals)
+		output$grouo_data <- convert_histogram_data(cal_data=cal_data)
+	}
+
 #	class(output) <- 'metaDigitise_data'
 	return(output)
 }

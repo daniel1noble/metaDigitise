@@ -45,7 +45,7 @@ single_scatter_extract <- function(){
 			}else{cat("**** Point not identified ****\n")
 			}
 		}
-		add_removeQ <- base::readline("Add, remove or continue? a/r/c ")		
+		add_removeQ <- readline("Add, remove or continue? a/r/c ")		
 	}
 
 	return(group_points)
