@@ -17,7 +17,7 @@ single_scatter_extract <- function(){
 			    sep = "\n\n"
 			  )
 			select_points <- locator(type="p", col="red", lwd=2)
-			group_points <- rbind(group_points, data.frame(id="z",x=select_points$x,y=select_points$y))}
+			group_points <- rbind(group_points, data.frame(x=select_points$x,y=select_points$y))}
 		if(add_removeQ=="r") {
 			cat("Click on point you want to remove\n")
 			remove <- locator(1,type="p", col="green", pch=4, lwd=2)
@@ -52,9 +52,16 @@ single_scatter_extract <- function(){
 }
 
 
-# group_scatter_extract <- function(nGroups){
+group_scatter_extract <- function(nGroups){
 
-# 		for(i in 1:nGroups) {
-# 		raw_data[rows,1] <- readline(paste("Group identifier",i,":"))
+	raw_data <-data.frame()
 
-# }	
+ 		for(i in 1:nGroups) {
+ 			id <- readline(paste("Group identifier",i,":"))
+			group_points <- single_scatter_extract()
+			raw_data <- rbind(raw_data, data.frame(id=id, x=group_points$x,y=group_points$y))
+		}
+	return(raw_data)
+}	
+
+
