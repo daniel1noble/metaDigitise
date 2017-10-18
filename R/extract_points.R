@@ -1,40 +1,30 @@
 
-#' @title extract_points
+#' @title metaDigitise
 #' @description Extracts points from a figure and generate summary statistics
 #' @param file Image file
-#' @param plot_type One of "mean_se", "boxplot", or "scatterplot". "mean_se" assumes that there are means and standard error bars, and requires the user to click the upper error bar followed by the mean. "boxplot" assumes that the user will input 5 points, in the order max, upper (75th) quartile, median, lower (25th) quartile, and minimum. "Scatterplot assumes that all points will be clicked"
 #' @param summary_stats Whether further summary statistics are derived from "mean_se" and "boxplot". Require use to input sample sizes. Currently defunct
 #' @return Dataframe
 #' @author Joel Pick
 #' @export
-extract_points <- function(file, plot_type=c("mean_se","boxplot","scatterplot"), summary_stats=FALSE){
+metaDigitise <- function(file, summary_stats=FALSE){
 	
-	stopifnot(plot_type %in% c("mean_se","boxplot","scatterplot"))
-
 	image <- magick::image_read(file)
 
 	new_image <- graph_rotate(image)
 	flush.console()
 
-	axis_coords <- cal_coords()	
+	output <- list()
+
+	output$plot_type <- plot_type <- specify_type()
+	output$calpoints <- calpoints <- cal_coords()	
+	output$point_vals <- point_vals <- getVals() 
 	
+	output$nGroups <- nGroups <- as.numeric(readline("Number of groups: "))
+
 	if(plot_type %in% c("mean_se","boxplot")){
-	
-		nMeans <- as.numeric(base::readline("Number of groups: "))
-		group_data <- if(plot_type == "mean_se") {as.data.frame(matrix(NA, ncol=4, nrow=nMeans, dimnames=list(NULL, c("id","mean","se","x"))))}else if(plot_type == "boxplot") {as.data.frame(matrix(NA, ncol=7, nrow=nMeans, dimnames=list(NULL, c("id","max","q3","med","q1","min","x"))))}
-			
-		for(i in 1:nMeans) {
-			add_removeQ <- "r"
-			while(add_removeQ=="r") {
-				group_data[i,1] <- base::readline(paste("Group identifier",i,":"))
-				if(plot_type == "mean_se") group_data[i,2:4] <- mean_se_points(axis_coords)
-				if(plot_type == "boxplot") group_data[i,2:7] <- boxplot_points(axis_coords)
-				add_removeQ <- base::readline("Continue or reclick? c/r ")
-				while(!add_removeQ  %in% c("c","r")) add_removeQ <- base::readline("Continue or reclick? c/r ")	
-				## if(add_removeQ=="r" & plot_type == "mean_se") points(rep(group_data[i,4],2),c(group_data[i,2],group_data[i,2]+group_data[i,3]), col="green", lwd=2)
-				## at the moment points are added to post calibration points, so don't plot at correct place
-			}
-		}
+		output$raw_data <- raw_data <- groups_extract(plot_type=plot_type, nGroups=nGroups)	
+		cal_data <- calibrate(raw_data=raw_data,calpoints=calpoints, point_vals=point_vals)
+		group_data <- convert_group_data(cal_data=cal_data, plot_type=plot_type, nGroups=nGroups)
 	}
 	
 	

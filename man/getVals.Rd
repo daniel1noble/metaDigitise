@@ -6,12 +6,6 @@
 \usage{
 getVals()
 }
-\value{
-vector
-}
 \description{
 Gets values needed to calibrate axis coordinated. Modified from the digitize package
-}
-\author{
-Joel Pick
 }

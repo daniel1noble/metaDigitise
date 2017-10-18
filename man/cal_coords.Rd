@@ -6,12 +6,6 @@
 \usage{
 cal_coords()
 }
-\value{
-list
-}
 \description{
 Prompts user to enter axis coordinates, and their values. Modified from the digitize package
-}
-\author{
-Joel Pick
 }

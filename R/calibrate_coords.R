@@ -1,7 +1,5 @@
 #' @title getVals
 #' @description Gets values needed to calibrate axis coordinated. Modified from the digitize package
-#' @return vector
-#' @author Joel Pick
 getVals <- function() {
 	names <- c("x1","x2","y1","y2")
 	vals <- NULL
@@ -23,8 +21,6 @@ getVals <- function() {
 
 #' @title cal_coords
 #' @description Prompts user to enter axis coordinates, and their values. Modified from the digitize package
-#' @return list
-#' @author Joel Pick
 cal_coords <- function() {
 
 		cat( "Use your mouse, and the image, 
@@ -67,27 +63,18 @@ Click IN ORDER: x1, x2, y1, y2 \n
 	
 	calpoints <- locator(4, type="p", col="blue", pch=3, lwd = 2)
 	flush.console()
-	point_vals <- getVals()  
-  return(list(calpoints=calpoints,point_vals=point_vals))
+  return(calpoints)
 }
+
 
 #Range <- function(x, na.rm=TRUE) max(x, na.rm=na.rm) - min(x, na.rm=na.rm)
 
-#' @title cal_X
-#' @description Converts x coordinates to using previous identified coordinates and conversion
-#' @return vector
-#' @author Joel Pick
-cal_X <- function(x, axis_coords) {
+#' @title calibrate
+#' @description Converts x and y coordinates from original plot coords to actual coords using previous identified coordinates. Modified from digitise package
+calibrate <- function(raw_data, calpoints, point_vals) {
   cx <- lm(formula = point_vals[1:2] ~ calpoints$x[1:2])$coeff
-  x * cx[2] + cx[1]
-}
-
-
-#' @title cal_Y
-#' @description Converts x coordinates to using previous identified coordinates and conversion
-#' @return vector
-#' @author Joel Pick
-cal_Y <- function(y axis_coords) {
-  cy <- lm(formula = c(y1, y2) ~ c(y))$coeff
-  y * cy[2] + cy[1]
+  cy <- lm(formula = point_vals[3:4] ~ calpoints$y[3:4])$coeff
+  raw_data$x <- raw_data$x * cx[2] + cx[1]
+  raw_data$y <- raw_data$y * cy[2] + cy[1]
+  return(raw_data)
 }

@@ -4,14 +4,12 @@
 \alias{se_to_sd}
 \title{se_to_sd}
 \usage{
-se_to_sd(se, n, na.rm = TRUE)
+se_to_sd(se, n)
 }
 \arguments{
 \item{se}{Standard Error of the mean}
 
 \item{n}{Sample Size}
-
-\item{na.rm}{Remove NAs}
 }
 \value{
 Returns vector of standard errors

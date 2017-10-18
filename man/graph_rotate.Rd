@@ -10,10 +10,10 @@ graph_rotate(image)
 \item{image}{Image object from magick::image_read}
 }
 \value{
-Returns new image object and plots rotated image
+Returns new image object and plots rotated/flipped image
 }
 \description{
-Rotates imported figures in order to align them properly. Asks the user after each rotation if further rotation is required
+Rotates/flips imported figures in order to align them properly. Asks the user after each change if further alteration is required
 }
 \author{
 Joel Pick
