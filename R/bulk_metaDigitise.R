@@ -14,7 +14,7 @@ bulk_metaDigitise <- function(dir, types = c("diff", "same")){
 	 data_list <- list()
 	 for(i in 1:length(paths)){
 	 			 plot_type <- specify_type()
-		 	data_list[[i]] <- extract_points(paths[i], plot_type = plot_type)
+		 	data_list[[i]] <- metaDigitise(paths[i], plot_type = plot_type)
 		 	names(data_list)[i] <- images[i]
 	 	}
 	}
@@ -23,7 +23,7 @@ bulk_metaDigitise <- function(dir, types = c("diff", "same")){
 		plot_type <- specify_type()
 		data_list <- list()
 		for(i in 1:length(paths)){
-		 	data_list[[i]] <- extract_points(paths[i], plot_type = plot_type)
+		 	data_list[[i]] <- metaDigitise(paths[i], plot_type = plot_type)
 		 	names(data_list)[i] <- images[i]
 	 	}	
 	}

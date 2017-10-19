@@ -6,6 +6,13 @@
 \usage{
 calibrate(raw_data, calpoints, point_vals)
 }
+\arguments{
+\item{raw_data}{The raw data}
+
+\item{calpoints}{The calibration points}
+
+\item{point_vals}{The point values}
+}
 \description{
 Converts x and y coordinates from original plot coords to actual coords using previous identified coordinates. Modified from digitise package
 }

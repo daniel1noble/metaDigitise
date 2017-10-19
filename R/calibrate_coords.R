@@ -70,6 +70,9 @@ Click IN ORDER: x1, x2, y1, y2 \n
 #Range <- function(x, na.rm=TRUE) max(x, na.rm=na.rm) - min(x, na.rm=na.rm)
 
 #' @title calibrate
+#' @param raw_data The raw data
+#' @param calpoints The calibration points
+#' @param point_vals The point values
 #' @description Converts x and y coordinates from original plot coords to actual coords using previous identified coordinates. Modified from digitise package
 calibrate <- function(raw_data, calpoints, point_vals) {
   cx <- lm(formula = point_vals[1:2] ~ calpoints$x[1:2])$coeff

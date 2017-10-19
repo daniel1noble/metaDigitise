@@ -52,6 +52,9 @@ single_scatter_extract <- function(){
 }
 
 
+#' @title group_scatter_extract
+#' @param nGroups The number of groups
+#' @description Don't know yet Joel.
 group_scatter_extract <- function(nGroups){
 
 	raw_data <-data.frame()

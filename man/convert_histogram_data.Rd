@@ -6,6 +6,9 @@
 \usage{
 convert_histogram_data(cal_data)
 }
+\arguments{
+\item{cal_data}{The calibration data}
+}
 \description{
 Conversion of extracted data from histogram
 }
