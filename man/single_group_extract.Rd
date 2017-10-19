@@ -6,6 +6,9 @@
 \usage{
 single_group_extract(plot_type)
 }
+\arguments{
+\item{plot_type}{Type of plot}
+}
 \description{
 Takes points user defined points from a single group mean_error plot or boxplot, in a set order, and returns them.
 }

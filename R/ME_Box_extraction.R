@@ -1,4 +1,5 @@
 #' @title single_group_extract
+#' @param plot_type Type of plot
 #' @description Takes points user defined points from a single group mean_error plot or boxplot, in a set order, and returns them.
 single_group_extract <- function(plot_type){
 	
@@ -16,6 +17,9 @@ single_group_extract <- function(plot_type){
 }
 
 #' @title groups_extract
+#' @param plot_type The type of plot
+#' @param nGroups number of groups
+#' @param image_width width of image
 #' @description Extraction of data from boxplots of mean_error plots, from multiple groups
 groups_extract <- function(plot_type, nGroups, image_width){
 	nRows <- ifelse(plot_type=="mean_error",2,5)
@@ -46,6 +50,9 @@ groups_extract <- function(plot_type, nGroups, image_width){
 }
 
 #' @title convert_group_data
+#' @param cal_data Calibrated data
+#' @param plot_type The type of plot
+#' @param nGroups number of groups
 #' @description Converts, pre-calibrated points clicked into a meaningful dataframe 
 convert_group_data <- function(cal_data, plot_type, nGroups){
 	nRows <- ifelse(plot_type=="mean_error",2,5)

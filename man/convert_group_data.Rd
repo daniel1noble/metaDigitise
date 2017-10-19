@@ -6,6 +6,13 @@
 \usage{
 convert_group_data(cal_data, plot_type, nGroups)
 }
+\arguments{
+\item{cal_data}{Calibrated data}
+
+\item{plot_type}{The type of plot}
+
+\item{nGroups}{number of groups}
+}
 \description{
 Converts, pre-calibrated points clicked into a meaningful dataframe
 }

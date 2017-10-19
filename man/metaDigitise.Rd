@@ -9,12 +9,12 @@ metaDigitise(file, plot_type = NULL, summary_stats = FALSE)
 \arguments{
 \item{file}{Image file}
 
-\item{plot_type}{Type of plot. NULL, but used in bulk_metaDigitise}
+\item{plot_type}{Type of plot from "mean_error","boxplot","scatterplot" or"histogram". Function will prompt if not entered by user.}
 
-\item{summary_stats}{Whether further summary statistics are derived from "mean_se" and "boxplot". Require use to input sample sizes. Currently defunct}
+\item{summary_stats}{Whether further summary statistics are derived from "mean_se" and "boxplot". Require user to input sample sizes. Currently defunct}
 }
 \value{
-Dataframe
+List of
 }
 \description{
 Extracts points from a figure and generate summary statistics

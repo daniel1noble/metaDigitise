@@ -4,7 +4,14 @@
 \alias{groups_extract}
 \title{groups_extract}
 \usage{
-groups_extract(plot_type, nGroups)
+groups_extract(plot_type, nGroups, image_width)
+}
+\arguments{
+\item{plot_type}{The type of plot}
+
+\item{nGroups}{number of groups}
+
+\item{image_width}{width of image}
 }
 \description{
 Extraction of data from boxplots of mean_error plots, from multiple groups
