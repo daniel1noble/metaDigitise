@@ -7,9 +7,13 @@ histogram_extract <- function(){
 	while(histQ != "c"){
 		if(histQ=="a"){
 			cat("Click on left then right upper corners of bar\n")
-			bar_points <- locator(2, type="o", col="red", lwd=2)
+			bar_points <- locator(2, type="o", col="red", lwd=2, pch="|")
 			raw_data <- rbind(raw_data, data.frame(x=bar_points$x,y=bar_points$y))
-			histQ <- readline("Add, reclick or continue? a/r/c ")		
+			histQ <- readline("Add, reclick or continue? a/r/c ")
+			if(histQ=="r") {
+				points(bar_points$x,bar_points$y, col="green", lwd=2, pch="|")
+				lines(bar_points$x,bar_points$y, col="green", lwd=2)
+			}
 		}
 
 		if(histQ=="r"){
