@@ -5,7 +5,7 @@
 #' @return If type = "same" the function returns a dataframe with the relevant data for each figure being digitised. If type = "diff" it returns a list of the relevant data.
 #' @export
 
-bulk_digitise <- function(dir, types = c("diff", "same")){
+bulk_metaDigitise <- function(dir, types = c("diff", "same")){
 	  type <- match.arg(types)
 	images <- list.files(dir)
 	 paths <- paste0(dir, images)
