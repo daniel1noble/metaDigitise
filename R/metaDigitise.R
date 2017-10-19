@@ -14,8 +14,8 @@ metaDigitise <- function(file, plot_type=NULL, summary_stats=FALSE){
 	new_image <- graph_rotate(image)
 	flush.console()
 
-	image_width <- image_info(new_image)["width"]
-	image_height <- image_info(new_image)["height"]
+	image_width <- magick::image_info(new_image)["width"]
+	image_height <- magick::image_info(new_image)["height"]
 
 	output <- list()
 
