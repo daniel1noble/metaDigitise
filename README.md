@@ -17,7 +17,7 @@ devtools::install_github("daniel1noble/metaDigitise")
 library(metaDigitise)
 ```
 
-Installation will make the primary functions for data extraction `extract_points` and `bulk_digitise` accessible to users along with their help files.
+Installation will make the primary functions for data extraction `metaDigitise` and `bulk_metaDigitise` accessible to users along with their help files.
 
 # Setting up directory structures
 
