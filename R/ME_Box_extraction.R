@@ -4,12 +4,12 @@ single_group_extract <- function(plot_type){
 	
 	if(plot_type=="mean_error"){
 		cat("Click on upper error bar, followed by the Mean\n")
-		group_points <- locator(2, type="o", col="red", lwd=2)
+		group_points <- locator(2, type="o", col="red", lwd=2, pch=19)
 	}
 
 	if(plot_type=="boxplot"){
 		cat("Click on Max, Upper Q, Median, Lower Q, and Minimum\nIn that order\n")
-		group_points <- locator(5, type="o", col="red", lwd=2)
+		group_points <- locator(5, type="o", col="red", lwd=2, pch=19)
 	}
 
 	return(group_points)
@@ -17,7 +17,7 @@ single_group_extract <- function(plot_type){
 
 #' @title groups_extract
 #' @description Extraction of data from boxplots of mean_error plots, from multiple groups
-groups_extract <- function(plot_type, nGroups){
+groups_extract <- function(plot_type, nGroups, image_width){
 	nRows <- ifelse(plot_type=="mean_error",2,5)
 	raw_data <- as.data.frame(matrix(NA, ncol=3, nrow=nGroups*nRows, dimnames=list(NULL, c("id","x","y"))))
 		
@@ -26,16 +26,20 @@ groups_extract <- function(plot_type, nGroups){
 		rows<- rowStart:(rowStart+nRows-1)
 		add_removeQ <- "r"
 		while(add_removeQ=="r") {
-			raw_data[rows,1] <- readline(paste("Group identifier",i,":"))
+			group_id <- readline(paste("Group identifier",i,":"))
+			raw_data[rows,1] <- group_id
 			group_points <- single_group_extract(plot_type)
 			raw_data[rows,2] <- group_points$x
 			raw_data[rows,3] <- group_points$y
 			add_removeQ <- readline("Continue or reclick? c/r ")
 			while(!add_removeQ  %in% c("c","r")) add_removeQ <- readline("Continue or reclick? c/r ")	
 			if(add_removeQ=="r") {
-				points(y~x, raw_data[rows,], col="green", lwd=2)
+				points(y~x, raw_data[rows,], col="green", pch=19)
 				lines(y~x, raw_data[rows,], col="green", lwd=2)
 			}
+			if(add_removeQ=="c") {
+				text(mean(group_points$x)+image_width/30,mean(group_points$y),group_id,srt=90, col="Red")
+			}		
 		}
 	}
 	return(raw_data)
