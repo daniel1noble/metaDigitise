@@ -146,24 +146,3 @@ data <- bulk_digitise(dir = "./example_figs/", types = "same")
 
 Here, the user simply specifies the directory folder where all the files are contained. The `types` arguments tells R whether the figures in the folder are different types, in which case `bulk_digitise` will ask the user to specify the type of figure prior to digitising and save all these results to a list. Alternatively, if the `type = same` then it will simply cycle through all the figures within the folder. An alternative directory structure to the ones specified above, is to simply put all like figures in the same folder and process these all at once or in batches. This can at times speed things up and make life easier. Another trick to digitising in bulk is to include the figure legends in the image, allowing you to quickly get information that is relevant should you need it.
 
-
-
-
-
-
-
-
-
-
-
-
-
-########################################################################
-
-```
-extract_points("./example_figs/mean_se/1269_Ligon_2009_Fig.3.png", "mean_se")
-
-extract_points("~/Dropbox/0_postdoc/8_PR repeat/shared/extracted graphs/29_fig1a.png", "boxplot")
- 
-extract_points("~/Dropbox/0_postdoc/8_PR repeat/shared/extracted graphs/33_fig2.png", "scatterplot")
-```
