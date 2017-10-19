@@ -2,6 +2,7 @@
 #' @title metaDigitise
 #' @description Extracts points from a figure and generate summary statistics
 #' @param file Image file
+#' @param plot_type Type of plot. NULL, but used in bulk_metaDigitise
 #' @param summary_stats Whether further summary statistics are derived from "mean_se" and "boxplot". Require use to input sample sizes. Currently defunct
 #' @return Dataframe
 #' @author Joel Pick

@@ -26,6 +26,7 @@ histogram_extract <- function(){
 }
 
 #' @title convert_histogram_data 
+#' @param cal_data The calibration data
 #' @description Conversion of extracted data from histogram
 convert_histogram_data <- function(cal_data){
 	#nBars <- nrow(raw_data)/2

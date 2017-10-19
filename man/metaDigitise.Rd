@@ -9,6 +9,8 @@ metaDigitise(file, plot_type = NULL, summary_stats = FALSE)
 \arguments{
 \item{file}{Image file}
 
+\item{plot_type}{Type of plot. NULL, but used in bulk_metaDigitise}
+
 \item{summary_stats}{Whether further summary statistics are derived from "mean_se" and "boxplot". Require use to input sample sizes. Currently defunct}
 }
 \value{
