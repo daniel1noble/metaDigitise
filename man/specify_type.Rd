@@ -6,6 +6,9 @@
 \usage{
 specify_type()
 }
+\value{
+The function will return the type of plot specified by the user and feed this argument back into metDigitise
+}
 \description{
 Function that allows user to interface with function to specific each type of plot prior to digitising
 }

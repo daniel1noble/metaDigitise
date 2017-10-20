@@ -5,30 +5,31 @@
 #' @return If type = "same" the function returns a dataframe with the relevant data for each figure being digitised. If type = "diff" it returns a list of the relevant data.
 #' @export
 
-bulk_metaDigitise <- function(dir, types = c("diff", "same")){
+bulk_metaDigitise <- function(dir, types = c("diff", "same")) {
 	  type <- match.arg(types)
 	images <- list.files(dir)
 	 paths <- paste0(dir, images)
 
-	 if(types == "diff"){
-	 data_list <- list()
-	 for(i in 1:length(paths)){
-	 			 plot_type <- specify_type()
-		 	data_list[[i]] <- metaDigitise(paths[i], plot_type = plot_type)
-		 	names(data_list)[i] <- images[i]
-	 	}
+	 if (types == "diff") {
+		 data_list <- list()
+		 for (i in 1:length(paths) ) {
+		 		   	   plot_type <- specify_type()
+			      data_list[[i]] <- metaDigitise(paths[i], plot_type = plot_type)
+			 names(data_list)[i] <- images[i]
+		 	}
 	}
 
-	if(types == "same"){
+	if (types == "same") {
 		plot_type <- specify_type()
 		data_list <- list()
-		for(i in 1:length(paths)){
+		
+		for (i in 1:length(paths)) {
 		 	data_list[[i]] <- metaDigitise(paths[i], plot_type = plot_type)
 		 	names(data_list)[i] <- images[i]
 	 	}	
 	}
 
-	if(type == "diff"){
+	if (type == "diff") {
 		return(data_list)
 	} else{
 		return(do.call(rbind, data_list))
@@ -37,11 +38,26 @@ bulk_metaDigitise <- function(dir, types = c("diff", "same")){
 
 #' @title specify_type
 #' @description Function that allows user to interface with function to specific each type of plot prior to digitising
+#' @return The function will return the type of plot specified by the user and feed this argument back into metDigitise 
+#' @export
+
 specify_type <- function(){
 		#user enters numeric value to specify the plot BEFORE moving on
 	 	pl_type <- NA
 	 	#while keeps asking the user the question until the input is one of the options
 		while(!pl_type %in% c("m","b","s","h")) pl_type <- readline("Please specify the plot_type as either: mean and error, box plot, scatter plot or histogram m/b/s/h: ")
+	
 	 	plot_type <- ifelse(pl_type == "m", "mean_error", ifelse(pl_type == "b", "boxplot",ifelse(pl_type == "s", "scatterplot","histogram")))
-	 	return(plot_type)
+	
+	return(plot_type)
+}
+
+#' @title extract_digitised
+#' @param list A list of objects returned from metaDigitise
+#' @description Function for extracting the data from a metaDigitise list
+#' @return The function will return a data frame with the data across all the digitised files 
+#' @export
+
+extract_digitised <- function(list) {
+	return( do.call (rbind, lapply (list, function(x) x$processed_data) ))
 }
