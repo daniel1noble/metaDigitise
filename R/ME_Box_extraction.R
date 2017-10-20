@@ -19,12 +19,15 @@ single_group_extract <- function(plot_type){
 #' @title groups_extract
 #' @param plot_type The type of plot
 #' @param nGroups number of groups
-#' @param image_width width of image
+#' @param image image
+#' @param calpoints points used for calibration 
+#' @param point_vals values for calibration
 #' @description Extraction of data from boxplots of mean_error plots, from multiple groups
-groups_extract <- function(plot_type, nGroups, image_width){
+groups_extract <- function(plot_type, nGroups, image, calpoints, point_vals){
 	nRows <- ifelse(plot_type=="mean_error",2,5)
 	raw_data <- as.data.frame(matrix(NA, ncol=3, nrow=nGroups*nRows, dimnames=list(NULL, c("id","x","y"))))
-		
+	image_width <- magick::image_info(image)["width"][[1]]
+	
 	for(i in 1:nGroups) {
 		rowStart <- (i-1)*nRows +1
 		rows<- rowStart:(rowStart+nRows-1)
@@ -33,16 +36,13 @@ groups_extract <- function(plot_type, nGroups, image_width){
 			group_id <- readline(paste("Group identifier",i,":"))
 			raw_data[rows,1] <- group_id
 			group_points <- single_group_extract(plot_type)
+			text(mean(group_points$x)+image_width/30,mean(group_points$y),group_id,srt=90, col="Red")
 			raw_data[rows,2] <- group_points$x
 			raw_data[rows,3] <- group_points$y
 			add_removeQ <- readline("Continue or reclick? c/r ")
 			while(!add_removeQ  %in% c("c","r")) add_removeQ <- readline("Continue or reclick? c/r ")	
 			if(add_removeQ=="r") {
-				points(y~x, raw_data[rows,], col="green", pch=19)
-				lines(y~x, raw_data[rows,], col="green", lwd=2)
-			}
-			if(add_removeQ=="c") {
-				text(mean(group_points$x)+image_width/30,mean(group_points$y),group_id,srt=90, col="Red")
+				redraw(image, plot_type=plot_type, raw_data[-rows,], calpoints, point_vals)
 			}		
 		}
 	}

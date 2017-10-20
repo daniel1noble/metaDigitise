@@ -9,39 +9,41 @@
 #' @export
 metaDigitise <- function(file, plot_type=NULL, summary_stats=FALSE){
 	
-	image <- magick::image_read(file)
+	output <- list()
+	output$file <- file
 
+	image <- magick::image_read(file)
 	new_image <- graph_rotate(image)
 	flush.console()
 
-	image_width <- magick::image_info(new_image)["width"]
-	image_height <- magick::image_info(new_image)["height"]
-
-	output <- list()
+	image_width <- magick::image_info(new_image)["width"][[1]]
+	image_height <- magick::image_info(new_image)["height"][[1]]
 
 	output$plot_type <- plot_type <- if(is.null(plot_type)){specify_type()}else{plot_type}
 	stopifnot(plot_type %in% c("mean_error","boxplot","scatterplot","histogram"))
 
 	output$calpoints <- calpoints <- cal_coords()	
-	output$point_vals <- point_vals <- getVals() 
-	
-	output$nGroups <- nGroups <- as.numeric(readline("Number of groups: "))
+	output$point_vals <- point_vals <- getVals(calpoints=calpoints, image_width=image_width, image_height=image_height) 
 
+	if(plot_type != "histogram"){
+		output$nGroups <- nGroups <- as.numeric(readline("Number of groups: "))
+	}
+	
 	if(plot_type %in% c("mean_error","boxplot")){
-		output$raw_data <- raw_data <- groups_extract(plot_type=plot_type, nGroups=nGroups, image_width=image_width)	
+		output$raw_data <- raw_data <- groups_extract(plot_type=plot_type, nGroups=nGroups, image=new_image, calpoints=calpoints, point_vals=point_vals)	
 		cal_data <- calibrate(raw_data=raw_data,calpoints=calpoints, point_vals=point_vals)
-		output$group_data <- group_data <- convert_group_data(cal_data=cal_data, plot_type=plot_type, nGroups=nGroups)
+		output$group_data <- convert_group_data(cal_data=cal_data, plot_type=plot_type, nGroups=nGroups)
 	}
 	
 	if(plot_type == "scatterplot"){
 		output$raw_data <- raw_data <- group_scatter_extract(nGroups)
-		output$group_data <- group_data <- calibrate(raw_data=raw_data,calpoints=calpoints, point_vals=point_vals)
+		output$group_data <- calibrate(raw_data=raw_data,calpoints=calpoints, point_vals=point_vals)
 	}	
 
 	if(plot_type == "histogram"){
-		output$raw_data <- histogram_extract()
+		output$raw_data <- raw_data <- histogram_extract(image=new_image, calpoints=calpoints, point_vals=point_vals)
 		cal_data <- calibrate(raw_data=raw_data,calpoints=calpoints, point_vals=point_vals)
-		output$grouo_data <- convert_histogram_data(cal_data=cal_data)
+		output$group_data <- convert_histogram_data(cal_data=cal_data)
 	}
 
 #	class(output) <- 'metaDigitise_data'

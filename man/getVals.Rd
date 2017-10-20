@@ -4,7 +4,14 @@
 \alias{getVals}
 \title{getVals}
 \usage{
-getVals()
+getVals(calpoints, image_width, image_height)
+}
+\arguments{
+\item{calpoints}{Calibration points}
+
+\item{image_width}{image width}
+
+\item{image_height}{image height}
 }
 \description{
 Gets values needed to calibrate axis coordinated. Modified from the digitize package

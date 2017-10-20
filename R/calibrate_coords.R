@@ -1,24 +1,3 @@
-#' @title getVals
-#' @description Gets values needed to calibrate axis coordinated. Modified from the digitize package
-getVals <- function() {
-	names <- c("x1","x2","y1","y2")
-	vals <- NULL
-	for (p in names) {
-    	bad <- TRUE
-    	while (bad) {
-    		input <- base::readline(paste("What is the value of", p, "?\n"))
-      		bad <- length(input) > 1
-      		if (bad) {
-        		cat("Error in input! Try again\n")
-      		} else {
-        		bad <- FALSE
-      		}
-    	}
-    vals[p] <- as.numeric(input)
-  }
-  return(vals)
-}
-
 #' @title cal_coords
 #' @description Prompts user to enter axis coordinates, and their values. Modified from the digitize package
 cal_coords <- function() {
@@ -61,10 +40,38 @@ Click IN ORDER: x1, x2, y1, y2 \n
 "
 	 )
 	
-	calpoints <- locator(4, type="p", col="blue", pch=3, lwd = 2)
-	flush.console()
-  return(calpoints)
+	calpoints_x <- locator(2, type="o", col="blue", pch=3, lwd = 2)
+	calpoints_y <- locator(2, type="o", col="blue", pch=3, lwd = 2)
+  flush.console()
+  return(rbind(as.data.frame(calpoints_x),as.data.frame(calpoints_y)))
 }
+
+
+#' @title getVals
+#' @param calpoints Calibration points
+#' @param image_width image width
+#' @param image_height image height
+#' @description Gets values needed to calibrate axis coordinated. Modified from the digitize package
+getVals <- function(calpoints, image_width, image_height) {
+  names <- c("x1","x2","y1","y2")
+  vals <- NULL
+  for (p in names) {
+      bad <- TRUE
+      while (bad) {
+        input <- base::readline(paste("What is the value of", p, "?\n"))
+          bad <- length(input) > 1
+          if (bad) {
+            cat("Error in input! Try again\n")
+          } else {
+            bad <- FALSE
+          }
+      }
+    vals[p] <- as.numeric(input)
+  }
+  text(calpoints$x - c(0, 0, image_width/30, image_width/30), calpoints$y - c(image_height/30, image_height/30, 0, 0), vals, col="blue", cex=2)
+  return(vals)
+}
+
 
 
 #Range <- function(x, na.rm=TRUE) max(x, na.rm=na.rm) - min(x, na.rm=na.rm)
