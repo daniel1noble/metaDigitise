@@ -4,10 +4,16 @@
 \alias{group_scatter_extract}
 \title{group_scatter_extract}
 \usage{
-group_scatter_extract(nGroups)
+group_scatter_extract(nGroups, image, calpoints, point_vals)
 }
 \arguments{
 \item{nGroups}{The number of groups}
+
+\item{image}{image}
+
+\item{calpoints}{points used for calibration}
+
+\item{point_vals}{values for calibration}
 }
 \description{
 Don't know yet Joel.
