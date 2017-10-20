@@ -3,3 +3,4 @@ example_figs/
 *.Rproj.user
 .Rbuildignore
 metaDigitise.Rproj
+.Rproj.user
