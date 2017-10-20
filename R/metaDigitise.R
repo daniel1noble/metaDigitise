@@ -35,19 +35,19 @@ metaDigitise <- function(image_file, plot_type=NULL, summary_stats=FALSE){
 	
 	if(plot_type %in% c("mean_error","boxplot")){
 		output$raw_data <- raw_data <- groups_extract(plot_type=plot_type, nGroups=nGroups, image=new_image, calpoints=calpoints, point_vals=point_vals)	
-		cal_data <- calibrate(raw_data=raw_data,calpoints=calpoints, point_vals=point_vals)
-		output$group_data <- convert_group_data(cal_data=cal_data, plot_type=plot_type, nGroups=nGroups)
+	#	cal_data <- calibrate(raw_data=raw_data,calpoints=calpoints, point_vals=point_vals)
+	#	output$group_data <- convert_group_data(cal_data=cal_data, plot_type=plot_type, nGroups=nGroups)
 	}
 	
 	if(plot_type == "scatterplot"){
-		output$raw_data <- raw_data <- group_scatter_extract(nGroups)
-		output$group_data <- calibrate(raw_data=raw_data,calpoints=calpoints, point_vals=point_vals)
+		output$raw_data <- raw_data <- group_scatter_extract(nGroups,image=new_image, calpoints=calpoints, point_vals=point_vals)
+	#	output$group_data <- calibrate(raw_data=raw_data,calpoints=calpoints, point_vals=point_vals)
 	}	
 
 	if(plot_type == "histogram"){
 		output$raw_data <- raw_data <- histogram_extract(image=new_image, calpoints=calpoints, point_vals=point_vals)
-		cal_data <- calibrate(raw_data=raw_data,calpoints=calpoints, point_vals=point_vals)
-		output$group_data <- convert_histogram_data(cal_data=cal_data)
+	#	cal_data <- calibrate(raw_data=raw_data,calpoints=calpoints, point_vals=point_vals)
+	#	output$group_data <- convert_histogram_data(cal_data=cal_data)
 	}
 
 #	class(output) <- 'metaDigitise_data'

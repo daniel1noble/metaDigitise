@@ -7,6 +7,7 @@
 #' @description Redraws figure and extraction data
 #' @author Joel Pick
 internal_redraw <- function(image, plot_type, calpoints, point_vals, raw_data){
+	plot(image)
 	image_width <- magick::image_info(image)["width"][[1]]
 	image_height <- magick::image_info(image)["height"][[1]]
 
