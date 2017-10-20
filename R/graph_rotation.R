@@ -54,6 +54,5 @@ Otherwise chose continue\n
 rotate_graph <- function(image, flip, rotate){
 	if(flip) image <- magick::image_flop(magick::image_rotate(image,270))
 	image <- magick::image_rotate(image, rotate)
-	plot(image)
 	return(image)
 }

@@ -7,6 +7,7 @@
 #' @description Redraws figure and extraction data
 #' @author Joel Pick
 internal_redraw <- function(image, plot_type, calpoints, point_vals, raw_data){
+	plot(image)
 	image_width <- magick::image_info(image)["width"][[1]]
 	image_height <- magick::image_info(image)["height"][[1]]
 
@@ -15,7 +16,7 @@ internal_redraw <- function(image, plot_type, calpoints, point_vals, raw_data){
 	lines(calpoints[3:4,], pch=3, col="blue", lwd=2)
 	text(calpoints$x - c(0, 0, image_width/30, image_width/30), calpoints$y - c(image_height/30, image_height/30, 0, 0), point_vals, col="blue", cex=2)
 
-	if(plot_type != "histogram" & nrow(raw_data)>0){
+	if(plot_type %in% c("mean_error","boxplot") & nrow(raw_data)>0){
 		for(i in unique(raw_data$id)){
 			group_data <- subset(raw_data,id==i)
 			points(y~x,group_data, pch=19, col="red")
@@ -25,6 +26,12 @@ internal_redraw <- function(image, plot_type, calpoints, point_vals, raw_data){
 			}
 		}
 	}
+
+	if(plot_type=="scatterplot"& nrow(raw_data)>0){
+		points(y~x,raw_data, pch=19, col="red")
+	}
+
+
 	if(plot_type=="histogram"& nrow(raw_data)>0){
 		for(i in seq(2,nrow(raw_data),2)){
 			bar_data <- raw_data[c(i-1,i),]
