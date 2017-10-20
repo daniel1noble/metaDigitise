@@ -42,7 +42,7 @@ groups_extract <- function(plot_type, nGroups, image, calpoints, point_vals){
 			add_removeQ <- readline("Continue or reclick? c/r ")
 			while(!add_removeQ  %in% c("c","r")) add_removeQ <- readline("Continue or reclick? c/r ")	
 			if(add_removeQ=="r") {
-				redraw(image, plot_type=plot_type, raw_data[-rows,], calpoints, point_vals)
+				internal_redraw(image, plot_type=plot_type, calpoints, point_vals, raw_data[-rows,])
 			}		
 		}
 	}

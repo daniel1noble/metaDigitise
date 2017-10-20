@@ -1,12 +1,12 @@
-#' @title redraw
+#' @title internal_redraw
 #' @param image image 
 #' @param plot_type The type of plot
-#' @param raw_data previously extracted data points
 #' @param calpoints points used for calibration 
 #' @param point_vals values for calibration
-#' @description Extraction of data from boxplots of mean_error plots, from multiple groups
-redraw <- function(image, plot_type, raw_data, calpoints, point_vals){
-	plot(image)
+#' @param raw_data previously extracted data points
+#' @description Redraws figure and extraction data
+#' @author Joel Pick
+internal_redraw <- function(image, plot_type, calpoints, point_vals, raw_data){
 	image_width <- magick::image_info(image)["width"][[1]]
 	image_height <- magick::image_info(image)["height"][[1]]
 
@@ -32,4 +32,23 @@ redraw <- function(image, plot_type, raw_data, calpoints, point_vals){
 			lines(y~x, bar_data, lwd=2, col="red")
 		}
 	}
+}
+
+
+
+#' @title redraw
+#' @param image_file image 
+#' @param flip whether to flip figure
+#' @param rotate how much to rotate figure
+#' @param plot_type The type of plot
+#' @param calpoints points used for calibration 
+#' @param point_vals values for calibration
+#' @param raw_data previously extracted data points
+#' @description Redraws figure and extraction data
+#' @author Joel Pick
+#' @export
+redraw <- function(image_file, flip, rotate, plot_type, calpoints, point_vals, raw_data){
+	image <- magick::image_read(image_file)
+	new_image <- rotate_graph(image=image, flip=flip, rotate=rotate)
+	internal_redraw(new_image, plot_type, calpoints, point_vals, raw_data)
 }
