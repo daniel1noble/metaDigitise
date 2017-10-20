@@ -1,19 +1,23 @@
 
 #' @title metaDigitise
 #' @description Extracts points from a figure and generate summary statistics
-#' @param file Image file
+#' @param image_file Image file
 #' @param plot_type Type of plot from "mean_error","boxplot","scatterplot" or"histogram". Function will prompt if not entered by user.
 #' @param summary_stats Whether further summary statistics are derived from "mean_se" and "boxplot". Require user to input sample sizes. Currently defunct
 #' @return List of 
 #' @author Joel Pick
 #' @export
-metaDigitise <- function(file, plot_type=NULL, summary_stats=FALSE){
+metaDigitise <- function(image_file, plot_type=NULL, summary_stats=FALSE){
 	
 	output <- list()
-	output$file <- file
+	output$image_file <- image_file
 
-	image <- magick::image_read(file)
-	new_image <- graph_rotate(image)
+	image <- magick::image_read(image_file)
+	rotate_image <- user_rotate_graph(image)
+	new_image <- rotate_image$image
+	output$flip <- rotate_image$flip
+	output$rotate <- rotate_image$rotate
+
 	flush.console()
 
 	image_width <- magick::image_info(new_image)["width"][[1]]
@@ -26,7 +30,7 @@ metaDigitise <- function(file, plot_type=NULL, summary_stats=FALSE){
 	output$point_vals <- point_vals <- getVals(calpoints=calpoints, image_width=image_width, image_height=image_height) 
 
 	if(plot_type != "histogram"){
-		output$nGroups <- nGroups <- as.numeric(readline("Number of groups: "))
+		nGroups <- as.numeric(readline("Number of groups: "))
 	}
 	
 	if(plot_type %in% c("mean_error","boxplot")){

@@ -19,7 +19,7 @@ histogram_extract <- function(image, calpoints, point_vals){
 		if(histQ=="r"){
 			remove <- c(nrow(raw_data)-1,nrow(raw_data))
 			raw_data <- raw_data[-remove,]
-			redraw(image, plot_type="histogram", raw_data, calpoints, point_vals)
+			internal_redraw(image, plot_type="histogram", calpoints, point_vals, raw_data)
 			histQ <- "a"
 		}
 	}

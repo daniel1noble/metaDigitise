@@ -4,10 +4,10 @@
 \alias{metaDigitise}
 \title{metaDigitise}
 \usage{
-metaDigitise(file, plot_type = NULL, summary_stats = FALSE)
+metaDigitise(image_file, plot_type = NULL, summary_stats = FALSE)
 }
 \arguments{
-\item{file}{Image file}
+\item{image_file}{Image file}
 
 \item{plot_type}{Type of plot from "mean_error","boxplot","scatterplot" or"histogram". Function will prompt if not entered by user.}
 

@@ -4,7 +4,14 @@
 \alias{single_scatter_extract}
 \title{single_scatter_extract}
 \usage{
-single_scatter_extract()
+single_scatter_extract(image, calpoints, point_vals)
+}
+\arguments{
+\item{image}{image}
+
+\item{calpoints}{points used for calibration}
+
+\item{point_vals}{values for calibration}
 }
 \description{
 Extraction of data from scatterplots

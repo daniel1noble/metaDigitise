@@ -1,10 +1,7 @@
-#' @title graph_rotate
-#' @description Rotates/flips imported figures in order to align them properly. Asks the user after each change if further alteration is required
+#' @title user_rotate_graph
+#' @description Rotates/flips imported figures according to user input, in order to align them properly. Asks the user after each change if further alteration is required
 #' @param image Image object from magick::image_read
-#' @return Returns new image object and plots rotated/flipped image
-#' @author Joel Pick
-#' @export
-graph_rotate <- function(image){
+user_rotate_graph <- function(image){
 	plot(image)
 	rotateQ <- "a"
 cat("mean_error and boxplots should be vertically orientated
@@ -20,10 +17,11 @@ If figures are wonky, chose rotate.
 
 Otherwise chose continue\n
 ")
-
+	out <- list(flip=FALSE, rotate=0)
 	while(rotateQ != "c") {
 		if(rotateQ=="f"){
 			image <- magick::image_flop(magick::image_rotate(image,270))
+			if(!out$flip){out$flip <- TRUE}else{out$flip <- FALSE}
 			plot(image)
 		}
 		if(rotateQ=="r"){
@@ -38,8 +36,24 @@ Otherwise chose continue\n
 			f <- atan2(y.dist, x.dist) * 180/pi
 			image <- magick::image_rotate(image, f)
 			plot(image)
+			out$rotate <- out$rotate + f
 		}
 		rotateQ <- base::readline("Flip, rotate or continue f/r/c ")
 	}
+	out$image <- image
+	return(out)
+}
+
+
+
+#' @title rotate_graph
+#' @description Rotates/flips imported figures
+#' @param image Image object from magick::image_read
+#' @param flip whether to flip figure
+#' @param rotate how much to rotate figure
+rotate_graph <- function(image, flip, rotate){
+	if(flip) image <- magick::image_flop(magick::image_rotate(image,270))
+	image <- magick::image_rotate(image, rotate)
+	plot(image)
 	return(image)
 }

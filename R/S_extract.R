@@ -1,8 +1,11 @@
 #' @title single_scatter_extract
 #' @description Extraction of data from scatterplots
-single_scatter_extract <- function(){
+#' @param image image
+#' @param calpoints points used for calibration 
+#' @param point_vals values for calibration
+single_scatter_extract <- function(image, calpoints, point_vals){
 	add_removeQ <- "a"
-	group_points <- data.frame()
+	raw_data <- data.frame()
 	while(add_removeQ!="c"){
 		if(add_removeQ=="a"){
 			cat(
@@ -17,12 +20,12 @@ single_scatter_extract <- function(){
 			    sep = "\n\n"
 			  )
 			select_points <- locator(type="p", col="red", lwd=2)
-			group_points <- rbind(group_points, data.frame(x=select_points$x,y=select_points$y))}
+			raw_data <- rbind(raw_data, data.frame(x=select_points$x,y=select_points$y))}
 		if(add_removeQ=="r") {
 			cat("Click on point you want to remove\n")
 			remove <- locator(1,type="p", col="green", pch=4, lwd=2)
-			x_remove <- which(abs(group_points$x-remove$x) == min(abs(group_points$x-remove$x)))
-			y_remove <- which(abs(group_points$y-remove$y) == min(abs(group_points$y-remove$y)))
+			x_remove <- which(abs(raw_data$x-remove$x) == min(abs(raw_data$x-remove$x)))
+			y_remove <- which(abs(raw_data$y-remove$y) == min(abs(raw_data$y-remove$y)))
 			## add in a maximum distance to search in; at the moment it searches whole plot area
 			#
 
@@ -30,17 +33,17 @@ single_scatter_extract <- function(){
 				cat("**** Point not identified ****\n")
 			}else if(length(x_remove)>1 & length(y_remove)==1){
 				x_remove <- x_remove[x_remove %in% y_remove]
-				points(group_points$x[x_remove],group_points$y[y_remove], col="green", lwd=2)
-				group_points <- group_points[-x_remove,]
+				raw_data <- raw_data[-x_remove,]
+				internal_redraw(image, plot_type="scatterplot", calpoints, point_vals, raw_data)
 				cat("**** Point successfully removed ****\n")
 			}else if(length(y_remove)>1 & length(x_remove)==1){
 				y_remove <- y_remove[y_remove %in% x_remove]
-				points(group_points$x[x_remove],group_points$y[y_remove], col="green", lwd=2)
-				group_points <- group_points[-x_remove,]
+				internal_redraw(image, plot_type="scatterplot", calpoints, point_vals, raw_data)
+				raw_data <- raw_data[-x_remove,]
 				cat("**** Point successfully removed ****\n")
 			}else if(x_remove==y_remove) {
-				points(group_points$x[x_remove],group_points$y[y_remove], col="green", lwd=2)
-				group_points <- group_points[-x_remove,]
+				points(raw_data$x[x_remove],raw_data$y[y_remove], col="green", lwd=2)
+				internal_redraw(image, plot_type="scatterplot", calpoints, point_vals, raw_data)
 				cat("**** Point successfully removed ****\n")	
 			}else{cat("**** Point not identified ****\n")
 			}
@@ -48,7 +51,7 @@ single_scatter_extract <- function(){
 		add_removeQ <- readline("Add, remove or continue? a/r/c ")		
 	}
 
-	return(group_points)
+	return(raw_data)
 }
 
 
