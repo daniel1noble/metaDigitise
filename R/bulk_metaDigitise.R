@@ -97,7 +97,7 @@ get_notDone_file_details <- function(dir){
 
 	# Find what files are already done. Remove these from our list
 	if (length(calibrations) > 1){
-		done_figures <- grep(calibrations, name)
+		done_figures <- match(calibrations, name)
 	
 	# Remove the files that are already done.
 		images <- images[-done_figures]
