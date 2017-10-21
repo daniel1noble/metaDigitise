@@ -6,33 +6,45 @@
 #' @export
 
 bulk_metaDigitise <- function(dir, types = c("diff", "same")) {
+	  
+	  cal_dir <- paste0(dir, "caldat")
+
+	if (dir.exists(cal_dir) == FALSE){
+		dir.create(cal_dir)
+	}
+
 	  type <- match.arg(types)
-	images <- list.files(dir)
+	images <- list.files(dir, pattern = ".[pjt][dnip][fpg]*")
+	  name <- gsub(".[pjt][dnip][fpg]*", "", images)
 	 paths <- paste0(dir, images)
 
-	 if (types == "diff") {
+	 if (type == "diff") {
 		 data_list <- list()
 		 for (i in 1:length(paths) ) {
 		 		   	   plot_type <- specify_type()
-			      data_list[[i]] <- metaDigitise(paths[i], plot_type = plot_type)
+			      tmp <- metaDigitise(paths[i], plot_type = plot_type)
+			      data_list[[i]] <- tmp
 			 names(data_list)[i] <- images[i]
+			 saveRDS(tmp, file = paste0(cal_dir, "/",name[i]))
 		 	}
 	}
 
-	if (types == "same") {
+	if (type == "same") {
 		plot_type <- specify_type()
 		data_list <- list()
 		
 		for (i in 1:length(paths)) {
-		 	data_list[[i]] <- metaDigitise(paths[i], plot_type = plot_type)
+		 	tmp <- metaDigitise(paths[i], plot_type = plot_type)
 		 	names(data_list)[i] <- images[i]
+		 	data_list[[i]] <- tmp
+		 	saveRDS(tmp, file = paste0(cal_dir, "/", name[i]))
 	 	}	
 	}
 
 	if (type == "diff") {
-		return(data_list)
+		return(extract_digitised(data_list))
 	} else{
-		return(do.call(rbind, data_list))
+		return(do.call(rbind, extract_digitised(data_list)))
 	}
 }
 
