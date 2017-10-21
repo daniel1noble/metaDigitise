@@ -50,5 +50,5 @@ internal_redraw <- function(image, plot_type, calpoints, point_vals, raw_data){
 redraw <- function(mD_data){
 	image <- magick::image_read(mD_data$image_file)
 	new_image <- rotate_graph(image=image, flip=mD_data$flip, rotate=mD_data$rotate)
-	internal_redraw(image=mD_data$new_image, plot_type=mD_data$plot_type, calpoints=mD_data$calpoints, point_vals=mD_data$point_vals, raw_data=mD_data$raw_data)
+	internal_redraw(image=new_image, plot_type=mD_data$plot_type, calpoints=mD_data$calpoints, point_vals=mD_data$point_vals, raw_data=mD_data$raw_data)
 }
