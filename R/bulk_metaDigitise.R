@@ -6,38 +6,41 @@
 #' @export
 
 bulk_metaDigitise <- function(dir, types = c("diff", "same")) {
-	  
-	setup_calibration_dir(dir)
-
-	  type <- match.arg(types)
-	images <- list.files(dir, pattern = ".[pjt][dnip][fpg]*")
-	  name <- gsub(".[pjt][dnip][fpg]*", "", images)
-	 paths <- paste0(dir, images)
+	
+	   type <- match.arg(types)
+			   setup_calibration_dir(dir)
+	details <- get_notDone_file_details(dir)
 
 	 if (type == "diff") {
+		 
 		 data_list <- list()
-		 for (i in 1:length(paths) ) {
+
+		 for (i in 1:length(details$paths)) {
 		 		   	   plot_type <- specify_type()
-			      data_list[[i]] <- metaDigitise(paths[i], plot_type = plot_type)
-			 names(data_list)[i] <- images[i]
-			 saveRDS(data_list[[i]], file = paste0(cal_dir, "/",name[i]))
+			      data_list[[i]] <- metaDigitise(details$paths[i], plot_type = plot_type)
+			 names(data_list)[i] <- details$images[i]
+			 saveRDS(data_list[[i]], file = paste0(details$cal_dir, details$name[i]))
 		 	}
 	}
 
 	if (type == "same") {
+		
 		plot_type <- specify_type()
 		data_list <- list()
 		
-		for (i in 1:length(paths)) {
-		 	data_list[[i]] <- metaDigitise(paths[i], plot_type = plot_type)
-		 	names(data_list)[i] <- images[i]
-		 	saveRDS(data_list[[i]], file = paste0(cal_dir, "/", name[i]))
+		for (i in 1:length(details$paths)) {
+		 	data_list[[i]] <- metaDigitise(details$paths[i], plot_type = plot_type)
+		 	names(data_list)[i] <- details$images[i]
+		 	saveRDS(data_list[[i]], file = paste0(details$cal_dir, details$name[i]))
 	 	}	
 	}
 
 	if (type == "diff") {
+		
 		return(extract_digitised(data_list))
+
 	} else{
+		
 		return(do.call(rbind, extract_digitised(data_list)))
 	}
 }
@@ -79,4 +82,28 @@ setup_calibration_dir <- function(dir){
 	if (dir.exists(cal_dir) == FALSE){
 		dir.create(cal_dir)
 	}
+}
+
+#' @title get_notDone_file_details
+#' @param dir the path name to the directory / folder where the files are located
+#' @description Function will get a series of file information from the directory and the calibration files. It will also exclude files that have already been processed, as is judged by the match between file names in the calibration folder and the 
+get_notDone_file_details <- function(dir){
+	
+	      images <- list.files(dir, pattern = ".[pjt][dnip][fpg]*")
+	        name <- gsub(".[pjt][dnip][fpg]*", "", images)
+	       paths <- paste0(dir, images)
+	     cal_dir <- paste0(dir, "caldat/")
+	calibrations <- list.files(paste0(dir, "caldat/"))
+
+	# Find what files are already done. Remove these from our list
+	if (length(calibrations) > 1){
+		done_figures <- grep(calibrations, name)
+	
+	# Remove the files that are already done.
+		images <- images[-done_figures]
+		  name <- name[-done_figures]
+		 paths <- paths[-done_figures]
+	}
+
+	return(list(images = images, name = name, paths = paths, cal_dir = cal_dir, calibrations = calibrations))
 }
