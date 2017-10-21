@@ -7,11 +7,7 @@
 
 bulk_metaDigitise <- function(dir, types = c("diff", "same")) {
 	  
-	  cal_dir <- paste0(dir, "caldat")
-
-	if (dir.exists(cal_dir) == FALSE){
-		dir.create(cal_dir)
-	}
+	setup_calibration_dir(dir)
 
 	  type <- match.arg(types)
 	images <- list.files(dir, pattern = ".[pjt][dnip][fpg]*")
@@ -22,10 +18,9 @@ bulk_metaDigitise <- function(dir, types = c("diff", "same")) {
 		 data_list <- list()
 		 for (i in 1:length(paths) ) {
 		 		   	   plot_type <- specify_type()
-			      tmp <- metaDigitise(paths[i], plot_type = plot_type)
-			      data_list[[i]] <- tmp
+			      data_list[[i]] <- metaDigitise(paths[i], plot_type = plot_type)
 			 names(data_list)[i] <- images[i]
-			 saveRDS(tmp, file = paste0(cal_dir, "/",name[i]))
+			 saveRDS(data_list[[i]], file = paste0(cal_dir, "/",name[i]))
 		 	}
 	}
 
@@ -34,10 +29,9 @@ bulk_metaDigitise <- function(dir, types = c("diff", "same")) {
 		data_list <- list()
 		
 		for (i in 1:length(paths)) {
-		 	tmp <- metaDigitise(paths[i], plot_type = plot_type)
+		 	data_list[[i]] <- metaDigitise(paths[i], plot_type = plot_type)
 		 	names(data_list)[i] <- images[i]
-		 	data_list[[i]] <- tmp
-		 	saveRDS(tmp, file = paste0(cal_dir, "/", name[i]))
+		 	saveRDS(data_list[[i]], file = paste0(cal_dir, "/", name[i]))
 	 	}	
 	}
 
@@ -72,4 +66,17 @@ specify_type <- function(){
 
 extract_digitised <- function(list) {
 	return( do.call (rbind, lapply (list, function(x) x$processed_data) ))
+}
+
+#' @title setup_calibration_dir
+#' @param dir the path name to the directory / folder where the files are located
+#' @description Function will check whether the calibration directory has been setup and if not, create one. 
+
+setup_calibration_dir <- function(dir){
+
+	cal_dir <- paste0(dir, "caldat")
+
+	if (dir.exists(cal_dir) == FALSE){
+		dir.create(cal_dir)
+	}
 }
