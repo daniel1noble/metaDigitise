@@ -4,22 +4,10 @@
 \alias{redraw}
 \title{redraw}
 \usage{
-redraw(image_file, flip, rotate, plot_type, calpoints, point_vals, raw_data)
+redraw(mD_data)
 }
 \arguments{
-\item{image_file}{image}
-
-\item{flip}{whether to flip figure}
-
-\item{rotate}{how much to rotate figure}
-
-\item{plot_type}{The type of plot}
-
-\item{calpoints}{points used for calibration}
-
-\item{point_vals}{values for calibration}
-
-\item{raw_data}{previously extracted data points}
+\item{mD_data}{metaDigitise output}
 }
 \description{
 Redraws figure and extraction data

@@ -20,6 +20,3 @@ internal_redraw(image, plot_type, calpoints, point_vals, raw_data)
 \description{
 Redraws figure and extraction data
 }
-\author{
-Joel Pick
-}
