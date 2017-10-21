@@ -40,8 +40,9 @@ groups_extract <- function(plot_type, nGroups, image, calpoints, point_vals){
 			if(nGroups>1){
 				group_id <- readline(paste("Group identifier",i,": "))
 				while(group_id %in% unique(raw_data$id)){group_id <- readline(paste("**** Group identifiers must be unique ****\nGroup identifier",i,": "))}
-				raw_data[rows,"id"] <- group_id
-			}else{group_id <- NA}
+			}else{group_id <- ""}
+			raw_data[rows,"id"] <- group_id
+
 			if(askN=="y") raw_data[rows,"n"] <- readline(paste("Group sample size: "))
 
 			group_points <- single_group_extract(plot_type)
