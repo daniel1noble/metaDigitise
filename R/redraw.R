@@ -5,7 +5,6 @@
 #' @param point_vals values for calibration
 #' @param raw_data previously extracted data points
 #' @description Redraws figure and extraction data
-#' @author Joel Pick
 internal_redraw <- function(image, plot_type, calpoints, point_vals, raw_data){
 	plot(image)
 	image_width <- magick::image_info(image)["width"][[1]]
@@ -44,18 +43,12 @@ internal_redraw <- function(image, plot_type, calpoints, point_vals, raw_data){
 
 
 #' @title redraw
-#' @param image_file image 
-#' @param flip whether to flip figure
-#' @param rotate how much to rotate figure
-#' @param plot_type The type of plot
-#' @param calpoints points used for calibration 
-#' @param point_vals values for calibration
-#' @param raw_data previously extracted data points
+#' @param mD_data metaDigitise output 
 #' @description Redraws figure and extraction data
 #' @author Joel Pick
 #' @export
-redraw <- function(image_file, flip, rotate, plot_type, calpoints, point_vals, raw_data){
-	image <- magick::image_read(image_file)
-	new_image <- rotate_graph(image=image, flip=flip, rotate=rotate)
-	internal_redraw(new_image, plot_type, calpoints, point_vals, raw_data)
+redraw <- function(mD_data){
+	image <- magick::image_read(mD_data$image_file)
+	new_image <- rotate_graph(image=image, flip=mD_data$flip, rotate=mD_data$rotate)
+	internal_redraw(image=mD_data$new_image, plot_type=mD_data$plot_type, calpoints=mD_data$calpoints, point_vals=mD_data$point_vals, raw_data=mD_data$raw_data)
 }
