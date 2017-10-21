@@ -36,7 +36,11 @@ groups_extract <- function(plot_type, nGroups, image, calpoints, point_vals){
 		rows<- rowStart:(rowStart+nRows-1)
 		add_removeQ <- "r"
 		while(add_removeQ=="r") {
-			group_id <- if(nGroups>1){readline(paste("Group identifier",i,": "))}else{NA}
+			
+			if(nGroups>1){
+				group_id <- readline(paste("Group identifier",i,": "))
+				while(group_id %in% unique(raw_data$id)){group_id <- readline(paste("**** Group identifiers must be unique ****\nGroup identifier",i,": "))}
+			}
 			group_N <- if(askN=="y"){readline(paste("Group sample size: "))}else{NA}
 
 			raw_data[rows,"id"] <- group_id
@@ -50,6 +54,7 @@ groups_extract <- function(plot_type, nGroups, image, calpoints, point_vals){
 			while(!add_removeQ  %in% c("c","r")) add_removeQ <- readline("Continue or reclick? c/r ")	
 			if(add_removeQ=="r") {
 				internal_redraw(image, plot_type=plot_type, calpoints, point_vals, raw_data[-rows,])
+				raw_data[rows,"id"] <- NA
 			}		
 		}
 	}
