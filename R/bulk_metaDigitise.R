@@ -19,7 +19,7 @@ bulk_metaDigitise <- function(dir, types = c("diff", "same")) {
 		 		   	   plot_type <- specify_type()
 			      data_list[[i]] <- metaDigitise(details$paths[i], plot_type = plot_type)
 			 names(data_list)[i] <- details$images[i]
-			 saveRDS(data_list[[i]], file = details$name)
+			 saveRDS(data_list[[i]], file = paste0(details$cal_dir, details$name[i]))
 		 	}
 	}
 
@@ -31,7 +31,7 @@ bulk_metaDigitise <- function(dir, types = c("diff", "same")) {
 		for (i in 1:length(details$paths)) {
 		 	data_list[[i]] <- metaDigitise(details$paths[i], plot_type = plot_type)
 		 	names(data_list)[i] <- details$images[i]
-		 	saveRDS(data_list[[i]], file = details$name)
+		 	saveRDS(data_list[[i]], file = paste0(details$cal_dir, details$name[i]))
 	 	}	
 	}
 
@@ -92,15 +92,18 @@ get_notDone_file_details <- function(dir){
 	      images <- list.files(dir, pattern = ".[pjt][dnip][fpg]*")
 	        name <- gsub(".[pjt][dnip][fpg]*", "", images)
 	       paths <- paste0(dir, images)
+	     cal_dir <- paste0(dir, "caldat/")
 	calibrations <- list.files(paste0(dir, "caldat/"))
 
 	# Find what files are already done. Remove these from our list
+	if (length(calibrations) > 1){
 		done_figures <- grep(calibrations, name)
-
+	
 	# Remove the files that are already done.
 		images <- images[-done_figures]
 		  name <- name[-done_figures]
 		 paths <- paths[-done_figures]
+	}
 
-	return(list(images = images, name = name, paths = paths, calibrations =calibrations))
+	return(list(images = images, name = name, paths = paths, cal_dir = cal_dir, calibrations = calibrations))
 }
