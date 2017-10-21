@@ -9,6 +9,8 @@
 #' @export
 metaDigitise <- function(image_file, plot_type=NULL, summary_stats=FALSE){
 	
+	op <- par(mar=c(0,0,0,0))
+
 	output <- list()
 	output$image_file <- image_file
 
@@ -51,6 +53,7 @@ metaDigitise <- function(image_file, plot_type=NULL, summary_stats=FALSE){
 	}
 
 #	class(output) <- 'metaDigitise_data'
+	par(op)
 	return(output)
 }
 
