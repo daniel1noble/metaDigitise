@@ -33,7 +33,7 @@ groups_extract <- function(plot_type, nGroups, image, calpoints, point_vals){
 		rows<- rowStart:(rowStart+nRows-1)
 		add_removeQ <- "r"
 		while(add_removeQ=="r") {
-			group_id <- readline(paste("Group identifier",i,":"))
+			group_id <- if(nGroups>1){readline(paste("Group identifier",i,":"))}else{NA}
 			raw_data[rows,1] <- group_id
 			group_points <- single_group_extract(plot_type)
 			text(mean(group_points$x)+image_width/30,mean(group_points$y),group_id,srt=90, col="Red")

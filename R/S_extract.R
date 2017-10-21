@@ -67,7 +67,7 @@ group_scatter_extract <- function(nGroups,image, calpoints, point_vals){
 	raw_data <-data.frame()
 
  		for(i in 1:nGroups) {
- 			id <- readline(paste("Group identifier",i,":"))
+			id <- if(nGroups>1){readline(paste("Group identifier",i,":"))}else{NA}
 			group_points <- single_scatter_extract(image, calpoints, point_vals)
 			raw_data <- rbind(raw_data, data.frame(id=id, x=group_points$x,y=group_points$y))
 		}
