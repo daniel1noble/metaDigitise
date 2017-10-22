@@ -4,7 +4,7 @@
 single_group_extract <- function(plot_type){
 	
 	if(plot_type=="mean_error"){
-		cat("Click on upper error bar, followed by the Mean\n")
+		cat("Click on Error Bar, followed by the Mean\n")
 		group_points <- locator(2, type="o", col="red", lwd=2, pch=19)
 	}
 
@@ -76,7 +76,7 @@ convert_group_data <- function(cal_data, plot_type, nGroups){
 
 		if(plot_type == "mean_error") {
 			group_mean <- group_data$y[2]
-			group_se <- group_data$y[1] - group_data$y[2]
+			group_se <- abs(group_data$y[1] - group_data$y[2])
 			convert_data[i,] <- c(group_data$id[1], group_mean,group_se,group_data$n[1])
 		}
 
