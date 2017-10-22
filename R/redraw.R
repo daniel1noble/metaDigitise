@@ -27,7 +27,19 @@ internal_redraw <- function(image, plot_type, calpoints, point_vals, raw_data){
 	}
 
 	if(plot_type=="scatterplot"& nrow(raw_data)>0){
-		points(y~x,raw_data, pch=19, col="red")
+		group_id <- unique(raw_data$id)
+		nGroups <- length(group_id)
+		cols <- rep(c("red", "green", "purple"),length.out=nGroups)
+		pchs <- rep(rep(c(19, 17, 15),each=3),length.out=nGroups)
+		legend_gap <- image_width/nGroups
+		legend_pos <- image_height/40
+
+		for(i in 1:nGroups){
+			group_data <- subset(raw_data,id==group_id[i])
+			points(y~x,group_data, pch=pchs[i], col=cols[i])
+			points(legend_gap/2 + legend_gap*(i-1), -legend_pos*2.5, col=cols[i], pch=pchs[i],xpd=TRUE)
+			text(legend_gap/2 + legend_gap*(i-1), -legend_pos, group_id[i], col=cols[i],xpd=TRUE)
+		}		
 	}
 
 
@@ -48,7 +60,7 @@ internal_redraw <- function(image, plot_type, calpoints, point_vals, raw_data){
 #' @author Joel Pick
 #' @export
 redraw <- function(mD_data){
-	op <- par(mar=c(0,0,0,0))
+	op <- par(mar=c(2,0,0,0))
 	image <- magick::image_read(mD_data$image_file)
 	new_image <- rotate_graph(image=image, flip=mD_data$flip, rotate=mD_data$rotate)
 	internal_redraw(image=new_image, plot_type=mD_data$plot_type, calpoints=mD_data$calpoints, point_vals=mD_data$point_vals, raw_data=mD_data$raw_data)
