@@ -1,3 +1,20 @@
+#' @title error_to_sd
+#' @description Transforms error to standard deviation
+#' @param error some form of error
+#' @param n Sample Size
+#' @param error_type type of error measured
+#' @return Returns vector of standard errors
+#' @author Joel Pick
+#' @export
+
+error_to_sd <- function(error, n, error_type=c("se","CI95","sd","range")){
+	if(error_type=="se") sd <- se_to_sd(error, n)
+	if(error_type=="CI95") sd <- CI95_to_sd(error, n)
+	if(error_type=="sd") sd <- error
+	if(error_type=="range") sd <- range_to_sd(error, n)
+	return(sd)
+}
+
 
 #' @title se_to_sd
 #' @description Transforms standard error to standard deviation
@@ -23,6 +40,19 @@ se_to_sd <- function(se, n) {
 CI95_to_sd <- function(CI,n) {
 	CI/1.96 * sqrt(n)
 }
+
+# #' @title range_to_sd
+# #' @description Transforms range to standard deviation
+# #' @param CI Interval difference from the mean
+# #' @param n Sample Size
+# #' @return Returns vector of standard deviations
+# #' @author Joel Pick
+# #' @export
+
+# range_to_sd <- function(min,max,n) {
+# 	CI/1.96 * sqrt(n)
+# }
+
 
 #' @title rqm_to_mean
 #' @description Calculate the mean from the box plots

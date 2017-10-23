@@ -51,7 +51,11 @@ metaDigitise <- function(image_file, plot_type=NULL){
 		output$raw_data <- raw_data <- groups_extract(plot_type=plot_type, nGroups=nGroups, image=image, image_file=image_file, calpoints=calpoints, point_vals=point_vals)	
 		cal_data <- calibrate(raw_data=raw_data,calpoints=calpoints, point_vals=point_vals)
 		output$processed_data <- convert_group_data(cal_data=cal_data, plot_type=plot_type, nGroups=nGroups)
-#		output$processed_data[,c("mean","error","n")] <- as.numeric(output$processed_data[,c("mean","error","n")])
+		if(plot_type == "mean_error") {
+			error_type <- readline("Type of error (se, CI95, sd, range): ")
+			while(!error_type %in% c("se","CI95","sd","range")) error_type <- readline("**** Invalid error type ***\nType of error (se, CI95, sd, range): ")
+			output$error_type <- error_type
+		}
 		output$processed_data$variable <- variable
 	}
 	
@@ -115,11 +119,10 @@ summary.metaDigitise<-function(object, ...){
 			group_id=pd$id,
 			variable=pd$variable,
 			mean=pd$mean,
-			sd=se_to_sd(se=pd$error, n=pd$n),
+			sd=error_to_sd(error=pd$error, n=pd$n, error_type=object$error_type),
 			n=pd$n,
 			r=NA
 		)
-
 	}
 	
 	if (object$plot_type == "boxplot"){
