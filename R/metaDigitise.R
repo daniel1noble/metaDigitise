@@ -68,8 +68,8 @@ metaDigitise <- function(image_file, plot_type=NULL){
 }
 
 
-#' @title metaDigitise
-#' @description Extracts points from a figure and generate summary statistics
+#' @title print.metaDigitise
+#' @description Print method for class ‘metaDigitise’
 #' @param x an R object of class ‘metaDigitise’
 #' @author Joel Pick
 #' @export
@@ -81,8 +81,8 @@ print.metaDigitise <- function(x, ...){
 }
 
 
-#' @title metaDigitise
-#' @description Extracts points from a figure and generate summary statistics
+#' @title summary.metaDigitise
+#' @description Summary method for class ‘metaDigitise’
 #' @param object an R object of class ‘metaDigitise’
 #' @return Data.frame
 #' @author Joel Pick
