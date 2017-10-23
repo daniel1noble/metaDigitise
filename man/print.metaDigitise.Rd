@@ -2,15 +2,17 @@
 % Please edit documentation in R/metaDigitise.R
 \name{print.metaDigitise}
 \alias{print.metaDigitise}
-\title{metaDigitise}
+\title{print.metaDigitise}
 \usage{
 \method{print}{metaDigitise}(x, ...)
 }
 \arguments{
 \item{x}{an R object of class ‘metaDigitise’}
+
+\item{...}{further arguments passed to or from other methods.}
 }
 \description{
-Extracts points from a figure and generate summary statistics
+Print method for class ‘metaDigitise’
 }
 \author{
 Joel Pick

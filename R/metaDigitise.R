@@ -63,7 +63,7 @@ metaDigitise <- function(image_file, plot_type=NULL){
 	}
 
 	class(output) <- 'metaDigitise'
-	par(op)
+	on.exit(par(op))
 	return(output)
 }
 
@@ -71,6 +71,7 @@ metaDigitise <- function(image_file, plot_type=NULL){
 #' @title print.metaDigitise
 #' @description Print method for class ‘metaDigitise’
 #' @param x an R object of class ‘metaDigitise’
+#' @param ... further arguments passed to or from other methods.
 #' @author Joel Pick
 #' @export
 
@@ -84,6 +85,7 @@ print.metaDigitise <- function(x, ...){
 #' @title summary.metaDigitise
 #' @description Summary method for class ‘metaDigitise’
 #' @param object an R object of class ‘metaDigitise’
+#' @param ... further arguments passed to or from other methods.
 #' @return Data.frame
 #' @author Joel Pick
 #' @export

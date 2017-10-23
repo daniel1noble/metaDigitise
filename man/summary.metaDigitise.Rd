@@ -2,18 +2,20 @@
 % Please edit documentation in R/metaDigitise.R
 \name{summary.metaDigitise}
 \alias{summary.metaDigitise}
-\title{metaDigitise}
+\title{summary.metaDigitise}
 \usage{
 \method{summary}{metaDigitise}(object, ...)
 }
 \arguments{
 \item{object}{an R object of class ‘metaDigitise’}
+
+\item{...}{further arguments passed to or from other methods.}
 }
 \value{
 Data.frame
 }
 \description{
-Extracts points from a figure and generate summary statistics
+Summary method for class ‘metaDigitise’
 }
 \author{
 Joel Pick
