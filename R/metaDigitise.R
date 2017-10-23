@@ -108,7 +108,8 @@ summary.metaDigitise<-function(object, ...){
 	}
 
 	if (object$plot_type=="histogram"){
-		out <- data.frame(filename=object$image_file, group_id=NA, variable=pd$variable, mean=pd$mean, sd=se_to_sd(se=pd$error,n=pd$n), n=pd$n)
+		hist_data <- rep(pd$midpoints, pd$freq)
+		out <- data.frame(filename=object$image_file, group_id=NA, variable=pd$variable, mean=mean(hist_data),sd=sd(hist_data),n=length(hist_data))
 	}
 
 	return(out)

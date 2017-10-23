@@ -38,7 +38,5 @@ convert_histogram_data <- function(cal_data){
 		midpoints <- c(midpoints, mean(bar_data$x))
 		freq <- c(freq, round(mean(bar_data$y)))
 	}
-	hist_data <- rep(midpoints, freq)
-	return(c(mean=mean(hist_data),sd=sd(hist_data),n=length(hist_data)))
+	return(data.frame(midpoints=midpoints, frequency=freq))
 }
-
