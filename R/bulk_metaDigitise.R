@@ -22,15 +22,7 @@ bulk_metaDigitise <- function(dir, types = c("diff", "same"), ...) {
 			 saveRDS(data_list[[i]], file = paste0(details$cal_dir, details$name[i]))
 		 }
 	
-
-	if (type == "diff") {
-		
-		return(extract_digitised(data_list, ...))
-
-	} else{
-		
-		return(do.call(rbind, extract_digitised(data_list, ...)))
-	}
+		return(extract_digitised(data_list, types = type, ...))
 }
 
 #' @title specify_type
@@ -52,16 +44,21 @@ specify_type <- function(){
 #' @title extract_digitised
 #' @param list A list of objects returned from metaDigitise
 #' @param summary A logical 'TRUE' or 'FALSE' indicating whether metaDigitise should print summary statitics from each figure and group.
+#' @param types Whether the plots are the same or different types
 #' @description Function for extracting the data from a metaDigitise list
 #' @return The function will return a data frame with the data across all the digitised files 
 #' @export
 
-extract_digitised <- function(list, summary = FALSE) {
+extract_digitised <- function(list, types = c("same", "diff"), summary = TRUE) {
 
 	if(summary == TRUE) {
-		return( do.call (rbind, lapply (list, function(x) summary(x)) ))		
-	} else{
-		return( do.call (rbind, lapply (list, function(x) x$processed_data) ))
+		return( do.call (rbind, make.row.names = FALSE, lapply (list, function(x) summary(x)) ))		
+	}
+
+	if(types == "same"){
+		return( do.call (rbind, lapply (list, function(x) x$processed_data)))
+	} else {
+		return(lapply (list, function(x) x$processed_data))
 	}
 }
 
