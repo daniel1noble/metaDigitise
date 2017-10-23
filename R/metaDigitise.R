@@ -107,27 +107,61 @@ print.metaDigitise <- function(x, ...){
 summary.metaDigitise<-function(object, ...){
 
 	pd <- object$processed_data
-
+	fn <- filename(object$image_file)
 
 	if (object$plot_type == "mean_error"){
-		out <- data.frame(filename=object$image_file, group_id=pd$id, variable=pd$variable, mean=pd$mean, sd=se_to_sd(se=pd$error,n=as.numeric(pd$n)), n=pd$n)
+		out <- data.frame(
+			filename=fn,
+			group_id=pd$id,
+			variable=pd$variable,
+			mean=pd$mean,
+			sd=se_to_sd(se=pd$error, n=pd$n),
+			n=pd$n,
+			r=NA
+		)
+
 	}
 	
 	if (object$plot_type == "boxplot"){
-		out <- data.frame(filename=object$image_file, group_id=pd$id, variable=pd$variable, mean=rqm_to_mean(min=pd$min,LQ=pd$q1,median=pd$med,UQ=pd$q3,max=pd$max), sd=rqm_to_sd(min=pd$min,LQ=pd$q1,UQ=pd$q3,max=pd$max,n=pd$n), n=pd$n)
+		out <- data.frame(
+			filename=fn,
+			group_id=pd$id,
+			variable=pd$variable,
+			mean=rqm_to_mean(min=pd$min,LQ=pd$q1,median=pd$med,UQ=pd$q3,max=pd$max),
+			sd=rqm_to_sd(min=pd$min,LQ=pd$q1,UQ=pd$q3,max=pd$max,n=pd$n),
+			n=pd$n,
+			r=NA
+		)
 	}
 
 	if (object$plot_type=="scatterplot"){
 		out <- as.data.frame(do.call(rbind, lapply(split(pd,pd$id), function(z){ 
-			data.frame(filename=object$image_file, group_id=z$id[1], x_var=z$x_variable[1], x_mean=mean(z$x), x_sd=sd(z$x), y_variable=z$y_var[1], y_mean=mean(z$y), y_sd=sd(z$y), n=nrow(z), r=cor(z$x,z$y))
+			data.frame(
+				filename=fn,
+				group_id=z$id[1],
+				variable=c(z$x_variable[1],z$y_variable[1]),
+				mean=apply(z[,c("x","y")],2,mean),
+				sd=apply(z[,c("x","y")],2,sd),
+			 	n=nrow(z),
+			 	r=cor(z$x,z$y)
+			)
 		})))
+		rownames(out) <- 1:nrow(out)
 	}
 
 	if (object$plot_type=="histogram"){
 		hist_data <- rep(pd$midpoints, pd$freq)
-		out <- data.frame(filename=object$image_file, group_id=NA, variable=pd$variable[1], mean=mean(hist_data),sd=sd(hist_data),n=length(hist_data))
+		out <- data.frame(
+			filename=fn,
+			group_id=NA,
+			variable=pd$variable[1],
+			mean=mean(hist_data),
+			sd=sd(hist_data),
+			n=length(hist_data),
+			r=NA
+		)
 	}
-
+	out$plot_type <- object$plot_type
 	return(out)
 }
 
