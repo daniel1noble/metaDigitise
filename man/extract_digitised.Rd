@@ -4,10 +4,12 @@
 \alias{extract_digitised}
 \title{extract_digitised}
 \usage{
-extract_digitised(list)
+extract_digitised(list, summary = FALSE)
 }
 \arguments{
 \item{list}{A list of objects returned from metaDigitise}
+
+\item{summary}{A logical 'TRUE' or 'FALSE' indicating whether metaDigitise should print summary statitics from each figure and group.}
 }
 \value{
 The function will return a data frame with the data across all the digitised files
