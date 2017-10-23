@@ -3,13 +3,12 @@
 #' @description Extracts points from a figure and generate summary statistics
 #' @param image_file Image file
 #' @param plot_type Type of plot from "mean_error","boxplot","scatterplot" or"histogram". Function will prompt if not entered by user.
-#' @param summary_stats Whether further summary statistics are derived from "mean_se" and "boxplot". Require user to input sample sizes. Currently defunct
 #' @return List of 
 #' @author Joel Pick
 #' @export
-metaDigitise <- function(image_file, plot_type=NULL, summary_stats=FALSE){
+metaDigitise <- function(image_file, plot_type=NULL){
 	
-	op <- par(mar=c(2,0,0,0))
+	op <- par(mar=c(3,0,0,0))
 
 	output <- list()
 	output$image_file <- image_file
@@ -28,6 +27,12 @@ metaDigitise <- function(image_file, plot_type=NULL, summary_stats=FALSE){
 	output$plot_type <- plot_type <- if(is.null(plot_type)){specify_type()}else{plot_type}
 	stopifnot(plot_type %in% c("mean_error","boxplot","scatterplot","histogram"))
 
+	variable <- readline("What is the variable? ")
+	if(plot_type == "scatterplot"){
+		x_variable <- readline("What is the x variable? ")
+		y_variable <- readline("What is the y variable? ")
+	}
+
 	output$calpoints <- calpoints <- cal_coords()	
 	output$point_vals <- point_vals <- getVals(calpoints=calpoints, image_width=image_width, image_height=image_height) 
 
@@ -39,26 +44,72 @@ metaDigitise <- function(image_file, plot_type=NULL, summary_stats=FALSE){
 		output$raw_data <- raw_data <- groups_extract(plot_type=plot_type, nGroups=nGroups, image=new_image, calpoints=calpoints, point_vals=point_vals)	
 		cal_data <- calibrate(raw_data=raw_data,calpoints=calpoints, point_vals=point_vals)
 		output$processed_data <- convert_group_data(cal_data=cal_data, plot_type=plot_type, nGroups=nGroups)
+#		output$processed_data[,c("mean","error","n")] <- as.numeric(output$processed_data[,c("mean","error","n")])
+		output$processed_data$variable <- variable
 	}
 	
 	if(plot_type == "scatterplot"){
 		output$raw_data <- raw_data <- group_scatter_extract(nGroups,image=new_image, calpoints=calpoints, point_vals=point_vals)
 		output$processed_data <- calibrate(raw_data=raw_data,calpoints=calpoints, point_vals=point_vals)
+		output$processed_data$x_variable <- x_variable
+		output$processed_data$y_variable <- y_variable
 	}	
 
 	if(plot_type == "histogram"){
 		output$raw_data <- raw_data <- histogram_extract(image=new_image, calpoints=calpoints, point_vals=point_vals)
 		cal_data <- calibrate(raw_data=raw_data,calpoints=calpoints, point_vals=point_vals)
 		output$processed_data <- convert_histogram_data(cal_data=cal_data)
+		output$processed_data$variable <- variable
 	}
 
-#	class(output) <- 'metaDigitise_data'
+	class(output) <- 'metaDigitise'
 	par(op)
 	return(output)
 }
 
-# print.metaDigitise_data <- function(x){
-# 	cat(paste("Data extracted from:", file))
-# 	## if rotated cat("Figure rotated x degrees")
-# 	cat(paste("Figure identified as a", plot_type, "with", nGroups, "groups"))
-# }
+
+#' @title metaDigitise
+#' @description Extracts points from a figure and generate summary statistics
+#' @param x an R object of class ‘metaDigitise’
+#' @author Joel Pick
+#' @export
+
+print.metaDigitise <- function(x, ...){
+	cat(paste("Data extracted from:\n", x$image_file,"\n"))
+	cat(paste0("Figure", ifelse(x$flip, " flipped and ", " "), "rotated ", x$rotate, " degrees"),"\n")
+	cat(paste("Figure identified as", x$plot_type, "with", length(unique(x$processed_data$id)), "groups","\n"))
+}
+
+
+#' @title metaDigitise
+#' @description Extracts points from a figure and generate summary statistics
+#' @param object an R object of class ‘metaDigitise’
+#' @return Data.frame
+#' @author Joel Pick
+#' @export
+
+summary.metaDigitise<-function(object, ...){
+
+	pd <- object$processed_data
+
+
+	if (object$plot_type == "mean_error"){
+		out <- data.frame(filename=object$image_file, group_id=pd$id, variable=pd$variable, mean=pd$mean, sd=se_to_sd(se=pd$error,n=as.numeric(pd$n)), n=pd$n)
+	}
+	
+	if (object$plot_type == "boxplot"){
+		out <- data.frame(filename=object$image_file, group_id=pd$id, variable=pd$variable, mean=rqm_to_mean(min=pd$min,LQ=pd$q1,median=pd$med,UQ=pd$q3,max=pd$max), sd=rqm_to_sd(min=pd$min,LQ=pd$q1,UQ=pd$q3,max=pd$max,n=pd$n), n=pd$n)
+	}
+
+	if (object$plot_type=="scatterplot"){
+		out <- sapply(split(processed_data,processed_data$id), function(z){ 
+			data.frame(id=z$id[1], x_var=z$x_var[1], x_mean=mean(z$x), x_sd=sd(z$x), y_var=z$y_var[1], y_mean=mean(z$y), y_sd=sd(z$y), n=nrow(z), r=cor(z$x,z$y))
+		})
+	}
+
+	if (object$plot_type=="histogram"){
+		out <- data.frame(filename=object$image_file, group_id=NA, variable=pd$variable, mean=pd$mean, sd=se_to_sd(se=pd$error,n=pd$n), n=pd$n)
+	}
+
+	return(out)
+}

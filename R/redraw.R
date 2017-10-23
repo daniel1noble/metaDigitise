@@ -21,7 +21,7 @@ internal_redraw <- function(image, plot_type, calpoints, point_vals, raw_data){
 			points(y~x,group_data, pch=19, col="red")
 			if(plot_type %in% c("mean_error", "boxplot")){
 				lines(y~x, group_data, lwd=2, col="red")
-				text(mean(group_data$x)+image_width/30,mean(group_data$y),group_data$id[1],srt=90, col="Red")
+				text(mean(group_data$x)+image_width/30,mean(group_data$y),paste0(group_data$id[1]," (",group_data$n[1],")"),srt=90, col="Red")
 			}
 		}
 	}
@@ -39,6 +39,7 @@ internal_redraw <- function(image, plot_type, calpoints, point_vals, raw_data){
 			points(y~x,group_data, pch=pchs[i], col=cols[i])
 			points(legend_gap/2 + legend_gap*(i-1), -legend_pos*2.5, col=cols[i], pch=pchs[i],xpd=TRUE)
 			text(legend_gap/2 + legend_gap*(i-1), -legend_pos, group_id[i], col=cols[i],xpd=TRUE)
+			text(legend_gap/2 + legend_gap*(i-1), -legend_pos*5, paste("n =",nrow(group_data)), col=cols[i],xpd=TRUE)
 		}		
 	}
 
@@ -60,7 +61,7 @@ internal_redraw <- function(image, plot_type, calpoints, point_vals, raw_data){
 #' @author Joel Pick
 #' @export
 redraw <- function(mD_data){
-	op <- par(mar=c(2,0,0,0))
+	op <- par(mar=c(3,0,0,0))
 	image <- magick::image_read(mD_data$image_file)
 	new_image <- rotate_graph(image=image, flip=mD_data$flip, rotate=mD_data$rotate)
 	internal_redraw(image=new_image, plot_type=mD_data$plot_type, calpoints=mD_data$calpoints, point_vals=mD_data$point_vals, raw_data=mD_data$raw_data)

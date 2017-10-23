@@ -4,14 +4,12 @@
 \alias{metaDigitise}
 \title{metaDigitise}
 \usage{
-metaDigitise(image_file, plot_type = NULL, summary_stats = FALSE)
+metaDigitise(image_file, plot_type = NULL)
 }
 \arguments{
 \item{image_file}{Image file}
 
 \item{plot_type}{Type of plot from "mean_error","boxplot","scatterplot" or"histogram". Function will prompt if not entered by user.}
-
-\item{summary_stats}{Whether further summary statistics are derived from "mean_se" and "boxplot". Require user to input sample sizes. Currently defunct}
 }
 \value{
 List of

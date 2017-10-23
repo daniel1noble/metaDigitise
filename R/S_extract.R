@@ -57,13 +57,12 @@ group_scatter_extract <- function(nGroups,image, calpoints, point_vals){
 	raw_data <- data.frame()
 	for(i in 1:nGroups) {
 		id <- readline(paste("Group identifier",i,":"))
-		group_points <- single_scatter_extract(image, calpoints, point_vals, col=cols[i], pch=pchs[i])
-		raw_data <- rbind(raw_data, data.frame(id=id, x=group_points$x,y=group_points$y))
 		points(legend_gap/2 + legend_gap*(i-1), -legend_pos*2.5, col=cols[i], pch=pchs[i],xpd=TRUE)
 		text(legend_gap/2 + legend_gap*(i-1), -legend_pos, id, col=cols[i],xpd=TRUE)
+		group_points <- single_scatter_extract(image, calpoints, point_vals, col=cols[i], pch=pchs[i])
+		raw_data <- rbind(raw_data, data.frame(id=id, x=group_points$x,y=group_points$y))
+		text(legend_gap/2 + legend_gap*(i-1), -legend_pos*5, paste("n =",nrow(group_points)), col=cols[i],xpd=TRUE)
 	}
-	
-	
 
 	return(raw_data)
 }	

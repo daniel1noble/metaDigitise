@@ -38,15 +38,16 @@ groups_extract <- function(plot_type, nGroups, image, calpoints, point_vals){
 		while(add_removeQ=="r") {
 			
 	#		if(nGroups>1){
-				group_id <- readline(paste("Group identifier",i,": "))
-				while(group_id %in% unique(raw_data$id)){group_id <- readline(paste("**** Group identifiers must be unique ****\nGroup identifier",i,": "))}
+			group_id <- readline(paste("Group identifier",i,": "))
+			while(group_id %in% unique(raw_data$id)){group_id <- readline(paste("**** Group identifiers must be unique ****\nGroup identifier",i,": "))}
 	#		}else{group_id <- ""}
 			raw_data[rows,"id"] <- group_id
 
-			if(askN=="y") raw_data[rows,"n"] <- readline(paste("Group sample size: "))
+			group_N <- if(askN=="y"){as.numeric(readline(paste("Group sample size: ")))}else{NA}
+			raw_data[rows,"n"] <- group_N
 
 			group_points <- single_group_extract(plot_type)
-			text(mean(group_points$x)+image_width/30,mean(group_points$y),group_id,srt=90, col="Red")
+			text(mean(group_points$x)+image_width/30,mean(group_points$y),paste0(group_id," (",group_N,")"),srt=90, col="Red")
 			raw_data[rows,"x"] <- group_points$x
 			raw_data[rows,"y"] <- group_points$y
 			add_removeQ <- readline("Continue or reclick? c/r ")
@@ -73,15 +74,16 @@ convert_group_data <- function(cal_data, plot_type, nGroups){
 	for(i in 1:nGroups) {
 		rowStart <- (i-1)*nRows +1
 		group_data <- cal_data[rowStart:(rowStart+nRows-1),]
+		convert_data[i,"id"] <- group_data$id[1]
 
 		if(plot_type == "mean_error") {
 			group_mean <- group_data$y[2]
 			group_se <- abs(group_data$y[1] - group_data$y[2])
-			convert_data[i,] <- c(group_data$id[1], group_mean,group_se,group_data$n[1])
+			convert_data[i,c("mean","error","n")] <- c(group_mean,group_se,group_data$n[1])
 		}
 
 		if(plot_type == "boxplot") {
-			convert_data[i,] <- c(group_data$id[1],group_data[,"y"], group_data$n[1])
+			convert_data[i,c(,"max","q3","med","q1","min","n")] <- c(group_data[,"y"],group_data$n[1])
 		}
 	}
 	return(convert_data)
