@@ -11,27 +11,15 @@ bulk_metaDigitise <- function(dir, types = c("diff", "same")) {
 			   setup_calibration_dir(dir)
 	details <- get_notDone_file_details(dir)
 
-	 if (type == "diff") {
+	 plot_type <-  if (type == "diff") {NULL} else{specify_type()}
 		 
 		 data_list <- list()
 
 		 for (i in 1:length(details$paths)) {
-			         data_list[[i]] <- metaDigitise(details$paths[i])			 
+			         data_list[[i]] <- metaDigitise(details$paths[i],plot_type = plot_type)			 
 			    names(data_list)[i] <- details$images[i]
 			 saveRDS(data_list[[i]], file = paste0(details$cal_dir, details$name[i]))
 		 	}
-	}
-
-	if (type == "same") {
-		
-		plot_type <- specify_type()
-		data_list <- list()
-		
-		for (i in 1:length(details$paths)) {
-		 	     data_list[[i]] <- metaDigitise(details$paths[i], plot_type = plot_type)
-		 	names(data_list)[i] <- details$images[i]
-		 	saveRDS(data_list[[i]], file = paste0(details$cal_dir, details$name[i]))
-	 	}	
 	}
 
 	if (type == "diff") {
