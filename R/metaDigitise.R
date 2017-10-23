@@ -35,9 +35,19 @@ metaDigitise <- function(image_file, plot_type=NULL){
 		variable <- readline("What is the variable? ")
 	}
 
-	output$calpoints <- calpoints <- cal_coords()	
-	output$point_vals <- point_vals <- getVals(calpoints=calpoints, image_width=image_width, image_height=image_height) 
 
+	cal_Q <- "y"
+	while(cal_Q!="n"){
+		if(cal_Q == "y"){
+			output$calpoints <- calpoints <- cal_coords()	
+			output$point_vals <- point_vals <- getVals(calpoints=calpoints, image_width=image_width, image_height=image_height) 
+		}
+		cal_Q <- readline("Re-calibrate? (y/n) ")
+		if(cal_Q == "y"){
+			plot(image)
+			mtext(filename(image_file),3, 0)
+		}
+	}
 
 	if(plot_type != "histogram"){
 		nGroups <- suppressWarnings(as.numeric(readline("Number of groups: ")))
