@@ -83,7 +83,7 @@ convert_group_data <- function(cal_data, plot_type, nGroups){
 		}
 
 		if(plot_type == "boxplot") {
-			convert_data[i,c(,"max","q3","med","q1","min","n")] <- c(group_data[,"y"],group_data$n[1])
+			convert_data[i,c("max","q3","med","q1","min","n")] <- c(group_data[,"y"],group_data$n[1])
 		}
 	}
 	return(convert_data)

@@ -102,9 +102,9 @@ summary.metaDigitise<-function(object, ...){
 	}
 
 	if (object$plot_type=="scatterplot"){
-		out <- sapply(split(processed_data,processed_data$id), function(z){ 
-			data.frame(id=z$id[1], x_var=z$x_var[1], x_mean=mean(z$x), x_sd=sd(z$x), y_var=z$y_var[1], y_mean=mean(z$y), y_sd=sd(z$y), n=nrow(z), r=cor(z$x,z$y))
-		})
+		out <- as.data.frame(do.call(rbind, lapply(split(pd,pd$id), function(z){ 
+			data.frame(id=z$id[1], x_var=z$x_variable[1], x_mean=mean(z$x), x_sd=sd(z$x), y_variable=z$y_var[1], y_mean=mean(z$y), y_sd=sd(z$y), n=nrow(z), r=cor(z$x,z$y))
+		})))
 	}
 
 	if (object$plot_type=="histogram"){
