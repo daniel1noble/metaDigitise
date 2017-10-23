@@ -39,12 +39,12 @@ metaDigitise <- function(image_file, plot_type=NULL){
 	output$calpoints <- calpoints <- cal_coords()	
 	output$point_vals <- point_vals <- getVals(calpoints=calpoints, image_width=image_width, image_height=image_height) 
 
-	is.wholenumber <- function(x, tol = .Machine$double.eps^0.5)  abs(x - round(x)) < tol
+
 
 	if(plot_type != "histogram"){
-		nGroups <- as.numeric(readline("Number of groups: "))
+		nGroups <- suppressWarnings(as.numeric(readline("Number of groups: ")))
 		while(is.na(nGroups)| nGroups<1 | !is.wholenumber(nGroups)){
-			nGroups <- as.numeric(readline("**** Number of groups must be an integer above 0 ****\nNumber of groups: "))
+			nGroups <- suppressWarnings(as.numeric(readline("\n**** Number of groups must be an integer above 0 ****\nNumber of groups: ")))
 		}
 	}
 

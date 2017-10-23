@@ -55,18 +55,12 @@ Click IN ORDER: x1, x2, y1, y2 \n
 getVals <- function(calpoints, image_width, image_height) {
   names <- c("x1","x2","y1","y2")
   vals <- NULL
-  for (p in names) {
-      bad <- TRUE
-      while (bad) {
-        input <- base::readline(paste("What is the value of", p, "?\n"))
-          bad <- length(input) > 1
-          if (bad) {
-            cat("Error in input! Try again\n")
-          } else {
-            bad <- FALSE
-          }
-      }
-    vals[p] <- as.numeric(input)
+  for (i in names){
+    input <- readline(paste0("What is the value of ", i, "?\n"))
+    while(!isNumeric(input)){
+      input <- readline("\n**** Input must be numeric ****\nNumber of groups: ")
+    }
+    vals[i] <- as.numeric(input)
   }
   text(calpoints$x - c(0, 0, image_width/30, image_width/30), calpoints$y - c(image_height/30, image_height/30, 0, 0), vals, col="blue", cex=2)
   return(vals)
