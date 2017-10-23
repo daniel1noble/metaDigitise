@@ -56,11 +56,11 @@ getVals <- function(calpoints, image_width, image_height) {
   names <- c("x1","x2","y1","y2")
   vals <- NULL
   for (i in names){
-    input <- readline(paste0("What is the value of ", i, "?\n"))
-    while(!isNumeric(input)){
-      input <- readline("\n**** Input must be numeric ****\nNumber of groups: ")
+    input <- suppressWarnings( as.numeric(readline(paste("What is the value of", i, "?\n"))))
+    while(is.na(input)){
+      input <- suppressWarnings( as.numeric(readline(paste("\n**** Input must be numeric ****\nWhat is the value of", i, "?\n"))))
     }
-    vals[i] <- as.numeric(input)
+    vals[i] <- input
   }
   text(calpoints$x - c(0, 0, image_width/30, image_width/30), calpoints$y - c(image_height/30, image_height/30, 0, 0), vals, col="blue", cex=2)
   return(vals)

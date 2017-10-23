@@ -40,15 +40,12 @@ metaDigitise <- function(image_file, plot_type=NULL){
 	output$point_vals <- point_vals <- getVals(calpoints=calpoints, image_width=image_width, image_height=image_height) 
 
 
-
 	if(plot_type != "histogram"){
 		nGroups <- suppressWarnings(as.numeric(readline("Number of groups: ")))
 		while(is.na(nGroups)| nGroups<1 | !is.wholenumber(nGroups)){
 			nGroups <- suppressWarnings(as.numeric(readline("\n**** Number of groups must be an integer above 0 ****\nNumber of groups: ")))
 		}
 	}
-
-
 
 
 	if(plot_type %in% c("mean_error","boxplot")){
@@ -79,6 +76,9 @@ metaDigitise <- function(image_file, plot_type=NULL){
 }
 
 
+
+
+
 #' @title print.metaDigitise
 #' @description Print method for class ‘metaDigitise’
 #' @param x an R object of class ‘metaDigitise’
@@ -91,6 +91,10 @@ print.metaDigitise <- function(x, ...){
 	cat(paste0("Figure", ifelse(x$flip, " flipped and ", " "), "rotated ", x$rotate, " degrees"),"\n")
 	cat(paste("Figure identified as", x$plot_type, "with", length(unique(x$processed_data$id)), "groups","\n"))
 }
+
+
+
+
 
 
 #' @title summary.metaDigitise

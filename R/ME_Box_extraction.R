@@ -43,8 +43,14 @@ groups_extract <- function(plot_type, nGroups, image, calpoints, point_vals){
 	#		}else{group_id <- ""}
 			raw_data[rows,"id"] <- group_id
 
-			group_N <- if(askN=="y"){as.numeric(readline(paste("Group sample size: ")))}else{NA}
+			if(askN=="y"){
+				group_N <- suppressWarnings(as.numeric(readline("Group sample size: ")))
+				while(is.na(group_N) | group_N<1 | !is.wholenumber(group_N)) {
+				group_N<- suppressWarnings(as.numeric(readline("\n**** Group sample size must be an integer above 0 ****\nGroup sample size: ")))
+ 			   }
+			}else{group_N <- NA}
 			raw_data[rows,"n"] <- group_N
+			   
 
 			group_points <- single_group_extract(plot_type)
 			text(mean(group_points$x)+image_width/30,mean(group_points$y),paste0(group_id," (",group_N,")"),srt=90, col="Red")
