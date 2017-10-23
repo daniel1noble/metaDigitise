@@ -52,7 +52,9 @@ specify_type <- function(){
 extract_digitised <- function(list, types = c("same", "diff"), summary = TRUE) {
 
 	if(summary == TRUE) {
-		return( do.call (rbind, make.row.names = FALSE, lapply (list, function(x) summary(x)) ))		
+		data <- do.call(rbind, lapply (list, function(x) summary(x)))
+		rownames(data) <- 1:nrow(data)
+		return(data)
 	}
 
 	if(types == "same"){
