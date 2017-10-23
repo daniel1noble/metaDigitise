@@ -28,19 +28,29 @@ metaDigitise <- function(image_file, plot_type=NULL){
 	output$plot_type <- plot_type <- if(is.null(plot_type)){specify_type()}else{plot_type}
 	stopifnot(plot_type %in% c("mean_error","boxplot","scatterplot","histogram"))
 
-	variable <- readline("What is the variable? ")
+	
 	if(plot_type == "scatterplot"){
 		x_variable <- readline("What is the x variable? ")
 		y_variable <- readline("What is the y variable? ")
+	}else{
+		variable <- readline("What is the variable? ")
 	}
 
 	output$calpoints <- calpoints <- cal_coords()	
 	output$point_vals <- point_vals <- getVals(calpoints=calpoints, image_width=image_width, image_height=image_height) 
 
+	is.wholenumber <- function(x, tol = .Machine$double.eps^0.5)  abs(x - round(x)) < tol
+
 	if(plot_type != "histogram"){
 		nGroups <- as.numeric(readline("Number of groups: "))
+		while(is.na(nGroups)| nGroups<1 | !is.wholenumber(nGroups)){
+			nGroups <- as.numeric(readline("**** Number of groups must be an integer above 0 ****\nNumber of groups: "))
+		}
 	}
-	
+
+
+
+
 	if(plot_type %in% c("mean_error","boxplot")){
 		output$raw_data <- raw_data <- groups_extract(plot_type=plot_type, nGroups=nGroups, image=new_image, calpoints=calpoints, point_vals=point_vals)	
 		cal_data <- calibrate(raw_data=raw_data,calpoints=calpoints, point_vals=point_vals)
