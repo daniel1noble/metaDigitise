@@ -52,19 +52,3 @@ internal_redraw <- function(image, plot_type, calpoints, point_vals, raw_data){
 		}
 	}
 }
-
-
-
-#' @title redraw
-#' @param mD_data metaDigitise output 
-#' @description Redraws figure and extraction data
-#' @author Joel Pick
-#' @export
-redraw <- function(mD_data){
-	op <- par(mar=c(3,0,0,0))
-	image <- magick::image_read(mD_data$image_file)
-	new_image <- rotate_graph(image=image, flip=mD_data$flip, rotate=mD_data$rotate)
-	internal_redraw(image=new_image, plot_type=mD_data$plot_type, calpoints=mD_data$calpoints, point_vals=mD_data$point_vals, raw_data=mD_data$raw_data)
-	par(op)
-
-}
