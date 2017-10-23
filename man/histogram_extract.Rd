@@ -4,10 +4,12 @@
 \alias{histogram_extract}
 \title{histogram_extract}
 \usage{
-histogram_extract(image, calpoints, point_vals)
+histogram_extract(image, image_file, calpoints, point_vals)
 }
 \arguments{
 \item{image}{image}
+
+\item{image_file}{image file name}
 
 \item{calpoints}{points used for calibration}
 

@@ -1,8 +1,12 @@
 #' @title user_rotate_graph
 #' @description Rotates/flips imported figures according to user input, in order to align them properly. Asks the user after each change if further alteration is required
-#' @param image Image object from magick::image_read
-user_rotate_graph <- function(image){
+#' @param image_file Image filename
+
+user_rotate_graph <- function(image_file){
+	image <- magick::image_read(image_file)
 	plot(image)
+	mtext(filename(image_file),3, 0)
+
 	rotateQ <- "a"
 cat("mean_error and boxplots should be vertically orientated
        _ 
@@ -51,6 +55,7 @@ Otherwise chose continue\n
 #' @param image Image object from magick::image_read
 #' @param flip whether to flip figure
 #' @param rotate how much to rotate figure
+
 rotate_graph <- function(image, flip, rotate){
 	if(flip) image <- magick::image_flop(magick::image_rotate(image,270))
 	image <- magick::image_rotate(image, rotate)

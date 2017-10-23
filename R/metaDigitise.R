@@ -9,21 +9,20 @@
 
 metaDigitise <- function(image_file, plot_type=NULL){
 	
-	op <- par(mar=c(3,0,0,0))
-
+	op <- par(mar=c(3,0,1,0))
+	
 	output <- list()
 	output$image_file <- image_file
 
-	image <- magick::image_read(image_file)
-	rotate_image <- user_rotate_graph(image)
-	new_image <- rotate_image$image
+	rotate_image <- user_rotate_graph(image_file)
+	image <- rotate_image$image
 	output$flip <- rotate_image$flip
 	output$rotate <- rotate_image$rotate
 
 	flush.console()
 
-	image_width <- magick::image_info(new_image)["width"][[1]]
-	image_height <- magick::image_info(new_image)["height"][[1]]
+	image_width <- magick::image_info(image)["width"][[1]]
+	image_height <- magick::image_info(image)["height"][[1]]
 
 	output$plot_type <- plot_type <- if(is.null(plot_type)){specify_type()}else{plot_type}
 	stopifnot(plot_type %in% c("mean_error","boxplot","scatterplot","histogram"))
@@ -49,7 +48,7 @@ metaDigitise <- function(image_file, plot_type=NULL){
 
 
 	if(plot_type %in% c("mean_error","boxplot")){
-		output$raw_data <- raw_data <- groups_extract(plot_type=plot_type, nGroups=nGroups, image=new_image, calpoints=calpoints, point_vals=point_vals)	
+		output$raw_data <- raw_data <- groups_extract(plot_type=plot_type, nGroups=nGroups, image=image, image_file=image_file, calpoints=calpoints, point_vals=point_vals)	
 		cal_data <- calibrate(raw_data=raw_data,calpoints=calpoints, point_vals=point_vals)
 		output$processed_data <- convert_group_data(cal_data=cal_data, plot_type=plot_type, nGroups=nGroups)
 #		output$processed_data[,c("mean","error","n")] <- as.numeric(output$processed_data[,c("mean","error","n")])
@@ -57,14 +56,14 @@ metaDigitise <- function(image_file, plot_type=NULL){
 	}
 	
 	if(plot_type == "scatterplot"){
-		output$raw_data <- raw_data <- group_scatter_extract(nGroups,image=new_image, calpoints=calpoints, point_vals=point_vals)
+		output$raw_data <- raw_data <- group_scatter_extract(nGroups,image=image, image_file=image_file, calpoints=calpoints, point_vals=point_vals)
 		output$processed_data <- calibrate(raw_data=raw_data,calpoints=calpoints, point_vals=point_vals)
 		output$processed_data$x_variable <- x_variable
 		output$processed_data$y_variable <- y_variable
 	}	
 
 	if(plot_type == "histogram"){
-		output$raw_data <- raw_data <- histogram_extract(image=new_image, calpoints=calpoints, point_vals=point_vals)
+		output$raw_data <- raw_data <- histogram_extract(image=image, image_file=image_file, calpoints=calpoints, point_vals=point_vals)
 		cal_data <- calibrate(raw_data=raw_data,calpoints=calpoints, point_vals=point_vals)
 		output$processed_data <- convert_histogram_data(cal_data=cal_data)
 		output$processed_data$variable <- variable
@@ -135,16 +134,17 @@ summary.metaDigitise<-function(object, ...){
 
 
 
-#' @title redraw.metaDigitise
-#' @param object an R object of class ‘metaDigitise’ 
-#' @description Redraws figure and extraction data
+#' @title plot.metaDigitise
+#' @param x an R object of class ‘metaDigitise’ 
+#' @param ... further arguments passed to or from other methods.
+#' @description Re-plots figure and extraction data
 #' @author Joel Pick
 #' @export
 
-redraw.metaDigitise <- function(object){
-	op <- par(mar=c(3,0,0,0))
-	image <- magick::image_read(object$image_file)
-	new_image <- rotate_graph(image=image, flip=object$flip, rotate=object$rotate)
-	internal_redraw(image=new_image, plot_type=object$plot_type, calpoints=object$calpoints, point_vals=object$point_vals, raw_data=object$raw_data)
+plot.metaDigitise <- function(x,...){
+	op <- par(mar=c(3,0,1,0))
+	image <- magick::image_read(x$image_file)
+	new_image <- rotate_graph(image=image, flip=x$flip, rotate=x$rotate)
+	internal_redraw(image=new_image, image_file=x$image_file, plot_type=x$plot_type, calpoints=x$calpoints, point_vals=x$point_vals, raw_data=x$raw_data)
 	on.exit(par(op))
 }

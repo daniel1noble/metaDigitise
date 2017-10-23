@@ -19,8 +19,8 @@ bulk_metaDigitise <- function(dir, types = c("diff", "same")) {
 			         data_list[[i]] <- metaDigitise(details$paths[i],plot_type = plot_type)			 
 			    names(data_list)[i] <- details$images[i]
 			 saveRDS(data_list[[i]], file = paste0(details$cal_dir, details$name[i]))
-		 	}
-	}
+		 }
+	
 
 	if (type == "diff") {
 		

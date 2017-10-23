@@ -4,10 +4,10 @@
 \alias{user_rotate_graph}
 \title{user_rotate_graph}
 \usage{
-user_rotate_graph(image)
+user_rotate_graph(image_file)
 }
 \arguments{
-\item{image}{Image object from magick::image_read}
+\item{image_file}{Image filename}
 }
 \description{
 Rotates/flips imported figures according to user input, in order to align them properly. Asks the user after each change if further alteration is required

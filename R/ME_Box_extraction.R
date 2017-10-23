@@ -20,10 +20,11 @@ single_group_extract <- function(plot_type){
 #' @param plot_type The type of plot
 #' @param nGroups number of groups
 #' @param image image
+#' @param image_file image file name
 #' @param calpoints points used for calibration 
 #' @param point_vals values for calibration
 #' @description Extraction of data from boxplots of mean_error plots, from multiple groups
-groups_extract <- function(plot_type, nGroups, image, calpoints, point_vals){
+groups_extract <- function(plot_type, nGroups, image, image_file, calpoints, point_vals){
 	askN <- NA
 	while(!askN %in% c("y","n")) askN <- readline("Enter sample sizes? y/n ")
 
@@ -59,7 +60,7 @@ groups_extract <- function(plot_type, nGroups, image, calpoints, point_vals){
 			add_removeQ <- readline("Continue or reclick? c/r ")
 			while(!add_removeQ  %in% c("c","r")) add_removeQ <- readline("Continue or reclick? c/r ")	
 			if(add_removeQ=="r") {
-				internal_redraw(image, plot_type=plot_type, calpoints, point_vals, raw_data[-rows,])
+				internal_redraw(image, image_file=image_file, plot_type=plot_type, calpoints, point_vals, raw_data[-rows,])
 				raw_data[rows,"id"] <- NA
 			}		
 		}

@@ -11,3 +11,15 @@ is.wholenumber <- function(x, tol = .Machine$double.eps^0.5)  abs(x - round(x)) 
 #' @description Checks whether a character is a number
 
 isNumeric <- function(x) !suppressWarnings(is.na(as.numeric(x)))
+
+
+#' @title filename
+#' @param x filepath
+#' @description extracts filename from filepath
+
+filename <- function(x) {
+	y <- strsplit(x,"/")[[1]]
+	return(y[length(y)])
+}
+
+

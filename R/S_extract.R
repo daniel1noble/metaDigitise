@@ -1,11 +1,12 @@
 #' @title single_scatter_extract
 #' @description Extraction of data from scatterplots
 #' @param image image
+#' @param image_file image file name
 #' @param calpoints points used for calibration 
 #' @param point_vals values for calibration
 #' @param col point colour
 #' @param pch point shape
-single_scatter_extract <- function(image, calpoints, point_vals, col="red",pch=19){
+single_scatter_extract <- function(image, image_file, calpoints, point_vals, col="red",pch=19){
 	add_removeQ <- "a"
 	raw_data <- data.frame()
 	while(add_removeQ!="c"){
@@ -29,7 +30,7 @@ single_scatter_extract <- function(image, calpoints, point_vals, col="red",pch=1
 			remove <- identify(raw_data, ,offset=0,labels="*", cex=2, col="green")
 			if(length(remove)>0) {
 				raw_data <- raw_data[-remove,]
-				internal_redraw(image, plot_type="scatterplot", calpoints, point_vals, raw_data)
+				internal_redraw(image, image_file=image_file, plot_type="scatterplot", calpoints, point_vals, raw_data)
 			}
 		}
 		add_removeQ <- readline("Add, remove or continue? a/r/c ")		
@@ -42,10 +43,11 @@ single_scatter_extract <- function(image, calpoints, point_vals, col="red",pch=1
 #' @title group_scatter_extract
 #' @param nGroups The number of groups
 #' @param image image
+#' @param image_file image file name
 #' @param calpoints points used for calibration 
 #' @param point_vals values for calibration
 #' @description Don't know yet Joel.
-group_scatter_extract <- function(nGroups,image, calpoints, point_vals){
+group_scatter_extract <- function(nGroups,image, image_file, calpoints, point_vals){
 
 	cols <- rep(c("red", "green", "purple"),length.out=nGroups)
 	pchs <- rep(rep(c(19, 17, 15),each=3),length.out=nGroups)

@@ -4,10 +4,13 @@
 \alias{single_scatter_extract}
 \title{single_scatter_extract}
 \usage{
-single_scatter_extract(image, calpoints, point_vals, col = "red", pch = 19)
+single_scatter_extract(image, image_file, calpoints, point_vals, col = "red",
+  pch = 19)
 }
 \arguments{
 \item{image}{image}
+
+\item{image_file}{image file name}
 
 \item{calpoints}{points used for calibration}
 

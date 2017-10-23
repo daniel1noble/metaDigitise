@@ -4,10 +4,12 @@
 \alias{internal_redraw}
 \title{internal_redraw}
 \usage{
-internal_redraw(image, plot_type, calpoints, point_vals, raw_data)
+internal_redraw(image, image_file, plot_type, calpoints, point_vals, raw_data)
 }
 \arguments{
 \item{image}{image}
+
+\item{image_file}{image file name}
 
 \item{plot_type}{The type of plot}
 

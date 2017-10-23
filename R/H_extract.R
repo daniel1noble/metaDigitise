@@ -1,9 +1,10 @@
 #' @title histogram_extract
 #' @param image image
+#' @param image_file image file name
 #' @param calpoints points used for calibration 
 #' @param point_vals values for calibration
 #' @description Extraction of data from histograms
-histogram_extract <- function(image, calpoints, point_vals){
+histogram_extract <- function(image, image_file, calpoints, point_vals){
 
 	histQ <- "a"
 	raw_data <- data.frame()
@@ -19,7 +20,7 @@ histogram_extract <- function(image, calpoints, point_vals){
 		if(histQ=="r"){
 			remove <- c(nrow(raw_data)-1,nrow(raw_data))
 			raw_data <- raw_data[-remove,]
-			internal_redraw(image, plot_type="histogram", calpoints, point_vals, raw_data)
+			internal_redraw(image, image_file=image_file, plot_type="histogram", calpoints, point_vals, raw_data)
 			histQ <- "a"
 		}
 	}

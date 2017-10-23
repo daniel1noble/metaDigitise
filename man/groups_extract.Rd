@@ -4,7 +4,7 @@
 \alias{groups_extract}
 \title{groups_extract}
 \usage{
-groups_extract(plot_type, nGroups, image, calpoints, point_vals)
+groups_extract(plot_type, nGroups, image, image_file, calpoints, point_vals)
 }
 \arguments{
 \item{plot_type}{The type of plot}
@@ -12,6 +12,8 @@ groups_extract(plot_type, nGroups, image, calpoints, point_vals)
 \item{nGroups}{number of groups}
 
 \item{image}{image}
+
+\item{image_file}{image file name}
 
 \item{calpoints}{points used for calibration}
 

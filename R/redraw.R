@@ -1,12 +1,16 @@
 #' @title internal_redraw
 #' @param image image 
+#' @param image_file image file name
 #' @param plot_type The type of plot
 #' @param calpoints points used for calibration 
 #' @param point_vals values for calibration
 #' @param raw_data previously extracted data points
 #' @description Redraws figure and extraction data
-internal_redraw <- function(image, plot_type, calpoints, point_vals, raw_data){
+
+internal_redraw <- function(image, image_file, plot_type, calpoints, point_vals, raw_data){
 	plot(image)
+	mtext(filename(image_file),3, 0)
+
 	image_width <- magick::image_info(image)["width"][[1]]
 	image_height <- magick::image_info(image)["height"][[1]]
 
