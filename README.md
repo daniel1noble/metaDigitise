@@ -152,7 +152,7 @@ After specifying the group name, will be will asked what the sample size is for 
 
 ![Example of a metaDigitised figure](https://user-images.githubusercontent.com/3505482/31927831-65c8cae2-b8e1-11e7-8888-1decdc73c5ee.png)
 
-`meta-Digitise` will conveniently print on the figure the calibration numbers along with group names and sample sizes (in brackets). This is useful for the user to be checking their input with actual values on the figure. Note that the error needs to be clicked first followed by the mean. But, don't worry if you make a mistake. It will always ask you to `continue or re-click` in case you need to fix things up. In this case, we didn't make a mistake and so we continue through the prompts to finally have the relevant data stored in the data object. We can then query the summary of this object:
+`meta-Digitise` will conveniently print on the figure the calibration numbers along with group names and sample sizes (in brackets). It will also print the figure name, which is useful if the user needs to go back and find the paper to obtain information. This is useful for the user to be checking their input with actual values on the figure. Note that the error needs to be clicked first followed by the mean. But, don't worry if you make a mistake. It will always ask you to `continue or re-click` in case you need to fix things up. In this case, we didn't make a mistake and so we continue through the prompts to finally have the relevant data stored in the data object. We can then query the summary of this object:
 
 ```
  summary(data)
@@ -182,11 +182,159 @@ This will bring up the plot shown above.
 
 # Bulk Digistising Images
 
-Often a paper contains many figures needing extracting and having to open and re-open new files, save data etc takes up a lot of unncessary time. `bulk_digitise` solves this problem by gradually working through all files within a directory, allowing users to digitise from them and then saving the output from all digitsiations in a single data frame. This function can be executed simply as:
+Often a paper contains many figures needing extracting and having to open and re-open new files, save data etc takes up a lot of unncessary time. `bulk_metaDigitise` solves this problem by gradually working through all files within a directory, allowing users to digitise from them and then saving the output from all digitsiations in a single data frame. This function can be executed simply as:
 
 ```
-data <- bulk_metaDigitise(dir = "./example_figs/", types = "same")
+data <- bulk_metaDigitise(dir = "./example_figs/", types = "same", summary = TRUE)
 ```
 
-Here, the user simply specifies the directory folder where all the files are contained. The `types` arguments tells R whether the figures in the folder are different types, in which case `bulk_metaDigitise` will ask the user to specify the type of figure prior to digitising and save all these results to a list. Alternatively, if the `type = same` then it will simply cycle through all the figures within the folder. An alternative directory structure to the ones specified above, is to simply put all like figures in the same folder and process these all at once or in batches. This can at times speed things up and make life easier. Another trick to digitising in bulk is to include the figure legends in the image, allowing you to quickly get information that is relevant should you need it.
+Here, the user simply specifies the directory folder where all the files are contained. The `types` arguments tells R whether the figures in the folder are different types, in which case `bulk_metaDigitise` will ask the user to specify the type of figure prior to digitising and save all these results. Alternatively, if the `type = same` then it will simply cycle through all the figures within the folder after specifying the plot type right at the beginning. An alternative directory structure to the ones specified above, is to simply put all like figures in the same folder and process these all at once or in batches. This can at times speed things up and make life easier. Another trick to digitising in bulk is to include the figure legends in the image, allowing you to quickly get information that is relevant should you need it.
 
+In this specific example, we use a directory where there are two different types of figures (different types from above to demonstrate the flexibility of `metaDigitise`), a scatter plot and a histogram:
+
+![Scatterplot](https://user-images.githubusercontent.com/3505482/31928575-5a9b8580-b8e4-11e7-876d-19cc7b7f9a15.png)
+![Histogram of a variable](https://user-images.githubusercontent.com/3505482/31928517-305f9acc-b8e4-11e7-97a0-6b8e5d05522b.png)
+
+These are just simulated data for the time being to demonstrate how `bulk_metaDigitise` works. Both thes figures are held in the `"./example_figs/example_figs_2/"` directory. Currently the directory looks like this:
+
+```
+  *example_figs_2
+      +1_histo_x.png
+      +1_scatterplot.png
+```
+
+We can bulk process these figures, maybe they are from the same paper, for example. This can be done as follows:
+
+```
+data_eg2 <- bulk_metaDigitise(dir="./example_figs/example_figs_2/", types = "diff", summary = TRUE)
+```
+
+Here, we simply give the entire directory where the figures are located. The `types = "diff"` argument states that the figures within the directory are different types. The `summary = TRUE` argument tells `bulk_metaDigitise` that we want only simple summaries saved. This might not what the user wants in all cases. For example, the user may want the raw data back in the scatterplot. If this is the case then simply change `summary = FALSE`. The returned object will be different depending on whether all objects are the `same` or `diff` type. If the `same` then everything will be concatenated into a data frame, but if different, a list of the relevant processed data will be returned for each figure. We are asked the exact same prompts as before, but because these are different figures we have slightly different needs, and so, some new ones show up that direct the user through the process. For the first figure, we have our histogram:
+
+```Please specify the plot_type as either: mean and error, box plot, scatter plot or histogram m/b/s/h: h
+
+What is the variable? Hair length (mm)
+
+```
+
+Here we specify the plot type as `h` for histogram and type in what the variable is, in this case Hair length (mm). We then get our normal calibration prompts, but this time need to calibrate both x and y:
+
+```
+On the Figure, click IN ORDER: 
+      y1, y2 , x1, x2  
+
+    Step 1 ----> Click on y1
+  |
+  |
+  |
+  |
+  y1
+  |_________________________
+
+  ....
+ 
+    Step 3 ----> Click on x1
+  |
+  |
+  |
+  |
+  |
+  |_____x1__________________
+  ....
+```
+
+We then plug in the calibration point values and check that everything is ok:
+
+```
+What is the value of y1 ?
+0
+What is the value of y2 ?
+15
+What is the value of x1 ?
+-2
+What is the value of x2 ?
+3
+Re-calibrate? (y/n) n
+```
+
+Digitising information from histograms is a little bit more involved than other plots because we need to characterize the entire distribution directly. This is done by clicking the left and right corners of each bar. We can only do one bar at a time before being prompted to re click, continue (finishing the plot) or we can add to put points on all the bars. We need to characterize everything so we continue adding on points:
+
+```
+Click on left then right upper corners of bar
+Add, reclick or continue? a/r/c a
+Click on left then right upper corners of bar
+Add, reclick or continue? a/r/c a
+Click on left then right upper corners of bar
+Add, reclick or continue? a/r/c a
+Click on left then right upper corners of bar
+Add, reclick or continue? a/r/c a
+Click on left then right upper corners of bar
+Add, reclick or continue? a/r/c c
+```
+
+<img width="792" alt="histogram_digitising" src="https://user-images.githubusercontent.com/3505482/31929607-7030af52-b8e8-11e7-9224-c9ce5ba24e28.png">
+
+Once done the histogram, we are immediately prompted to the next figure, in this case the scatter plot. This is handy because we often would need to re-specify the directory and file when digitizing, which wastes a lot of time. Importantly, the user can quit at any point (maybe you need a coffee, or need to run for a beer with colleagues) using `control c`. We'll continue now to digitsing the scatter plot:
+
+```Please specify the plot_type as either: mean and error, box plot, scatter plot or histogram m/b/s/h: s
+
+What is the x variable? x
+What is the y variable? y
+```
+
+here we gives the axis labels and then follow on form this to do the calibration specifying the x and y coordinates just like above. `metaDigitise` allows multiple groups to be specified within scatter plots as well and the user will be prompted to specify the number of groups followed by the group ID:
+
+```
+Number of groups: 2
+Follow instructions below, to exit point adding or removing:
+
+ - Windows: right click on the plot area and choose 'Stop'!
+
+ - X11: hit any mouse button other than the left one.
+
+ - quartz/OS X: hit ESC
+
+Group identifier 1 :Open circles 
+```
+
+We can specify up to 9 groups where each group will have unique symbols and colours to make it easy for the user to keep track of where they are and what all symbols mean. As the user progresses, the prompts will then tell the user what to do next:
+
+```
+Click on points you want to add
+ 
+ If you want to remove a point, or are finished with a group,
+ exit (see above), then follow prompts, 
+
+Add, remove or continue? a/r/c c
+``` 
+
+This will continue through each group and the final digitized plot will look something like this:
+
+<img width="545" alt="scatterplot_digitised" src="https://user-images.githubusercontent.com/3505482/31929851-27864680-b8e9-11e7-89dc-3220907db7aa.png">
+
+Information is again printed on the figure for each group to allow the user to check. Sample sizes don't need to be specif iced in either of the figures because we can get this information from the figure itself. Once we are finished we can have a look at the object:
+
+```
+print(data_eg2)
+         filename     group_id         variable       mean        sd  n         r   plot_type
+1     1_histo_x.png         <NA> Hair length (mm) 0.03098954 1.0445928 30        NA   histogram
+2 1_scatterplot.png Open circles                x 0.04086579 0.8039671 15 0.4343518 scatterplot
+3 1_scatterplot.png Open circles                y 6.51566703 1.0625279 15 0.4343518 scatterplot
+4 1_scatterplot.png Gray circles                x 0.14537999 0.7568024 15 0.6695450 scatterplot
+5 1_scatterplot.png Gray circles                y 4.19254287 1.5910878 15 0.6695450 scatterplot
+```
+
+This has already been conveniently summarized for us despite having different figure types. Given that we have a scatter plot, we can derive the correlation between `x` and `y`, and we see this printed in the summary. In any case the processed information (should the user want the raw data) can be grabbed at any point be re-loading the calibration files which have been automatically written to the `caldat/` folder inside the directory:
+
+```
+  *example_figs_2/
+      caldat/
+        +1_histo_x
+        +1_scatterplot
+      +1_histo_x.png
+      +1_scatterplot.png
+```
+
+# Conclusions
+
+We are still actively developing `metaDigitise` particularly post-processing functions for reproducibility. We would be more than happy to hear what you think of it, possible improvements or bugs that are found. Please lodge an issue and we can try and deal with these as soon as possible. Also feel free to email the package maintainers. 
