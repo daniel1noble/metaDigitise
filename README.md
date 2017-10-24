@@ -9,7 +9,7 @@
 
 # Installation
 
-To install `metaDigitise` enter the following code in R:
+To install `metaDigitise` use the following code in R:
 
 ```
 install.packages("devtools")
@@ -17,13 +17,13 @@ devtools::install_github("daniel1noble/metaDigitise")
 library(metaDigitise)
 ```
 
-Installation will make the primary functions for data extraction `metaDigitise` and `bulk_metaDigitise` accessible to users along with their help files.
+Installation will make the primary functions for data extraction `metaDigitise` and `bulk_metaDigitise` accessible to users along with their help files. Standard base functions, such as `summary`, `print` and `plot` (used for re-plotting calibrations) will also work on `bulk_metaDigitise` objects.
 
 # Setting up directory structures
 
-The package is quite flexible and is currently being made even more flexible. Users can extract single figures (if this is all they have) using the `metaDigitise` function with a path name to the specific file needing extraction. However, often many figures need extracting from a single paper or set of papers and, so, `bulk_metaDigitise` helps expedite this situation preventing users from having to constantly specify the directories were files are stored. `bulk_metaDigitise` essentially will bring up each figure within a folder automatically and allow the user to click and enter the relevant information about a figure as you go. This information is then all stored in a data frame or list at the end of the process, saving quite a bit of time.
+The `metaDigitise` package is quite flexible and is currently being made even more flexible. Users can extract single figures (if this is all they have) using the `metaDigitise` function with a path name to the specific file needing extraction. However, often many figures need extracting from a single paper or set of papers and, so, `bulk_metaDigitise` helps expedite this situation preventing users from having to constantly specify the directories where files are stored. `bulk_metaDigitise` essentially will bring up each figure within a folder automatically and allow the user to click and enter the relevant information about a figure as you go. This information is then all stored in a data frame or list at the end of the process, saving quite a bit of time. Users can also quit (`control c`) at any time and the data from digitised figures will automatically be written to the `caldat/` folder for later use.
 
-Users can get creative in how they set up the directories of figures (.png images) to facilitate extraction. For example, one might have 3–4 figures from a single paper that needs extracting and the user may want to focus on a single paper at a time as the need to extract comes up. This could be done by simply setting up a file structure as follows and then using `bulk_metaDigitise` for each papers folder:
+Many `metaDigitise` functions work on whole directories. Users can get creative in how they set up the directories of figures (currently .png, .jpg, .tiff, .pdf images can be used) to facilitate extraction. For example, one might have 3–4 figures from a single paper that need extracting and the user may want to focus on a single paper at a time as the need to extract comes up. This could be done by simply setting up a file structure as follows and then using `bulk_metaDigitise` for each papers folder:
 
 	* Main project directory
 		+ Paper1_P1
@@ -84,25 +84,16 @@ Specify `f`for "Flip", `r` for "rotate" or `c` for "continue. For now, our image
 ```
 Please specify the plot_type as either: mean and error, box plot, scatter plot or histogram m/b/s/h:
 ```
-Depending on the figure one has the user can specify that it is a figure containing the mean and error (`m`), a box plot (`b`), a scatter plot (`s`) or a histogram (`h`). After selecting the figure type a new set of prompts will come up that will ask the user to calibrate the x and y-axis so that the relevant statistics / data can be correctly calculated. 
+Depending on the figure one has the user can specify that it is a figure containing the mean and error (`m`), a box plot (`b`), a scatter plot (`s`) or a histogram (`h`). After selecting the figure type a new set of prompts will come up that will ask the user to calibrate the x and y-axis so that the relevant statistics / data can be correctly calculated. Since we are working with a plot of the mean and standard errors, the x-axis is rather useless in terms of calibration so `metaDigitise` just asks us to calibrate the y-axis. Note here that it first asks us what the variable in the plot is. This is useful as you can keep track of the different variables across different figures.
 
 ```
-Use your mouse, and the image, 
-but careful how you calibrate.
-Click IN ORDER: x1, x2, y1, y2 
+What is the variable? Residuals
 
-	
-    Step 1 ----> Click on x1
-  |
-  |
-  |
-  |
-  |
-  |_____x1__________________
+On the Figure, click IN ORDER: 
+      y1, y2  
 
-	....
 
-    Step 3 ----> Click on y1
+    Step 1 ----> Click on y1
   |
   |
   |
@@ -111,50 +102,83 @@ Click IN ORDER: x1, x2, y1, y2
   |_________________________
 
 
-	....
+    Step 2 ----> Click on y2
+  |
+  y2
+  |
+  |
+  |
+  |_________________________
+  
+
   ```
-Follow the instructions on screen step by step and in the order specified. The user will be asked to specify the x and y calibration points. As users click the figure, points will come up. Blue points are those that create the calibration and the red points are those that are the specific statistics or data points the user wants. As the user progresses, a series of prompts will pop up in the R console asking for relevant information:
+Follow the instructions on screen step-by-step, and in the order specified. The user will be asked to specify the x and y calibration points (in this case only the y). 
 
 ```
-What is the value of x1 ?
-1
-What is the value of x2 ?
-2
 What is the value of y1 ?
--0.5
+-1
+
 What is the value of y2 ?
-0.5
+1
+
+Re-calibrate? (y/n) 
 ```
-The first few questions ask the user what the calibration points mean. In this figure, only the y-axis is really important, so we just add 1 and 2 for the x-points.
+The first few questions ask the user what the calibration points are. In this figure, only the y-axis is really important, so again, we only have to enter the y-axis coordinates.
 
 ```
 Number of groups: 3
+Enter sample sizes? y/n
 ```
 
-`metaDigitise` will then ask the user how many groups are within the figure, in this case, we have 3 treatments and so we have entered 3. Once this part is complete it asks for group identifiers, these can be the treatment names. In this case, we have three temperature treatments, and so, we enter their values, but these could be anything really:
+`metaDigitise` will then ask the user how many groups are within the figure, in this case, we have 3 treatments and so we have entered 3. We will be prompted to tell `metaDigitise` whether we know the sample sizes for these treatments. This is useful for back-calculating from standard error to standard deviation or some other form of error. If we know these we can choose `y`, indicating that we do know the sample size. Once this part is complete it asks for group identifiers, these can be the treatment names. In this case, we have three temperature treatments, and so, we enter their values, but these could be anything really:
 
 ```
-Group identifier 1 :26.5
-Click on upper error bar, followed by the Mean
+Group identifier 1 : 26.5
+Group sample size: 20
+Click on Error Bar, followed by the Mean
 Continue or reclick? c/r c
-Group identifier 2 :28.5
-Click on upper error bar, followed by the Mean
+Group identifier 2 : 28.5
+Group sample size: 12
+Click on Error Bar, followed by the Mean
 Continue or reclick? c/r c
-Group identifier 3 :30.5
-Click on upper error bar, followed by the Mean
+Group identifier 3 : 30.5
+Group sample size: 10
+Click on Error Bar, followed by the Mean
 Continue or reclick? c/r c
+Type of error (se, CI95, sd, range): se
 ```
 
-What you will notice is that the upper error needs to be clicked first followed by the mean. But, don't worry if you make a mistake. It will always ask you to `continue or re-click` in case you need to fix things up. In this case, we didn't make a mistake and so we continue through the prompts to finally have the relevant data printed on screen or stored to an object:
+After specifying the group name, will be will asked what the sample size is for each treatment. Users may need to refer back to the paper for this or they could include the figure legend in if these contain relevant information. As users click the figure, points will come up. Blue points are those that create the calibration and the red points are those that are the specific statistics or data points the user wants. As the user progresses, prompts will pop up in the R console asking for relevant information before new information is digitised:
+
+![Example of a metaDigitised figure](https://user-images.githubusercontent.com/3505482/31927831-65c8cae2-b8e1-11e7-8888-1decdc73c5ee.png)
+
+`meta-Digitise` will conveniently print on the figure the calibration numbers along with group names and sample sizes (in brackets). This is useful for the user to be checking their input with actual values on the figure. Note that the error needs to be clicked first followed by the mean. But, don't worry if you make a mistake. It will always ask you to `continue or re-click` in case you need to fix things up. In this case, we didn't make a mistake and so we continue through the prompts to finally have the relevant data stored in the data object. We can then query the summary of this object:
 
 ```
-    id       mean        se        x
-1 26.5  0.0443038 0.1265823 1.000000
-2 28.5  0.2088608 0.1518987 1.508929
-3 30.5 -0.4493671 0.2531646 2.017857
+ summary(data)
+                   filename group_id  variable       mean        sd  n  r  plot_type
+1 1269_Ligon_2009_Fig.3.png     26.5 Residuals  0.0376134 0.5961405 20 NA mean_error
+2 1269_Ligon_2009_Fig.3.png     28.5 Residuals  0.2062570 0.5496178 12 NA mean_error
+3 1269_Ligon_2009_Fig.3.png     30.5 Residuals -0.4541619 0.7691445 10 NA mean_error
 ```
 
-For reproducibility, all the calibration data can be exported and over layed on a graph at a later date. 
+Our summary output has all the relevant information about the means and the standard errors, which are automatically converted to standard deviations. The user will notice an `r` column indicating the correlation coefficient. This is not needed in this specific plot type, but see below for outputs of different types of figures in the `bulk_metaDigitise` function. We can also print the `metaDigitise` object to find out more details:
+
+```
+print(data)
+Data extracted from:
+ ./example_figs/mean_se/1269_Ligon_2009_Fig.3.png 
+Figure rotated 0 degrees 
+Figure identified as mean_error with 3 groups 
+```
+
+For reproducibility, all the calibration data can be exported and over layed on a graph at a later date. Given that all the data is stored in the data object, if we accidentally close the plotting window, we can replot our figure, calibrations and selected points using:
+
+```
+plot(data)
+```
+
+This will bring up the plot shown above.
 
 # Bulk Digistising Images
 
