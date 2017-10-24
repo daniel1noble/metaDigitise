@@ -4,13 +4,13 @@
 single_group_extract <- function(plot_type){
 	
 	if(plot_type=="mean_error"){
-		cat("\nClick on Error Bar, followed by the Mean\n")
+		cat("\nClick on Error Bar, followed by the Mean\n\n")
 		group_points <- locator(2, type="o", col="red", lwd=2, pch=19)
 		points(group_points$x[1],group_points$y[1], pch=20, col="yellow")
 	}
 
 	if(plot_type=="boxplot"){
-		cat("\nClick on Max, Upper Q, Median, Lower Q, and Minimum\nIn that order\n")
+		cat("\nClick on Max, Upper Q, Median, Lower Q, and Minimum\nIn that order\n\n")
 		group_points <- locator(5, type="o", col="red", lwd=2, pch=19)
 	}
 
@@ -24,10 +24,9 @@ single_group_extract <- function(plot_type){
 #' @param image_file image file name
 #' @param calpoints points used for calibration 
 #' @param point_vals values for calibration
+#' @param askN ask for sample sizes?
 #' @description Extraction of data from boxplots of mean_error plots, from multiple groups
-groups_extract <- function(plot_type, nGroups, image, image_file, calpoints, point_vals){
-	askN <- NA
-	while(!askN %in% c("y","n")) askN <- readline("Enter sample sizes? y/n ")
+groups_extract <- function(plot_type, nGroups, image, image_file, calpoints, point_vals, askN){
 
 	nRows <- ifelse(plot_type=="mean_error",2,5)
 	raw_data <- as.data.frame(matrix(NA, ncol=4, nrow=nGroups*nRows, dimnames=list(NULL, c("id","x","y","n"))))
@@ -64,7 +63,10 @@ groups_extract <- function(plot_type, nGroups, image, image_file, calpoints, poi
 			text(mean(group_points$x)+image_width/30,mean(group_points$y),paste0(group_id," (",group_N,")"),srt=90, col="Red")
 			raw_data[rows,"x"] <- group_points$x
 			raw_data[rows,"y"] <- group_points$y
-			add_removeQ <- readline("Continue or reclick? c/r ")
+
+			if(plot_type=="boxplot" & group_points$y[1]<group_points$y[5]) warning("max is smaller than min", call. = FALSE, immediate. = TRUE)
+
+			add_removeQ <- readline("\nContinue or reclick? c/r ")
 			while(!add_removeQ  %in% c("c","r")) add_removeQ <- readline("Continue or reclick? c/r ")	
 			if(add_removeQ=="r") {
 				internal_redraw(image, image_file=image_file, plot_type=plot_type, calpoints, point_vals, raw_data[-rows,])

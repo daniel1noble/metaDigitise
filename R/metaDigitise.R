@@ -27,7 +27,7 @@ metaDigitise <- function(image_file, plot_type=NULL){
 	output$plot_type <- plot_type <- if(is.null(plot_type)){specify_type()}else{plot_type}
 	stopifnot(plot_type %in% c("mean_error","boxplot","scatterplot","histogram"))
 
-	
+	### ask what the variable is
 	if(plot_type == "scatterplot"){
 		x_variable <- readline("\nWhat is the x variable? ")
 		y_variable <- readline("\nWhat is the y variable? ")
@@ -35,7 +35,7 @@ metaDigitise <- function(image_file, plot_type=NULL){
 		variable <- readline("\nWhat is the variable? ")
 	}
 
-
+	### Calibrate axes
 	cal_Q <- "y"
 	while(cal_Q!="n"){
 		if(cal_Q == "y"){
@@ -49,6 +49,7 @@ metaDigitise <- function(image_file, plot_type=NULL){
 		}
 	}
 
+	### Ask number of groups
 	if(plot_type != "histogram"){
 		nGroups <- suppressWarnings(as.numeric(readline("\nNumber of groups: ")))
 		while(is.na(nGroups)| nGroups<1 | !is.wholenumber(nGroups)){
@@ -57,16 +58,21 @@ metaDigitise <- function(image_file, plot_type=NULL){
 	}
 
 
+	### Extract and calibrate data depending on plot type
 	if(plot_type %in% c("mean_error","boxplot")){
-		output$raw_data <- raw_data <- groups_extract(plot_type=plot_type, nGroups=nGroups, image=image, image_file=image_file, calpoints=calpoints, point_vals=point_vals)	
+		askN <- NA
+		while(!askN %in% c("y","n")) askN <- readline("\nEnter sample sizes? y/n ")
+
+		output$raw_data <- raw_data <- groups_extract(plot_type=plot_type, nGroups=nGroups, image=image, image_file=image_file, calpoints=calpoints, point_vals=point_vals, askN=askN)	
 		cal_data <- calibrate(raw_data=raw_data,calpoints=calpoints, point_vals=point_vals)
 		output$processed_data <- convert_group_data(cal_data=cal_data, plot_type=plot_type, nGroups=nGroups)
+		output$processed_data$variable <- variable
+		output$entered_N <- ifelse(askN =="y", TRUE, FALSE)
 		if(plot_type == "mean_error") {
-			error_type <- readline("Type of error (se, CI95, sd, range): ")
-			while(!error_type %in% c("se","CI95","sd","range")) error_type <- readline("**** Invalid error type ***\nType of error (se, CI95, sd, range): ")
+			error_type <- readline("Type of error (se, CI95, sd): ")
+			while(!error_type %in% c("se","CI95","sd")) error_type <- readline("\n**** Invalid error type ***\nType of error (se, CI95, sd): ")
 			output$error_type <- error_type
 		}
-		output$processed_data$variable <- variable
 	}
 	
 	if(plot_type == "scatterplot"){
