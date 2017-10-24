@@ -4,13 +4,13 @@
 single_group_extract <- function(plot_type){
 	
 	if(plot_type=="mean_error"){
-		cat("Click on Error Bar, followed by the Mean\n")
+		cat("\nClick on Error Bar, followed by the Mean\n")
 		group_points <- locator(2, type="o", col="red", lwd=2, pch=19)
 		points(group_points$x[1],group_points$y[1], pch=20, col="yellow")
 	}
 
 	if(plot_type=="boxplot"){
-		cat("Click on Max, Upper Q, Median, Lower Q, and Minimum\nIn that order\n")
+		cat("\nClick on Max, Upper Q, Median, Lower Q, and Minimum\nIn that order\n")
 		group_points <- locator(5, type="o", col="red", lwd=2, pch=19)
 	}
 
@@ -46,13 +46,13 @@ groups_extract <- function(plot_type, nGroups, image, image_file, calpoints, poi
 		while(add_removeQ=="r") {
 			
 	#		if(nGroups>1){
-			group_id <- readline(paste("Group identifier",i,": "))
+			group_id <- readline(paste("\nGroup identifier",i,": "))
 			while(group_id %in% unique(raw_data$id)){group_id <- readline(paste("**** Group identifiers must be unique ****\nGroup identifier",i,": "))}
 	#		}else{group_id <- ""}
 			raw_data[rows,"id"] <- group_id
 
 			if(askN=="y"){
-				group_N <- suppressWarnings(as.numeric(readline("Group sample size: ")))
+				group_N <- suppressWarnings(as.numeric(readline("\nGroup sample size: ")))
 				while(is.na(group_N) | group_N<1 | !is.wholenumber(group_N)) {
 				group_N<- suppressWarnings(as.numeric(readline("\n**** Group sample size must be an integer above 0 ****\nGroup sample size: ")))
  			   }

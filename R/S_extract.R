@@ -42,15 +42,14 @@ group_scatter_extract <- function(nGroups,image, image_file, calpoints, point_va
     " - Windows: right click on the plot area and choose 'Stop'!",
     " - X11: hit any mouse button other than the left one.",
     " - quartz/OS X: hit ESC\n",
-    sep = "\n\n"
-  )
+    sep = "\n\n")
 
 	cols <- rep(c("red", "green", "purple"),length.out=nGroups)
 	pchs <- rep(rep(c(19, 17, 15),each=3),length.out=nGroups)
 	raw_data <- data.frame()
 
 	for(i in 1:nGroups) {
-		id <- readline(paste("Group identifier",i,":"))
+		id <- readline(paste("\nGroup identifier",i,":"))
 
 		add_removeQ <- "a"
 		while(add_removeQ!="c"){
@@ -65,7 +64,6 @@ group_scatter_extract <- function(nGroups,image, image_file, calpoints, point_va
 			add_removeQ <- readline("Add, remove or continue? a/r/c ")
 		}
 	}
-
 	return(raw_data)
 }	
 

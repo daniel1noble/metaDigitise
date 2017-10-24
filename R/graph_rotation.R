@@ -8,7 +8,11 @@ user_rotate_graph <- function(image_file){
 	mtext(filename(image_file),3, 0)
 
 	rotateQ <- "a"
-cat("mean_error and boxplots should be vertically orientated
+cat("
+**** NEW PLOT ****
+
+
+mean_error and boxplots should be vertically orientated
        _ 
        |	
   I.E. o    NOT  |-o-|
