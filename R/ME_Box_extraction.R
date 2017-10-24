@@ -6,6 +6,7 @@ single_group_extract <- function(plot_type){
 	if(plot_type=="mean_error"){
 		cat("Click on Error Bar, followed by the Mean\n")
 		group_points <- locator(2, type="o", col="red", lwd=2, pch=19)
+		points(group_points$x[1],group_points$y[1], pch=20, col="yellow")
 	}
 
 	if(plot_type=="boxplot"){
@@ -31,6 +32,12 @@ groups_extract <- function(plot_type, nGroups, image, image_file, calpoints, poi
 	nRows <- ifelse(plot_type=="mean_error",2,5)
 	raw_data <- as.data.frame(matrix(NA, ncol=4, nrow=nGroups*nRows, dimnames=list(NULL, c("id","x","y","n"))))
 	image_width <- magick::image_info(image)["width"][[1]]
+	image_height <- magick::image_info(image)["height"][[1]]
+	
+	if(plot_type == "mean_error"){
+		points((image_width/4)*c(1,3,3), rep(-image_height/40,3), pch=c(19,19,20), col=c("red","red","yellow"),xpd=TRUE)
+		text((image_width/4)*c(1,3), rep(-image_height/20,2), c("mean","error"),xpd=TRUE)
+	}
 	
 	for(i in 1:nGroups) {
 		rowStart <- (i-1)*nRows +1

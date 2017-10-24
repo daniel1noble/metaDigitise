@@ -13,6 +13,7 @@ internal_redraw <- function(image, image_file, plot_type, calpoints, point_vals,
 
 	image_width <- magick::image_info(image)["width"][[1]]
 	image_height <- magick::image_info(image)["height"][[1]]
+	legend_pos <- image_height/40
 
 	points(calpoints, pch=3, col="blue", lwd=2)
 
@@ -28,9 +29,12 @@ internal_redraw <- function(image, image_file, plot_type, calpoints, point_vals,
 		for(i in unique(raw_data$id)){
 			group_data <- subset(raw_data,id==i)
 			points(y~x,group_data, pch=19, col="red")
-			if(plot_type %in% c("mean_error", "boxplot")){
-				lines(y~x, group_data, lwd=2, col="red")
-				text(mean(group_data$x)+image_width/30,mean(group_data$y),paste0(group_data$id[1]," (",group_data$n[1],")"),srt=90, col="Red")
+			lines(y~x, group_data, lwd=2, col="red")
+			text(mean(group_data$x)+image_width/30,mean(group_data$y),paste0(group_data$id[1]," (",group_data$n[1],")"),srt=90, col="Red")
+			if(plot_type == "mean_error"){
+				points(group_data$x[1],group_data$y[1], pch=20, col="yellow")
+				points((image_width/4)*c(1,3,3), rep(-legend_pos,3), pch=c(19,19,20), col=c("red","red","yellow"),xpd=TRUE)
+				text((image_width/4)*c(1,3), rep(-legend_pos*2,2), c("mean","error"),xpd=TRUE)
 			}
 		}
 	}
@@ -41,7 +45,6 @@ internal_redraw <- function(image, image_file, plot_type, calpoints, point_vals,
 		cols <- rep(c("red", "green", "purple"),length.out=nGroups)
 		pchs <- rep(rep(c(19, 17, 15),each=3),length.out=nGroups)
 		legend_gap <- image_width/nGroups
-		legend_pos <- image_height/40
 
 		for(i in 1:nGroups){
 			group_data <- subset(raw_data,id==group_id[i])

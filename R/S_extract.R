@@ -47,16 +47,10 @@ group_scatter_extract <- function(nGroups,image, image_file, calpoints, point_va
 
 	cols <- rep(c("red", "green", "purple"),length.out=nGroups)
 	pchs <- rep(rep(c(19, 17, 15),each=3),length.out=nGroups)
-	image_width <- magick::image_info(image)["width"][[1]]
-	image_height <- magick::image_info(image)["height"][[1]]
-	legend_gap <- image_width/nGroups
-	legend_pos <- image_height/40
 	raw_data <- data.frame()
 
 	for(i in 1:nGroups) {
 		id <- readline(paste("Group identifier",i,":"))
-		#points(legend_gap/2 + legend_gap*(i-1), -legend_pos*2.5, col=cols[i], pch=pchs[i],xpd=TRUE)
-		#text(legend_gap/2 + legend_gap*(i-1), -legend_pos, id, col=cols[i],xpd=TRUE)
 
 		add_removeQ <- "a"
 		while(add_removeQ!="c"){
@@ -70,7 +64,6 @@ group_scatter_extract <- function(nGroups,image, image_file, calpoints, point_va
 			internal_redraw(image=image, image_file=image_file, plot_type="scatterplot", calpoints=calpoints, point_vals=point_vals, raw_data=raw_data)
 			add_removeQ <- readline("Add, remove or continue? a/r/c ")
 		}
-		#text(legend_gap/2 + legend_gap*(i-1), -legend_pos*5, paste("n =",nrow(subset(raw_data, id==id))), col=cols[i],xpd=TRUE)
 	}
 
 	return(raw_data)
