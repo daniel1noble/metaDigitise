@@ -80,6 +80,8 @@ metaDigitise <- function(image_file, plot_type=NULL){
 		output$processed_data <- calibrate(raw_data=raw_data,calpoints=calpoints, point_vals=point_vals)
 		output$processed_data$x_variable <- x_variable
 		output$processed_data$y_variable <- y_variable
+		output$entered_N <- TRUE
+
 	}	
 
 	if(plot_type == "histogram"){
@@ -87,6 +89,7 @@ metaDigitise <- function(image_file, plot_type=NULL){
 		cal_data <- calibrate(raw_data=raw_data,calpoints=calpoints, point_vals=point_vals)
 		output$processed_data <- convert_histogram_data(cal_data=cal_data)
 		output$processed_data$variable <- variable
+		output$entered_N <- TRUE
 	}
 
 	class(output) <- 'metaDigitise'
