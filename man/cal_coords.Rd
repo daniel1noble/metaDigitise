@@ -4,7 +4,10 @@
 \alias{cal_coords}
 \title{cal_coords}
 \usage{
-cal_coords()
+cal_coords(plot_type)
+}
+\arguments{
+\item{plot_type}{plot type}
 }
 \description{
 Prompts user to enter axis coordinates, and their values. Modified from the digitize package

@@ -18,5 +18,5 @@ group_scatter_extract(nGroups, image, image_file, calpoints, point_vals)
 \item{point_vals}{values for calibration}
 }
 \description{
-Don't know yet Joel.
+Extraction of data from scatterplots
 }

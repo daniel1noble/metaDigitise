@@ -29,20 +29,20 @@ metaDigitise <- function(image_file, plot_type=NULL){
 
 	
 	if(plot_type == "scatterplot"){
-		x_variable <- readline("What is the x variable? ")
-		y_variable <- readline("What is the y variable? ")
+		x_variable <- readline("\nWhat is the x variable? ")
+		y_variable <- readline("\nWhat is the y variable? ")
 	}else{
-		variable <- readline("What is the variable? ")
+		variable <- readline("\nWhat is the variable? ")
 	}
 
 
 	cal_Q <- "y"
 	while(cal_Q!="n"){
 		if(cal_Q == "y"){
-			output$calpoints <- calpoints <- cal_coords()	
+			output$calpoints <- calpoints <- cal_coords(plot_type=plot_type)	
 			output$point_vals <- point_vals <- getVals(calpoints=calpoints, image_width=image_width, image_height=image_height) 
 		}
-		cal_Q <- readline("Re-calibrate? (y/n) ")
+		cal_Q <- readline("\nRe-calibrate? (y/n) ")
 		if(cal_Q == "y"){
 			plot(image)
 			mtext(filename(image_file),3, 0)
@@ -50,7 +50,7 @@ metaDigitise <- function(image_file, plot_type=NULL){
 	}
 
 	if(plot_type != "histogram"){
-		nGroups <- suppressWarnings(as.numeric(readline("Number of groups: ")))
+		nGroups <- suppressWarnings(as.numeric(readline("\nNumber of groups: ")))
 		while(is.na(nGroups)| nGroups<1 | !is.wholenumber(nGroups)){
 			nGroups <- suppressWarnings(as.numeric(readline("\n**** Number of groups must be an integer above 0 ****\nNumber of groups: ")))
 		}
@@ -148,18 +148,17 @@ summary.metaDigitise<-function(object, ...){
 	}
 
 	if (object$plot_type=="scatterplot"){
-		out <- as.data.frame(do.call(rbind, lapply(split(pd,pd$id), function(z){ 
-			data.frame(
-				filename=fn,
-				group_id=z$id[1],
-				variable=c(z$x_variable[1],z$y_variable[1]),
-				mean=apply(z[,c("x","y")],2,mean),
-				sd=apply(z[,c("x","y")],2,sd),
-			 	n=nrow(z),
-			 	r=cor(z$x,z$y)
-			)
-		})))
-		rownames(out) <- 1:nrow(out)
+		out <- as.data.frame(do.call(rbind, c(lapply(split(pd,pd$id), function(z){ 
+					data.frame(
+						filename=fn,
+						group_id=z$id[1],
+						variable=c(z$x_variable[1],z$y_variable[1]),
+						mean=apply(z[,c("x","y")],2,mean),
+						sd=apply(z[,c("x","y")],2,sd),
+					 	n=nrow(z),
+					 	r=cor(z$x,z$y)
+					)
+				}),make.row.names=FALSE)))
 	}
 
 	if (object$plot_type=="histogram"){

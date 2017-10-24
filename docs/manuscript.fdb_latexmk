@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1508401757 "manuscript.tex" "manuscript.pdf" "manuscript" 1508401758
+["pdflatex"] 1508401757 "manuscript.tex" "manuscript.pdf" "manuscript" 1508796610
   "/sw/share/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/sw/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/sw/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -65,6 +65,6 @@
   "manuscript.aux" 1508401757 868 449c8eb90254a47bb794c64817a6c00c ""
   "manuscript.tex" 1508401752 2012 24383bd89b87cae8d5b76ae8e30a49f7 ""
   (generated)
+  "manuscript.log"
   "manuscript.pdf"
   "manuscript.aux"
-  "manuscript.log"

@@ -1,43 +1,29 @@
-#' @title single_scatter_extract
-#' @description Extraction of data from scatterplots
-#' @param image image
-#' @param image_file image file name
-#' @param calpoints points used for calibration 
-#' @param point_vals values for calibration
+
+
+#' @title add_points
 #' @param col point colour
 #' @param pch point shape
-single_scatter_extract <- function(image, image_file, calpoints, point_vals, col="red",pch=19){
-	add_removeQ <- "a"
-	raw_data <- data.frame()
-	while(add_removeQ!="c"){
-		if(add_removeQ=="a"){
-			cat(
-			    "..............NOW .............",
-			    "Click all the data. (Do not hit ESC, close the window or press any mouse key.)",
-			    "Once you are done - exit:",
-			    " - Windows: right click on the plot area and choose 'Stop'!",
-			    " - X11: hit any mouse button other than the left one.",
-			    " - quartz/OS X: hit ESC",
-			    "If you would like to remove a point, exit, then select remove, \n",
-			    "and choose the point. Then choose Add to continue extracting data.",
-			    sep = "\n\n"
-			  )
-			select_points <- locator(type="p", col=col, lwd=2, pch=pch)
-			raw_data <- rbind(raw_data, data.frame(x=select_points$x,y=select_points$y))
-		}
-		if(add_removeQ=="r") {
-			cat("Click on points you want to remove\n")
-			remove <- identify(raw_data, ,offset=0,labels="*", cex=2, col="green")
-			if(length(remove)>0) {
-				raw_data <- raw_data[-remove,]
-				internal_redraw(image, image_file=image_file, plot_type="scatterplot", calpoints, point_vals, raw_data)
-			}
-		}
-		add_removeQ <- readline("Add, remove or continue? a/r/c ")		
-	}
+#' @description Add points to scatterplots
+ 
+add_points <- function(col, pch){
+	cat("\nClick on points you want to add\n",
+		"If you want to remove a point, or are finished with a group,\n exit (see above), then follow prompts, \n")
+	select_points <- locator(type="p", lwd=2, col=col, pch=pch)
+	return(as.data.frame(select_points))
+}
 
+
+#' @title remove_points
+#' @param raw_data data
+#' @description Remove Points from scatterplots
+ 
+remove_points <- function(raw_data){
+	cat("\nClick on points you want to remove\n Once you are finished removing points exit (see above)\n")
+	remove <- identify(raw_data$x,raw_data$y ,offset=0,labels="*", cex=2, col="green")
+	if(length(remove)>0) raw_data <- raw_data[-remove,]
 	return(raw_data)
 }
+
 
 
 #' @title group_scatter_extract
@@ -46,8 +32,18 @@ single_scatter_extract <- function(image, image_file, calpoints, point_vals, col
 #' @param image_file image file name
 #' @param calpoints points used for calibration 
 #' @param point_vals values for calibration
-#' @description Don't know yet Joel.
+#' @description Extraction of data from scatterplots
+
 group_scatter_extract <- function(nGroups,image, image_file, calpoints, point_vals){
+
+	cat(
+    #"..............NOW .............",
+    "\nFollow instructions below, to exit point adding or removing:",
+    " - Windows: right click on the plot area and choose 'Stop'!",
+    " - X11: hit any mouse button other than the left one.",
+    " - quartz/OS X: hit ESC\n",
+    sep = "\n\n"
+  )
 
 	cols <- rep(c("red", "green", "purple"),length.out=nGroups)
 	pchs <- rep(rep(c(19, 17, 15),each=3),length.out=nGroups)
@@ -55,15 +51,26 @@ group_scatter_extract <- function(nGroups,image, image_file, calpoints, point_va
 	image_height <- magick::image_info(image)["height"][[1]]
 	legend_gap <- image_width/nGroups
 	legend_pos <- image_height/40
-
 	raw_data <- data.frame()
+
 	for(i in 1:nGroups) {
 		id <- readline(paste("Group identifier",i,":"))
-		points(legend_gap/2 + legend_gap*(i-1), -legend_pos*2.5, col=cols[i], pch=pchs[i],xpd=TRUE)
-		text(legend_gap/2 + legend_gap*(i-1), -legend_pos, id, col=cols[i],xpd=TRUE)
-		group_points <- single_scatter_extract(image, calpoints, point_vals, col=cols[i], pch=pchs[i])
-		raw_data <- rbind(raw_data, data.frame(id=id, x=group_points$x,y=group_points$y))
-		text(legend_gap/2 + legend_gap*(i-1), -legend_pos*5, paste("n =",nrow(group_points)), col=cols[i],xpd=TRUE)
+		#points(legend_gap/2 + legend_gap*(i-1), -legend_pos*2.5, col=cols[i], pch=pchs[i],xpd=TRUE)
+		#text(legend_gap/2 + legend_gap*(i-1), -legend_pos, id, col=cols[i],xpd=TRUE)
+
+		add_removeQ <- "a"
+		while(add_removeQ!="c"){
+			if(add_removeQ=="a"){
+				group_points <- add_points(col=cols[i], pch=pchs[i])
+				raw_data <- rbind(raw_data, data.frame(id=id, x=group_points$x,y=group_points$y))
+			}
+			if(add_removeQ=="r") {
+				raw_data <- remove_points(raw_data=raw_data)
+			}
+			internal_redraw(image=image, image_file=image_file, plot_type="scatterplot", calpoints=calpoints, point_vals=point_vals, raw_data=raw_data)
+			add_removeQ <- readline("Add, remove or continue? a/r/c ")
+		}
+		#text(legend_gap/2 + legend_gap*(i-1), -legend_pos*5, paste("n =",nrow(subset(raw_data, id==id))), col=cols[i],xpd=TRUE)
 	}
 
 	return(raw_data)
