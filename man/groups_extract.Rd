@@ -4,7 +4,8 @@
 \alias{groups_extract}
 \title{groups_extract}
 \usage{
-groups_extract(plot_type, nGroups, image, image_file, calpoints, point_vals)
+groups_extract(plot_type, nGroups, image, image_file, calpoints, point_vals,
+  askN)
 }
 \arguments{
 \item{plot_type}{The type of plot}
@@ -18,6 +19,8 @@ groups_extract(plot_type, nGroups, image, image_file, calpoints, point_vals)
 \item{calpoints}{points used for calibration}
 
 \item{point_vals}{values for calibration}
+
+\item{askN}{ask for sample sizes?}
 }
 \description{
 Extraction of data from boxplots of mean_error plots, from multiple groups
