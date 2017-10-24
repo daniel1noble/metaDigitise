@@ -15,9 +15,14 @@ internal_redraw <- function(image, image_file, plot_type, calpoints, point_vals,
 	image_height <- magick::image_info(image)["height"][[1]]
 
 	points(calpoints, pch=3, col="blue", lwd=2)
+
 	lines(calpoints[1:2,], pch=3, col="blue", lwd=2)
-	lines(calpoints[3:4,], pch=3, col="blue", lwd=2)
-	text(calpoints$x - c(0, 0, image_width/30, image_width/30), calpoints$y - c(image_height/30, image_height/30, 0, 0), point_vals, col="blue", cex=2)
+	text(calpoints$x[1:2] - c(image_width/30, image_width/30), calpoints$y[1:2] - c(0, 0), point_vals[1:2], col="blue", cex=2)
+	
+	if(!plot_type %in% c("mean_error","boxplot")){
+		lines(calpoints[3:4,], pch=3, col="blue", lwd=2)
+		text(calpoints$x[3:4] - c(0, 0), calpoints$y[3:4] - c(image_height/30, image_height/30), point_vals[3:4], col="blue", cex=2)
+	}
 
 	if(plot_type %in% c("mean_error","boxplot") & nrow(raw_data)>0){
 		for(i in unique(raw_data$id)){
