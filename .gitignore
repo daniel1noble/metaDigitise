@@ -3,3 +3,4 @@ example_figs/
 .Rbuildignore
 metaDigitise.Rproj
 .Rproj.user
+sim_figs.R
