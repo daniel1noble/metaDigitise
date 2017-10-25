@@ -5,8 +5,8 @@
 \title{internal_redraw}
 \usage{
 internal_redraw(image_file, flip = FALSE, rotate = 0,
-  image_details = NULL, plot_type = NULL, calpoints = NULL,
-  point_vals = NULL, raw_data = NULL, rotation = TRUE,
+  image_details = NULL, plot_type = NULL, variable = NULL,
+  calpoints = NULL, point_vals = NULL, raw_data = NULL, rotation = TRUE,
   calibration = TRUE, points = TRUE, return_image = FALSE, ...)
 }
 \arguments{
@@ -19,6 +19,8 @@ internal_redraw(image_file, flip = FALSE, rotate = 0,
 \item{image_details}{image_details}
 
 \item{plot_type}{plot_type}
+
+\item{variable}{variable}
 
 \item{calpoints}{The calibration points}
 

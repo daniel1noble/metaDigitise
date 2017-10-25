@@ -29,7 +29,6 @@ filename <- function(x) {
 #' @description asks user for option from specified list
 
 user_options <- function(question, allowed_answers) {
-	input <- NA	
 	input_bad <- TRUE
 	while(input_bad){
 		input <- readline(question)
@@ -46,7 +45,6 @@ user_options <- function(question, allowed_answers) {
 #' @description asks user for numeric
 
 user_numeric <- function(question) {
-	input <- NA
 	input_bad <- TRUE
 	while(input_bad){
     	input <- suppressWarnings(as.numeric(readline(question)))
@@ -62,7 +60,6 @@ user_numeric <- function(question) {
 #' @description asks user for count
 
 user_count <- function(question) {
-	input <- NA
 	input_bad <- TRUE
 	while(input_bad){
 		input <- suppressWarnings(as.numeric(readline(question)))
@@ -80,11 +77,11 @@ user_count <- function(question) {
 
 ask_variable <- function(plot_type){
 	if(plot_type == "scatterplot"){
-		x_variable <- readline("\nWhat is the x variable? ")
 		y_variable <- readline("\nWhat is the y variable? ")
-		variable <- c(x=x_variable,y=y_variable)
+		x_variable <- readline("\nWhat is the x variable? ")
+		variable <- c(y=y_variable,x=x_variable)
 	}else{
-		variable <- readline("\nWhat is the variable? ")
+		variable <- c(y=readline("\nWhat is the variable? "))
 	}
 	return(variable)
 }

@@ -8,9 +8,7 @@
 #' @export
 
 metaDigitise <- function(image_file, plot_type=NULL){
-	
-	op <- par(mar=c(3,0,1,0))
-	
+		
 	output <- list()
 	output$image_file <- image_file
 
@@ -22,8 +20,6 @@ metaDigitise <- function(image_file, plot_type=NULL){
 
 
 	flush.console()
-
-
 	
 	### plot type
 	output$plot_type <- plot_type <- if(is.null(plot_type)){specify_type()}else{plot_type}
@@ -62,7 +58,6 @@ metaDigitise <- function(image_file, plot_type=NULL){
 	output$processed_data <- process_data(output)
 
 	class(output) <- 'metaDigitise'
-	on.exit(par(op))
 	return(output)
 }
 
@@ -166,7 +161,5 @@ summary.metaDigitise<-function(object, ...){
 #' @export
 
 plot.metaDigitise <- function(x,...){
-	op <- par(mar=c(3,0,1,0))
 	do.call(internal_redraw, x)
-	on.exit(par(op))
 }

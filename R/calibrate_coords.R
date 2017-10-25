@@ -79,10 +79,6 @@ getVals <- function(calpoints, image_details,...) {
   names <- if(nrow(calpoints)==2){c("y1","y2")}else{c("y1","y2","x1","x2")}
   vals <- NULL
   for (i in names) vals[i] <- user_numeric(paste("What is the value of", i, "?\n"))
-  # text(calpoints$x[1:2] - c(image_width/30, image_width/30), calpoints$y[1:2] - c(0, 0), vals[1:2], col="blue", cex=2)
-  # if(nrow(calpoints)==4){
-  #   text(calpoints$x[3:4] - c(0, 0), calpoints$y[3:4] - c(image_height/30, image_height/30), vals[3:4], col="blue", cex=2)
- #  }
   return(vals)
 }
 
@@ -96,7 +92,7 @@ user_calibrate <- function(object){
   while(cal_Q!="n"){
     if(cal_Q == "y"){
       do.call(print_cal_instructions, object)
-      object$calpoints <- do.call(cal_coords, object) 
+      object$calpoints <- do.call(cal_coords, object)
       object$point_vals <- do.call(getVals, object)
       do.call(internal_redraw, c(object, calibration=TRUE, points=FALSE))
     }

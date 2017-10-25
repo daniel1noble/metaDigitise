@@ -4,8 +4,8 @@
 \alias{MB_extract}
 \title{groups_extract}
 \usage{
-MB_extract(plot_type, nGroups, image_file, image_details, calpoints, point_vals,
-  entered_N, ...)
+MB_extract(plot_type, nGroups, image_file, image_details, variable, calpoints,
+  point_vals, entered_N, ...)
 }
 \arguments{
 \item{plot_type}{The type of plot}
@@ -15,6 +15,8 @@ MB_extract(plot_type, nGroups, image_file, image_details, calpoints, point_vals,
 \item{image_file}{image file name}
 
 \item{image_details}{image details}
+
+\item{variable}{variable}
 
 \item{calpoints}{points used for calibration}
 

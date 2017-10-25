@@ -4,10 +4,12 @@
 \alias{redraw_calibration}
 \title{redraw_calibration}
 \usage{
-redraw_calibration(plot_type, calpoints, point_vals, image_details)
+redraw_calibration(plot_type, variable, calpoints, point_vals, image_details)
 }
 \arguments{
 \item{plot_type}{plot_type}
+
+\item{variable}{variable}
 
 \item{calpoints}{The calibration points}
 

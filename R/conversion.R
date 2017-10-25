@@ -86,8 +86,8 @@ process_data <- function(object){
 	
 	if(plot_type == "scatterplot"){
 		processed_data <- do.call(calibrate, object)
-		processed_data$x_variable <- x_variable
-		processed_data$y_variable <- y_variable
+		processed_data$y_variable <- variable["y"]
+		processed_data$x_variable <- variable["x"]
 	}	
 
 	if(plot_type == "histogram"){

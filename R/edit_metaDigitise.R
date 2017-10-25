@@ -23,9 +23,14 @@ edit_metaDigitise <- function(object){
 	rotQ <- user_options("Edit rotation? If yes, then the whole extraction will be redone (y/n) ", c("y","n"))
 	if(rotQ=="y") output <- metaDigitise(object$image_file)
 
+
+### plot type
+	output$plot_type <- plot_type <- if(is.null(plot_type)){specify_type()}else{plot_type}
+
+
 	### variables
 	if(object$plot_type=="scatterplot"){
-		cat("\nx variable entered as:", object$variable["x"],"\ny variable entered as:", object$variable["x"])
+		cat("\ny variable entered as:", object$variable["y"],"\nx variable entered as:", object$variable["x"])
 	}else{
 		cat("\nVariable entered as:", object$variable)
 	}
