@@ -4,20 +4,37 @@
 \alias{internal_redraw}
 \title{internal_redraw}
 \usage{
-internal_redraw(image, image_file, plot_type, calpoints, point_vals, raw_data)
+internal_redraw(image_file, flip = FALSE, rotate = 0,
+  image_details = NULL, plot_type = NULL, calpoints = NULL,
+  point_vals = NULL, raw_data = NULL, rotation = TRUE,
+  calibration = TRUE, points = TRUE, return_image = FALSE, ...)
 }
 \arguments{
-\item{image}{image}
+\item{image_file}{Image filename}
 
-\item{image_file}{image file name}
+\item{flip}{whether to flip figure}
 
-\item{plot_type}{The type of plot}
+\item{rotate}{how much to rotate figure}
 
-\item{calpoints}{points used for calibration}
+\item{image_details}{image_details}
 
-\item{point_vals}{values for calibration}
+\item{plot_type}{plot_type}
 
-\item{raw_data}{previously extracted data points}
+\item{calpoints}{The calibration points}
+
+\item{point_vals}{The point values}
+
+\item{raw_data}{The raw data}
+
+\item{rotation}{logical, should figure be rotated}
+
+\item{calibration}{logical, should calibration be redrawn}
+
+\item{points}{logical, should points be redrawn}
+
+\item{return_image}{return_image object}
+
+\item{...}{further arguments passed to or from other methods.}
 }
 \description{
 Redraws figure and extraction data

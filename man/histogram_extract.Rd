@@ -4,16 +4,16 @@
 \alias{histogram_extract}
 \title{histogram_extract}
 \usage{
-histogram_extract(image, image_file, calpoints, point_vals)
+histogram_extract(image_file, calpoints, point_vals, ...)
 }
 \arguments{
-\item{image}{image}
-
 \item{image_file}{image file name}
 
 \item{calpoints}{points used for calibration}
 
 \item{point_vals}{values for calibration}
+
+\item{...}{further arguments passed to or from other methods.}
 }
 \description{
 Extraction of data from histograms

@@ -14,83 +14,52 @@ metaDigitise <- function(image_file, plot_type=NULL){
 	output <- list()
 	output$image_file <- image_file
 
+	### image rotation
 	rotate_image <- user_rotate_graph(image_file)
-	image <- rotate_image$image
 	output$flip <- rotate_image$flip
 	output$rotate <- rotate_image$rotate
+	output$image_details <- rotate_image$image_details
+
 
 	flush.console()
 
-	image_width <- magick::image_info(image)["width"][[1]]
-	image_height <- magick::image_info(image)["height"][[1]]
 
+	
+	### plot type
 	output$plot_type <- plot_type <- if(is.null(plot_type)){specify_type()}else{plot_type}
 	stopifnot(plot_type %in% c("mean_error","boxplot","scatterplot","histogram"))
 
-	### ask what the variable is
-	if(plot_type == "scatterplot"){
-		x_variable <- readline("\nWhat is the x variable? ")
-		y_variable <- readline("\nWhat is the y variable? ")
-	}else{
-		variable <- readline("\nWhat is the variable? ")
-	}
+	### variables
+	output$variable <- ask_variable(plot_type)
 
 	### Calibrate axes
-	cal_Q <- "y"
-	while(cal_Q!="n"){
-		if(cal_Q == "y"){
-			output$calpoints <- calpoints <- cal_coords(plot_type=plot_type)	
-			output$point_vals <- point_vals <- getVals(calpoints=calpoints, image_width=image_width, image_height=image_height) 
-		}
-		cal_Q <- readline("\nRe-calibrate? (y/n) ")
-		if(cal_Q == "y"){
-			plot(image)
-			mtext(filename(image_file),3, 0)
-		}
-	}
+	cal <- user_calibrate(output)
+	output$calpoints <- cal$calpoints
+	output$point_vals <- cal$point_vals
 
-	### Ask number of groups
+	### Number of groups
 	if(plot_type != "histogram"){
-		nGroups <- suppressWarnings(as.numeric(readline("\nNumber of groups: ")))
-		while(is.na(nGroups)| nGroups<1 | !is.wholenumber(nGroups)){
-			nGroups <- suppressWarnings(as.numeric(readline("\n**** Number of groups must be an integer above 0 ****\nNumber of groups: ")))
-		}
+		output$nGroups <- user_count("\nNumber of groups: ")
 	}
 
-
-	### Extract and calibrate data depending on plot type
-	if(plot_type %in% c("mean_error","boxplot")){
-		askN <- NA
-		while(!askN %in% c("y","n")) askN <- readline("\nEnter sample sizes? y/n ")
-
-		output$raw_data <- raw_data <- groups_extract(plot_type=plot_type, nGroups=nGroups, image=image, image_file=image_file, calpoints=calpoints, point_vals=point_vals, askN=askN)	
-		cal_data <- calibrate(raw_data=raw_data,calpoints=calpoints, point_vals=point_vals)
-		output$processed_data <- convert_group_data(cal_data=cal_data, plot_type=plot_type, nGroups=nGroups)
-		output$processed_data$variable <- variable
+	### N entered?
+	if(plot_type %in% c("mean_error","boxplot")) {
+		askN <- user_options("\nEnter sample sizes? y/n ",c("y","n"))
 		output$entered_N <- ifelse(askN =="y", TRUE, FALSE)
-		if(plot_type == "mean_error") {
-			error_type <- readline("Type of error (se, CI95, sd): ")
-			while(!error_type %in% c("se","CI95","sd")) error_type <- readline("\n**** Invalid error type ***\nType of error (se, CI95, sd): ")
-			output$error_type <- error_type
-		}
-	}
-	
-	if(plot_type == "scatterplot"){
-		output$raw_data <- raw_data <- group_scatter_extract(nGroups,image=image, image_file=image_file, calpoints=calpoints, point_vals=point_vals)
-		output$processed_data <- calibrate(raw_data=raw_data,calpoints=calpoints, point_vals=point_vals)
-		output$processed_data$x_variable <- x_variable
-		output$processed_data$y_variable <- y_variable
-		output$entered_N <- TRUE
-
-	}	
-
-	if(plot_type == "histogram"){
-		output$raw_data <- raw_data <- histogram_extract(image=image, image_file=image_file, calpoints=calpoints, point_vals=point_vals)
-		cal_data <- calibrate(raw_data=raw_data,calpoints=calpoints, point_vals=point_vals)
-		output$processed_data <- convert_histogram_data(cal_data=cal_data)
-		output$processed_data$variable <- variable
+	}else{
 		output$entered_N <- TRUE
 	}
+		
+	### Extract data
+	output$raw_data <- point_extraction(output)
+
+	## error type
+	if(plot_type %in% c("mean_error")) {
+		output$error_type <- user_options("Type of error (se, CI95, sd): ", c("se","CI95","sd"))
+	}
+
+	### calibrate and convert data
+	output$processed_data <- process_data(output)
 
 	class(output) <- 'metaDigitise'
 	on.exit(par(op))
@@ -111,7 +80,7 @@ metaDigitise <- function(image_file, plot_type=NULL){
 print.metaDigitise <- function(x, ...){
 	cat(paste("Data extracted from:\n", x$image_file,"\n"))
 	cat(paste0("Figure", ifelse(x$flip, " flipped and ", " "), "rotated ", x$rotate, " degrees"),"\n")
-	cat(paste("Figure identified as", x$plot_type, "with", length(unique(x$processed_data$id)), "groups","\n"))
+	cat(paste("Figure identified as", x$plot_type, "with", x$nGroups, "groups","\n"))
 }
 
 
@@ -198,8 +167,6 @@ summary.metaDigitise<-function(object, ...){
 
 plot.metaDigitise <- function(x,...){
 	op <- par(mar=c(3,0,1,0))
-	image <- magick::image_read(x$image_file)
-	new_image <- rotate_graph(image=image, flip=x$flip, rotate=x$rotate)
-	internal_redraw(image=new_image, image_file=x$image_file, plot_type=x$plot_type, calpoints=x$calpoints, point_vals=x$point_vals, raw_data=x$raw_data)
+	do.call(internal_redraw, x)
 	on.exit(par(op))
 }

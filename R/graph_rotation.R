@@ -3,11 +3,7 @@
 #' @param image_file Image filename
 
 user_rotate_graph <- function(image_file){
-	image <- magick::image_read(image_file)
-	plot(image)
-	mtext(filename(image_file),3, 0)
 
-	rotateQ <- "a"
 cat("
 **** NEW PLOT ****
 
@@ -25,12 +21,17 @@ If figures are wonky, chose rotate.
 
 Otherwise chose continue\n
 ")
-	out <- list(flip=FALSE, rotate=0)
+	
+	flip=FALSE
+	rotate=0
+
+	internal_redraw(image_file, flip = flip,rotate = rotate)
+
+	rotateQ <- "a"
 	while(rotateQ != "c") {
 		if(rotateQ=="f"){
-			image <- magick::image_flop(magick::image_rotate(image,270))
-			if(!out$flip){out$flip <- TRUE}else{out$flip <- FALSE}
-			plot(image)
+			flip <- ifelse(!flip, TRUE, FALSE)
+			internal_redraw(image_file, flip = flip,rotate = rotate)
 		}
 		if(rotateQ=="r"){
 			cat("Click left hand then right hand side of x axis\n")
@@ -42,26 +43,17 @@ Otherwise chose continue\n
 			y.dist <- rot_angle$y[2] - rot_angle$y[1]
 			
 			f <- atan2(y.dist, x.dist) * 180/pi
-			image <- magick::image_rotate(image, f)
-			plot(image)
-			out$rotate <- out$rotate + f
+			rotate <- rotate + f
+			internal_redraw(image_file, flip = flip,rotate = rotate)	
 		}
-		rotateQ <- base::readline("Flip, rotate or continue f/r/c ")
+		rotateQ <- readline("Flip, rotate or continue f/r/c ")
 	}
-	out$image <- image
+
+	image <- internal_redraw(image_file, flip = flip, rotate = rotate, return_image=TRUE)
+	image_details <- c(width = magick::image_info(image)["width"][[1]], height = magick::image_info(image)["height"][[1]])
+
+	out <- list(flip=flip, rotate=rotate, image_details=image_details)
+
 	return(out)
 }
 
-
-
-#' @title rotate_graph
-#' @description Rotates/flips imported figures
-#' @param image Image object from magick::image_read
-#' @param flip whether to flip figure
-#' @param rotate how much to rotate figure
-
-rotate_graph <- function(image, flip, rotate){
-	if(flip) image <- magick::image_flop(magick::image_rotate(image,270))
-	image <- magick::image_rotate(image, rotate)
-	return(image)
-}

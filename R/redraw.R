@@ -1,19 +1,27 @@
-#' @title internal_redraw
-#' @param image image 
-#' @param image_file image file name
-#' @param plot_type The type of plot
-#' @param calpoints points used for calibration 
-#' @param point_vals values for calibration
-#' @param raw_data previously extracted data points
-#' @description Redraws figure and extraction data
+#' @title rotate_graph
+#' @description Rotates/flips imported figures
+#' @param image Image object from magick::image_read
+#' @param flip whether to flip figure
+#' @param rotate how much to rotate figure
 
-internal_redraw <- function(image, image_file, plot_type, calpoints, point_vals, raw_data){
-	plot(image)
-	mtext(filename(image_file),3, 0)
+redraw_rotation <- function(image, flip, rotate){
+	if(flip) image <- magick::image_flop(magick::image_rotate(image,270))
+	image <- magick::image_rotate(image, rotate)
+	return(image)
+}
 
-	image_width <- magick::image_info(image)["width"][[1]]
-	image_height <- magick::image_info(image)["height"][[1]]
-	legend_pos <- image_height/40
+
+
+#' @title redraw_calibration
+#' @param plot_type plot_type
+#' @param calpoints The calibration points
+#' @param point_vals The point values
+#' @param image_details image_details
+#' @description plots calibration data on graph
+
+redraw_calibration <- function(plot_type, calpoints,point_vals,image_details){
+	image_width <- image_details["width"]
+	image_height <- image_details["height"]
 
 	points(calpoints, pch=3, col="blue", lwd=2)
 
@@ -24,6 +32,20 @@ internal_redraw <- function(image, image_file, plot_type, calpoints, point_vals,
 		lines(calpoints[3:4,], pch=3, col="blue", lwd=2)
 		text(calpoints$x[3:4] - c(0, 0), calpoints$y[3:4] - c(image_height/30, image_height/30), point_vals[3:4], col="blue", cex=2)
 	}
+}
+
+
+
+#' @title redraw_points
+#' @param plot_type plot_type
+#' @param raw_data The raw data
+#' @param image_details image_details
+#' @description plots clicked data on graph
+
+redraw_points <- function(plot_type,raw_data,image_details){
+	image_width <- image_details["width"]
+	image_height <- image_details["height"]
+	legend_pos <- image_height/40
 
 	if(plot_type %in% c("mean_error","boxplot") & nrow(raw_data)>0){
 		for(i in unique(raw_data$id)){
@@ -55,7 +77,6 @@ internal_redraw <- function(image, image_file, plot_type, calpoints, point_vals,
 		}		
 	}
 
-
 	if(plot_type=="histogram"& nrow(raw_data)>0){
 		for(i in seq(2,nrow(raw_data),2)){
 			bar_data <- raw_data[c(i-1,i),]
@@ -63,4 +84,40 @@ internal_redraw <- function(image, image_file, plot_type, calpoints, point_vals,
 			lines(y~x, bar_data, lwd=2, col="red")
 		}
 	}
+}
+
+
+
+#' @title internal_redraw
+#' @param image_file Image filename
+#' @param flip whether to flip figure
+#' @param rotate how much to rotate figure
+#' @param image_details image_details
+#' @param plot_type plot_type
+#' @param calpoints The calibration points
+#' @param point_vals The point values
+#' @param raw_data The raw data
+#' @param rotation logical, should figure be rotated
+#' @param calibration logical, should calibration be redrawn
+#' @param points logical, should points be redrawn
+#' @param return_image return_image object
+#' @param ... further arguments passed to or from other methods.
+#' @description Redraws figure and extraction data
+
+#image_file, flip, rotate, image_details, plot_type, calpoints, point_vals, raw_data
+
+internal_redraw <- function(image_file, flip=FALSE, rotate=0, image_details=NULL, plot_type=NULL, calpoints=NULL, point_vals=NULL, raw_data=NULL, rotation=TRUE, calibration=TRUE, points=TRUE, return_image=FALSE,...){
+
+	image <- magick::image_read(image_file)
+	new_image <- redraw_rotation(image=image, flip=flip, rotate=rotate)
+	plot(new_image)
+	mtext(filename(image_file),3, 0)
+
+	if(is.null(calpoints)) calibration=FALSE
+	if(calibration) redraw_calibration(plot_type, calpoints,point_vals,image_details)
+
+	if(is.null(raw_data)) points=FALSE
+	if(points) redraw_points(plot_type,raw_data,image_details)
+
+	if(return_image) return(new_image)
 }

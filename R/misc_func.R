@@ -23,3 +23,68 @@ filename <- function(x) {
 }
 
 
+#' @title user_options
+#' @param question question
+#' @param allowed_answers allowed answers
+#' @description asks user for option from specified list
+
+user_options <- function(question, allowed_answers) {
+	input <- NA	
+	input_bad <- TRUE
+	while(input_bad){
+		input <- readline(question)
+		input_bad <- !input %in% allowed_answers
+		if(input_bad) cat("\n**** Invalid response ****\n")
+	}
+	return(input)
+}
+
+
+
+#' @title user_numeric
+#' @param question question
+#' @description asks user for numeric
+
+user_numeric <- function(question) {
+	input <- NA
+	input_bad <- TRUE
+	while(input_bad){
+    	input <- suppressWarnings(as.numeric(readline(question)))
+		input_bad <- is.na(input)
+		if(input_bad) cat("\n**** Input must be numeric ****\n")
+	}
+	return(input)
+}
+
+
+#' @title user_count
+#' @param question question
+#' @description asks user for count
+
+user_count <- function(question) {
+	input <- NA
+	input_bad <- TRUE
+	while(input_bad){
+		input <- suppressWarnings(as.numeric(readline(question)))
+		input_bad <- is.na(input)| input<1 | !is.wholenumber(input)
+		if(input_bad) cat("\n**** Input must be an integer above 0 ****\n")
+	}
+	return(input)
+}
+
+
+
+#' @title ask_variable
+#' @param plot_type plot_type
+#' @description asks user what variable(s) is depending on plot type
+
+ask_variable <- function(plot_type){
+	if(plot_type == "scatterplot"){
+		x_variable <- readline("\nWhat is the x variable? ")
+		y_variable <- readline("\nWhat is the y variable? ")
+		variable <- c(x=x_variable,y=y_variable)
+	}else{
+		variable <- readline("\nWhat is the variable? ")
+	}
+	return(variable)
+}

@@ -4,18 +4,18 @@
 \alias{group_scatter_extract}
 \title{group_scatter_extract}
 \usage{
-group_scatter_extract(nGroups, image, image_file, calpoints, point_vals)
+group_scatter_extract(nGroups, image_file, calpoints, point_vals, ...)
 }
 \arguments{
 \item{nGroups}{The number of groups}
-
-\item{image}{image}
 
 \item{image_file}{image file name}
 
 \item{calpoints}{points used for calibration}
 
 \item{point_vals}{values for calibration}
+
+\item{...}{further arguments passed to or from other methods.}
 }
 \description{
 Extraction of data from scatterplots
