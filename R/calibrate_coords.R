@@ -91,15 +91,13 @@ user_calibrate <- function(object){
   cal_Q <- "y"
   while(cal_Q!="n"){
     if(cal_Q == "y"){
+      do.call(internal_redraw, c(object, calibration=FALSE, points=FALSE))
       do.call(print_cal_instructions, object)
       object$calpoints <- do.call(cal_coords, object)
       object$point_vals <- do.call(getVals, object)
       do.call(internal_redraw, c(object, calibration=TRUE, points=FALSE))
     }
     cal_Q <- readline("\nRe-calibrate? (y/n) ")
-    if(cal_Q == "y"){
-      do.call(internal_redraw, c(object, calibration=FALSE, points=FALSE))
-      }
   }
   return(object[c("calpoints","point_vals")])
 }

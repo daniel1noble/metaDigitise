@@ -4,27 +4,16 @@
 \alias{MB_extract}
 \title{groups_extract}
 \usage{
-MB_extract(plot_type, nGroups, image_file, image_details, variable, calpoints,
-  point_vals, entered_N, ...)
+MB_extract(plot_type, nGroups, entered_N, ...)
 }
 \arguments{
 \item{plot_type}{The type of plot}
 
 \item{nGroups}{number of groups}
 
-\item{image_file}{image file name}
-
-\item{image_details}{image details}
-
-\item{variable}{variable}
-
-\item{calpoints}{points used for calibration}
-
-\item{point_vals}{values for calibration}
-
 \item{entered_N}{ask for sample sizes?}
 
-\item{...}{further arguments passed to or from other methods.}
+\item{...}{further arguments to internal_redraw}
 }
 \description{
 Extraction of data from boxplots of mean_error plots, from multiple groups

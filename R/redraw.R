@@ -88,8 +88,8 @@ redraw_points <- function(plot_type,raw_data,image_details){
 	}
 
 	if(plot_type=="histogram"& nrow(raw_data)>0){
-		for(i in seq(2,nrow(raw_data),2)){
-			bar_data <- raw_data[c(i-1,i),]
+		for(i in unique(raw_data$bar)){
+			bar_data <- subset(raw_data, bar==i)
 			points(y~x,bar_data, pch=19, col="red")
 			lines(y~x, bar_data, lwd=2, col="red")
 			text(mean(bar_data$x),mean(bar_data$y)+legend_pos,bar_data$bar[1], col="red", cex=0.5)

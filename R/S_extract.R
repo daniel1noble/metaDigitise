@@ -31,7 +31,7 @@ remove_points <- function(raw_data){
 #' @param ... arguments passed to internal_redraw
 #' @description Extraction of data from scatterplots
 
-group_scatter_extract <- function(nGroups,...){
+group_scatter_extract <- function(edit=FALSE.nGroups,...){
 
 	cat(
     #"..............NOW .............",
@@ -48,7 +48,8 @@ group_scatter_extract <- function(nGroups,...){
 	for(i in 1:nGroups) {
 		id <- readline(paste("\nGroup identifier",i,":"))
 
-		add_removeQ <- "a"
+		add_removeQ <-  if(edit){ NA }else{ "a" }
+		
 		while(add_removeQ!="c"){
 			if(add_removeQ=="a"){
 				group_points <- add_points(col=cols[i], pch=pchs[i])

@@ -1,4 +1,4 @@
-point_extraction <-function(object){
+point_extraction <-function(object, edit=FALSE){
 
 	plot_type <- object$plot_type
 
@@ -7,11 +7,11 @@ point_extraction <-function(object){
 	}
 
 	if(plot_type == "scatterplot"){
-		raw_data <- do.call(group_scatter_extract, object)
+		raw_data <- do.call(group_scatter_extract, c(object,edit=edit))
 	}	
 	
 	if(plot_type == "histogram"){
-		raw_data <- do.call(histogram_extract, object)
+		raw_data <- do.call(histogram_extract, c(object,edit=edit))
 	}
 
 	return(raw_data)

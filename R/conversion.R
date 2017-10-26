@@ -58,8 +58,9 @@ convert_histogram_data <- function(cal_data){
 	#nBars <- nrow(raw_data)/2
 	midpoints <- c()
 	freq <- c()
-	for(i in seq(2,nrow(cal_data),2)){
-		bar_data <- cal_data[c(i-1,i),]
+
+	for(i in unique(cal_data$bar)){
+		bar_data <- subset(cal_data, bar==i)
 		midpoints <- c(midpoints, mean(bar_data$x))
 		freq <- c(freq, round(mean(bar_data$y)))
 	}
