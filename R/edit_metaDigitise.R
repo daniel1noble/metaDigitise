@@ -15,7 +15,7 @@ edit_metaDigitise <- function(object){
 
 
 	### plot type
-	ptQ <- user_options("Change plot type? If yes, then the whole extraction will be redone (y/n) ", c("y","n"))
+	ptQ <- user_options("\nChange plot type? If yes, then the whole extraction will be redone (y/n) ", c("y","n"))
 	if(ptQ=="y") output <- metaDigitise(object$image_file)
 	
 
@@ -34,20 +34,20 @@ edit_metaDigitise <- function(object){
 	
 
 	### calibration
-	calQ <- user_options("Edit calibration? (y/n) ", c("y","n"))
+	calQ <- user_options("\nEdit calibration? (y/n) ", c("y","n"))
 	if(calQ =="y"){
-		cal <- user_calibrate(image, object$image_file)
+		cal <- user_calibrate(object)
 		object$calpoints <- cal$calpoints
 		object$point_vals <- cal$point_vals
 		plot(object)
 	}
 
 	### Number of groups
-	if(plot_type != "histogram"){
+	if(object$plot_type != "histogram"){
 		cat("\nNumber of Groups:", object$nGroups)
 		groupQ <- user_options("\nRe-enter number of groups (y/n) ", c("y","n")) 
 	if(groupQ=="y") {
-		output$nGroups <- user_count("\nNumber of groups: ")
+		object$nGroups <- user_count("\nNumber of groups: ")
 		}
 	}
 	
@@ -62,23 +62,23 @@ edit_metaDigitise <- function(object){
 	### Extract data
 	extractQ <- user_options("\nRe-extract data (y/n) ", c("y","n")) 
 	if(extractQ=="y") {
-		output$raw_data <- point_extraction(output, edit=TRUE)	
+		object$raw_data <- point_extraction(object, edit=TRUE)	
 	}
 	
 	## error type
-	if(plot_type %in% c("mean_error")) {
+	if(object$plot_type %in% c("mean_error")) {
 		cat("\nType of error:", object$error_type)
 		errorQ <- user_options("\nRe-enter error type (y/n) ", c("y","n")) 
 		if(errorQ=="y") {
-			output$error_type <- user_options("Type of error (se, CI95, sd): ", c("se","CI95","sd"))
+			object$error_type <- user_options("Type of error (se, CI95, sd): ", c("se","CI95","sd"))
 		}
 	}
 
 	### re-process data
-	output$processed_data <- process_data(output)
+	object$processed_data <- process_data(object)
 
-	class(output) <- 'metaDigitise'
-	return(output)
+	class(object) <- 'metaDigitise'
+	return(object)
 
 
 }

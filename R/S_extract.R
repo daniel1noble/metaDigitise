@@ -29,10 +29,11 @@ remove_points <- function(raw_data){
 #' @title group_scatter_extract
 #' @param edit logical; whether in edit mode 
 #' @param nGroups The number of groups
+#' @param raw_data raw data
 #' @param ... arguments passed to internal_redraw
 #' @description Extraction of data from scatterplots
 
-group_scatter_extract <- function(edit=FALSE.nGroups,...){
+group_scatter_extract <- function(edit=FALSE, nGroups, raw_data = data.frame(),...){
 
 	cat(
     #"..............NOW .............",
@@ -44,12 +45,18 @@ group_scatter_extract <- function(edit=FALSE.nGroups,...){
 
 	cols <- rep(c("red", "green", "purple"),length.out=nGroups)
 	pchs <- rep(rep(c(19, 17, 15),each=3),length.out=nGroups)
-	raw_data <- data.frame()
 
 	for(i in 1:nGroups) {
-		id <- readline(paste("\nGroup identifier",i,":"))
-
-		add_removeQ <-  if(edit){ NA }else{ "a" }
+		if(edit){
+			ids <- unique(raw_data$id)
+			cat("\nGroup identifier",i,":",ids[i],"\n")
+			id <- ids[i]
+#			editQ <- user_options("Change group identifier? (y/n) ",c("y","n"))
+		}else{
+			id <- readline(paste("\nGroup identifier",i,":"))
+		}
+		
+		add_removeQ <-  if(edit){ "b" }else{ "a" }
 		
 		while(add_removeQ!="c"){
 			if(add_removeQ=="a"){
@@ -60,7 +67,7 @@ group_scatter_extract <- function(edit=FALSE.nGroups,...){
 				raw_data <- remove_points(raw_data=raw_data)
 			}
 			internal_redraw(...,raw_data=raw_data, calibration=TRUE, points=TRUE)
-			add_removeQ <- readline("Add, delete or continue? a/d/c ")
+			add_removeQ <- readline("\nAdd, delete or continue? a/d/c ")
 		}
 	}
 	return(raw_data)
