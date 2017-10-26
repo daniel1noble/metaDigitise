@@ -23,6 +23,6 @@ Batch processes png files within a set directory, consolidates the data and expo
 bulk_metaDigitise can be used on a directory with a whole host of different figure (mean and error, scatter plots, box plots and histograms) and file types (.jpeg, .png, .tiff, .pdf). It will automatically cycle through all files within a directory in order, prompting the user for specific information as they go. It will also write calibration files (also containing processed data), into a special caldat/ folder within the directory. Importantly, as new files are added to a directory that has already been "completed", bulk_metaDigitise will recognize these unfinished files and only cycle through the digitisation of these new files.
 }
 \examples{
-data <- bulk_metaDigitise(dir = "./example_figs/", types = "diff", summary = TRUE)
-summary(data)
+# data <- bulk_metaDigitise(dir = "./example_figs/", types = "diff", summary = TRUE)
+# summary(data)
 }
