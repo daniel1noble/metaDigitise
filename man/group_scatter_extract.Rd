@@ -4,14 +4,16 @@
 \alias{group_scatter_extract}
 \title{group_scatter_extract}
 \usage{
-group_scatter_extract(edit = FALSE.nGroups, ...)
+group_scatter_extract(edit = FALSE, nGroups, raw_data = data.frame(), ...)
 }
 \arguments{
 \item{edit}{logical; whether in edit mode}
 
-\item{...}{arguments passed to internal_redraw}
-
 \item{nGroups}{The number of groups}
+
+\item{raw_data}{raw data}
+
+\item{...}{arguments passed to internal_redraw}
 }
 \description{
 Extraction of data from scatterplots
