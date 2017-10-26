@@ -4,12 +4,12 @@
 \alias{group_scatter_extract}
 \title{group_scatter_extract}
 \usage{
-group_scatter_extract(nGroups, ...)
+group_scatter_extract(edit = FALSE.nGroups, ...)
 }
 \arguments{
-\item{nGroups}{The number of groups}
-
 \item{...}{arguments passed to internal_redraw}
+
+\item{nGroups}{The number of groups}
 }
 \description{
 Extraction of data from scatterplots

@@ -4,7 +4,7 @@
 \alias{histogram_extract}
 \title{histogram_extract}
 \usage{
-histogram_extract(...)
+histogram_extract(edit = FALSE, ...)
 }
 \arguments{
 \item{...}{arguments to pass to internal_redraw}
