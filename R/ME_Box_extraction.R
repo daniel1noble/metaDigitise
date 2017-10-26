@@ -50,7 +50,8 @@ MB_extract <- function(plot_type, nGroups,entered_N,...){
 
 			if(plot_type=="boxplot" & group_points$y[1]<group_points$y[5]) warning("max is smaller than min", call. = FALSE, immediate. = TRUE)
 
-			user_options("\nReclick or Continue? r/c ",c("c","r"))
+			add_removeQ <- user_options("\nReclick or Continue? r/c", c("c","r"))
+			
 			if(add_removeQ=="r") {
 				internal_redraw(plot_type=plot_type, raw_data=raw_data[-rows,], ...)
 				raw_data[rows,"id"] <- NA

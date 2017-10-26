@@ -1,13 +1,13 @@
 
-#' @title metaDigitise
-#' @description Extracts points from a figure and generate summary statistics
+#' @title internal_digitise
+#' @description Extracts points from a single figure and processes data
 #' @param image_file Image file
 #' @param plot_type Type of plot from "mean_error","boxplot","scatterplot" or"histogram". Function will prompt if not entered by user.
 #' @return List of 
 #' @author Joel Pick
 #' @export
 
-metaDigitise <- function(image_file, plot_type=NULL){
+internal_digitise <- function(image_file, plot_type=NULL){
 		
 	output <- list()
 	output$image_file <- image_file

@@ -11,7 +11,18 @@
 #' @return If type = "same" the function returns a dataframe with the relevant data for each figure being digitised. If type = "diff" it returns a list of the relevant data. If summary = TRUE a tidy version of the above is provided instead.
 #' @export
 
-bulk_metaDigitise <- function(dir, types = c("diff", "same"), ...) {
+
+metaDigitise<-function(...){
+cat("Do you want to...")
+Q <- menu(c("Process new images", "Import existing data", "Edit existing data"))
+
+switch(Q, list(1= process_new_files(...), 2= import(...), 3=editmD(...)))
+
+}
+
+
+
+process_new_files <- function(dir, types = c("diff", "same"), ...) {
 	
 	   type <- match.arg(types)
 			   setup_calibration_dir(dir)
@@ -25,6 +36,8 @@ bulk_metaDigitise <- function(dir, types = c("diff", "same"), ...) {
 			         data_list[[i]] <- metaDigitise(details$paths[i], plot_type = plot_type)	
 			    names(data_list)[i] <- details$images[i]
 			 saveRDS(data_list[[i]], file = paste0(details$cal_dir, details$name[i]))
+			breakQ <-  user_options(paste("do you want continue:", length(details$paths)- i, "plots out of", length(details$paths), "plots remaining (y/n) "), c("y","n"))
+		 	if(breakQ=="n") break
 		 }
 	
 		return(extract_digitised(data_list, types = type, ...))
@@ -100,7 +113,7 @@ get_notDone_file_details <- function(dir){
 	}
 
 	# Find what files are already done. Remove these from our list
-	if (length(calibrations) > 1){
+	if (length(calibrations) >= 1){
 		done_figures <- match(calibrations, name)
 	
 	# Remove the files that are already done.
