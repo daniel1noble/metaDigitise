@@ -92,6 +92,7 @@ redraw_points <- function(plot_type,raw_data,image_details){
 			bar_data <- raw_data[c(i-1,i),]
 			points(y~x,bar_data, pch=19, col="red")
 			lines(y~x, bar_data, lwd=2, col="red")
+			text(mean(bar_data$x),mean(bar_data$y)+legend_pos,bar_data$bar[1], col="red", cex=0.5)
 		}
 	}
 }

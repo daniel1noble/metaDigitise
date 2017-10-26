@@ -24,9 +24,10 @@ edit_metaDigitise <- function(object){
 	if(rotQ=="y") output <- metaDigitise(object$image_file)
 
 
-### plot type
-	output$plot_type <- plot_type <- if(is.null(plot_type)){specify_type()}else{plot_type}
-
+	### plot type
+	ptQ <- user_options("Change plot type? If yes, then the whole extraction will be redone (y/n) ", c("y","n"))
+	if(ptQ=="y") output <- metaDigitise(object$image_file)
+	
 
 	### variables
 	if(object$plot_type=="scatterplot"){
@@ -34,9 +35,13 @@ edit_metaDigitise <- function(object){
 	}else{
 		cat("\nVariable entered as:", object$variable)
 	}
-	varQ <- user_options("\nRename Variables (y/n) ", c("y","n")) 
-	if(varQ=="y") object$variable <- ask_variable(object$plot_type)
 
+	varQ <- user_options("\nRename Variables (y/n) ", c("y","n")) 
+	if(varQ=="y") {
+		object$variable <- ask_variable(object$plot_type)
+		plot(object)
+	}
+	
 
 	### calibration
 	calQ <- user_options("Edit calibration? (y/n) ", c("y","n"))
@@ -45,6 +50,7 @@ edit_metaDigitise <- function(object){
 		cal <- user_calibrate(image, object$image_file)
 		object$calpoints <- cal$calpoints
 		object$point_vals <- cal$point_vals
+		plot(object)
 	}
 
 	### point reclicking

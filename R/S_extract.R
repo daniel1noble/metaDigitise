@@ -18,7 +18,7 @@ add_points <- function(col, pch){
 #' @description Remove Points from scatterplots
  
 remove_points <- function(raw_data){
-	cat("\nClick on points you want to remove\n Once you are finished removing points exit (see above)\n")
+	cat("\nClick on points you want to delete\n Once you are finished removing points exit (see above)\n")
 	remove <- identify(raw_data$x,raw_data$y ,offset=0,labels="*", cex=2, col="green")
 	if(length(remove)>0) raw_data <- raw_data[-remove,]
 	return(raw_data)
@@ -28,14 +28,10 @@ remove_points <- function(raw_data){
 
 #' @title group_scatter_extract
 #' @param nGroups The number of groups
-#' @param image_file image file name
-#' @param image_details image_details
-#' @param calpoints points used for calibration 
-#' @param point_vals values for calibration
-#' @param ... further arguments passed to or from other methods.
+#' @param ... arguments passed to internal_redraw
 #' @description Extraction of data from scatterplots
 
-group_scatter_extract <- function(nGroups, image_file, image_details, calpoints, point_vals,...){
+group_scatter_extract <- function(nGroups,...){
 
 	cat(
     #"..............NOW .............",
@@ -58,11 +54,11 @@ group_scatter_extract <- function(nGroups, image_file, image_details, calpoints,
 				group_points <- add_points(col=cols[i], pch=pchs[i])
 				raw_data <- rbind(raw_data, data.frame(id=id, x=group_points$x,y=group_points$y))
 			}
-			if(add_removeQ=="r") {
+			if(add_removeQ=="d") {
 				raw_data <- remove_points(raw_data=raw_data)
 			}
-			internal_redraw(image_file=image_file, image_details=image_details, plot_type="scatterplot", calpoints=calpoints, point_vals=point_vals,raw_data=raw_data, calibration=TRUE, points=TRUE)
-			add_removeQ <- readline("Add, remove or continue? a/r/c ")
+			internal_redraw(...,raw_data=raw_data, calibration=TRUE, points=TRUE)
+			add_removeQ <- readline("Add, delete or continue? a/d/c ")
 		}
 	}
 	return(raw_data)
