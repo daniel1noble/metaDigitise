@@ -4,9 +4,11 @@
 \alias{histogram_extract}
 \title{histogram_extract}
 \usage{
-histogram_extract(...)
+histogram_extract(edit = FALSE, ...)
 }
 \arguments{
+\item{edit}{logical; whether in edit mode}
+
 \item{...}{arguments to pass to internal_redraw}
 }
 \description{

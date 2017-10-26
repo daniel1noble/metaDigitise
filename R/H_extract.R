@@ -1,4 +1,5 @@
 #' @title histogram_extract
+#' @param edit logical; whether in edit mode 
 #' @param ... arguments to pass to internal_redraw
 #' @description Extraction of data from histograms
 histogram_extract <- function(edit=FALSE,...){

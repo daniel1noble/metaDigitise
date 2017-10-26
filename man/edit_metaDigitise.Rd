@@ -2,7 +2,7 @@
 % Please edit documentation in R/edit_metaDigitise.R
 \name{edit_metaDigitise}
 \alias{edit_metaDigitise}
-\title{summary.metaDigitise}
+\title{edit_metaDigitise}
 \usage{
 edit_metaDigitise(object)
 }
@@ -13,7 +13,7 @@ edit_metaDigitise(object)
 Data.frame
 }
 \description{
-Summary method for class ‘metaDigitise’
+Function for editing previous data extraction through `metaDigitise`
 }
 \author{
 Joel Pick

@@ -27,6 +27,7 @@ remove_points <- function(raw_data){
 
 
 #' @title group_scatter_extract
+#' @param edit logical; whether in edit mode 
 #' @param nGroups The number of groups
 #' @param ... arguments passed to internal_redraw
 #' @description Extraction of data from scatterplots
