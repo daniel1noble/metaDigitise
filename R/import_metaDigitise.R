@@ -5,7 +5,7 @@
 #' @return Returns a list if types = 'diff' or a dataframe of raw data or summarise data if types = 'same' or summary = TRUE
 #' @export
 
-import_metaDigitise <- function(dir, summary = TRUE){
+import_metaDigitise <- function(dir, summary = TRUE ) {
 	
 	details <- dir_details(dir)
 
@@ -25,6 +25,3 @@ import_metaDigitise <- function(dir, summary = TRUE){
 
 	return(import)
 }
-
-dir = "./example_figs/scatterplot/"
-test <- import_metaDigitise(dir, summary = FALSE)

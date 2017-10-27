@@ -1,29 +1,38 @@
-#' @title bulk_metaDigitise
+#' @title metaDigitise
 #' @description Batch processes png files within a set directory, consolidates the data and exports the data for each image and type
 #' @param dir the path name to the directory / folder where the files are located
 #' @param types Argument specifying whether the types of images are the same (i.e., all scatter plots - "same") or a mixture of different plot types (i.e., scatter plots, means and se - "diff").
 #' @param ... Other arguments called to metaDigitise. summary = TRUE or FALSE is most relevant as it will print a simple summary statistics that are the same across all files.
 #' @details 
-#' bulk_metaDigitise can be used on a directory with a whole host of different figure (mean and error, scatter plots, box plots and histograms) and file types (.jpeg, .png, .tiff, .pdf). It will automatically cycle through all files within a directory in order, prompting the user for specific information as they go. It will also write calibration files (also containing processed data), into a special caldat/ folder within the directory. Importantly, as new files are added to a directory that has already been "completed", bulk_metaDigitise will recognize these unfinished files and only cycle through the digitisation of these new files. 
+#' metaDigitise can be used on a directory with a whole host of different figure (mean and error, scatter plots, box plots and histograms) and file types (.jpeg, .png, .tiff, .pdf). It will automatically cycle through all files within a directory in order, prompting the user for specific information as they go. It will also write calibration files (also containing processed data), into a special caldat/ folder within the directory. Importantly, as new files are added to a directory that has already been "completed", metaDigitise will recognize these unfinished files and only cycle through the digitisation of these new files. 
 #' @examples
-#' # data <- bulk_metaDigitise(dir = "./example_figs/", types = "diff", summary = TRUE)
+#' # data <- metaDigitise(dir = "./example_figs/", types = "diff", summary = TRUE)
 #' # summary(data)
 #' @return If type = "same" the function returns a dataframe with the relevant data for each figure being digitised. If type = "diff" it returns a list of the relevant data. If summary = TRUE a tidy version of the above is provided instead.
 #' @export
 
-metaDigitise<-function(dir){
+metaDigitise<-function(dir, summary = TRUE){
 	cat("Do you want to...\n")
 	Q <- menu(c("Process new images", "Import existing data", "Edit existing data"))
-	switch(Q, process_new_files(dir), import_metaDigitise(dir), bulk_edit(dir))
+	switch(Q, process_new_files(dir, summary = summary), import_metaDigitise(dir, summary = summary), bulk_edit(dir, summary = summary))
 }
 
 
+#' @title process_new_files
+#' @description Batch processes png files within a set directory, consolidates the data and exports the data for each image and type
+#' @param dir the path name to the directory / folder where the files are located
+#' @param summary summary = TRUE or FALSE is most relevant as it will print a simple summary statistics that are the same across all files
+#' @export
+process_new_files <- function(dir, summary = TRUE) {
 
-process_new_files <- function(dir, ...) {
+			       setup_calibration_dir(dir)
+	    details <- get_notDone_file_details(dir)
+	DoneDetails <- dir_details(dir)
+		   type <- user_options("Are all plot types the same? (diff/same)" , c("diff", "same"))
 	
-	type <- user_options("Are all plot tpyes the same? (diff/same)" , c("diff", "same"))
-			   setup_calibration_dir(dir)
-	details <- get_notDone_file_details(dir)
+	if(length(DoneDetails$calibrations) >= 1){
+		import_data <- import_metaDigitise(dir, summary = summary)
+	}
 
 	 plot_type <-  if (type == "diff") {NULL} else{ specify_type() }
 		 
@@ -37,7 +46,7 @@ process_new_files <- function(dir, ...) {
 		 	if(breakQ=="n") break
 		 }
 	
-		return(extract_digitised(data_list, types = type, ...))
+		return(list(import_data, extract_digitised(data_list, types = type, summary = summary)))
 }
 
 #' @title specify_type
@@ -118,8 +127,10 @@ get_notDone_file_details <- function(dir){
 	return(details)
 }
 
-
-
+#' @title dir_details
+#' @param dir the path name to the directory / folder where the files are located
+#' @description Function will gather important directory details about calibration files and figures needed for processing
+#' @export
 dir_details <- function(dir){
 	detail_list <- list()
 
