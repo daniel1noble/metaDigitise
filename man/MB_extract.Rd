@@ -4,16 +4,16 @@
 \alias{MB_extract}
 \title{groups_extract}
 \usage{
-MB_extract(plot_type, nGroups, entered_N, ...)
+MB_extract(edit = FALSE, plot_type, entered_N, raw_data = data.frame(), ...)
 }
 \arguments{
 \item{plot_type}{The type of plot}
 
-\item{nGroups}{number of groups}
-
 \item{entered_N}{ask for sample sizes?}
 
 \item{...}{further arguments to internal_redraw}
+
+\item{nGroups}{number of groups}
 }
 \description{
 Extraction of data from boxplots of mean_error plots, from multiple groups

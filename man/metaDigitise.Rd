@@ -4,19 +4,25 @@
 \alias{metaDigitise}
 \title{metaDigitise}
 \usage{
-metaDigitise(image_file, plot_type = NULL)
+metaDigitise(dir, summary = TRUE)
 }
 \arguments{
-\item{image_file}{Image file}
+\item{dir}{the path name to the directory / folder where the files are located}
 
-\item{plot_type}{Type of plot from "mean_error","boxplot","scatterplot" or"histogram". Function will prompt if not entered by user.}
+\item{types}{Argument specifying whether the types of images are the same (i.e., all scatter plots - "same") or a mixture of different plot types (i.e., scatter plots, means and se - "diff").}
+
+\item{...}{Other arguments called to metaDigitise. summary = TRUE or FALSE is most relevant as it will print a simple summary statistics that are the same across all files.}
 }
 \value{
-List of
+If type = "same" the function returns a dataframe with the relevant data for each figure being digitised. If type = "diff" it returns a list of the relevant data. If summary = TRUE a tidy version of the above is provided instead.
 }
 \description{
-Extracts points from a figure and generate summary statistics
+Batch processes png files within a set directory, consolidates the data and exports the data for each image and type
 }
-\author{
-Joel Pick
+\details{
+metaDigitise can be used on a directory with a whole host of different figure (mean and error, scatter plots, box plots and histograms) and file types (.jpeg, .png, .tiff, .pdf). It will automatically cycle through all files within a directory in order, prompting the user for specific information as they go. It will also write calibration files (also containing processed data), into a special caldat/ folder within the directory. Importantly, as new files are added to a directory that has already been "completed", metaDigitise will recognize these unfinished files and only cycle through the digitisation of these new files.
+}
+\examples{
+# data <- metaDigitise(dir = "./example_figs/", types = "diff", summary = TRUE)
+# summary(data)
 }
