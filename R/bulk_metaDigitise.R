@@ -124,8 +124,8 @@ dir_details <- function(dir){
 	detail_list <- list()
 
 		  detail_list$images <- list.files(dir, pattern = ".[pjt][dnip][fpg]*")
-		    detail_list$name <- gsub(".[pjt][dnip][fpg]*", "", images)
-	       detail_list$paths <- paste0(dir, images)
+		    detail_list$name <- gsub(".[pjt][dnip][fpg]*", "", detail_list$images)
+	       detail_list$paths <- paste0(dir, detail_list$images)
 	     detail_list$cal_dir <- paste0(dir, "caldat/")
 	detail_list$calibrations <- list.files(paste0(dir, "caldat/"))
 	detail_list$doneCalFiles <- paste0(detail_list$cal_dir, detail_list$calibrations)
