@@ -5,7 +5,7 @@
 #' @description Extraction of data from histograms
 histogram_extract <- function(edit=FALSE, raw_data = data.frame(), ...){
 
-	histQ <-  if(edit){ "b" }else{ "a" }
+	histQ <- if(edit){ "b" }else{ "a" }
 	i <- if(edit){ max(unique(raw_data$bar)) }else{ 0 }
 
 	while(histQ != "c"){
@@ -23,7 +23,7 @@ histogram_extract <- function(edit=FALSE, raw_data = data.frame(), ...){
 			raw_data <- subset(raw_data, bar != delQ)
 			internal_redraw(raw_data=raw_data,...)
 		}
-		histQ <- readline("Add, delete or continue? a/d/c ")
+		histQ <- readline("Add bar, delete bar or continue? a/d/c ")
 
 	}
 	return(raw_data)

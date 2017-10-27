@@ -38,7 +38,20 @@ user_options <- function(question, allowed_answers) {
 	return(input)
 }
 
+#' @title user_unique
+#' @param question question
+#' @param allowed_answers allowed answers
+#' @description asks user for option from specified list
 
+user_unique <- function(question, previous_answers) {
+	input_bad <- TRUE
+	while(input_bad){
+		input <- readline(question)
+		input_bad <- input %in% previous_answers
+		if(input_bad) cat("\n**** Response must be unique ****\n")
+	}
+	return(input)
+}
 
 #' @title user_numeric
 #' @param question question

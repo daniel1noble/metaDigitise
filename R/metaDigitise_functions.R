@@ -51,7 +51,7 @@ internal_digitise <- function(image_file, plot_type=NULL){
 
 	## error type
 	if(plot_type %in% c("mean_error")) {
-		output$error_type <- user_options("Type of error (se, CI95, sd): ", c("se","CI95","sd"))
+		output$error_type <- user_options("\nType of error (se, CI95, sd): ", c("se","CI95","sd"))
 	}
 
 	### calibrate and convert data
