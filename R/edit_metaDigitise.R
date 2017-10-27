@@ -1,3 +1,14 @@
+bulk_edit <- function(dir, summary){
+	
+
+	editQ <- menu(c("Cycle through images","Choose specific files to edit","Enter previously missed sample sizes"))
+
+	cat("In progress!!")
+#	switch(Q, process_new_files(dir), import_metaDigitise(dir), bulk_edit(dir))
+
+}
+
+
 
 #' @title edit_metaDigitise
 #' @description Function for editing previous data extraction through `metaDigitise`
@@ -42,14 +53,15 @@ edit_metaDigitise <- function(object){
 		plot(object)
 	}
 
-	### Number of groups
-	if(object$plot_type != "histogram"){
-		cat("\nNumber of Groups:", object$nGroups)
-		groupQ <- user_options("\nRe-enter number of groups (y/n) ", c("y","n")) 
-	if(groupQ=="y") {
-		object$nGroups <- user_count("\nNumber of groups: ")
-		}
-	}
+	# ### Number of groups
+	# if(object$plot_type != "histogram"){
+	# 	cat("\nNumber of Groups:", object$nGroups)
+	# 	groupQ <- user_options("\nEdit number of groups (y/n) ", c("y","n")) 
+	# if(groupQ=="y") {
+
+	# 	object$nGroups <- user_count("\nNumber of groups: ")
+	# 	}
+	# }
 	
 	### N entered? - how to do entering of sample size (also generally mean_error/boxplots)
 	# if(plot_type %in% c("mean_error","boxplot")) {
@@ -82,3 +94,19 @@ edit_metaDigitise <- function(object){
 
 
 }
+
+
+enter_N <- function(raw_data,...){
+	ids <- 	unique(raw_data$id)
+	for (i in ids){
+		raw_data[raw_data$id==i,"n"] <- user_count(paste("Group \"", i,"\": Enter sample size "))
+	}
+	return(raw_data)
+}
+
+
+bulk_enter_N <- function(){
+	## find files that have no entered N
+
+}
+

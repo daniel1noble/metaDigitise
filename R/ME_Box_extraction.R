@@ -23,43 +23,74 @@ single_MB_extract <- function(plot_type){
 #' @param entered_N ask for sample sizes?
 #' @param ... further arguments to internal_redraw
 #' @description Extraction of data from boxplots of mean_error plots, from multiple groups
-MB_extract <- function(plot_type, nGroups,entered_N,...){
+# MB_extract <- function(plot_type, nGroups,entered_N,...){
 
-	nRows <- ifelse(plot_type=="mean_error",2,5)
-	raw_data <- as.data.frame(matrix(NA, ncol=4, nrow=nGroups*nRows, dimnames=list(NULL, c("id","x","y","n"))))
+# 	nRows <- ifelse(plot_type=="mean_error",2,5)
+# 	raw_data <- as.data.frame(matrix(NA, ncol=4, nrow=nGroups*nRows, dimnames=list(NULL, c("id","x","y","n"))))
 	
-	for(i in 1:nGroups) {
-		rowStart <- (i-1)*nRows +1
-		rows<- rowStart:(rowStart+nRows-1)
-		add_removeQ <- "r"
-		while(add_removeQ=="r") {
+# 	for(i in 1:nGroups) {
+# 		rowStart <- (i-1)*nRows +1
+# 		rows<- rowStart:(rowStart+nRows-1)
+# 		add_removeQ <- "r"
+# 		while(add_removeQ=="r") {
 			
-			group_id <- readline(paste("\nGroup identifier",i,": "))
-			while(group_id %in% unique(raw_data$id)){group_id <- readline(paste("**** Group identifiers must be unique ****\nGroup identifier",i,": "))}
+# 			group_id <- user_unique(paste("\nGroup identifier",i,": "), unique(raw_data$id))
 
+# 			group_N <- if(entered_N){ user_count("\nGroup sample size: ") }else{ NA }
+
+# 			group_points <- single_MB_extract(plot_type)
+			
+# 			raw_data[rows,"id"] <- group_id
+# 			raw_data[rows,"x"] <- group_points$x
+# 			raw_data[rows,"y"] <- group_points$y
+# 			raw_data[rows,"n"] <- group_N
+
+# 			internal_redraw(plot_type=plot_type, raw_data=raw_data, ...)
+
+# 			if(plot_type=="boxplot" & group_points$y[1]<group_points$y[5]) warning("max is smaller than min", call. = FALSE, immediate. = TRUE)
+
+# 			add_removeQ <- user_options("\nReclick or Continue? r/c ", c("c","r"))
+			
+# 			if(add_removeQ=="r") {
+# 				internal_redraw(plot_type=plot_type, raw_data=raw_data[-rows,], ...)
+# 				raw_data[rows,"id"] <- NA
+# 			}		
+# 		}
+# 	}
+# 	return(raw_data)
+# }
+
+
+MB_extract <- function(edit=FALSE, plot_type, entered_N, raw_data = data.frame(), ...){
+
+	add_removeQ <- if(edit){ "b" }else{ "a" }
+#	i <- if(edit){ max(unique(raw_data$bar)) }else{ 0 }
+
+	while(add_removeQ != "c"){
+		
+		if(add_removeQ=="a"){
+#			i=i+1
+
+			group_id <- user_unique(paste("\nGroup identifier: "), unique(raw_data$id))
 			group_N <- if(entered_N){ user_count("\nGroup sample size: ") }else{ NA }
-
 			group_points <- single_MB_extract(plot_type)
+			raw_data <- rbind(raw_data, data.frame(id=group_id,x=group_points$x,y=group_points$y, n=group_N))
 			
-			raw_data[rows,"id"] <- group_id
-			raw_data[rows,"x"] <- group_points$x
-			raw_data[rows,"y"] <- group_points$y
-			raw_data[rows,"n"] <- group_N
+			internal_redraw(plot_type=plot_type, raw_data=raw_data,...)
 
-			internal_redraw(plot_type=plot_type, raw_data=raw_data, ...)
+			if(plot_type=="boxplot" & group_points$y[1]<group_points$y[5]) warning("max is smaller than min - consider deleting and re-adding group", call. = FALSE, immediate. = TRUE)
 
-			if(plot_type=="boxplot" & group_points$y[1]<group_points$y[5]) warning("max is smaller than min", call. = FALSE, immediate. = TRUE)
-
-			add_removeQ <- user_options("\nReclick or Continue? r/c", c("c","r"))
-			
-			if(add_removeQ=="r") {
-				internal_redraw(plot_type=plot_type, raw_data=raw_data[-rows,], ...)
-				raw_data[rows,"id"] <- NA
-			}		
 		}
+
+		if(add_removeQ=="d"){
+			delQ <- user_options("\nEnter a group id to delete (displayed beside bars) ", unique(raw_data$id)) 
+			raw_data <- subset(raw_data, id != delQ)
+			internal_redraw(plot_type=plot_type, raw_data=raw_data,...)
+		}
+		add_removeQ <- readline("Add group, delete group or continue? a/d/c ")
+
 	}
 	return(raw_data)
 }
-
 
 
