@@ -11,20 +11,17 @@
 #' @return If type = "same" the function returns a dataframe with the relevant data for each figure being digitised. If type = "diff" it returns a list of the relevant data. If summary = TRUE a tidy version of the above is provided instead.
 #' @export
 
-
-metaDigitise<-function(...){
-cat("Do you want to...")
-Q <- menu(c("Process new images", "Import existing data", "Edit existing data"))
-
-switch(Q, list(1= process_new_files(...), 2= import(...), 3=editmD(...)))
-
+metaDigitise<-function(dir){
+	cat("Do you want to...\n")
+	Q <- menu(c("Process new images", "Import existing data", "Edit existing data"))
+	switch(Q, process_new_files(dir), import_metaDigitise(dir), bulk_edit(dir))
 }
 
 
 
-process_new_files <- function(dir, types = c("diff", "same"), ...) {
+process_new_files <- function(dir, ...) {
 	
-	   type <- match.arg(types)
+	type <- user_options("Are all plot tpyes the same? (diff/same)" , c("diff", "same"))
 			   setup_calibration_dir(dir)
 	details <- get_notDone_file_details(dir)
 
@@ -33,10 +30,10 @@ process_new_files <- function(dir, types = c("diff", "same"), ...) {
 		 data_list <- list()
 
 		 for (i in 1:length(details$paths)) {
-			         data_list[[i]] <- metaDigitise(details$paths[i], plot_type = plot_type)	
+			         data_list[[i]] <- internal_digitise(details$paths[i], plot_type = plot_type)	
 			    names(data_list)[i] <- details$images[i]
 			 saveRDS(data_list[[i]], file = paste0(details$cal_dir, details$name[i]))
-			breakQ <-  user_options(paste("do you want continue:", length(details$paths)- i, "plots out of", length(details$paths), "plots remaining (y/n) "), c("y","n"))
+			breakQ <-  user_options(paste("Do you want continue:", length(details$paths)- i, "plots out of", length(details$paths), "plots remaining (y/n) "), c("y","n"))
 		 	if(breakQ=="n") break
 		 }
 	
