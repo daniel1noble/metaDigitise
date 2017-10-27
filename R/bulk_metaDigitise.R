@@ -100,27 +100,38 @@ setup_calibration_dir <- function(dir){
 #' @description Function will get a series of file information from the directory and the calibration files. It will also exclude files that have already been processed, as is judged by the match between file names in the calibration folder and the 
 get_notDone_file_details <- function(dir){
 	
-	      images <- list.files(dir, pattern = ".[pjt][dnip][fpg]*")
-	        name <- gsub(".[pjt][dnip][fpg]*", "", images)
-	       paths <- paste0(dir, images)
-	     cal_dir <- paste0(dir, "caldat/")
-	calibrations <- list.files(paste0(dir, "caldat/"))
+	      details <- dir_details(dir)
 
 	# Check whether there are new files still needing to be done.
 
-	if(length(calibrations) == length(name)) {
+	if(length(details$calibrations) == length(details$name)) {
 		stop("Congratulations! Looks like you have finished digitising all figures in this directory. If you haven't please delete files from the caldat/ folder and try again!", call. = FALSE)
 	}
 
 	# Find what files are already done. Remove these from our list
-	if (length(calibrations) >= 1){
-		done_figures <- match(calibrations, name)
+	if (length(details$calibrations) >= 1){
+		done_figures <- match(details$calibrations, details$name)
 	
 	# Remove the files that are already done.
-		images <- images[-done_figures]
-		  name <- name[-done_figures]
-		 paths <- paths[-done_figures]
+		details$images <- details$images[-done_figures]
+		  details$name <- details$name[-done_figures]
+		 details$paths <- details$paths[-done_figures]
 	}
 
-	return(list(images = images, name = name, paths = paths, cal_dir = cal_dir, calibrations = calibrations))
+	return(details)
+}
+
+
+
+dir_details <- function(dir){
+	detail_list <- list()
+
+		  detail_list$images <- list.files(dir, pattern = ".[pjt][dnip][fpg]*")
+		    detail_list$name <- gsub(".[pjt][dnip][fpg]*", "", images)
+	       detail_list$paths <- paste0(dir, images)
+	     detail_list$cal_dir <- paste0(dir, "caldat/")
+	detail_list$calibrations <- list.files(paste0(dir, "caldat/"))
+	detail_list$doneCalFiles <- paste0(detail_list$cal_dir, detail_list$calibrations)
+
+	return(detail_list)
 }
