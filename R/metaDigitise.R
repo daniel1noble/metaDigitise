@@ -50,7 +50,7 @@ process_new_files <- function(dir, summary = TRUE) {
 	if(summary == TRUE){
 		return(do.call(rbind, list(import_data, extract_digitised(data_list, types = type, summary = summary))))
 	}else{
-		return(do.call(c, list(import_data, extract_digitised(data_list, types = type, summary = summary))))
+		return(do.call(c, list(extract_digitised(import_data, types = type, summary = summary), extract_digitised(data_list, types = type, summary = summary))))
 	}
 
 }
