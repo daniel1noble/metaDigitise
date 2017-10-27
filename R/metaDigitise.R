@@ -1,19 +1,20 @@
 #' @title metaDigitise
-#' @description Batch processes png files within a set directory, consolidates the data and exports the data for each image and type
+#' @description Single or batch processes figures of .png, .jpg, .tiff, .pdf extensions within a set directory, consolidates the data and exports the data for each image and type
 #' @param dir the path name to the directory / folder where the files are located
-#' @param types Argument specifying whether the types of images are the same (i.e., all scatter plots - "same") or a mixture of different plot types (i.e., scatter plots, means and se - "diff").
-#' @param ... Other arguments called to metaDigitise. summary = TRUE or FALSE is most relevant as it will print a simple summary statistics that are the same across all files.
+#' @param summary whether the digitised data should be returned as a summary (TRUE) or as a concatenated list of similar types. 
 #' @details 
 #' metaDigitise can be used on a directory with a whole host of different figure (mean and error, scatter plots, box plots and histograms) and file types (.jpeg, .png, .tiff, .pdf). It will automatically cycle through all files within a directory in order, prompting the user for specific information as they go. It will also write calibration files (also containing processed data), into a special caldat/ folder within the directory. Importantly, as new files are added to a directory that has already been "completed", metaDigitise will recognize these unfinished files and only cycle through the digitisation of these new files. 
 #' @examples
-#' # data <- metaDigitise(dir = "./example_figs/", types = "diff", summary = TRUE)
+#' # data <- metaDigitise(dir = "./example_figs/", summary = TRUE)
 #' # summary(data)
-#' @return If type = "same" the function returns a dataframe with the relevant data for each figure being digitised. If type = "diff" it returns a list of the relevant data. If summary = TRUE a tidy version of the above is provided instead.
+#' @return A data frame or list containing the raw digitised data or the processed, summary statistics from the digitised data
 #' @export
 
 metaDigitise<-function(dir, summary = TRUE){
 	cat("Do you want to...\n")
+	
 	Q <- menu(c("Process new images", "Import existing data", "Edit existing data"))
+	
 	switch(Q, process_new_files(dir, summary = summary), import_metaDigitise(dir, summary = summary), bulk_edit(dir, summary = summary))
 }
 
@@ -30,7 +31,7 @@ process_new_files <- function(dir, summary = TRUE) {
 	DoneDetails <- dir_details(dir)
 		   type <- user_options("Are all plot types the same? (diff/same)" , c("diff", "same"))
 	
-	if(length(DoneDetails$calibrations) >= 1){
+	if(length(DoneDetails$calibrations) >= 1){	
 		import_data <- import_metaDigitise(dir, summary = summary)
 	}
 
@@ -46,7 +47,12 @@ process_new_files <- function(dir, summary = TRUE) {
 		 	if(breakQ=="n") break
 		 }
 	
-		return(list(import_data, extract_digitised(data_list, types = type, summary = summary)))
+	if(summary == TRUE){
+		return(do.call(rbind, list(import_data, extract_digitised(data_list, types = type, summary = summary))))
+	}else{
+		return(do.call(c, list(import_data, extract_digitised(data_list, types = type, summary = summary))))
+	}
+
 }
 
 #' @title specify_type

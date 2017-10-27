@@ -7,21 +7,26 @@
 
 import_metaDigitise <- function(dir, summary = TRUE ) {
 	
-	details <- dir_details(dir)
+	    details <- dir_details(dir)
 
 	    metaDig <- lapply(details$doneCalFiles, function(x) readRDS(x))
-	plot_types <- length(unique(lapply(metaDig, function(x) x$plot_type)))
+	 plot_types <- length(unique(lapply(metaDig, function(x) x$plot_type)))
 
 	if(summary == TRUE){
+	
 		import <- do.call(rbind,lapply(metaDig, function(x) summary(x)))
+	
 	} else{
 		if(plot_types > 1){
+	
 			import <- lapply(metaDig, function(x) x$processed_data)
 			names(import) <- do.call(rbind, lapply(metaDig, function(x) filename(x$image_file)))
+
 		} else {
+	
 			import <- do.call(rbind, lapply(metaDig, function(x) x$processed_data))
+	
 		}
 	}
-
 	return(import)
 }
