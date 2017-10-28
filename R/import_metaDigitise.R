@@ -16,8 +16,9 @@ import_metaDigitise <- function(dir, summary = TRUE ) {
 		import <- do.call(rbind,lapply(metaDig, function(x) summary(x)))
 	
 	} else{
-		import <- lapply(metaDig, function(x) x$processed_data)
- names(import) <- do.call(rbind, lapply(metaDig, function(x) filename(x$image_file)))
+		tmp <- lapply(metaDig, function(x) x$processed_data)
+ names(tmp) <- do.call(rbind, lapply(metaDig, function(x) filename(x$image_file)))
+ 		import <- order_lists(tmp, plot_types = plot_types)
 	}
 
 	return(import)
@@ -46,6 +47,8 @@ order_lists <- function(list, plot_types){
 	   boxplot <- import[match("boxplot", unlist(plot_types),  nomatch = FALSE)]
 	      hist <- import[match("histogram", unlist(plot_types),  nomatch = FALSE)]
 
-return(list(mean_error = mean_error, boxplot=boxplot, hist=hist, scatterplot=scatterplot))
+	dat_list <- as.list(c(mean_error = mean_error, boxplot=boxplot, hist=hist, scatterplot=scatterplot))
+
+return(dat_list)
 
 }

@@ -55,7 +55,7 @@ process_new_files <- function(dir, summary = TRUE) {
 	if(summary == TRUE){
 		return(do.call(rbind, list(import_data, extract_digitised(data_list, types = type, summary = summary))))
 	}else{
-		return(order_lists(c(import_data, extract_digitised(data_list, types = type, summary = summary)), plot_types = plot_type))
+		return(order_lists(c(import_data, data_list), plot_types = plot_type))
 	}
 
 }
