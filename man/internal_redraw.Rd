@@ -32,10 +32,6 @@ internal_redraw(image_file, flip = FALSE, rotate = 0, plot_type = NULL,
 \item{points}{logical, should points be redrawn}
 
 \item{...}{further arguments passed to or from other methods.}
-
-\item{image_details}{image_details}
-
-\item{return_image}{return_image object}
 }
 \description{
 Redraws figure and extraction data

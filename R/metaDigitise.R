@@ -52,7 +52,7 @@ process_new_files <- function(dir, summary = TRUE) {
 		plot_type <- c(done_plot_types, complete_plot_types)
 
 	if(summary == TRUE){
-		return(do.call(rbind, list(summary(done_objects), summary(data_list)))
+		return(do.call(rbind, list(summary(done_objects), summary(data_list))))
 	}else{
 			done_figs <- extract_digitised(done_objects, types = plot_types, summary = summary)
 			new_figs <- extract_digitised(data_list, types = plot_types, summary = summary)
