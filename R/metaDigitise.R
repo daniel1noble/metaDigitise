@@ -27,15 +27,16 @@ metaDigitise<-function(dir, summary = TRUE){
 process_new_files <- function(dir, summary = TRUE) {
 
 			       setup_calibration_dir(dir)
-	    details <- get_notDone_file_details(dir)
-	DoneDetails <- dir_details(dir)
+	     details <- get_notDone_file_details(dir)
+	done_details <- load_metaDigitise(details$doneCalFiles)
+	done_plot_types <- lapply(done_details, function(x) x$plot_type)
 		   type <- user_options("Are all plot types the same? (diff/same)" , c("diff", "same"))
 	
-	if(length(DoneDetails$calibrations) >= 1){	
+	if(length(done_details$calibrations) >= 1){	
 		import_data <- import_metaDigitise(dir, summary = summary)
 	}
 
-	 plot_type <-  if (type == "diff") {NULL} else{ specify_type() }
+	 plot_type <-  if (type == "diff") {NULL} else { specify_type() }
 		 
 		 data_list <- list()
 
@@ -47,10 +48,14 @@ process_new_files <- function(dir, summary = TRUE) {
 		 	if(breakQ=="n") break
 		 }
 	
+		complete_plot_types <- lapply(data_list, function(x) x$plot_type)
+
+		plot_type <- c(done_plot_types, complete_plot_types)
+
 	if(summary == TRUE){
 		return(do.call(rbind, list(import_data, extract_digitised(data_list, types = type, summary = summary))))
 	}else{
-		return(do.call(c, list(extract_digitised(import_data, types = type, summary = summary), extract_digitised(data_list, types = type, summary = summary))))
+		return(order_lists(c(import_data, extract_digitised(data_list, types = type, summary = summary)), plot_types = plot_type))
 	}
 
 }
@@ -61,9 +66,11 @@ process_new_files <- function(dir, summary = TRUE) {
 #' @export
 
 specify_type <- function(){
-	 	# keeps asking the user the question until the input is one of the options
-	 	pl_type <- user_options("\nPlease specify the plot_type as either: mean and error, box plot, scatter plot or histogram m/b/s/h: ", c("m","b","s","h"))
-
+		#user enters numeric value to specify the plot BEFORE moving on
+	 	pl_type <- NA
+	 	#while keeps asking the user the question until the input is one of the options
+		while(!pl_type %in% c("m","b","s","h")) pl_type <- readline("Please specify the plot_type as either: mean and error, box plot, scatter plot or histogram m/b/s/h: ")
+	
 	 	plot_type <- ifelse(pl_type == "m", "mean_error", ifelse(pl_type == "b", "boxplot",ifelse(pl_type == "s", "scatterplot","histogram")))
 	
 	return(plot_type)
