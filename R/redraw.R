@@ -30,13 +30,16 @@ redraw_calibration <- function(plot_type, variable, calpoints,point_vals,image_d
 
 	lines(calpoints[1:2,], col=cal_col, lwd=2)
 	text(calpoints$x[1:2] - rep(x_shift, 2), calpoints$y[1:2], point_vals[1:2], col=cal_col, cex=text_cex)
-	text(mean(calpoints$x[1:2]) - x_shift*1.5, mean(calpoints$y[1:2]), variable["y"], col=cal_col, cex=text_cex, srt=90)
-	
+	if(plot_type=="histogram"){
+		text(mean(calpoints$x[3:4]), mean(calpoints$y[3:4]) - y_shift*1.5, variable[1], col=cal_col, cex=text_cex)
+	}else{	
+		text(mean(calpoints$x[1:2]) - x_shift*1.5, mean(calpoints$y[1:2]), variable[1], col=cal_col, cex=text_cex, srt=90)
+		}
 
 	if(!plot_type %in% c("mean_error","boxplot")){
 		lines(calpoints[3:4,], col=cal_col, lwd=2)
 		text(calpoints$x[3:4], calpoints$y[3:4] - rep(y_shift, 2), point_vals[3:4], col=cal_col, cex=text_cex)
-		text(mean(calpoints$x[3:4]), mean(calpoints$y[3:4]) - y_shift*1.5, variable["x"], col=cal_col, cex=text_cex)
+		text(mean(calpoints$x[3:4]), mean(calpoints$y[3:4]) - y_shift*1.5, variable[2], col=cal_col, cex=text_cex)
 	}
 }
 
