@@ -9,7 +9,7 @@ user_unique(question, previous_answers)
 \arguments{
 \item{question}{question}
 
-\item{allowed_answers}{allowed answers}
+\item{previous_answers}{allowed answers}
 }
 \description{
 asks user for option from specified list

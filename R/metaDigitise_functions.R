@@ -33,10 +33,10 @@ internal_digitise <- function(image_file, plot_type=NULL){
 	output$calpoints <- cal$calpoints
 	output$point_vals <- cal$point_vals
 
-	### Number of groups
-	if(plot_type != "histogram"){
-		output$nGroups <- user_count("\nNumber of groups: ")
-	}
+	# ### Number of groups
+	# if(plot_type != "histogram"){
+	# 	output$nGroups <- user_count("\nNumber of groups: ")
+	# }
 
 	### N entered?
 	if(plot_type %in% c("mean_error","boxplot")) {
@@ -75,7 +75,7 @@ internal_digitise <- function(image_file, plot_type=NULL){
 print.metaDigitise <- function(x, ...){
 	cat(paste("Data extracted from:\n", x$image_file,"\n"))
 	cat(paste0("Figure", ifelse(x$flip, " flipped and ", " "), "rotated ", x$rotate, " degrees"),"\n")
-	cat(paste("Figure identified as", x$plot_type, "with", x$nGroups, "groups","\n"))
+	cat(paste("Figure identified as", x$plot_type, "with", length(unique(x$raw_data$id)), "groups","\n"))
 }
 
 

@@ -4,12 +4,10 @@
 \alias{group_scatter_extract}
 \title{group_scatter_extract}
 \usage{
-group_scatter_extract(edit = FALSE, nGroups, raw_data = data.frame(), ...)
+group_scatter_extract(edit = FALSE, raw_data = data.frame(), ...)
 }
 \arguments{
 \item{edit}{logical; whether in edit mode}
-
-\item{nGroups}{The number of groups}
 
 \item{raw_data}{raw data}
 

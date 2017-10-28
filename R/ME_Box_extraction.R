@@ -21,7 +21,6 @@ single_MB_extract <- function(plot_type){
 #' @title MB_extract
 #' @param edit logical; whether in edit mode 
 #' @param plot_type The type of plot
-##' @param nGroups number of groups
 #' @param entered_N ask for sample sizes?
 #' @param raw_data raw data
 #' @param ... further arguments to internal_redraw

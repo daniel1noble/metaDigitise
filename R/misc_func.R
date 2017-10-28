@@ -40,7 +40,7 @@ user_options <- function(question, allowed_answers) {
 
 #' @title user_unique
 #' @param question question
-#' @param allowed_answers allowed answers
+#' @param previous_answers allowed answers
 #' @description asks user for option from specified list
 
 user_unique <- function(question, previous_answers) {

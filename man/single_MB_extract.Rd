@@ -2,7 +2,7 @@
 % Please edit documentation in R/ME_Box_extraction.R
 \name{single_MB_extract}
 \alias{single_MB_extract}
-\title{single_group_extract}
+\title{single_MB_extract}
 \usage{
 single_MB_extract(plot_type)
 }

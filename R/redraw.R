@@ -80,12 +80,12 @@ redraw_points <- function(plot_type,raw_data,image_details){
 
 #		for(i in 1:nGroups){
 #			group_data <- subset(raw_data,id==group_id[i])
-		points(y~x,raw_data, pch=raw_data$pch, col=raw_data$col)
+		points(y~x,raw_data, pch=raw_data$pch, col=as.character(raw_data$col))
 
 		#legend
-		points(rep(legend_gap/2,nGroups) + legend_gap*((1:nGroups)-1), -legend_pos*2.5, col=unique(raw_data$cols), pch=unique(raw_data$pch),xpd=TRUE)
-		text(legend_gap/2 + legend_gap*(i-1), -legend_pos, group_id[i], col=cols[i],xpd=TRUE)
-		text(legend_gap/2 + legend_gap*(i-1), -legend_pos*5, paste("n =",nrow(raw_data)), col=cols[i],xpd=TRUE)
+		# points(rep(legend_gap/2,nGroups) + legend_gap*((1:nGroups)-1), -legend_pos*2.5, col=unique(raw_data$cols), pch=unique(raw_data$pch),xpd=TRUE)
+		# text(legend_gap/2 + legend_gap*(i-1), -legend_pos, group_id[i], col=cols[i],xpd=TRUE)
+		# text(legend_gap/2 + legend_gap*(i-1), -legend_pos*5, paste("n =",nrow(raw_data)), col=cols[i],xpd=TRUE)
 #		}		
 	}
 

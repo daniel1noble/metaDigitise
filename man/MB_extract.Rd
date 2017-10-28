@@ -2,18 +2,20 @@
 % Please edit documentation in R/ME_Box_extraction.R
 \name{MB_extract}
 \alias{MB_extract}
-\title{groups_extract}
+\title{MB_extract}
 \usage{
 MB_extract(edit = FALSE, plot_type, entered_N, raw_data = data.frame(), ...)
 }
 \arguments{
+\item{edit}{logical; whether in edit mode}
+
 \item{plot_type}{The type of plot}
 
 \item{entered_N}{ask for sample sizes?}
 
-\item{...}{further arguments to internal_redraw}
+\item{raw_data}{raw data}
 
-\item{nGroups}{number of groups}
+\item{...}{further arguments to internal_redraw}
 }
 \description{
 Extraction of data from boxplots of mean_error plots, from multiple groups
