@@ -25,7 +25,7 @@ Otherwise chose continue\n
 	flip=FALSE
 	rotate=0
 
-	internal_redraw(image_file, flip = flip,rotate = rotate)
+	internal_redraw(image_file, flip = flip, rotate = rotate)
 
 	rotateQ <- "a"
 	while(rotateQ != "c") {
@@ -44,15 +44,14 @@ Otherwise chose continue\n
 			
 			f <- atan2(y.dist, x.dist) * 180/pi
 			rotate <- rotate + f
-			internal_redraw(image_file, flip = flip,rotate = rotate)	
+			internal_redraw(image_file, flip = flip, rotate = rotate)	
 		}
 		rotateQ <- readline("Flip, rotate or continue f/r/c ")
 	}
 
-	image <- internal_redraw(image_file, flip = flip, rotate = rotate, return_image=TRUE)
-	image_details <- c(width = magick::image_info(image)["width"][[1]], height = magick::image_info(image)["height"][[1]])
+	internal_redraw(image_file, flip = flip, rotate = rotate)
 
-	out <- list(flip=flip, rotate=rotate, image_details=image_details)
+	out <- list(flip=flip, rotate=rotate)
 
 	return(out)
 }
