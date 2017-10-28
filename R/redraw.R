@@ -74,17 +74,19 @@ redraw_points <- function(plot_type,raw_data,image_details){
 	if(plot_type=="scatterplot"& nrow(raw_data)>0){
 		group_id <- unique(raw_data$id)
 		nGroups <- length(group_id)
-		cols <- rep(c("red", "green", "purple"),length.out=nGroups)
-		pchs <- rep(rep(c(19, 17, 15),each=3),length.out=nGroups)
+#		cols <- rep(c("red", "green", "purple"),length.out=nGroups)
+#		pchs <- rep(rep(c(19, 17, 15),each=3),length.out=nGroups)
 		legend_gap <- image_width/nGroups
 
-		for(i in 1:nGroups){
-			group_data <- subset(raw_data,id==group_id[i])
-			points(y~x,group_data, pch=pchs[i], col=cols[i])
-			points(legend_gap/2 + legend_gap*(i-1), -legend_pos*2.5, col=cols[i], pch=pchs[i],xpd=TRUE)
-			text(legend_gap/2 + legend_gap*(i-1), -legend_pos, group_id[i], col=cols[i],xpd=TRUE)
-			text(legend_gap/2 + legend_gap*(i-1), -legend_pos*5, paste("n =",nrow(group_data)), col=cols[i],xpd=TRUE)
-		}		
+#		for(i in 1:nGroups){
+#			group_data <- subset(raw_data,id==group_id[i])
+		points(y~x,raw_data, pch=raw_data$pch, col=raw_data$col)
+
+		#legend
+		points(rep(legend_gap/2,nGroups) + legend_gap*((1:nGroups)-1), -legend_pos*2.5, col=unique(raw_data$cols), pch=unique(raw_data$pch),xpd=TRUE)
+		text(legend_gap/2 + legend_gap*(i-1), -legend_pos, group_id[i], col=cols[i],xpd=TRUE)
+		text(legend_gap/2 + legend_gap*(i-1), -legend_pos*5, paste("n =",nrow(raw_data)), col=cols[i],xpd=TRUE)
+#		}		
 	}
 
 	if(plot_type=="histogram"& nrow(raw_data)>0){

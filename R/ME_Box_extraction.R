@@ -67,27 +67,22 @@ single_MB_extract <- function(plot_type){
 MB_extract <- function(edit=FALSE, plot_type, entered_N, raw_data = data.frame(), ...){
 
 	add_removeQ <- if(edit){ "b" }else{ "a" }
-#	i <- if(edit){ max(unique(raw_data$bar)) }else{ 0 }
 
 	while(add_removeQ != "c"){
 		
 		if(add_removeQ=="a"){
-#			i=i+1
-
 			group_id <- user_unique(paste("\nGroup identifier: "), unique(raw_data$id))
 			group_N <- if(entered_N){ user_count("\nGroup sample size: ") }else{ NA }
 			group_points <- single_MB_extract(plot_type)
 			raw_data <- rbind(raw_data, data.frame(id=group_id,x=group_points$x,y=group_points$y, n=group_N))
-			
-			internal_redraw(plot_type=plot_type, raw_data=raw_data,...)
 		}
 
 		if(add_removeQ=="d"){
 			delQ <- user_options("\nEnter a group id to delete (displayed beside bars) ", unique(raw_data$id)) 
 			raw_data <- subset(raw_data, id != delQ)
-			internal_redraw(plot_type=plot_type, raw_data=raw_data,...)
 		}
-		
+
+		internal_redraw(plot_type=plot_type, raw_data=raw_data,...)
 		add_removeQ <- readline("Add group, delete group or continue? a/d/c ")
 
 	}

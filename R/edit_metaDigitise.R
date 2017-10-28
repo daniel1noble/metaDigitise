@@ -30,14 +30,14 @@ bulk_edit <- function(dir, summary=TRUE){
 # list files
 	if(Q==2){
 		editQ<-"y"
-		while(editQ =="y"){
+		while(editQ !="n"){
 			cat("\n\n")
 			cat_matrix(files, 3)
 			edit_file <- user_options("\nSelect number of file to edit ", 1:length(files))
 			object <- readRDS(filepaths[as.numeric(edit_file)])
 			object <- edit_metaDigitise(object)
 			saveRDS(object, file=filepaths[edit_file])
-			editQ <- user_options("\nEdit more file? y/n ", c("y","n"))
+			editQ <- readline("\nEdit more files? y/n ")
 		}
 	}
 
