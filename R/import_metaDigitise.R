@@ -18,7 +18,7 @@ import_metaDigitise <- function(dir, summary = TRUE ) {
 	} else{
 		tmp <- lapply(metaDig, function(x) x$processed_data)
  names(tmp) <- do.call(rbind, lapply(metaDig, function(x) filename(x$image_file)))
- 		import <- order_lists(tmp, plot_types = plot_types)
+ 	 import <- order_lists(tmp, plot_types = plot_types)
 	}
 
 	return(import)
@@ -30,7 +30,9 @@ import_metaDigitise <- function(dir, summary = TRUE ) {
 #' @return Returns a list of metaDigitised objects that have already been completed
 
 load_metaDigitise <- function(doneCalFiles){
+	details <- get_notDone_file_details(dir)
 	metaDig <- lapply(doneCalFiles, function(x) readRDS(x))
+	names(metaDig) <- details$calibrations
 	return(metaDig)
 }
 
@@ -42,10 +44,10 @@ load_metaDigitise <- function(doneCalFiles){
 
 order_lists <- function(list, plot_types){
 
-	mean_error <- import[match("mean_error", unlist(plot_types), nomatch = TRUE)]
-   scatterplot <- import[match("scatterplot", unlist(plot_types),  nomatch = FALSE)]
-	   boxplot <- import[match("boxplot", unlist(plot_types),  nomatch = FALSE)]
-	      hist <- import[match("histogram", unlist(plot_types),  nomatch = FALSE)]
+	mean_error <- list[match("mean_error", unlist(plot_types), nomatch = TRUE)]
+   scatterplot <- list[match("scatterplot", unlist(plot_types),  nomatch = FALSE)]
+	   boxplot <- list[match("boxplot", unlist(plot_types),  nomatch = FALSE)]
+	      hist <- list[match("histogram", unlist(plot_types),  nomatch = FALSE)]
 
 	dat_list <- as.list(c(mean_error = mean_error, boxplot=boxplot, hist=hist, scatterplot=scatterplot))
 
