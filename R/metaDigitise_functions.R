@@ -31,10 +31,6 @@ internal_digitise <- function(image_file, plot_type=NULL){
 	output$calpoints <- cal$calpoints
 	output$point_vals <- cal$point_vals
 
-	# ### Number of groups
-	# if(plot_type != "histogram"){
-	# 	output$nGroups <- user_count("\nNumber of groups: ")
-	# }
 
 	### N entered?
 	if(plot_type %in% c("mean_error","boxplot")) {

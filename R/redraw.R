@@ -78,7 +78,7 @@ redraw_points <- function(plot_type,raw_data,image_details){
 		points(y~x,raw_data, pch=raw_data$pch, col=as.character(raw_data$col))
 
 	#legend
-		legend_dat <- aggregate(x~id+col+pch+group,dat2$raw_data, length)
+		legend_dat <- aggregate(x~id+col+pch+group,raw_data, length)
 		nGroups <- nrow(legend_dat)
 		legend_x <- (image_width/nGroups)/2 + (image_width/nGroups)*((1:nGroups)-1)
 
@@ -115,6 +115,8 @@ redraw_points <- function(plot_type,raw_data,image_details){
 #' @param return_image return_image object
 #' @param ... further arguments passed to or from other methods.
 #' @description Redraws figure and extraction data
+
+
 
 #image_file, flip, rotate, image_details, plot_type, calpoints, point_vals, raw_data
 
