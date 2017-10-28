@@ -27,21 +27,20 @@ metaDigitise<-function(dir, summary = TRUE){
 process_new_files <- function(dir, summary = TRUE) {
 
 			       setup_calibration_dir(dir)
-	     details <- get_notDone_file_details(dir)
-	done_details <- load_metaDigitise(details$doneCalFiles)
-	done_plot_types <- lapply(done_details, function(x) x$plot_type)
+	     done_details <- get_notDone_file_details(dir)
 		   type <- user_options("Are all plot types the same? (diff/same)" , c("diff", "same"))
 	
 	if(length(done_details$calibrations) >= 1){	
-		import_data <- import_metaDigitise(dir, summary = summary)
+		done_objects <- load_metaDigitise(details$doneCalFiles)
+		done_plot_types <- lapply(done_objects, function(x) x$plot_type)
 	}
 
-	 plot_type <-  if (type == "diff") {NULL} else { specify_type() }
+	 plot_types <-  if (type == "diff") {NULL} else { specify_type() }
 		 
 		 data_list <- list()
 
 		 for (i in 1:length(details$paths)) {
-			         data_list[[i]] <- internal_digitise(details$paths[i], plot_type = plot_type)	
+			         data_list[[i]] <- internal_digitise(details$paths[i], plot_type = plot_types)	
 			    names(data_list)[i] <- details$images[i]
 			 saveRDS(data_list[[i]], file = paste0(details$cal_dir, details$name[i]))
 			breakQ <-  user_options(paste("Do you want continue:", length(details$paths)- i, "plots out of", length(details$paths), "plots remaining (y/n) "), c("y","n"))
@@ -53,9 +52,11 @@ process_new_files <- function(dir, summary = TRUE) {
 		plot_type <- c(done_plot_types, complete_plot_types)
 
 	if(summary == TRUE){
-		return(do.call(rbind, list(import_data, extract_digitised(data_list, types = type, summary = summary))))
+		return(do.call(rbind, list(summary(done_objects), summary(data_list))))
 	}else{
-		return(order_lists(c(import_data, data_list), plot_types = plot_type))
+			done_figs <- extract_digitised(done_objects, types = plot_types, summary = summary)
+			new_figs <- extract_digitised(data_list, types = plot_types, summary = summary)
+		return(order_lists(c(done_figs, new_figs), plot_types = plot_type))
 	}
 
 }

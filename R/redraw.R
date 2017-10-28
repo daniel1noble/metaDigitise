@@ -103,7 +103,6 @@ redraw_points <- function(plot_type,raw_data,image_details){
 #' @param image_file Image filename
 #' @param flip whether to flip figure
 #' @param rotate how much to rotate figure
-#' @param image_details image_details
 #' @param plot_type plot_type
 #' @param variable variable
 #' @param calpoints The calibration points
@@ -112,7 +111,6 @@ redraw_points <- function(plot_type,raw_data,image_details){
 #' @param rotation logical, should figure be rotated
 #' @param calibration logical, should calibration be redrawn
 #' @param points logical, should points be redrawn
-#' @param return_image return_image object
 #' @param ... further arguments passed to or from other methods.
 #' @description Redraws figure and extraction data
 
