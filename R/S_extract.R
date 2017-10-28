@@ -23,18 +23,18 @@ edit_group <- function(raw_data, group_id,...){
 	cols <- rep(c("red", "green", "purple"),length.out=90)
 	pchs <- rep(rep(c(19, 17, 15),each=3),length.out=90)
 
-	if(is.null(group_id)) {
+	if(!is.null(group_id)) {
+		group_data <- data.frame()
+		i <- if(nrow(raw_data)==0){ 1 }else{ max(raw_data$group) + 1 }
+		add_removeQ <- "a"
+	}else{
 		group_id <- unique(raw_data$id)[ menu(unique(raw_data$id)) ]
 		group_data <- subset(raw_data, id==group_id)
 		i <- unique(group_data$group)
 		add_removeQ <- "b"
-	}else{
-		group_data <- data.frame()
-		i <- if(nrow(raw_data)==0){ 1 }else{ max(raw_data$group) + 1 }
-		add_removeQ <- "a"
+		raw_data <- subset(raw_data, id != group_id)
 	}
 	
-	raw_data <- subset(raw_data, id != group_id)
 
 	while(add_removeQ!="c"){
 
@@ -80,16 +80,18 @@ group_scatter_extract <- function(edit=FALSE, raw_data = data.frame(), ...){
     " - quartz/OS X: hit ESC\n",
     sep = "\n\n")
 
-
 	editQ <- if(edit){ "b" }else{ "a" }
 
 	while(editQ != "f"){
 	
-		# ids <- unique(raw_data$id)
 		group_id <- NULL
 
 		if(editQ=="a"){
-			group_id <- user_unique(paste("\nGroup identifier: "), unique(raw_data$id))
+			if(nrow(raw_data)==0){
+				group_id <- readline("\nGroup identifier: ")
+			}else{
+				group_id <- user_unique("\nGroup identifier: ", unique(raw_data$id))
+			}
 			editQ <- "e"
 		}
 

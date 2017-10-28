@@ -72,21 +72,17 @@ redraw_points <- function(plot_type,raw_data,image_details){
 	}
 
 	if(plot_type=="scatterplot"& nrow(raw_data)>0){
-		group_id <- unique(raw_data$id)
-		nGroups <- length(group_id)
-#		cols <- rep(c("red", "green", "purple"),length.out=nGroups)
-#		pchs <- rep(rep(c(19, 17, 15),each=3),length.out=nGroups)
-		legend_gap <- image_width/nGroups
-
-#		for(i in 1:nGroups){
-#			group_data <- subset(raw_data,id==group_id[i])
 		points(y~x,raw_data, pch=raw_data$pch, col=as.character(raw_data$col))
 
-		#legend
-		# points(rep(legend_gap/2,nGroups) + legend_gap*((1:nGroups)-1), -legend_pos*2.5, col=unique(raw_data$cols), pch=unique(raw_data$pch),xpd=TRUE)
-		# text(legend_gap/2 + legend_gap*(i-1), -legend_pos, group_id[i], col=cols[i],xpd=TRUE)
-		# text(legend_gap/2 + legend_gap*(i-1), -legend_pos*5, paste("n =",nrow(raw_data)), col=cols[i],xpd=TRUE)
-#		}		
+	#legend
+		legend_dat <- aggregate(x~id+col+pch+group,dat2$raw_data, length)
+		nGroups <- nrow(legend_dat)
+		legend_x <- (image_width/nGroups)/2 + (image_width/nGroups)*((1:nGroups)-1)
+
+		 points(legend_x, rep(-legend_pos*2.5,nGroups), 
+		 	col=as.character(legend_dat$col), pch=legend_dat$pch, xpd=TRUE)
+		 text(legend_x, rep(-legend_pos,nGroups), legend_dat$id, col=as.character(legend_dat$col),xpd=TRUE)
+		 text(legend_x, rep(-legend_pos*5,nGroups), paste("n =",legend_dat$x), col=as.character(legend_dat$col),xpd=TRUE)
 	}
 
 	if(plot_type=="histogram"& nrow(raw_data)>0){
@@ -99,7 +95,7 @@ redraw_points <- function(plot_type,raw_data,image_details){
 	}
 }
 
-
+unique(dat2$raw_data$pch)
 
 #' @title internal_redraw
 #' @param image_file Image filename
