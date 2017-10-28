@@ -8,7 +8,7 @@ bulk_edit <- function(dir, summary=TRUE){
 	cat("Choose how you want to edit files:\n")
 	Q <- menu(c("Cycle through images","Choose specific file to edit","Enter previously omitted sample sizes"))
 
-	#list caldat_files
+#list caldat_files
 	caldat <- dir_details(dir)
 	filepaths <- caldat$doneCalFiles
 	files <- caldat$calibrations
@@ -43,16 +43,48 @@ bulk_edit <- function(dir, summary=TRUE){
 
 # enter_N
 	if(Q==3){
-		cat("In progress!!")
+		needed <- N_needed(filepaths)
+		if(sum(needed)==0) {
+			cat("\n**** No files need N ****\n\n\n")
+		}else{
+			N_files <- filenames(needed)
+			for(i in N_files){
+				object <- readRDS(i)
+				plot(object)
+				object$raw_data <- enter_N(object$raw_data)
+				saveRDS(object, file=i)
+			}
+		}
 	}
 
 ## finish by importing data 
 	import_metaDigitise(dir=dir, summary=summary)
 }
 
-#dir="~/Dropbox/0_postdoc/8_PR repeat/shared/extracted graphs/"
 
-#bulk_edit("~/Dropbox/0_postdoc/8_PR repeat/shared/extracted graphs/",summary=TRUE)
+
+N_needed <- function(filepaths){
+	metaDig <- load_metaDigitise(filepaths)
+	no_N <- !sapply(metaDig, function(x) x$entered_N)
+	return(no_N)
+}
+
+
+#' @title enter_N
+#' @description ...
+#' @param raw_data raw_data
+#' @param ... ...
+#' @author Joel Pick
+
+enter_N <- function(raw_data,...){
+	ids <- 	unique(raw_data$id)
+	for (i in ids){
+		raw_data[raw_data$id==i,"n"] <- user_count(paste("Group \"", i,"\": Enter sample size "))
+	}
+	return(raw_data)
+}
+
+
 
 
 
@@ -99,24 +131,6 @@ edit_metaDigitise <- function(object){
 		object$point_vals <- cal$point_vals
 		plot(object)
 	}
-
-	# ### Number of groups
-	# if(object$plot_type != "histogram"){
-	# 	cat("\nNumber of Groups:", object$nGroups)
-	# 	groupQ <- user_options("\nEdit number of groups (y/n) ", c("y","n")) 
-	# if(groupQ=="y") {
-
-	# 	object$nGroups <- user_count("\nNumber of groups: ")
-	# 	}
-	# }
-	
-	### N entered? - how to do entering of sample size (also generally mean_error/boxplots)
-	# if(plot_type %in% c("mean_error","boxplot")) {
-	# 	askN <- user_options("\nEnter sample sizes? y/n ",c("y","n"))
-	# 	output$entered_N <- ifelse(askN =="y", TRUE, FALSE)
-	# }else{
-	# 	output$entered_N <- TRUE
-	# }
 		
 	### Extract data
 	extractQ <- user_options("\nRe-extract data (y/n) ", c("y","n")) 
@@ -142,18 +156,4 @@ edit_metaDigitise <- function(object){
 
 }
 
-
-enter_N <- function(raw_data,...){
-	ids <- 	unique(raw_data$id)
-	for (i in ids){
-		raw_data[raw_data$id==i,"n"] <- user_count(paste("Group \"", i,"\": Enter sample size "))
-	}
-	return(raw_data)
-}
-
-
-bulk_enter_N <- function(){
-	## find files that have no entered N
-
-}
 

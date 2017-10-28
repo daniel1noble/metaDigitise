@@ -94,7 +94,7 @@ ask_variable <- function(plot_type){
 		x_variable <- readline("\nWhat is the x variable? ")
 		variable <- c(y=y_variable,x=x_variable)
 	}else{
-		variable <- c(y=readline("\nWhat is the variable? "))
+		variable <- c(readline("\nWhat is the variable? "))
 	}
 	return(variable)
 }

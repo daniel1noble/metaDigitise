@@ -30,13 +30,16 @@ redraw_calibration <- function(plot_type, variable, calpoints,point_vals,image_d
 
 	lines(calpoints[1:2,], col=cal_col, lwd=2)
 	text(calpoints$x[1:2] - rep(x_shift, 2), calpoints$y[1:2], point_vals[1:2], col=cal_col, cex=text_cex)
-	text(mean(calpoints$x[1:2]) - x_shift*1.5, mean(calpoints$y[1:2]), variable["y"], col=cal_col, cex=text_cex, srt=90)
-	
+	if(plot_type=="histogram"){
+		text(mean(calpoints$x[3:4]), mean(calpoints$y[3:4]) - y_shift*1.5, variable[1], col=cal_col, cex=text_cex)
+	}else{	
+		text(mean(calpoints$x[1:2]) - x_shift*1.5, mean(calpoints$y[1:2]), variable[1], col=cal_col, cex=text_cex, srt=90)
+		}
 
 	if(!plot_type %in% c("mean_error","boxplot")){
 		lines(calpoints[3:4,], col=cal_col, lwd=2)
 		text(calpoints$x[3:4], calpoints$y[3:4] - rep(y_shift, 2), point_vals[3:4], col=cal_col, cex=text_cex)
-		text(mean(calpoints$x[3:4]), mean(calpoints$y[3:4]) - y_shift*1.5, variable["x"], col=cal_col, cex=text_cex)
+		text(mean(calpoints$x[3:4]), mean(calpoints$y[3:4]) - y_shift*1.5, variable[2], col=cal_col, cex=text_cex)
 	}
 }
 
@@ -72,21 +75,17 @@ redraw_points <- function(plot_type,raw_data,image_details){
 	}
 
 	if(plot_type=="scatterplot"& nrow(raw_data)>0){
-		group_id <- unique(raw_data$id)
-		nGroups <- length(group_id)
-#		cols <- rep(c("red", "green", "purple"),length.out=nGroups)
-#		pchs <- rep(rep(c(19, 17, 15),each=3),length.out=nGroups)
-		legend_gap <- image_width/nGroups
-
-#		for(i in 1:nGroups){
-#			group_data <- subset(raw_data,id==group_id[i])
 		points(y~x,raw_data, pch=raw_data$pch, col=as.character(raw_data$col))
 
-		#legend
-		# points(rep(legend_gap/2,nGroups) + legend_gap*((1:nGroups)-1), -legend_pos*2.5, col=unique(raw_data$cols), pch=unique(raw_data$pch),xpd=TRUE)
-		# text(legend_gap/2 + legend_gap*(i-1), -legend_pos, group_id[i], col=cols[i],xpd=TRUE)
-		# text(legend_gap/2 + legend_gap*(i-1), -legend_pos*5, paste("n =",nrow(raw_data)), col=cols[i],xpd=TRUE)
-#		}		
+	#legend
+		legend_dat <- aggregate(x~id+col+pch+group,dat2$raw_data, length)
+		nGroups <- nrow(legend_dat)
+		legend_x <- (image_width/nGroups)/2 + (image_width/nGroups)*((1:nGroups)-1)
+
+		 points(legend_x, rep(-legend_pos*2.5,nGroups), 
+		 	col=as.character(legend_dat$col), pch=legend_dat$pch, xpd=TRUE)
+		 text(legend_x, rep(-legend_pos,nGroups), legend_dat$id, col=as.character(legend_dat$col),xpd=TRUE)
+		 text(legend_x, rep(-legend_pos*5,nGroups), paste("n =",legend_dat$x), col=as.character(legend_dat$col),xpd=TRUE)
 	}
 
 	if(plot_type=="histogram"& nrow(raw_data)>0){
@@ -99,7 +98,7 @@ redraw_points <- function(plot_type,raw_data,image_details){
 	}
 }
 
-
+unique(dat2$raw_data$pch)
 
 #' @title internal_redraw
 #' @param image_file Image filename
@@ -120,12 +119,16 @@ redraw_points <- function(plot_type,raw_data,image_details){
 
 #image_file, flip, rotate, image_details, plot_type, calpoints, point_vals, raw_data
 
-internal_redraw <- function(image_file, flip=FALSE, rotate=0, image_details=NULL, plot_type=NULL, variable=NULL, calpoints=NULL, point_vals=NULL, raw_data=NULL, rotation=TRUE, calibration=TRUE, points=TRUE, return_image=FALSE,...){
+internal_redraw <- function(image_file, flip=FALSE, rotate=0, plot_type=NULL, variable=NULL, calpoints=NULL, point_vals=NULL, raw_data=NULL, rotation=TRUE, calibration=TRUE, points=TRUE, ...){
 
 	op <- par(mar=c(3,0,2,0))
 
 	image <- magick::image_read(image_file)
 	new_image <- redraw_rotation(image=image, flip=flip, rotate=rotate)
+
+	image_details <- c(width = magick::image_info(new_image)["width"][[1]], height = magick::image_info(new_image)["height"][[1]])
+
+
 	plot(new_image)
 	mtext(filename(image_file),3, 1)
 

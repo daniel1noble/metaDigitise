@@ -16,8 +16,6 @@ internal_digitise <- function(image_file, plot_type=NULL){
 	rotate_image <- user_rotate_graph(image_file)
 	output$flip <- rotate_image$flip
 	output$rotate <- rotate_image$rotate
-	output$image_details <- rotate_image$image_details
-
 
 	flush.console()
 	
