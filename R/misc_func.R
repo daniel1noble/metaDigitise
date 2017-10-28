@@ -98,3 +98,16 @@ ask_variable <- function(plot_type){
 	}
 	return(variable)
 }
+
+
+#' @title cat_matrix
+#' @param x vector
+#' @param cols number of columns
+#' @description prints a vector as a number list of items with a certain number of columns
+
+cat_matrix<- function(x, cols){
+	rows <- ceiling(length(x)/cols)
+	files_print<- c(paste(1:length(x), x, sep = ". ") ,rep("",rows*cols - length(x)))
+	rows_print <- apply(matrix(files_print, nrow=rows, byrow=TRUE),1,paste,collapse = "\t")
+	cat(rows_print,sep="\n")
+}

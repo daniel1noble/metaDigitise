@@ -2,7 +2,7 @@
 #' @param plot_type plot type
 #' @param ... further arguments passed to or from other methods.
 #' @description Prints instructions for calibration
-#' 
+
 print_cal_instructions <- function(plot_type,...){
   cat( "\nOn the Figure, click IN ORDER: 
       y1, y2",if(!plot_type %in% c("mean_error","boxplot")) ", x1, x2", " \n
@@ -52,6 +52,7 @@ if(!plot_type %in% c("mean_error","boxplot")) "
 #' @param plot_type plot type
 #' @param ... further arguments passed to or from other methods.
 #' @description Prompts user to enter axis coordinates, and their values. Modified from the digitize package
+
 cal_coords <- function(plot_type,...) {
 	calpoints_y <- locator(2, type="o", col="blue", pch=3, lwd = 2)
 
@@ -66,21 +67,19 @@ cal_coords <- function(plot_type,...) {
 }
 
 
+
 #' @title getVals
 #' @param calpoints Calibration points
-#' @param image_details image width and height
 #' @param ... further arguments passed to or from other methods.
 #' @description Gets values needed to calibrate axis coordinated. Modified from the digitize package
 
-getVals <- function(calpoints, image_details,...) {
-  image_width <- image_details["width"]
-  image_height <- image_details["height"]
-
+getVals <- function(calpoints,...) {
   names <- if(nrow(calpoints)==2){c("y1","y2")}else{c("y1","y2","x1","x2")}
   vals <- NULL
   for (i in names) vals[i] <- user_numeric(paste("What is the value of", i, "?\n"))
   return(vals)
 }
+
 
 
 #' @title user_calibrate
@@ -100,5 +99,6 @@ user_calibrate <- function(object){
     cal_Q <- readline("\nRe-calibrate? (y/n) ")
   }
   return(object[c("calpoints","point_vals")])
+  ##output object?
 }
 

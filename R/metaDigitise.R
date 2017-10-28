@@ -61,11 +61,9 @@ process_new_files <- function(dir, summary = TRUE) {
 #' @export
 
 specify_type <- function(){
-		#user enters numeric value to specify the plot BEFORE moving on
-	 	pl_type <- NA
-	 	#while keeps asking the user the question until the input is one of the options
-		while(!pl_type %in% c("m","b","s","h")) pl_type <- readline("Please specify the plot_type as either: mean and error, box plot, scatter plot or histogram m/b/s/h: ")
-	
+	 	# keeps asking the user the question until the input is one of the options
+	 	pl_type <- user_options("\nPlease specify the plot_type as either: mean and error, box plot, scatter plot or histogram m/b/s/h: ", c("m","b","s","h"))
+
 	 	plot_type <- ifelse(pl_type == "m", "mean_error", ifelse(pl_type == "b", "boxplot",ifelse(pl_type == "s", "scatterplot","histogram")))
 	
 	return(plot_type)

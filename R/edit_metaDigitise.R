@@ -1,12 +1,59 @@
-bulk_edit <- function(dir, summary){
-	
+#' @title bulk_edit
+#' @description Function for bulk editing previous data extraction through `metaDigitise`
+#' @param dir parent directory
+#' @param summary logical; whether summary is returned
+#' @author Joel Pick
 
-	editQ <- menu(c("Cycle through images","Choose specific files to edit","Enter previously missed sample sizes"))
+bulk_edit <- function(dir, summary=TRUE){
+	cat("Choose how you want to edit files:\n")
+	Q <- menu(c("Cycle through images","Choose specific file to edit","Enter previously omitted sample sizes"))
 
-	cat("In progress!!")
-#	switch(Q, process_new_files(dir), import_metaDigitise(dir), bulk_edit(dir))
+	#list caldat_files
+	caldat <- dir_details(dir)
+	filepaths <- caldat$doneCalFiles
+	files <- caldat$calibrations
 
+# cycle 
+	if(Q==1){
+		for(i in filepaths){
+			object <- readRDS(i)
+			plot(object)
+			editQ <- user_options("\nEdit file? y/n ", c("y","n"))
+			if(editQ == "y") {
+				object <- edit_metaDigitise(object)
+				saveRDS(object, file=i)
+			}
+		}
+	cat("\n**** Reached end of files ****\n\n\n")
+	}
+
+# list files
+	if(Q==2){
+		editQ<-"y"
+		while(editQ =="y"){
+			cat("\n\n")
+			cat_matrix(files, 3)
+			edit_file <- user_options("\nSelect number of file to edit ", 1:length(files))
+			object <- readRDS(filepaths[as.numeric(edit_file)])
+			object <- edit_metaDigitise(object)
+			saveRDS(object, file=filepaths[edit_file])
+			editQ <- user_options("\nEdit more file? y/n ", c("y","n"))
+		}
+	}
+
+# enter_N
+	if(Q==3){
+		cat("In progress!!")
+	}
+
+## finish by importing data 
+	import_metaDigitise(dir=dir, summary=summary)
 }
+
+#dir="~/Dropbox/0_postdoc/8_PR repeat/shared/extracted graphs/"
+
+#bulk_edit("~/Dropbox/0_postdoc/8_PR repeat/shared/extracted graphs/",summary=TRUE)
+
 
 
 
