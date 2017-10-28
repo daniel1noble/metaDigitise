@@ -139,6 +139,5 @@ internal_redraw <- function(image_file, flip=FALSE, rotate=0, plot_type=NULL, va
 	if(is.null(raw_data)) points=FALSE
 	if(points) redraw_points(plot_type=plot_type,raw_data=raw_data,image_details=image_details)
 
-	if(return_image) return(new_image)
 	on.exit(par(op))
 }
