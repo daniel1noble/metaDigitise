@@ -98,7 +98,6 @@ redraw_points <- function(plot_type,raw_data,image_details){
 	}
 }
 
-unique(dat2$raw_data$pch)
 
 #' @title internal_redraw
 #' @param image_file Image filename
