@@ -4,12 +4,10 @@
 \alias{getVals}
 \title{getVals}
 \usage{
-getVals(calpoints, image_details, ...)
+getVals(calpoints, ...)
 }
 \arguments{
 \item{calpoints}{Calibration points}
-
-\item{image_details}{image width and height}
 
 \item{...}{further arguments passed to or from other methods.}
 }
