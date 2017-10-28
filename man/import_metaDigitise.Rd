@@ -12,7 +12,7 @@ import_metaDigitise(dir, summary = TRUE)
 \item{summary}{Logical indicating whether the imported data should be returned in summarised form ('TRUE') or not ('FALSE')}
 }
 \value{
-Returns a list if types = 'diff' or a dataframe of raw data or summarise data if types = 'same' or summary = TRUE
+Returns a list (summary = FALSE) or data frame (summary = TRUE)
 }
 \description{
 Imports metaDigitise calibration files from a directory that is partially or fully digitised already
