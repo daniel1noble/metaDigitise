@@ -27,23 +27,18 @@ calibrate <- function(raw_data, calpoints, point_vals,...) {
 
 convert_group_data <- function(cal_data, plot_type){
 	groups <- unique(cal_data$id)
-	nRows <- ifelse(plot_type=="mean_error",2,5)
 	convert_data <- data.frame()
-	#as.data.frame(matrix(NA, ncol=nRows+2, nrow=nGroups), stringsAsFactor=FALSE)
-
 	for(i in groups) {
-		group_data <- subset(cal_data,id=i)
+		group_data <- subset(cal_data,id==i)
 
 		if(plot_type == "mean_error") {
-			convert_data <- rbind(convert_data, c(id=i, mean=group_data$y[2], error=abs(group_data$y[1] - group_data$y[2]), n=group_data$n[1]))
+			convert_data <- rbind(convert_data, data.frame(id=i, mean=group_data$y[2], error=abs(group_data$y[1] - group_data$y[2]), n=group_data$n[1]))
 		}
 
 		if(plot_type == "boxplot") {
-			convert_data[i,c("max","q3","med","q1","min","n")] <- c(group_data[,"y"],group_data$n[1])
-			convert_data <- rbind(convert_data, c(id=i, max=group_data[1,"y"], q3=group_data[2,"y"], med=group_data[3,"y"], q1=group_data[4,"y"], min=group_data[5,"y"], n=group_data$n[1]))
+			convert_data <- rbind(convert_data, data.frame(id=i, max=group_data[1,"y"], q3=group_data[2,"y"], med=group_data[3,"y"], q1=group_data[4,"y"], min=group_data[5,"y"], n=group_data$n[1]))
 		}
 	}
-
 	return(convert_data)
 }
 
@@ -52,8 +47,8 @@ convert_group_data <- function(cal_data, plot_type){
 #' @title convert_histogram_data 
 #' @param cal_data The calibration data
 #' @description Conversion of extracted data from histogram
+
 convert_histogram_data <- function(cal_data){
-	#nBars <- nrow(raw_data)/2
 	midpoints <- c()
 	freq <- c()
 
