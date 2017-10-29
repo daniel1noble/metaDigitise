@@ -5,13 +5,15 @@
 #' @author Joel Pick
 
 bulk_edit <- function(dir, summary=TRUE){
-	cat("Choose how you want to edit files:\n")
-	Q <- menu(c("Cycle through images","Choose specific file to edit","Enter previously omitted sample sizes"))
-
 #list caldat_files
 	caldat <- dir_details(dir)
 	filepaths <- caldat$doneCalFiles
 	files <- caldat$calibrations
+
+	if(length(filepaths)==0) stop("No files to edit", call.=FALSE)
+
+	cat("Choose how you want to edit files:\n")
+	Q <- menu(c("Cycle through images","Choose specific file to edit","Enter previously omitted sample sizes"))
 
 # cycle 
 	if(Q==1){
