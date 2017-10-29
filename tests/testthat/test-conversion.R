@@ -11,16 +11,14 @@ test_that("Checking calibrate..", {
 })
 
 
-# test_that("Checking convert_group_data..", {
-# 	expect_equal(
-# 		convert_group_data(
-# 			cal_data = data.frame(id=as.character(c("control","control")), x=c(1,1), y=c(7,5), n=rep(20,2)),
-# 			plot_type = "mean_error"
-# 		), 
-# 		data.frame(id="control", mean=5, error=2, n=20), info = "convert_group_data failed")
-# })
-
-
+test_that("Checking convert_group_data..", {
+	expect_equal(
+		convert_group_data(
+			cal_data = data.frame(id=c("control","control"), x=c(1,1), y=c(7,5), n=rep(20,2)),
+			plot_type = "mean_error"
+		), 
+		data.frame(id="control", mean=5, error=2, n=20), info = "convert_group_data failed")
+})
 
 test_that("Checking convert_histogram_data..", {
 	expect_equal(
