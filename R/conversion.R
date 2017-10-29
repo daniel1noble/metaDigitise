@@ -26,9 +26,9 @@ calibrate <- function(raw_data, calpoints, point_vals,...) {
 #' @description Converts, pre-calibrated points clicked into a meaningful dataframe 
 
 convert_group_data <- function(cal_data, plot_type){
-	groups <- unique(cal_data$id)
 	convert_data <- data.frame()
-	for(i in groups) {
+
+	for(i in unique(cal_data$id)) {
 		group_data <- subset(cal_data,id==i)
 
 		if(plot_type == "mean_error") {
@@ -49,15 +49,13 @@ convert_group_data <- function(cal_data, plot_type){
 #' @description Conversion of extracted data from histogram
 
 convert_histogram_data <- function(cal_data){
-	midpoints <- c()
-	freq <- c()
+	convert_data <- data.frame()
 
 	for(i in unique(cal_data$bar)){
 		bar_data <- subset(cal_data, bar==i)
-		midpoints <- c(midpoints, mean(bar_data$x))
-		freq <- c(freq, round(mean(bar_data$y)))
+		convert_data <- rbind( convert_data, data.frame( midpoints=mean(bar_data$x), frequency= round(mean(bar_data$y)) ) )
 	}
-	return(data.frame(midpoints=midpoints, frequency=freq))
+	return(convert_data)
 }
 
 
