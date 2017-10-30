@@ -12,5 +12,8 @@ process_new_files(dir, summary = TRUE)
 \item{summary}{summary = TRUE or FALSE is most relevant as it will print a simple summary statistics that are the same across all files}
 }
 \description{
-Batch processes png files within a set directory, consolidates the data and exports the data for each image and type
+Batch processes image files within a set directory, consolidates the data and exports the data for each image and type
+}
+\author{
+Joel Pick - joel.l.pick@gmail.com; Daniel Noble - daniel.wa.noble@gmail.com
 }
