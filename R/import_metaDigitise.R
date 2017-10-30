@@ -6,7 +6,7 @@
 #' @export
 
 import_metaDigitise <- function(dir, summary = TRUE ) {
-	
+	## THIS FUNCTION MAYBE OBSELETE NOW. REPLACED WITH process_new_files as all component functions are embed within.
 	    details <- dir_details(dir)
 	    metaDig <- load_metaDigitise(details$doneCalFiles)
 	 plot_types <- lapply(metaDig, function(x) x$plot_type)

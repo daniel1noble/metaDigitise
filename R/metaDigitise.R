@@ -11,6 +11,11 @@
 #' @export
 
 metaDigitise<-function(dir, summary = TRUE){
+		# Check dir has a / at the end.
+	if( (substring(dir, nchar(dir)) == "/") == FALSE){
+		dir <- paste0(dir, "/")
+	}
+
 	cat("Do you want to...\n")
 	
 	Q <- menu(c("Process new images", "Import existing data", "Edit existing data"))
@@ -27,6 +32,7 @@ metaDigitise<-function(dir, summary = TRUE){
 process_new_files <- function(dir, summary = TRUE) {
 
 			       setup_calibration_dir(dir)
+			      details <- dir_details(dir)
 	     done_details <- get_notDone_file_details(dir)
 		   type <- user_options("Are all plot types the same? (diff/same)" , c("diff", "same"))
 	
