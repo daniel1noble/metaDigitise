@@ -27,7 +27,9 @@ import_metaDigitise <- function(dir, summary = TRUE ) {
 #' @title load_metaDigitise
 #' @description Loads metaDigitise calibration files from a directory that is partially or fully digitised already
 #' @param doneCalFiles The calibration files that have already been finished taken from directory details
+#' @param names The names of the done calibration files
 #' @return Returns a list of metaDigitised objects that have already been completed
+
 load_metaDigitise <- function(doneCalFiles, names){
 	metaDig <- lapply(doneCalFiles, function(x) readRDS(x))
 	names(metaDig) <- names

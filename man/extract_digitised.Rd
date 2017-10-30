@@ -4,12 +4,10 @@
 \alias{extract_digitised}
 \title{extract_digitised}
 \usage{
-extract_digitised(list, types = c("same", "diff"), summary = TRUE)
+extract_digitised(list, summary = TRUE)
 }
 \arguments{
 \item{list}{A list of objects returned from metaDigitise}
-
-\item{types}{Whether the plots are the same or different types}
 
 \item{summary}{A logical 'TRUE' or 'FALSE' indicating whether metaDigitise should print summary statitics from each figure and group.}
 }

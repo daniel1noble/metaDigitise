@@ -88,7 +88,6 @@ specify_type <- function(){
 #' @title extract_digitised
 #' @param list A list of objects returned from metaDigitise
 #' @param summary A logical 'TRUE' or 'FALSE' indicating whether metaDigitise should print summary statitics from each figure and group.
-#' @param types Whether the plots are the same or different types
 #' @description Function for extracting the data from a metaDigitise list
 #' @return The function will return a data frame with the data across all the digitised files 
 #' @export
@@ -100,7 +99,9 @@ extract_digitised <- function(list, summary = TRUE) {
 		rownames(data) <- 1:nrow(data)
 		return(data)
 	} else {
-		return(lapply (list, function(x) x$processed_data))
+		tmp <- lapply (list, function(x) x$processed_data)
+		names(tmp) <- unlist(lapply(list, function(x) x$image_file))
+		return(tmp)
 	}
 }
 

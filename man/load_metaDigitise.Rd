@@ -4,10 +4,12 @@
 \alias{load_metaDigitise}
 \title{load_metaDigitise}
 \usage{
-load_metaDigitise(doneCalFiles)
+load_metaDigitise(doneCalFiles, names)
 }
 \arguments{
 \item{doneCalFiles}{The calibration files that have already been finished taken from directory details}
+
+\item{names}{The names of the done calibration files}
 }
 \value{
 Returns a list of metaDigitised objects that have already been completed
