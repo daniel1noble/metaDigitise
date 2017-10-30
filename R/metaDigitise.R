@@ -38,7 +38,7 @@ process_new_files <- function(dir, summary = TRUE) {
 			       setup_calibration_dir(dir)
 			      done_details <- dir_details(dir)
 	     details <- get_notDone_file_details(dir)
-		   type <- user_options("Are all plot types the same? (diff/same)" , c("diff", "same"))
+		   type <- user_options("Are all plot types the same? (diff/same)\n" , c("diff", "same"))
 	
 	if(length(done_details$calibrations) >= 1){	
 		done_objects <- load_metaDigitise(done_details$doneCalFiles, done_details$names)
@@ -108,7 +108,7 @@ extract_digitised <- function(list, summary = TRUE) {
 		return(data)
 	} else {
 		tmp <- lapply (list, function(x) x$processed_data)
-		names(tmp) <- unlist(lapply(list, function(x) x$image_file))
+		names(tmp) <- unlist(lapply(list, function(x) filename(x)))
 		return(tmp)
 	}
 }

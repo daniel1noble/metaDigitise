@@ -49,7 +49,7 @@ order_lists <- function(list, plot_types){
 	   boxplot <- list[which(unlist(plot_types) == "boxplot")]
 	      hist <- list[which(unlist(plot_types) == "histogram")]
 
-	dat_list <- as.list(c(mean_error = mean_error, boxplot=boxplot, hist=hist, scatterplot=scatterplot))
+	dat_list <- list(mean_error = mean_error, boxplot=boxplot, hist=hist, scatterplot=scatterplot)
 
 return(dat_list)
 
