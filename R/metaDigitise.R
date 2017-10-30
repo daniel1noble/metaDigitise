@@ -32,12 +32,12 @@ metaDigitise<-function(dir, summary = TRUE){
 process_new_files <- function(dir, summary = TRUE) {
 
 			       setup_calibration_dir(dir)
-			      details <- dir_details(dir)
-	     done_details <- get_notDone_file_details(dir)
+			      done_details <- dir_details(dir)
+	     details <- get_notDone_file_details(dir)
 		   type <- user_options("Are all plot types the same? (diff/same)" , c("diff", "same"))
 	
 	if(length(done_details$calibrations) >= 1){	
-		done_objects <- load_metaDigitise(details$doneCalFiles)
+		done_objects <- load_metaDigitise(done_details$doneCalFiles, done_details$names)
 		done_plot_types <- lapply(done_objects, function(x) x$plot_type)
 	}
 
@@ -58,10 +58,12 @@ process_new_files <- function(dir, summary = TRUE) {
 		plot_type <- c(done_plot_types, complete_plot_types)
 
 	if(summary == TRUE){
+
 		return(do.call(rbind, list(summary(done_objects), summary(data_list))))
+
 	}else{
-			done_figs <- extract_digitised(done_objects, types = plot_types, summary = summary)
-			new_figs <- extract_digitised(data_list, types = plot_types, summary = summary)
+			done_figs <- extract_digitised(done_objects,  summary = summary)
+			new_figs <- extract_digitised(data_list, summary = summary)
 		return(order_lists(c(done_figs, new_figs), plot_types = plot_type))
 	}
 
@@ -91,16 +93,12 @@ specify_type <- function(){
 #' @return The function will return a data frame with the data across all the digitised files 
 #' @export
 
-extract_digitised <- function(list, types = c("same", "diff"), summary = TRUE) {
+extract_digitised <- function(list, summary = TRUE) {
 
 	if(summary == TRUE) {
 		data <- do.call(rbind, lapply (list, function(x) summary(x)))
 		rownames(data) <- 1:nrow(data)
 		return(data)
-	}
-
-	if(types == "same"){
-		return( do.call (rbind, lapply (list, function(x) x$processed_data)))
 	} else {
 		return(lapply (list, function(x) x$processed_data))
 	}
