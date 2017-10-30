@@ -26,24 +26,17 @@ calibrate <- function(raw_data, calpoints, point_vals,...) {
 #' @description Converts, pre-calibrated points clicked into a meaningful dataframe 
 
 convert_group_data <- function(cal_data, plot_type){
-	nGroups <- length(unique(cal_data$id))
-	nRows <- ifelse(plot_type=="mean_error",2,5)
-	convert_data <- as.data.frame(matrix(NA, ncol=nRows+2, nrow=nGroups))
-	colnames(convert_data) <- if(plot_type=="mean_error"){c("id","mean","error","n")}else{c("id","max","q3","med","q1","min","n")}
+	convert_data <- data.frame()
 
-	for(i in 1:nGroups) {
-		rowStart <- (i-1)*nRows +1
-		group_data <- cal_data[rowStart:(rowStart+nRows-1),]
-		convert_data[i,"id"] <- group_data$id[1]
+	for(i in unique(cal_data$id)) {
+		group_data <- subset(cal_data,id==i)
 
 		if(plot_type == "mean_error") {
-			group_mean <- group_data$y[2]
-			group_se <- abs(group_data$y[1] - group_data$y[2])
-			convert_data[i,c("mean","error","n")] <- c(group_mean,group_se,group_data$n[1])
+			convert_data <- rbind(convert_data, data.frame(id=i, mean=group_data$y[2], error=abs(group_data$y[1] - group_data$y[2]), n=group_data$n[1]))
 		}
 
 		if(plot_type == "boxplot") {
-			convert_data[i,c("max","q3","med","q1","min","n")] <- c(group_data[,"y"],group_data$n[1])
+			convert_data <- rbind(convert_data, data.frame(id=i, max=group_data[1,"y"], q3=group_data[2,"y"], med=group_data[3,"y"], q1=group_data[4,"y"], min=group_data[5,"y"], n=group_data$n[1]))
 		}
 	}
 	return(convert_data)
@@ -54,17 +47,15 @@ convert_group_data <- function(cal_data, plot_type){
 #' @title convert_histogram_data 
 #' @param cal_data The calibration data
 #' @description Conversion of extracted data from histogram
+
 convert_histogram_data <- function(cal_data){
-	#nBars <- nrow(raw_data)/2
-	midpoints <- c()
-	freq <- c()
+	convert_data <- data.frame()
 
 	for(i in unique(cal_data$bar)){
 		bar_data <- subset(cal_data, bar==i)
-		midpoints <- c(midpoints, mean(bar_data$x))
-		freq <- c(freq, round(mean(bar_data$y)))
+		convert_data <- rbind( convert_data, data.frame( midpoints=mean(bar_data$x), frequency= round(mean(bar_data$y)) ) )
 	}
-	return(data.frame(midpoints=midpoints, frequency=freq))
+	return(convert_data)
 }
 
 

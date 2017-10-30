@@ -49,7 +49,7 @@ process_new_files <- function(dir, summary = TRUE) {
 			         data_list[[i]] <- internal_digitise(details$paths[i], plot_type = plot_types)	
 			    names(data_list)[i] <- details$images[i]
 			 saveRDS(data_list[[i]], file = paste0(details$cal_dir, details$name[i]))
-			breakQ <-  user_options(paste("Do you want continue:", length(details$paths)- i, "plots out of", length(details$paths), "plots remaining (y/n) "), c("y","n"))
+			breakQ <-  user_options(paste("\n\nDo you want continue:", length(details$paths)- i, "plots out of", length(details$paths), "plots remaining (y/n) "), c("y","n"))
 		 	if(breakQ=="n") break
 		 }
 	
@@ -157,7 +157,10 @@ dir_details <- function(dir){
 	       detail_list$paths <- paste0(dir, detail_list$images)
 	     detail_list$cal_dir <- paste0(dir, "caldat/")
 	detail_list$calibrations <- list.files(paste0(dir, "caldat/"))
-	detail_list$doneCalFiles <- paste0(detail_list$cal_dir, detail_list$calibrations)
+	detail_list$doneCalFiles <- if(length(detail_list$calibrations)==0) { vector(mode="character") 
+	} else{ 
+		paste0(detail_list$cal_dir, detail_list$calibrations) 
+	}
 
 	return(detail_list)
 }
