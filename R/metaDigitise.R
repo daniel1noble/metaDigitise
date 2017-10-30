@@ -1,9 +1,12 @@
 #' @title metaDigitise
-#' @description Single or batch processes figures of .png, .jpg, .tiff, .pdf extensions within a set directory, consolidates the data and exports the data for each image and type
+#' @description Single or batch processing of figures with .png, .jpg, .tiff, .pdf extensions within a set directory. metaDigitise consolidates the data and exports the data for each image and image type. It can also summarise the data, provide the raw data (if scatterplots) and automatically imports previously finished data and merges it with newly digitised data. metaDigitise also allows users to check their calibration along with editing previous digitisations.
 #' @param dir the path name to the directory / folder where the files are located
 #' @param summary whether the digitised data should be returned as a summary (TRUE) or as a concatenated list of similar types. 
 #' @details 
-#' metaDigitise can be used on a directory with a whole host of different figure (mean and error, scatter plots, box plots and histograms) and file types (.jpeg, .png, .tiff, .pdf). It will automatically cycle through all files within a directory in order, prompting the user for specific information as they go. It will also write calibration files (also containing processed data), into a special caldat/ folder within the directory. Importantly, as new files are added to a directory that has already been "completed", metaDigitise will recognize these unfinished files and only cycle through the digitisation of these new files. 
+#' metaDigitise can be used on a directory with a whole host of different figure types (mean and error, scatter plots, box plots and histograms) and file types (.jpeg, .png, .tiff, .pdf). It will automatically cycle through all files within a directory in order, prompting the user for specific information as they go. It will automatically write metaDigitise object files (in .RDS format containing processed and calibration data along with directory and file details), into a special caldat/ folder within the directory. Importantly, as new files are added to a directory that has already been "completed", metaDigitise will recognize these unfinished files and only cycle through the digitisation of these new files. 
+#' 
+#' metDigitise is built for reproducibility and ease of operation. This means that, so long as the caldat/ folder along with respective images are maintained, anyone using metaDigitise can simply import existing digitisations, modify them and fix them. 
+#' @author Joel Pick - joel.l.pick@gmail.com; Daniel Noble - daniel.wa.noble@gmail.com
 #' @examples
 #' # data <- metaDigitise(dir = "./example_figs/", summary = TRUE)
 #' # summary(data)
@@ -25,9 +28,10 @@ metaDigitise<-function(dir, summary = TRUE){
 
 
 #' @title process_new_files
-#' @description Batch processes png files within a set directory, consolidates the data and exports the data for each image and type
+#' @description Batch processes image files within a set directory, consolidates the data and exports the data for each image and type
 #' @param dir the path name to the directory / folder where the files are located
 #' @param summary summary = TRUE or FALSE is most relevant as it will print a simple summary statistics that are the same across all files
+#' @author Joel Pick - joel.l.pick@gmail.com; Daniel Noble - daniel.wa.noble@gmail.com
 #' @export
 process_new_files <- function(dir, summary = TRUE) {
 
@@ -60,7 +64,7 @@ process_new_files <- function(dir, summary = TRUE) {
 		} else{
 			plot_type <- complete_plot_types
 		}
-		
+
 	if(summary == TRUE){
 
 		return(do.call(rbind, list(summary(done_objects), summary(data_list))))
