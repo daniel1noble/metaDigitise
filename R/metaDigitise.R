@@ -55,8 +55,12 @@ process_new_files <- function(dir, summary = TRUE) {
 	
 		complete_plot_types <- lapply(data_list, function(x) x$plot_type)
 
-		plot_type <- c(done_plot_types, complete_plot_types)
-
+		if( length(done_plot_types) > 1){
+			plot_type <- c(done_plot_types, complete_plot_types)
+		} else{
+			plot_type <- complete_plot_types
+		}
+		
 	if(summary == TRUE){
 
 		return(do.call(rbind, list(summary(done_objects), summary(data_list))))
