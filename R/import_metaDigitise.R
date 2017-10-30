@@ -6,9 +6,9 @@
 #' @export
 
 import_metaDigitise <- function(dir, summary = TRUE ) {
-	## THIS FUNCTION MAYBE OBSELETE NOW. REPLACED WITH process_new_files as all component functions are embed within.
+	
 	    details <- dir_details(dir)
-	    metaDig <- load_metaDigitise(details$doneCalFiles)
+	    metaDig <- load_metaDigitise(details$doneCalFiles, details$name)
 	 plot_types <- lapply(metaDig, function(x) x$plot_type)
 
 	if(summary == TRUE){
@@ -28,11 +28,9 @@ import_metaDigitise <- function(dir, summary = TRUE ) {
 #' @description Loads metaDigitise calibration files from a directory that is partially or fully digitised already
 #' @param doneCalFiles The calibration files that have already been finished taken from directory details
 #' @return Returns a list of metaDigitised objects that have already been completed
-
-load_metaDigitise <- function(doneCalFiles){
-	details <- get_notDone_file_details(dir)
+load_metaDigitise <- function(doneCalFiles, names){
 	metaDig <- lapply(doneCalFiles, function(x) readRDS(x))
-	names(metaDig) <- details$calibrations
+	names(metaDig) <- names
 	return(metaDig)
 }
 
@@ -44,10 +42,10 @@ load_metaDigitise <- function(doneCalFiles){
 
 order_lists <- function(list, plot_types){
 
-	mean_error <- list[match("mean_error", unlist(plot_types), nomatch = TRUE)]
-   scatterplot <- list[match("scatterplot", unlist(plot_types),  nomatch = FALSE)]
-	   boxplot <- list[match("boxplot", unlist(plot_types),  nomatch = FALSE)]
-	      hist <- list[match("histogram", unlist(plot_types),  nomatch = FALSE)]
+	mean_error <- list[which(unlist(plot_types) == "mean_error")]
+   scatterplot <- list[which(unlist(plot_types) == "scatterplot")]
+	   boxplot <- list[which(unlist(plot_types) == "boxplot")]
+	      hist <- list[which(unlist(plot_types) == "histogram")]
 
 	dat_list <- as.list(c(mean_error = mean_error, boxplot=boxplot, hist=hist, scatterplot=scatterplot))
 
