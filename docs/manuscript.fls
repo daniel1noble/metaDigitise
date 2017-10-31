@@ -119,6 +119,9 @@ INPUT fig_calibrate.pdf
 INPUT ./fig_calibrate.pdf
 INPUT ./fig_calibrate.pdf
 INPUT /usr/local/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
+INPUT fig_all_extract.pdf
+INPUT ./fig_all_extract.pdf
+INPUT ./fig_all_extract.pdf
 INPUT fig_scatter_points.pdf
 INPUT ./fig_scatter_points.pdf
 INPUT ./fig_scatter_points.pdf

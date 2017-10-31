@@ -41,7 +41,7 @@ Here, we present an interactive R package designed for large scale data extracti
 \begin{figure}[ht] 
 %\onehalfspacing
  \includegraphics[width=0.9\textwidth]{fig_plot_type.pdf} 
- \caption{Plot types that metaDigitise is designed to extract data from: A) mean and error plot, B) box plot, C) scatter plot and D) histogram. }
+ \caption{Four plot types that metaDigitise is designed to extract data from: A) mean and error plot, B) box plot, C) scatter plot and D) histogram. Data is taken from the iris dataset in R. A and B are plotted with the whole dataset, C and D are just the data for the species setosa.}
 \label{fig:plot_type}
 \end{figure}
 
@@ -96,6 +96,14 @@ metaDigitise recognises 4 main types of plot; Mean and error plots, box plots, s
 
 \subsubsection{Mean and error plots} 
 metaDigitise prompts the user to enter groups names and allows the user to enter sample sizes, which are used in downstream processing. The user is then prompted to click on an error bar followed by the mean. Error bars above or below the mean can be clicked - sometimes one is clearer than the other. metaDigitise assumes that the error bars are symmetrical. Where the user has clicked the error is displayed in a different colour to the mean. The user can subsequently add more groups or remove groups.
+
+\begin{figure}[!h] 
+%\onehalfspacing
+ \includegraphics[width=0.9\textwidth]{fig_all_extract.pdf} 
+ \caption{ }
+\label{fig:all_extract}
+\end{figure}
+
 
 \subsubsection{Box plots}
  metaDigitise prompts the user to enter groups names and allows the user to enter sample sizes, which are used in downstream processing. The user is then prompted to click on the maximum, upper quartile, median, lower quartile and minimum. metaDigitise will check that the maximum is greater than the minimum, and return an warning if that is not the case. The user can subsequently add more groups or remove groups.

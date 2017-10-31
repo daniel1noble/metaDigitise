@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1509360397 "manuscript.tex" "manuscript.pdf" "manuscript" 1509360398
+["pdflatex"] 1509408667 "manuscript.tex" "manuscript.pdf" "manuscript" 1509408668
   "/usr/local/texlive/2017/texmf-dist/fonts/map/fontname/texfonts.map" 1480098670 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2017/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1480098698 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2017/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1480098698 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -65,14 +65,15 @@
   "/usr/local/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1495593472 2350277 a699055bee05bf8a40b0504752487295 ""
   "/usr/local/texlive/2017/texmf-var/web2c/pdftex/pdflatex.fmt" 1502609529 4129592 42cbefe75cd1afbf7a840ee914c6547b ""
   "/usr/local/texlive/2017/texmf.cnf" 1495593465 577 2b71d4d888f9e5560b2e99985915a9fa ""
-  "fig_calibrate.pdf" 1509360268 79760 de8a21dae43f11c2eb0122fbb7204d0c ""
+  "fig_all_extract.pdf" 1509408488 39254 44db27aae548f79a0f078ec931ab5b43 ""
+  "fig_calibrate.pdf" 1509408177 89021 435057067482cb07a222e05209025e63 ""
   "fig_flip.pdf" 1509360169 16922 ae6219179dcbe7aedbf73de123ce86f5 ""
-  "fig_plot_type.pdf" 1509343004 6136 6384f6e74560b8a168512bdd37a1c339 ""
-  "fig_rotate.pdf" 1509360165 79665 c0d1cf52422e3a650646d8d47bab49d3 ""
-  "fig_scatter_points.pdf" 1509360192 80635 c646d7ef12f039743d90260fbe63f5e2 ""
-  "manuscript.aux" 1509360398 1766 de7a2eef4c998ada0828baf5f74bddf3 ""
-  "manuscript.tex" 1509360393 7981 2a8f4ece15ea7e5e2187921c6b15525a ""
+  "fig_plot_type.pdf" 1509405700 6173 ad929f6ade78b1e4224656bdec1c6ace ""
+  "fig_rotate.pdf" 1509408152 88097 6623a23afda350d5df01638a0d68e92b ""
+  "fig_scatter_points.pdf" 1509408180 89756 1a7e63558148c7274b93a903485446b6 ""
+  "manuscript.aux" 1509408667 2019 97f0b79fe6937ef698e2b4bdde8d1586 ""
+  "manuscript.tex" 1509408666 8636 f6907625a0659ba62b5b95a2c84cc08f ""
   (generated)
-  "manuscript.aux"
-  "manuscript.log"
   "manuscript.pdf"
+  "manuscript.log"
+  "manuscript.aux"
