@@ -7,8 +7,14 @@
 setup_calibration_dir(dir)
 }
 \arguments{
-\item{dir}{the path name to the directory / folder where the files are located}
+\item{dir}{Path name to the directory / folder where the files are located.}
+}
+\value{
+Returns a caldat/ folder within the directory where all metaDigitise objects are stored.
 }
 \description{
 Function will check whether the calibration directory has been setup and if not, create one.
+}
+\author{
+Daniel Noble - daniel.wa.noble@gmail.com
 }

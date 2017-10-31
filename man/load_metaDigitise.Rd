@@ -7,13 +7,16 @@
 load_metaDigitise(doneCalFiles, names)
 }
 \arguments{
-\item{doneCalFiles}{The calibration files that have already been finished taken from directory details}
+\item{doneCalFiles}{The metaDigitise objects that have already been completed in the directory}
 
-\item{names}{The names of the done calibration files}
+\item{names}{The names of the finished metaDigitise objects}
 }
 \value{
 Returns a list of metaDigitised objects that have already been completed
 }
 \description{
-Loads metaDigitise calibration files from a directory that is partially or fully digitised already
+Loads metaDigitise calibration / data files from a directory containing a set of figures that are partially or fully digitised already.
+}
+\author{
+Daniel Noble - daniel.wa.noble@gmail.com
 }

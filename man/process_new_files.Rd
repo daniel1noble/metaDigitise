@@ -15,5 +15,7 @@ process_new_files(dir, summary = TRUE)
 Batch processes image files within a set directory, consolidates the data and exports the data for each image and type
 }
 \author{
-Joel Pick - joel.l.pick@gmail.com; Daniel Noble - daniel.wa.noble@gmail.com
+Joel Pick - joel.l.pick@gmail.com
+
+Daniel Noble - daniel.wa.noble@gmail.com
 }

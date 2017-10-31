@@ -12,3 +12,8 @@ The function will return the type of plot specified by the user and feed this ar
 \description{
 Function that allows user to interface with function to specific each type of plot prior to digitising
 }
+\author{
+Daniel Noble - daniel.wa.noble@gmail.com
+
+Joel Pick - joel.l.pick@gmail.com
+}

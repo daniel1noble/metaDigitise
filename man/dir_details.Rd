@@ -12,3 +12,6 @@ dir_details(dir)
 \description{
 Function will gather important directory details about calibration files and figures needed for processing
 }
+\author{
+Daniel Noble - daniel.wa.noble@gmail.com
+}

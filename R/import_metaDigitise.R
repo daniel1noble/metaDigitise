@@ -3,13 +3,14 @@
 #' @param dir The directory where figures have already been digitised
 #' @param summary Logical indicating whether the imported data should be returned in summarised form ('TRUE') or not ('FALSE')
 #' @return Returns a list (summary = FALSE) or data frame (summary = TRUE)
+#' @author Daniel Noble - daniel.wa.noble@gmail.com
 #' @export
 
 import_metaDigitise <- function(dir, summary = TRUE ) {
 	
 	    details <- dir_details(dir)
 
-	if(length(details$doneCalFiles) == 0) stop("No digitised files to import!")
+	if(length(details$doneCalFiles) == 0) stop("No digitised files to import!", call. = FALSE)
 
 	    metaDig <- load_metaDigitise(details$doneCalFiles, details$calibrations)
 	 plot_types <- lapply(metaDig, function(x) x$plot_type)
@@ -29,10 +30,11 @@ import_metaDigitise <- function(dir, summary = TRUE ) {
 }
 
 #' @title load_metaDigitise
-#' @description Loads metaDigitise calibration files from a directory that is partially or fully digitised already
-#' @param doneCalFiles The calibration files that have already been finished taken from directory details
-#' @param names The names of the done calibration files
+#' @description Loads metaDigitise calibration / data files from a directory containing a set of figures that are partially or fully digitised already.
+#' @param doneCalFiles The metaDigitise objects that have already been completed in the directory
+#' @param names The names of the finished metaDigitise objects
 #' @return Returns a list of metaDigitised objects that have already been completed
+#' @author Daniel Noble - daniel.wa.noble@gmail.com
 
 load_metaDigitise <- function(doneCalFiles, names){
 	metaDig <- lapply(doneCalFiles, function(x) readRDS(x))
@@ -41,10 +43,11 @@ load_metaDigitise <- function(doneCalFiles, names){
 }
 
 #' @title order_lists
-#' @description Will re-order the processed data such that similar types of data are organised into a single list defined by their 
-#' @param list The calibration files that have already been finished
-#' @param plot_types The list of plot types 
+#' @description Will re-order the processed data such that similar types of data are organised into a single list defined by their plot type.
+#' @param list The list of metaDigitise objects that have already been finished within the caldat/ folder
+#' @param plot_types The list of plot types extracted from metaDigitised objects
 #' @return Returns a list ordered by the plot type
+#' @author Daniel Noble - daniel.wa.noble@gmail.com
 
 order_lists <- function(list, plot_types){
 

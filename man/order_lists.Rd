@@ -7,13 +7,16 @@
 order_lists(list, plot_types)
 }
 \arguments{
-\item{list}{The calibration files that have already been finished}
+\item{list}{The list of metaDigitise objects that have already been finished within the caldat/ folder}
 
-\item{plot_types}{The list of plot types}
+\item{plot_types}{The list of plot types extracted from metaDigitised objects}
 }
 \value{
 Returns a list ordered by the plot type
 }
 \description{
-Will re-order the processed data such that similar types of data are organised into a single list defined by their
+Will re-order the processed data such that similar types of data are organised into a single list defined by their plot type.
+}
+\author{
+Daniel Noble - daniel.wa.noble@gmail.com
 }
