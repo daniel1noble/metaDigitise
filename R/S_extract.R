@@ -1,7 +1,7 @@
 
 #' @title delete_points
 #' @param raw_data data
-#' @description Delete group points to scatterplots
+#' @description Delete groups from scatterplots
  
 delete_group <- function(raw_data){
 	ids <- unique(raw_data$id)
@@ -11,12 +11,11 @@ delete_group <- function(raw_data){
 }
 
 
-
 #' @title edit_group
 #' @param raw_data data
 #' @param group_id group_id
-#' @param ... ...
-#' @description Edit group points to scatterplots
+#' @param ... other functions to pass to internal_redraw
+#' @description Edit group points in scatterplots
  
 edit_group <- function(raw_data, group_id,...){
 	
@@ -33,6 +32,12 @@ edit_group <- function(raw_data, group_id,...){
 		i <- unique(group_data$group)
 		add_removeQ <- "b"
 		raw_data <- subset(raw_data, id != group_id)
+		
+		idQ <- user_options("Change group identifier? (y/n) ",c("y","n"))
+		if(idQ=="y"){
+			group_id <- user_unique("\nGroup identifier: ", unique(raw_data$id))
+			group_data$id <- group_id
+		}
 	}
 	
 
@@ -66,10 +71,6 @@ edit_group <- function(raw_data, group_id,...){
 #' @param ... arguments passed to internal_redraw
 #' @description Extraction of data from scatterplots
 
-#
-#	object$raw_data
-#	do.call(group_scatter_extract, c(object, edit=TRUE))
-
 group_scatter_extract <- function(edit=FALSE, raw_data = data.frame(), ...){
 
 	cat(
@@ -87,71 +88,24 @@ group_scatter_extract <- function(edit=FALSE, raw_data = data.frame(), ...){
 		group_id <- NULL
 
 		if(editQ=="a"){
-			if(nrow(raw_data)==0){
-				group_id <- readline("\nGroup identifier: ")
-			}else{
-				group_id <- user_unique("\nGroup identifier: ", unique(raw_data$id))
-			}
+			# if(nrow(raw_data)==0){
+			# 	group_id <- readline("\nGroup identifier: ")
+			# }else{
+			group_id <- user_unique("\nGroup identifier: ", unique(raw_data$id))
+			# }
 			editQ <- "e"
 		}
 
 		if(editQ == "e") raw_data <- edit_group(raw_data, group_id,...)
-#		if(edit){
-#			cat("\nGroup identifier:",ids[i],"\n")
-#			idQ <- user_options("Change group identifier? (y/n) ",c("y","n"))
 
 		if(editQ == "d") raw_data <- delete_group(raw_data)
 	
 		internal_redraw(...,raw_data=raw_data, calibration=TRUE, points=TRUE)
-		editQ <- readline("\nAdd group, edit group, delete group, or finish? a/e/d/f ")
+		editQ <- readline("\nAdd group, Edit group, Delete group, or Finish plot? a/e/d/f ")
 	}
 	return(raw_data)
 }
 
-
-
-
-
-
-group_scatter_extract_old <- function(edit=FALSE, nGroups, raw_data = data.frame(),...){
-
-	cat(
-    #"..............NOW .............",
-    "\nFollow instructions below, to exit point adding or removing:",
-    " - Windows: right click on the plot area and choose 'Stop'!",
-    " - X11: hit any mouse button other than the left one.",
-    " - quartz/OS X: hit ESC\n",
-    sep = "\n\n")
-
-	cols <- rep(c("red", "green", "purple"),length.out=nGroups)
-	pchs <- rep(rep(c(19, 17, 15),each=3),length.out=nGroups)
-
-	for(i in 1:nGroups) {
-		if(edit){
-			ids <- unique(raw_data$id)
-			cat("\nGroup identifier",i,":",ids[i],"\n")
-			id <- ids[i]
-#			editQ <- user_options("Change group identifier? (y/n) ",c("y","n"))
-		}else{
-			id <- readline(paste("\nGroup identifier",i,":"))
-		}
-		
-		add_removeQ <-  if(edit){ "b" }else{ "a" }
-		
-		while(add_removeQ!="c"){
-			if(add_removeQ=="a"){
-				group_points <- add_points(col=cols[i], pch=pchs[i])
-				raw_data <- rbind(raw_data, data.frame(id=id, x=group_points$x,y=group_points$y))
-			}
-			if(add_removeQ=="d") {
-				raw_data <- remove_points(raw_data=raw_data)
-			}
-			internal_redraw(...,raw_data=raw_data, calibration=TRUE, points=TRUE)
-			add_removeQ <- readline("\nAdd, delete or continue? a/d/c ")
-		}
-	}
-	return(raw_data)
-}	
 
 
 

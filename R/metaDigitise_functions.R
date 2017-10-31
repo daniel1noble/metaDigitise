@@ -7,10 +7,12 @@
 #' @author Joel Pick
 #' @export
 
-internal_digitise <- function(image_file, plot_type=NULL){
+internal_digitise <- function(image_file, plot_type=NULL, cex=1){
 		
 	output <- list()
 	output$image_file <- image_file
+
+	output$cex <- cex
 
 	### image rotation
 	rotate_image <- user_rotate_graph(image_file)
@@ -68,7 +70,7 @@ internal_digitise <- function(image_file, plot_type=NULL){
 
 print.metaDigitise <- function(x, ...){
 	cat(paste("Data extracted from:\n", x$image_file,"\n"))
-	cat(paste0("Figure", ifelse(x$flip, " flipped and ", " "), "rotated ", x$rotate, " degrees"),"\n")
+	cat(paste0("Figure", ifelse(x$flip, " flipped and ", " "), "rotated ", round(x$rotate,2), " degrees"),"\n")
 	cat(paste("Figure identified as", x$plot_type, "with", length(unique(x$raw_data$id)), "groups","\n"))
 }
 
