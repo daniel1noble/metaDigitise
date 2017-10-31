@@ -41,6 +41,7 @@ process_new_files <- function(dir, summary = TRUE) {
 		done_objects <- load_metaDigitise(done_details$doneCalFiles, done_details$names)
 		done_plot_types <- lapply(done_objects, function(x) x$plot_type)
 	} else{
+		done_objects = 0
 		done_plot_types = 0
 	}
 
@@ -69,9 +70,15 @@ process_new_files <- function(dir, summary = TRUE) {
 		return(do.call(rbind, list(summary(done_objects), summary(data_list))))
 
 	}else{
-			done_figs <- extract_digitised(done_objects,  summary = summary)
-			new_figs <- extract_digitised(data_list, summary = summary)
-		return(order_lists(c(done_figs, new_figs), plot_types = plot_type))
+		if(done_objects == 0){
+				done_figs <- extract_digitised(done_objects,  summary = summary)
+				new_figs <- extract_digitised(data_list, summary = summary)
+			return(order_lists(c(done_figs, new_figs), plot_types = plot_type))
+			
+		} else{
+				new_figs <- extract_digitised(data_list, summary = summary)
+				return(order_lists(new_figs, plot_types = plot_type))
+		}
 	}
 
 }

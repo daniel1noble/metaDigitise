@@ -8,6 +8,9 @@
 import_metaDigitise <- function(dir, summary = TRUE ) {
 	
 	    details <- dir_details(dir)
+
+	if(length(details$doneCalFiles) == 0) stop("No digitised files to import!")
+
 	    metaDig <- load_metaDigitise(details$doneCalFiles, details$name)
 	 plot_types <- lapply(metaDig, function(x) x$plot_type)
 
