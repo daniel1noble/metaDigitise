@@ -40,9 +40,12 @@ process_new_files <- function(dir, summary = TRUE) {
 	if(length(done_details$calibrations) >= 1){	
 		done_objects <- load_metaDigitise(done_details$doneCalFiles, done_details$names)
 		done_plot_types <- lapply(done_objects, function(x) x$plot_type)
+		names <- lapply(done_objects, function(x) filename(x$image_file))
+		names(done_plot_types) <- names
 	} else{
 		done_objects = NULL
 		done_plot_types = NULL
+		names = NULL
 	}
 
 	 plot_types <-  if (type == "diff") {NULL} else { specify_type() }
@@ -66,14 +69,19 @@ process_new_files <- function(dir, summary = TRUE) {
 		}
 
 	if(summary == TRUE){
-
-		return(do.call(rbind, list(summary(done_objects), summary(data_list))))
+		if(length(done_objects) == 0){
+			return(lapply(data_list, function(x) summary(x)))
+		} else{
+			sum_dat <- do.call(rbind, c(lapply(done_objects, function(x) summary(x)), lapply(data_list, function(x) summary(x))))
+			rownames(sum_dat) <- 1:nrow(sum_dat)
+			return(sum_dat)
+		}
 
 	}else{
 		if(length(done_objects) == 0){
 				new_figs <- extract_digitised(data_list, summary = summary)
-				return(order_lists(new_figs, plot_types = plot_type))
-				
+				return(new_figs)
+
 		} else{
 				done_figs <- extract_digitised(done_objects,  summary = summary)
 				new_figs <- extract_digitised(data_list, summary = summary)

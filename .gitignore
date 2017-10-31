@@ -4,4 +4,4 @@ example_figs/
 metaDigitise.Rproj
 .Rproj.user
 sim_figs.R
-R/testing-script.R
+testing-script.R
