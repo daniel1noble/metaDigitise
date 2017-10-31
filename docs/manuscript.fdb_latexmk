@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1509408667 "manuscript.tex" "manuscript.pdf" "manuscript" 1509408668
+["pdflatex"] 1509430981 "manuscript.tex" "manuscript.pdf" "manuscript" 1509430981
   "/usr/local/texlive/2017/texmf-dist/fonts/map/fontname/texfonts.map" 1480098670 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2017/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1480098698 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2017/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1480098698 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -65,15 +65,13 @@
   "/usr/local/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1495593472 2350277 a699055bee05bf8a40b0504752487295 ""
   "/usr/local/texlive/2017/texmf-var/web2c/pdftex/pdflatex.fmt" 1502609529 4129592 42cbefe75cd1afbf7a840ee914c6547b ""
   "/usr/local/texlive/2017/texmf.cnf" 1495593465 577 2b71d4d888f9e5560b2e99985915a9fa ""
-  "fig_all_extract.pdf" 1509408488 39254 44db27aae548f79a0f078ec931ab5b43 ""
+  "fig_all_extract.pdf" 1509430971 82269 bdb95d5f0823db5735bf6e41e3059088 ""
   "fig_calibrate.pdf" 1509408177 89021 435057067482cb07a222e05209025e63 ""
-  "fig_flip.pdf" 1509360169 16922 ae6219179dcbe7aedbf73de123ce86f5 ""
   "fig_plot_type.pdf" 1509405700 6173 ad929f6ade78b1e4224656bdec1c6ace ""
-  "fig_rotate.pdf" 1509408152 88097 6623a23afda350d5df01638a0d68e92b ""
-  "fig_scatter_points.pdf" 1509408180 89756 1a7e63558148c7274b93a903485446b6 ""
-  "manuscript.aux" 1509408667 2019 97f0b79fe6937ef698e2b4bdde8d1586 ""
-  "manuscript.tex" 1509408666 8636 f6907625a0659ba62b5b95a2c84cc08f ""
+  "fig_rotate.pdf" 1509430976 109545 a553437ee0c8135f1d0005bcc5de7f63 ""
+  "manuscript.aux" 1509430981 2285 ee1215b8845fd7944bd5f2eccbb284df ""
+  "manuscript.tex" 1509430934 8900 6d1698840c5193d3b1f8ed3828d203d0 ""
   (generated)
   "manuscript.pdf"
-  "manuscript.log"
   "manuscript.aux"
+  "manuscript.log"

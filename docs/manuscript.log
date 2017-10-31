@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.8.13)  31 OCT 2017 11:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.8.13)  31 OCT 2017 17:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -617,74 +617,50 @@ Package pdftex.def Info: fig_plot_type.pdf used on input line 43.
 
 [2
 
-] <fig_rotate.pdf, id=14, 867.24pt x 578.16pt>
+] <fig_rotate.pdf, id=14, 867.24pt x 1156.32pt>
 File: fig_rotate.pdf Graphic file (type pdf)
  <use fig_rotate.pdf>
 Package pdftex.def Info: fig_rotate.pdf used on input line 69.
-(pdftex.def)             Requested size: 407.66833pt x 271.77934pt.
+(pdftex.def)             Requested size: 407.66833pt x 543.5587pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[3 <./fig_plot_type.pdf>] <fig_flip.pdf, id=24, 867.24pt x 578.16pt>
-File: fig_flip.pdf Graphic file (type pdf)
-
-<use fig_flip.pdf>
-Package pdftex.def Info: fig_flip.pdf used on input line 78.
-(pdftex.def)             Requested size: 407.66833pt x 271.77934pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<fig_calibrate.pdf, id=25, 867.24pt x 578.16pt>
+[3 <./fig_plot_type.pdf>] [4 <./fig_rotate.pdf>]
+<fig_calibrate.pdf, id=36, 867.24pt x 578.16pt>
 File: fig_calibrate.pdf Graphic file (type pdf)
  <use fig_calibrate.pdf>
-Package pdftex.def Info: fig_calibrate.pdf used on input line 89.
+Package pdftex.def Info: fig_calibrate.pdf used on input line 83.
 (pdftex.def)             Requested size: 407.66833pt x 271.77934pt.
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[4 <./fig_rotate.pdf>]
-Overfull \vbox (9.4072pt too high) has occurred while \output is active []
-
-
-[5 <./fig_flip.pdf> <./fig_calibrate.pdf>]
-<fig_all_extract.pdf, id=54, 1300.86pt x 578.16pt>
+<fig_all_extract.pdf, id=37, 867.24pt x 1156.32pt>
 File: fig_all_extract.pdf Graphic file (type pdf)
  <use fig_all_extract.pdf>
-Package pdftex.def Info: fig_all_extract.pdf used on input line 102.
-(pdftex.def)             Requested size: 407.66833pt x 181.18623pt.
-
-<fig_scatter_points.pdf, id=55, 867.24pt x 578.16pt>
-File: fig_scatter_points.pdf Graphic file (type pdf)
-
-<use fig_scatter_points.pdf>
-Package pdftex.def Info: fig_scatter_points.pdf used on input line 116.
-(pdftex.def)             Requested size: 407.66833pt x 271.77934pt.
+Package pdftex.def Info: fig_all_extract.pdf used on input line 93.
+(pdftex.def)             Requested size: 407.66833pt x 543.5587pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[6 <./fig_all_extract.pdf>] [7 <./fig_scatter_points.pdf>] (./manuscript.aux) )
- 
+[5 <./fig_calibrate.pdf>] [6 <./fig_all_extract.pdf>] [7] [8] (./manuscript.aux
+) ) 
 Here is how much of TeX's memory you used:
- 3547 strings out of 492995
- 47518 string characters out of 6132704
- 119450 words of memory out of 5000000
- 7038 multiletter control sequences out of 15000+600000
+ 3535 strings out of 492995
+ 47280 string characters out of 6132704
+ 119451 words of memory out of 5000000
+ 7028 multiletter control sequences out of 15000+600000
  8569 words of font info for 31 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 39i,6n,25p,712b,219s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><
-/usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></
-usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></us
-r/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/
-local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb>
-Output written on manuscript.pdf (7 pages, 405622 bytes).
+ 39i,6n,25p,738b,219s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pf
+b></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
+></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><
+/usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></u
+sr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb>
+Output written on manuscript.pdf (8 pages, 366109 bytes).
 PDF statistics:
- 98 PDF objects out of 1000 (max. 8388607)
- 60 compressed objects within 1 object stream
+ 87 PDF objects out of 1000 (max. 8388607)
+ 53 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 31 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 

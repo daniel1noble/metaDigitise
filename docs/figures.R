@@ -7,6 +7,11 @@ head(airquality)
 #plot(Temp~Wind,airquality, subset = Month %in% c(5,6), pch=c(19,1)[as.factor(airquality$Month)])
 
 cex.mtext = 2
+setosa <- subset(iris, Species == "setosa")
+
+
+
+## first plot
 
 setEPS()
 pdf("/Users/joelpick/Dropbox/0_postdoc/10_metaDigitise/docs/fig_plot_type.pdf", height=9, width=9)
@@ -25,8 +30,6 @@ boxplot(Sepal.Length ~ Species, iris, ylab="Sepal Length", xlab="Species", col="
 mtext("B", 3, adj=0, line=0, cex=cex.mtext)
 
 
-setosa <- subset(iris, Species == "setosa")
-
 set.seed(5)
 plot(Sepal.Length~jitter(Petal.Length),setosa, pch=19, ylab="Sepal Length", xlab="Petal Length")
 mtext("C", 3, adj=0, line=0, cex=cex.mtext)
@@ -35,6 +38,10 @@ hist(setosa$Sepal.Length,, main="", col="grey", xlab="Sepal Length")
 mtext("D", 3, adj=0, line=0, cex=cex.mtext)
 
 dev.off()
+
+
+
+
 
 ### make pngs
 png("/Users/joelpick/Dropbox/0_postdoc/10_metaDigitise/docs/images/iris_mean_error.png")
@@ -60,13 +67,15 @@ hist(setosa$Sepal.Length,, main="", col="grey", xlab="Sepal Length")
 dev.off()
 
 
+png("/Users/joelpick/Dropbox/0_postdoc/10_metaDigitise/docs/images/iris_boxplot_flip.png")
+par(mar=c(6,5,1,1), cex.lab=1.5)
+boxplot(Petal.Width ~ Species, iris, ylab="Petal Width", xlab="Species", col="grey", range=0, horizontal=TRUE)
+dev.off()
+
+
+
 
 dat <- metaDigitise("/Users/joelpick/Dropbox/0_postdoc/10_metaDigitise/docs/images/")
-
-
-
-
-
 
 object_scatter <- readRDS("/Users/joelpick/Dropbox/0_postdoc/10_metaDigitise/docs/images/caldat/iris_scatter_rotate")
 object_hist <- readRDS("/Users/joelpick/Dropbox/0_postdoc/10_metaDigitise/docs/images/caldat/iris_histogram")
@@ -76,29 +85,18 @@ object_box <- readRDS("/Users/joelpick/Dropbox/0_postdoc/10_metaDigitise/docs/im
 
 
 setEPS()
-pdf("/Users/joelpick/Dropbox/0_postdoc/10_metaDigitise/docs/fig_rotate.pdf", height=8, width=12)
+pdf("/Users/joelpick/Dropbox/0_postdoc/10_metaDigitise/docs/fig_rotate.pdf", height=16, width=12)
 
-par(mfrow=c(1,2), oma=c(0,0,3,0), cex.lab=1.5)
+par(mfrow=c(2,2), oma=c(0,0,0,0), cex.lab=1.5)
 do.call(internal_redraw, c(object_scatter, rotation=FALSE, calibration=FALSE,points=FALSE))
-mtext("A", side=3, outer = TRUE, adj=0.1, cex=cex.mtext)
+mtext("A", side=3, adj=0.1, cex=cex.mtext)
 do.call(internal_redraw, c(object_scatter, rotation=TRUE, calibration=FALSE,points=FALSE))
-mtext("B", side=3, outer = TRUE, adj=0.6, cex=cex.mtext)
-
+mtext("B", side=3, adj=0.1, cex=cex.mtext)
+internal_redraw("/Users/joelpick/Dropbox/0_postdoc/10_metaDigitise/docs/images/iris_boxplot_flip.png")
+mtext("C", side=3, adj=0.1, cex=cex.mtext)
+internal_redraw("/Users/joelpick/Dropbox/0_postdoc/10_metaDigitise/docs/images/iris_boxplot_flip.png", flip=TRUE)
+mtext("D", side=3, adj=0.1, cex=cex.mtext)
 dev.off()
-
-
-
-setEPS()
-pdf("/Users/joelpick/Dropbox/0_postdoc/10_metaDigitise/docs/fig_flip.pdf", height=8, width=12)
-
-par(mfrow=c(1,2), oma=c(0,0,3,0), cex.lab=1.5)
-internal_redraw("/Users/joelpick/Dropbox/0_postdoc/10_metaDigitise/example_figs/horiz_plot.png")
-mtext("A", side=3, outer = TRUE, adj=0.1, cex=cex.mtext)
-internal_redraw("/Users/joelpick/Dropbox/0_postdoc/10_metaDigitise/example_figs/horiz_plot.png", flip=TRUE)
-mtext("B", side=3, outer = TRUE, adj=0.6, cex=cex.mtext)
-
-dev.off()
-
 
 
 
@@ -114,49 +112,22 @@ mtext("B", side=3, outer = TRUE, adj=0.6, cex=cex.mtext)
 
 dev.off()
 
-#user_calibrate(list(image_file="/Users/joelpick/Dropbox/0_postdoc/10_metaDigitise/docs/scatter_rotate.png", variable=c(y="x", x="y"), rotate=6.66894, plot_type="scatterplot"))
-
-
-setEPS()
-pdf("/Users/joelpick/Dropbox/0_postdoc/10_metaDigitise/docs/fig_scatter_points.pdf", height=8, width=12)
-
-par(mfrow=c(1,2), oma=c(0,0,3,0))
-do.call(internal_redraw, c(object_scatter, points=FALSE))
-mtext("A", side=3, outer = TRUE, adj=0.1, cex=cex.mtext)
-do.call(internal_redraw, c(object_scatter, points=TRUE))
-mtext("B", side=3, outer = TRUE, adj=0.6, cex=cex.mtext)
-
-dev.off()
-
- 
-# point_extraction(object_scatter)
-
-setEPS()
-pdf("/Users/joelpick/Dropbox/0_postdoc/10_metaDigitise/docs/fig_scatter_points.pdf", height=8, width=12)
-
-par(mfrow=c(1,2), oma=c(0,0,3,0))
-do.call(internal_redraw, c(object_scatter, points=FALSE))
-mtext("A", side=3, outer = TRUE, adj=0.1, cex=cex.mtext)
-do.call(internal_redraw, c(object_scatter, points=TRUE))
-mtext("B", side=3, outer = TRUE, adj=0.6, cex=cex.mtext)
-
-dev.off()
-
-
 
 
 
 
 setEPS()
-pdf("/Users/joelpick/Dropbox/0_postdoc/10_metaDigitise/docs/fig_all_extract.pdf", height=8, width=18)
+pdf("/Users/joelpick/Dropbox/0_postdoc/10_metaDigitise/docs/fig_all_extract.pdf", height=16, width=12)
 
-par(mfrow=c(1,3), oma=c(0,0,3,0))
+par(mfrow=c(2,2), oma=c(0,0,0,0))
 do.call(internal_redraw, c(object_mean, points=TRUE))
-mtext("A", side=3, outer = TRUE, adj=0.1, cex=cex.mtext)
+mtext("A", side=3, adj=0.1, cex=cex.mtext)
 do.call(internal_redraw, c(object_box, points=TRUE))
-mtext("B", side=3, outer = TRUE, adj=0.4, cex=cex.mtext)
+mtext("B", side=3, adj=0.1, cex=cex.mtext)
+do.call(internal_redraw, c(object_scatter, points=TRUE))
+mtext("C", side=3, adj=0.1, cex=cex.mtext)
 do.call(internal_redraw, c(object_hist, points=TRUE))
-mtext("c", side=3, outer = TRUE, adj=0.7, cex=cex.mtext)
+mtext("D", side=3, adj=0.1, cex=cex.mtext)
 
 dev.off()
 
