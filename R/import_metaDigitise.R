@@ -11,12 +11,13 @@ import_metaDigitise <- function(dir, summary = TRUE ) {
 
 	if(length(details$doneCalFiles) == 0) stop("No digitised files to import!")
 
-	    metaDig <- load_metaDigitise(details$doneCalFiles, details$name)
+	    metaDig <- load_metaDigitise(details$doneCalFiles, details$calibrations)
 	 plot_types <- lapply(metaDig, function(x) x$plot_type)
 
 	if(summary == TRUE){
 	
 		import <- do.call(rbind,lapply(metaDig, function(x) summary(x)))
+		rownames(import) <- 1:nrow(import)
 	
 	} else{
 		tmp <- lapply(metaDig, function(x) x$processed_data)
