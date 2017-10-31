@@ -123,12 +123,12 @@ internal_redraw <- function(image_file, flip=FALSE, rotate=0, plot_type=NULL, va
 	op <- par(mar=c(3,0,2,0))
 
 	image <- magick::image_read(image_file)
-	new_image <- redraw_rotation(image=image, flip=flip, rotate=rotate)
+	if(rotation) image <- redraw_rotation(image=image, flip=flip, rotate=rotate)
 
-	image_details <- c(width = magick::image_info(new_image)["width"][[1]], height = magick::image_info(new_image)["height"][[1]])
+	image_details <- c(width = magick::image_info(image)["width"][[1]], height = magick::image_info(image)["height"][[1]])
 
 
-	plot(new_image)
+	plot(image)
 	mtext(filename(image_file),3, 1)
 
 	if(!is.null(plot_type)) mtext(plot_type,3, 0)
