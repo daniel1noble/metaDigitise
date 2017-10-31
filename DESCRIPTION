@@ -13,4 +13,5 @@ Imports: digitize,
     stats,
     graphics,
     utils,
-    testthat
+    testthat,
+    purrr

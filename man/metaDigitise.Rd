@@ -18,14 +18,12 @@ A data frame or list containing the raw digitised data or the processed, summary
 Single or batch processing of figures with .png, .jpg, .tiff, .pdf extensions within a set directory. metaDigitise consolidates the data and exports the data for each image and image type. It can also summarise the data, provide the raw data (if scatterplots) and automatically imports previously finished data and merges it with newly digitised data. metaDigitise also allows users to check their calibration along with editing previous digitisations.
 }
 \details{
-metaDigitise can be used on a directory with a whole host of different figure types (mean and error, scatter plots, box plots and histograms) and file types (.jpeg, .png, .tiff, .pdf). It will automatically cycle through all files within a directory in order, prompting the user for specific information as they go. It will automatically write metaDigitise object files (in .RDS format containing processed and calibration data along with directory and file details), into a special caldat/ folder within the directory. Importantly, as new files are added to a directory that has already been "completed", metaDigitise will recognize these unfinished files and only cycle through the digitisation of these new files. 
-
-metDigitise is built for reproducibility and ease of operation. This means that, so long as the caldat/ folder along with respective images are maintained, anyone using metaDigitise can simply import existing digitisations, modify them and fix them.
+metaDigitise can be used on a directory with a whole host of different figure types (mean and error, scatter plots, box plots and histograms) and file types (.jpeg, .png, .tiff, .pdf). It will automatically cycle through all files within a directory in order, prompting the user for specific information as they go. It will automatically write metaDigitise object files (in .RDS format containing processed and calibration data along with directory and file details), into a special caldat/ folder within the directory. Importantly, as new files are added to a directory that has already been "completed", metaDigitise will recognize these unfinished files and only cycle through the digitisation of these new files. metDigitise is built for reproducibility and ease of operation. This means that, so long as the caldat/ folder along with respective images are maintained, anyone using metaDigitise can simply import existing digitisations, modify them and fix them.
 }
 \examples{
 # data <- metaDigitise(dir = "./example_figs/", summary = TRUE)
 # summary(data)
 }
 \author{
-Joel Pick - joel.l.pick@gmail.com; Daniel Noble - daniel.wa.noble@gmail.com
+{Joel Pick - joel.l.pick@gmail.com; Daniel Noble - daniel.wa.noble@gmail.com}
 }
