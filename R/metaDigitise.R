@@ -108,7 +108,7 @@ extract_digitised <- function(list, summary = TRUE) {
 		return(data)
 	} else {
 		tmp <- lapply (list, function(x) x$processed_data)
-		names(tmp) <- unlist(lapply(list, function(x) filename(x)))
+		names(tmp) <- unlist(lapply(list, function(x) filename(x$image_file)))
 		return(tmp)
 	}
 }
