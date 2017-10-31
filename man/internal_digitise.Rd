@@ -4,12 +4,14 @@
 \alias{internal_digitise}
 \title{internal_digitise}
 \usage{
-internal_digitise(image_file, plot_type = NULL)
+internal_digitise(image_file, plot_type = NULL, cex = 1)
 }
 \arguments{
 \item{image_file}{Image file}
 
 \item{plot_type}{Type of plot from "mean_error","boxplot","scatterplot" or"histogram". Function will prompt if not entered by user.}
+
+\item{cex}{point size for replotting}
 }
 \value{
 List of

@@ -10,5 +10,5 @@ delete_group(raw_data)
 \item{raw_data}{data}
 }
 \description{
-Delete group points to scatterplots
+Delete groups from scatterplots
 }

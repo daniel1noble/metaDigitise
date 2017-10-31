@@ -3,6 +3,7 @@
 #' @description Extracts points from a single figure and processes data
 #' @param image_file Image file
 #' @param plot_type Type of plot from "mean_error","boxplot","scatterplot" or"histogram". Function will prompt if not entered by user.
+#' @param cex point size for replotting
 #' @return List of 
 #' @author Joel Pick
 #' @export

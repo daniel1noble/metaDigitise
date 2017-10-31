@@ -11,8 +11,8 @@ edit_group(raw_data, group_id, ...)
 
 \item{group_id}{group_id}
 
-\item{...}{...}
+\item{...}{other functions to pass to internal_redraw}
 }
 \description{
-Edit group points to scatterplots
+Edit group points in scatterplots
 }
