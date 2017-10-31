@@ -43,6 +43,8 @@ process_new_files <- function(dir, summary = TRUE) {
 	if(length(done_details$calibrations) >= 1){	
 		done_objects <- load_metaDigitise(done_details$doneCalFiles, done_details$names)
 		done_plot_types <- lapply(done_objects, function(x) x$plot_type)
+	} else{
+		done_plot_types = FALSE
 	}
 
 	 plot_types <-  if (type == "diff") {NULL} else { specify_type() }
@@ -59,10 +61,10 @@ process_new_files <- function(dir, summary = TRUE) {
 	
 		complete_plot_types <- lapply(data_list, function(x) x$plot_type)
 
-		if( length(done_plot_types) > 1){
-			plot_type <- c(done_plot_types, complete_plot_types)
-		} else{
+		if( done_plot_types == FALSE){
 			plot_type <- complete_plot_types
+		} else{
+			plot_type <- c(done_plot_types, complete_plot_types)
 		}
 
 	if(summary == TRUE){
