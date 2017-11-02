@@ -64,7 +64,7 @@ Nonetheless, how users set up their directory is really up to them. However, it 
 
 We'll first demonstrate how `metaDigitise` works when the user simply wants to extract data from a single figure. Here, we'll use the `iris` (loaded in R using `data(iris)`) dataset and some plots from this dataset to demonstrate how it works. In this case, we have an `example_figs/` folder in our meta-analysis project directory and a scatter plot of sepal length and width for two species (setosa and versicolor), which we would like to extract relevant statistics from. We've labeled this file 001_Anderson_1935_Fig1.png. Notice our naming of this file. 001 is the paper number followed by author, year (in this case the data was collected by E. Anderson in 1935) and the figure number. This makes it easy to keep track of the figures being digitised. Here is what this figure looks like:
 
-<img align="center" src="https://user-images.githubusercontent.com/3505482/32259397-651ea5a6-bf14-11e7-8073-a18aa7bd3094.png" hspace="20" width = "300"/>
+<img align="centre" src="https://user-images.githubusercontent.com/3505482/32259397-651ea5a6-bf14-11e7-8073-a18aa7bd3094.png" hspace="20" width = "300"/>
 
 To extract from 001_Anderson_1935_Fig1.png we'll first set the working directory to the folder containing images. While this step isn't completely necessary, it currently is if you would like colleagues to be able to reproduce the digitisations at a later date, which of course we advocate (see below). Our code will therefore be as follows:
 
@@ -187,7 +187,7 @@ Add points, delete points or continue? a/d/c c
 
 Once we are done digitising all the groups our plot will look something like this:
 
-![rplot](https://user-images.githubusercontent.com/3505482/32259894-071cdcc6-bf18-11e7-8e19-c8d449f9fe01.png)
+<img align="centre" src="https://user-images.githubusercontent.com/3505482/32259894-071cdcc6-bf18-11e7-8e19-c8d449f9fe01.png" hspace="20" width = "450"/>
 
 `meta-Digitise` will conveniently print on the figure the calibration details along with group names and sample sizes. It will also print the figure name, which is useful if the user needs to go back and find the paper to obtain information. Printing this information on the figure is useful so that input can be checked with actual values on the figure, and any mistakes can then be corrected if found.  Don't worry if you notice a mistake. Prior to exiting the figure you will be prompted with this:
 
@@ -325,9 +325,7 @@ The prompts, again, tell the user to calibrate the y-axis, enter these calibrati
 
 ```Type of error (se, CI95, sd): se```
 
-
-align="center"
-![002_doe_2013_fig1_digitised](https://user-images.githubusercontent.com/3505482/32304001-44c9f164-bfc0-11e7-80c6-d36a1f463c2b.png)
+<img align="centre" src="https://user-images.githubusercontent.com/3505482/32304001-44c9f164-bfc0-11e7-80c6-d36a1f463c2b.png" hspace="20" width = "450"/>
 
 When we are done the current plot, beacuse there is another figure left to digitise, we get prompted how many figures are left and whether we want to continue. This allows the user to stop or automatically bring up the next figure for processing:
 
@@ -343,7 +341,7 @@ Add, reclick or continue? a/r/c a
  .... etc....
 ```
 
-![003_doe_2013_fig3_digitised](https://user-images.githubusercontent.com/3505482/32304002-44f1fb46-bfc0-11e7-81b0-3b0c5e854cde.png)
+<img src="https://user-images.githubusercontent.com/3505482/32304002-44f1fb46-bfc0-11e7-81b0-3b0c5e854cde.png" hspace="20" width = "450"/>
 
 Once the user is finished, `metaDigitise` will sort all the summary data for each of the figures, including the previously digitised figure(s) (001_Anderson_1935_Fig1.png) in the `data` object.
 
@@ -529,11 +527,11 @@ Re-enter error type (y/n) n
 
 This provides lots of flexibility to edit various aspects of previously digitised functions. This then integrates this corrected data directly into the fully formed data summary and re-writes the .RDS file in the `caldat` folder automatically.
 
-<img src="https://user-images.githubusercontent.com/3505482/32309074-543427ba-bfdd-11e7-9d4b-5aa65c764aef.png" hspace="20" width = "300"/><img src="https://user-images.githubusercontent.com/3505482/32304001-44c9f164-bfc0-11e7-80c6-d36a1f463c2b.png" hspace="20" width = "300"/>
+<img src="https://user-images.githubusercontent.com/3505482/32309074-543427ba-bfdd-11e7-9d4b-5aa65c764aef.png" hspace="20" width = "450"/><img src="https://user-images.githubusercontent.com/3505482/32304001-44c9f164-bfc0-11e7-80c6-d36a1f463c2b.png" hspace="20" width = "450"/>
 
 Above, we have just slightly modified versicolor's point to make it overlap a bit better with the black dot. And we can see the slight change in this value:
 
 # Conclusions <a name="Conclusion"></a>
 
-We are still actively developing `metaDigitise` particularly post-processing functions for reproducibility. We would be more than happy to hear what you think of it, possible improvements or bugs that are found. Please lodge an issue and we can try and deal with these as soon as possible. Also feel free to email the package maintainers. Our future plans include abilities to deal with log-transformed axes, including arguments for calculating standard deviations from 95%CI's and standard errors using the t-distribution to correct the t-value for small sample sizes (currently assumed t-values are 1.96 as is normal), dealing with asymmetric error bars and the possibility of zooming in plots such that greater accuracy can be achieved when digitising. 
+We are still actively developing `metaDigitise` particularly post-processing functions for reproducibility. We would be more than happy to hear what you think of it, suggestions for possible improvements or to hear about bugs that are found. Please lodge an issue and we can try and deal with these as soon as possible. Also, feel free to email the package maintainers. Our future plans include building in abilities to deal with log-transformed axes, including arguments for calculating standard deviations from 95`%` confidence intervals and standard errors using the t-distribution to correct the t-value for small sample sizes (currently assumed t-values are 1.96 as is normal), dealing with asymmetric error bars and the possibility of zooming in plots such that greater accuracy can be achieved when digitising. 
 
