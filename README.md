@@ -15,7 +15,7 @@
 
 # Introduction <a name="Introduction"></a>
 
-`metaDigitise` is an R package that provides functions for extracting raw data and summary statistics from figures in primary research papers. Often third party applications are used to do this (e.g., `graphClick` or `dataThief`), but the output from these are handled separately from the analysis package, making this process more laborious than it needs to be. `metaDigitise` allows users to extract information from a figure or set of figures all within the R environment making data extraction, analysis and export more streamlined. It also provides users with options to conduct the necessary calculations on raw data immediately after extraction so that comparable summary statistics can be obtained, and will condense multiple figures into data frames or lists (depending on the type of figure) and these objects can easily be exported from R. Conveniently, when bulk processing figures `metaDigitise` will only work on figures not already completed within a directory, so that new figures can be added at anytime without having to specify the specific file types. `metaDigitise` was built for reproducibility in mind. It has functions that allow users to redraw their digitisations on figures, correct anything and access the raw calibration data which is written automatically for each figure that is digitised into a special `caldat` folder within the directory.
+`metaDigitise` is an R package that provides functions for extracting raw data and summary statistics from figures in primary research papers. Often third party applications are used to do this (e.g., `graphClick` or `dataThief`), but the output from these are handled separately from the analysis package, making this process more laborious than it needs to be. `metaDigitise` allows users to extract information from a figure or set of figures all within the R environment making data extraction, analysis and export more streamlined. It also provides users with options to conduct the necessary calculations on raw data immediately after extraction so that comparable summary statistics can be obtained quickly. Summaries will condense multiple figures into data frames or lists (depending on the type of figure) and these objects can easily be exported from R, or if using the raw data, analysed in any way the user desires. Conveniently, when needing to process many figures at different times `metaDigitise` will only import figures not already completed within a directory. This makes it easy to add new figures at anytime. `metaDigitise` has also been built for reproducibility in mind. It has functions that allow users to redraw their digitisations on figures, correct anything and access the raw calibration data which is written automatically for each figure that is digitised into a special `caldat` folder within the directory. This makes sharing figure digitisation and reproducing the work of others simple and easy and allows meta-analysts to update existing studies more easily.
 
 # Installation <a name="Installation"></a>
 
@@ -31,21 +31,21 @@ Installation will make the primary function for data extraction, `metaDigitise`,
 
 # Setting up directory structures <a name="P3"></a>
 
-The `metaDigitise` package is quite flexible and is currently being made even more flexible. Users can extract single figures (if this is all they have) using the `metaDigitise` function with a path name to the directory with the file(s). However, often many figures need extracting from a single paper or set of papers. `metaDigitise` will also handle these situations seamlessly by simply cycling through all figures within a directory. This is useful because it expedites digitising figures as it prevents users from having to constantly specify the directories and /or paths where files are stored. `metaDigitise` essentially will bring up each figure within a folder automatically and allow the user to click and enter the relevant information about a figure as you go. This information is then all stored in a data frame or list at the end of the process, saving quite a bit of time. Users can stop mid-way through a folder by simply exiting after the last plot they have digitised.  The data from completed figures will automatically be written to the `caldat/` folder for later use and editing, should the user need to do this.
+The `metaDigitise` package is quite flexible. Users can extract single figures (if this is all they have) using the `metaDigitise` function with a path name to the directory with the file. However, often many figures need extracting from a single paper or set of papers. `metaDigitise` will also handle these situations seamlessly by simply cycling through all figures within a directory. This is useful because it expedites digitising figures as it prevents users from having to constantly specify the directories and / or paths where files are stored. `metaDigitise` essentially will bring up each figure within a folder automatically and allow the user to click and enter the relevant information about a figure as they go. This information is then all stored in a data frame or list at the end of the process, saving quite a bit of time. Users can stop mid-way through a folder by simply exiting after the last plot they have digitised.  The data from completed figures will automatically be written to the `caldat/` folder for later use and editing, should the user need to do this.
 
-`metaDigitise` can work on a directory with figures (currently .png, .jpg, .tiff, .pdf images can be used) from many different papers and that are of different types. However, users can get creative in how they set up the directories of figures  to facilitate extraction. For example, one might have 3–4 figures from a single paper that need extracting and the user may want to focus on a single paper at a time while the information about a paper is on hand. This could be done by simply setting up a file structure as follows and then using `metaDigitise` for each papers folder:
+`metaDigitise` can work on a directory with figures (currently .png, .jpg, .tiff, .pdf images can be used) from many different papers and that are of different types. However, users can get creative in how they set up the directories of figures  to facilitate extraction. For example, one might have 3–4 figures from a single paper that need extracting and the user may want to focus on a single paper at a time while the information about a paper is on hand. This could be done by simply setting up a file structure as follows and then using `metaDigitise` with path names (i.e., directory) for each papers folder:
 
 	* Main project directory
 		+ Paper1_P1
-			+ P1_Figure1.png
-			+ P1_Figure2.png
-			+ P1_Figure3.png
+			+ Figure1.png
+			+ Figure2.png
+			+ Figure3.png
 		+ Paper2_P2
-			+ P2_Figure1.png
-			+ P2_Figure2.png
-			+ P2_Figure3.png
+			+ Figure1.png
+			+ Figure2.png
+			+ Figure3.png
 
-An alternative directory structure (and probably the most flexible) could simply be to have a set of different figures with an informative and relevant naming scheme to make it easy to identify the paper and figure the data come from. This cuts out the need to change directories constantly. For example the directory structure could look like:
+An alternative directory structure (and probably the most flexible) would be to simply have a set of different figures with an informative and relevant naming scheme to make it easy to identify the paper and figure the data come from. This cuts out the need to change directories constantly. For example the directory structure could look like:
 
 	* Main project directory
 		+ FiguresToExtract
@@ -58,17 +58,17 @@ An alternative directory structure (and probably the most flexible) could simply
 
 The above directory structure is probably the easiest in combination with a clear and unambiguous naming scheme for each figure. Even if only figures from a single paper are digitised, one paper at a time, an overall figure directory will work perfectly because `metaDigitise` will only cycle through incomplete figures, so figures can be added at anytime. 
 
-Nonetheless, how users set up their directory is really up to them. However, it is important for users to think carefully about reproducibility at this stage. Would they like to share the entire project folder with colleagues? Or would they prefer to simply share the image folder. The answers to these questions are important because relative path names are stored in `metaDigitise` objects, meaning that the directory structure (currently at least) needs to be the same for colleagues to re-load previously digitised objects. So, the working directory needs to be set to either the "main project directory" or the "FiguresToExtract" directory and relative path names used. More on this below.
+Nonetheless, how users set up their directory is really up to them. However, it is important for users to think carefully about reproducibility at this stage. Would they like to share the entire project folder with colleagues? or would they prefer to simply share the image folder? The answers to these questions are important because relative path names are stored in `metaDigitise` objects, meaning that the directory structure (currently at least) needs to be the same for colleagues to re-load previously digitised objects. Therefore, the working directory needs to be set to either the "main project directory" or the "FiguresToExtract" directory and relative path names (e.g., dir = "./FiguresToExtract/" if setting the working directory to "Main project directory") used as opposed to absolute paths. More on this below.
 
 # Example of how it works <a name="P4"></a>
 
-We'll first demonstrate how `metaDigitise` works when the user simply wants to extract data from a single figure. Here, we'll use the `iris` (loaded in R using `data(iris)`) dataset and some plots from this dataset to demonstrate how it works. In this case, we have an `example_figs/` folder in our meta-analysis project directory and a scatter plot of sepal length and width for two species (setosa and versicolor), which we would like to extract relevant statistics from. We've labeled this file 001_Anderson_1935_Fig1.png. Notice our naming of this file. 001 is the paper number followed by author, year (in this case the data was collected by E. Anderson in 1935) and the figure number. This makes it easy to keep track of the figures being digitised. Here is what this figure looks like:
+We'll first demonstrate how `metaDigitise` works when the user simply wants to extract data from a single figure. Here, we'll use the `iris` (loaded in R using `data(iris)`) dataset and some plots from this dataset to demonstrate how it works. In this case, we have an `example_figs/` folder in our meta-analysis project directory and a scatter plot of sepal length and width for two species (setosa and versicolor), which we would like to extract relevant statistics from. We've labeled this file 001_Anderson_1935_Fig1.png. Notice our naming of this file. 001 is the paper number followed by the author, year (in this case the data was collected by E. Anderson in 1935) and the figure number. This makes it easy to keep track of the figures being digitised. Here is what this figure looks like:
 
 <p align="center">
   <img align="centre" src="https://user-images.githubusercontent.com/3505482/32259397-651ea5a6-bf14-11e7-8073-a18aa7bd3094.png" hspace="20" width = "450"/>
 </p>
 
-To extract from 001_Anderson_1935_Fig1.png we'll first set the working directory to the folder containing images. While this step isn't completely necessary, it currently is if you would like colleagues to be able to reproduce the digitisations at a later date, which of course we advocate (see below). Our code will therefore be as follows:
+To extract from 001_Anderson_1935_Fig1.png we'll first set the working directory to the folder containing images. While this step isn't completely necessary, it currently is if you would like colleagues to be able to reproduce the digitisations at a later date and only would like to share the images (not the entire project). Our code will therefore be as follows:
 
 ```
 setwd("~/example_figs/")
@@ -95,7 +95,7 @@ The next thing we are asked is whether we have different types of plot(s) in the
 Are all plot types the same? (diff/same)
 ```
 
-We are next asked whether we want to flip  or rotate the figure image. This can be needed when box plots and mean and error plots are not orientated correctly. In some cases, older papers can give slightly off angled images which can be corrected by rotating. So, in this prompt the user has three options: `f` for "Flip", `r` for "rotate" or `c` for "continue. For now, our image (which appears on screen in the plotting window), looks fine so we'll hit `c` for now. 
+We are next asked whether we want to flip or rotate the figure image. This can be needed when box plots and mean and error plots are not orientated correctly. In some cases, older papers can give slightly off angled images which can be corrected by rotating. So, in this prompt the user has three options: `f` for "Flip", `r` for "rotate" or `c` for "continue. For now, our image (which appears on screen in the plotting window), looks fine so we'll hit `c` for now. 
 
 ```
 mean_error and boxplots should be vertically orientated
@@ -114,13 +114,13 @@ Otherwise chose continue
 Flip, rotate or continue f/r/c c
 ```
 
-After we do this `metaDigistise` will ask the user to specify the plot type. Depending on the figure one has the user can specify that it is a figure containing the mean and error (`m`), a box plot (`b`), a scatter plot (`s`) or a histogram (`h`). If the user has specified `diff` instead of `same` in response to the questions about whether the plot types are the same or different, this question will pop up for each plot, but will only be asked once if plots are all the same.
+After we do this, `metaDigistise` will ask the user to specify the plot type. Depending on the figure, the user can specify that it is a figure containing the mean and error (`m`), a box plot (`b`), a scatter plot (`s`) or a histogram (`h`). If the user has specified `diff` instead of `same` in response to the question about whether the plot types are the same or different, this question will pop up for each plot, but will only be asked once if plots are all the same.
 
 ```
 Please specify the plot_type as either: mean and error, box plot, scatter plot or histogram m/b/s/h:
 ```
 
-After selecting the figure type a new set of prompts will come up that will ask the user first what the y and x-axis variables are. This is useful as you can keep track of the different variables across different figures and papers. Here, the user can just add this information in to the R console. Once complete, we'll get prompted to calibrate the x and y-axis so that the relevant statistics / data can be correctly calculated. If we were working with a plot of mean and standard errors, the x-axis is rather useless in terms of calibration so `metaDigitise` just asks us to calibrate the y-axis (more on that soon). 
+After selecting the figure type a new set of prompts will come up that will ask the user first what the y and x-axis variables are. This is useful as you can keep track of the different variables across different figures and papers. Here, the user can just add this information in to the R console. Once complete, we'll get prompted to calibrate the x and y-axis so that the relevant statistics / data can be correctly calculated. If we were working with a plot of mean and standard errors, the x-axis is rather useless in terms of calibration so `metaDigitise` just asks the user to calibrate the y-axis (more on that soon). 
 
 ```
 What is the y variable? Sepal Length (mm)
@@ -151,7 +151,7 @@ On the Figure, click IN ORDER:
   ....
   ```
 
-Follow the instructions on screen step-by-step, and in the order specified. The user will then be asked to specify the x and y calibration points and whether or not the calibration has been set up correctly. If `n` is chosen because something needs to be fixed then the user can re-calibrate.
+Follow the instructions on screen step-by-step (instructions above have been truncated by `...` to simplify), and in the order specified. The user will then be asked to specify the x and y calibration points and whether or not the calibration has been set up correctly. If `n` is chosen because something needs to be fixed then the user can re-calibrate.
 
 ```
 What is the value of y1 ?
@@ -166,7 +166,7 @@ What is the value of x2 ?
 Re-calibrate? (y/n) 
 ```
 
-The first few questions ask the user what the calibration points are. In this figure, only the y-axis is really important, so again, we only have to enter the y-axis coordinates. Often, plots might contain multiple groups that the meta-analyst wants to extract from. `metaDigitise` handles this nicely by prompting the user to enter the group first, followed by the digitisation of this groups data. After digitising the first group and having exited (i.e., hit `esc` from plot window), `mteaDigitise` will ask the user whether they would like to add another group. They can add another group, or simply continue. The number of groups are not really limited and users can just keep adding in groups to accommodate the different numbers that may be presented across figures (although it gets complicated with too many).
+The first few questions ask the user what the calibration points are. Often, plots might contain multiple groups that the meta-analyst wants to extract from. `metaDigitise` handles this nicely by prompting the user to enter the group first, followed by the digitisation of this groups data. After digitising the first group, and having exited (i.e., hit `esc` from plot window), `mteaDigitise` will ask the user whether they would like to add another group. They can add another group (`a`), or simply continue (`c`). The number of groups are not really limited and users can just keep adding in groups to accommodate the different numbers that may be presented across figures (although it can get complicated with too many).
 
 ```
 Follow instructions below, to exit point adding or removing:
@@ -198,7 +198,7 @@ Once we are done digitising all the groups our plot will look something like thi
 Add group, Edit group, Delete group, or Finish plot? a/e/d/f f
 ```
 
-Choosing `e` allows the user to go back and edit a group already digitised, but also, `d` allows them to completely delete a group and re-digitise if necessary. In our case, all has gone well and we choose `f` to finish plotting. This will exit metaDigitise (since we only have a single figure) and save the digitised output that can be conveniently queried by printing the object:
+Choosing `e` allows the user to go back and edit a group already digitised, but also, `d` allows them to completely delete a group and re-digitise if necessary. In our case, all has gone well and we choose `f` to finish plotting. This will exit `metaDigitise` (since we only have a single figure) and save the summary statistics to the data object that can be conveniently queried by printing the object:
 
 ```
  data
@@ -209,7 +209,7 @@ Choosing `e` allows the user to go back and edit a group already digitised, but 
 4 iris_scatter_multigrp.png versicolor Sepal Length (mm) 5.936769 0.5292535 44 0.5157938 scatterplot
 ```
 
-Our summary output has all the relevant information about the means and standard deviations for each of the variables. The user will notice an `r` column indicating the correlation coefficient between Sepal width and length for each species (provided because this is a scatterplot). These match reasonably well with the actual means of Sepal length and width for each of the species in the `iris` dataset:
+Our summary output has all the relevant information about the means and standard deviations for each of the variables. The user will notice an `r` column indicating the correlation coefficient between sepal width and length for each species (provided because this is a scatterplot). These match reasonably well with the actual means of Sepal length and width for each of the species in the `iris` dataset:
 
 ```
      Species meanSL meanSW
@@ -217,7 +217,7 @@ Our summary output has all the relevant information about the means and standard
 2 versicolor  5.936  2.770
 ```
 
-One thing anyone with a familiarity with the iris dataset will notice is that the sample sizes for each of these species (which are n = 50 each) are quite a bit lower. This is an example of some of the challenges when extracting data from figures, often data points will overlap with each other making it impossible (without having the real data) to know whether this is a problem. However, a meta-analyst will probably realise that the sample sizes here conflict with what is reported in the paper. Hence, we also provide the user with an option to input the sample sizes directly, even for scatterplots and histograms where, strictly speaking, this shouldn't be necessary. Nonetheless, it is important to recognise the impact that overlapping points can have (particularly its effects on SD and SE). In our case, our mean point estimates are nearly bang on, but the SD's are slightly over-estimated:
+One thing anyone with a familiarity with the iris dataset will notice is that the sample sizes for each of these species (which are n = 50 each) are quite a bit lower. This is an example of some of the challenges when extracting data from scatter plots, often data points will overlap with each other making it impossible (without having the real data) to know whether this is a problem. However, a meta-analyst will probably realise that the sample sizes here conflict with what is reported in the paper. Hence, we also provide the user with an option to input the sample sizes directly, even for scatterplots and histograms where, strictly speaking, this shouldn't be necessary. Nonetheless, it is important to recognise the impact that overlapping points can have (particularly its effects on SD and SE). In our case, our mean point estimates are nearly bang on, but the SD's are slightly over-estimated:
 
 ```
      Species    meanSL    meanSW
@@ -229,11 +229,11 @@ While this is a problem for any program digitising from figures, it is probably 
 
 # Processing batches of figures of different types <a name="P5"></a>
 
-Often a paper, and especially a single meta-analytic project, contains many figures needing extracting and having to open and re-open new files, save data, analyse or summarize data, make conversions etc takes up a lot of unnecessary time. `metaDigitise` solves this problem by gradually working through all files within a directory, allowing users to digitise from them and then save the output from all digitsiations to a single data frame – providing summary statistics by default. `metaDigitise` automatically does this for the meta-analyst without having to use a different function or special set of arguments. 
+Often a paper, and especially a single meta-analytic project, contains many figures needing extracting and having to open and re-open new files, save data, analyse or summarize data, make conversions etc. takes up a lot of unnecessary time. `metaDigitise` solves this problem by gradually working through all files within a directory, allowing users to digitise from them and then save the output from all digitsiations to a single data frame – providing summary statistics by default. `metaDigitise` automatically does this for the meta-analyst without having to use a different function or special set of arguments. 
 
-Lets assume now that, after digitising our scatter plot, we have added two new figures from a different study from a research group conducting experiments on the same species. Both figures contain data on sepal length and width for the same species but on a sample taken from different populations. Here, we have added two new figures (002_Doe_2013_Fig1.png and 003_Doe_2013_Fig3.png) from this paper to the same folder containing 001_Anderson_1935_Fig1.png. The folder now contains our original scatter plot, but also a histogram of sepal width for a fourth species (`catana` – a hypothetical species). 
+Lets assume now that, after digitising our scatter plot, we have added two new figures from a different study done by a research group conducting experiments on the same species. Both figures contain data on sepal length and width for the same species but on a sample taken from different populations. Here, we have added two new figures from this study (002_Doe_2013_Fig1.png and 003_Doe_2013_Fig3.png) to the same folder containing 001_Anderson_1935_Fig1.png. The folder now contains our original scatter plot (completely digitised), but also a mean error plot of the same three species (002_Doe_2013_Fig1.png) along with a histogram of sepal width for a fourth species (003_Doe_2013_Fig3.png -`catana` – a hypothetical species). 
 
-In this specific example, we now have different types of figures (different types from above to demonstrate the flexibility of `metaDigitise`) in our directory, a mean error plot and a histogram:
+In this specific example, we now have different types of figures (allowing us to demonstrate the flexibility of `metaDigitise`) in our directory. Here is what our new figures look like:
 <p align="center">
   <img src="https://user-images.githubusercontent.com/3505482/32300779-3283752c-bfaf-11e7-9c75-05b2438fa528.png" hspace="20" width = "300"/><img src="https://user-images.githubusercontent.com/3505482/32300780-32b0f218-bfaf-11e7-8d1b-a0618c3b094e.png" hspace="20" width = "300"/>
 </p>
@@ -248,13 +248,13 @@ Now that we have added two new figures from Doe (2013), our directory looks like
       +003_Doe_2013_Fig3.png
 ```
 
-We have already processed figure (001_Anderson_1935_Fig1.png) along with it's digitised data (caldat/001_Anderson_1935_Fig1), but now have our two new figures that have not yet been digitised. This example will nicely demonstrate how users can easily pick up from where they left off and how all previous data gets re-integrated. It will also demonstrate how different plot types are handled. All we have to do to begin, is again, provide the directory where all the figures are located:
+We have already processed figure (001_Anderson_1935_Fig1.png) and we can tell because it has digitised data (caldat/001_Anderson_1935_Fig1), but now we have our two new figures that have not yet been digitised. This example will nicely demonstrate how users can easily pick up from where they left off and how all previous data gets re-integrated. It will also demonstrate how different plot types are handled. All we have to do to begin, is again, provide the directory where all the figures are located:
 
 ```
 data <- metaDigitise(dir = ".")
 ```
 
-Here, we'll get the same prompts as we seen when digitising our scatter plot above. Given we want to processs the new files we have, we'll select `1`. All the prompts after this selection are essentially the same, but we now specify we have `diff` plots and as they are loaded in the plotting window we'll be prompted to specify what type of plot we have. 
+Here, we'll get the same prompts as we seen when digitising our scatter plot above. Given we want to process the new files we have, we'll select `1`. All the prompts after this selection are essentially the same, but we now specify we have `diff` plots and as the figures are loaded in the plotting window we'll be prompted to specify what type of plot we have on screen. 
 
 ```
 Are all plot types the same? (diff/same)
@@ -324,17 +324,17 @@ Click on Error Bar, followed by the Mean
 Add group, Delete group or Finish plot? a/d/f a
 ```
 
-The prompts, again, tell the user to calibrate the y-axis, enter these calibration values. After this we now have some new prompts, which tells `metaDigitise` whether we have sample sizes for all the groups in the plot. If `y` we can enter the group name and its sample size straight after. The user can then digitise each of the groups, being prompted after each group whether to add, delete for finish digitising the group. The user can continue adding groups to the plot until they are all completely digitised (see figure below), at which point the user is asked to specify the type of error:
+The prompts, again, tell the user to calibrate the y-axis, enter these calibration values. After this we now have some new prompts, which tells `metaDigitise` whether we have sample sizes for all the groups in the plot. If `y` we can enter the group name and its sample size straight after. This is important for back calculating standard errors, for example, in this plot. The user can then digitise each of the groups, being prompted after each group whether to add, delete for finish digitising the group. The user can continue adding groups to the plot until they are all completely digitised (see figure below), at which point the user is asked to specify the type of error:
 
 ```Type of error (se, CI95, sd): se```
 <p align="center">
   <img align="centre" src="https://user-images.githubusercontent.com/3505482/32304001-44c9f164-bfc0-11e7-80c6-d36a1f463c2b.png" hspace="20" width = "450"/>
 </p>
-When we are done the current plot, beacuse there is another figure left to digitise, we get prompted how many figures are left and whether we want to continue. This allows the user to stop or automatically bring up the next figure for processing:
+When we are done the current plot, because there is another figure left to digitise, we get a message indicating how many figures are left and whether we want to continue. This allows the user to stop or automatically bring up the next figure for processing:
 
 ```Do you want continue: 1 plots out of 2 plots remaining (y/n) y```
 
-After selecting `y` the second plot pops up with all the same prompts. Digitising information from histograms is a little bit more involved, however, than other plots because we need to characterize the entire distribution directly. This difference with histograms is that the user needs to click both the left and right corners of each bar, and continue adding until all bars of the histogram . We can only do one bar at a time before being prompted to re click, continue (finishing the plot) or we can add to put points on all the bars. We need to characterize everything so we continue adding on points:
+After selecting `y` the second plot pops up with all the same prompts. Digitising information from histograms is a little bit more involved, however, than other plots because we need to characterize the entire distribution directly. The difference with histograms is that the user needs to click both the left and right corners of each bar, and continue adding until all bars of the histogram have digitised lines above them. We can only do one bar at a time before being prompted to re-click, continue (finishing the plot) or we can add to put points on all the bars. We need to characterize everything so we continue adding on points:
 
 ```
 Click on left then right upper corners of bar
@@ -378,11 +378,11 @@ Here, the output has all the relevant summary statistics we digitsied for each f
 
 One trick to digitising all kinds of figures all at once is to include the figure legends in the image, allowing you to quickly get information that is relevant should you need it as the figures come up. This means the meta-analyst won't need to necessarily go grab and consult the paper for things like sample sizes (often these are in figure legends). 
 
-The fact that `metaDigitise` only processes and digitises new figures from an image folder means there are two additional benefits afforded to meta-analysts. First, it is easy to update the meta-analysis in the future and integrate all the data together, providing that the image folder and / or project directory is shared. Second, if there are collaborators on the project, if the project folder and images are shared, then co-author can pick up from where another colleague left off. 
+The fact that `metaDigitise` only processes and digitises new figures from an image folder means there are two additional benefits afforded to meta-analysts. First, it is easy to update the meta-analysis in the future and integrate all the data together, providing that the image folder and / or project directory is shared. Second, if there are collaborators on the project, if the project folder and images are shared, then co-authors can pick up from where another colleague left off. 
 
 # Re-importing previously digitised data and accessing raw data <a name="P6"></a>
 
-Now that all the relevant figures from papers included in the meta-analysis are digitised we can easily re-import these data if at any point in the future there is a need to view them again. But also, in case we need to get raw data and process this in a unique way, as may be necessary from scatter plots. Again, this is seamless and easy with `metaDigitise`:
+Now that all the relevant figures from papers included in the meta-analysis are digitised we can easily re-import these data if at any point in the future there is a need to view them again. But also, in case we need to get the raw data and process this in a unique way – this may be necessary from scatter plots. Again, this is seamless and easy with `metaDigitise`:
 
 ```
 setwd("~/example_figs/")
@@ -402,13 +402,13 @@ Do you want to...
 Selection: 2
 ```
 
-Importantly, this will import the same summary statistics that we seen above, but what if we wanted the raw data because we wanted to view the data for the scatterplot. This is easy by re-specifying the call to the `summary` argument in `metaDigitise` as follows:
+Importantly, this will import the same summary statistics that we seen above, but what if we wanted the raw data because we wanted to access the data for the scatter plot. This is easy by re-specifying the call to the `summary` argument in `metaDigitise` as follows:
 
 ```
 data <- metaDigitise(dir = ".", summary = FALSE)
 ```
 
-In this case, `metaDigitise` returns a list with all the relavent data organised into slots that are related to each plot type:
+In this case, `metaDigitise` returns a list with all the relevant data organised into slots that are related to each plot type:
 
 ```
 List of 3
@@ -457,13 +457,14 @@ To get the final scatter plot data back as a data frame:
 4 001_Anderson_1935_Fig1.png setosa 3.004389 4.300789     1 red  19 Sepal length (mm)   Sepal width (mm)
 5 001_Anderson_1935_Fig1.png setosa 3.003907 4.801037     1 red  19 Sepal length (mm)   Sepal width (mm)
 6 001_Anderson_1935_Fig1.png setosa 3.003289 4.904720     1 red  19 Sepal length (mm)   Sepal width (mm)
+...
 ```
 
 We can now do whatever we need with these data as all the x and y values for sepal length and width are available.
 
 # Editing and plotting digitised figures <a name="P7"></a>
 
-A particularly useful feature of `metaDigitise` is its ability to re-plot previously digitised figures and edit them. Lets assume that for some reason the user noticed that some one of the groups in 002_Doe_2013_Fig1.png wasn't quite correctly placed. This can be modified rather simply as follows:
+A particularly useful feature of `metaDigitise` is its ability to re-plot previously digitised figures and edit them. Lets assume that for some reason the user noticed that one of the groups in 002_Doe_2013_Fig1.png (versicolor) wasn't quite correctly placed. This can be modified rather simply as follows:
 
 ```
 data <- metaDigitise(".", summary = TRUE)
@@ -487,7 +488,7 @@ Choose how you want to edit files:
 
 Selection: 2
 ```
-Here, users can choose `1` and `metaDigitise` will cycle through all the digitised figures, one after another, re-plotting these in the plot window and asking the user whether they would like to edit it. This provides a facility with which users can check existing digitisations for all the figures in a folder. Alternatively, if the user would like to add in sample sizes because the sample sizes in a paper were different based on new information, they can simply choose option `3`. However, we only need to edit one figure and option `2` is best in our case because this selection will provide a selection of all the digitised figures:
+Here, users can choose `1` and `metaDigitise` will cycle through all the digitised figures, one after the other, re-plotting these in the plotting window and asking the user whether they would like to edit it. This provides a facility with which users can check existing digitisations for all the figures in a folder. Alternatively, if the user would like to add in sample sizes because the sample sizes in a paper were different based on new information, they can simply choose option `3`. However, we only need to edit one figure and option `2` is best in our case because this selection will provide a selection of all the digitised figures:
 
 ```
 1. 001_Anderson_1935_Fig1 2. 002_Doe_2013_Fig1  3. 003_Doe_2013_Fig3
@@ -495,7 +496,7 @@ Here, users can choose `1` and `metaDigitise` will cycle through all the digitis
 Select number of file to edit 2
 ```
 
-The user can then just select the relevant figure that needs editing. After the selection, the similar (but a slightly expanded) set of prompts that would be used to edit during digitisation are provided to walk the user through what specifically would like to be modified:
+The user can then just select the relevant figure that needs editing. After the selection, a similar (but a slightly expanded) set of prompts that would be used to edit during digitisation are provided to walk the user through what specifically they would like to modify:
 
 ```
 Edit rotation? If yes, then the whole extraction will be redone (y/n) n
@@ -518,7 +519,7 @@ Add group, Delete group or Finish plot? a/d/f d
 Selection: 2
 Add group, Delete group or Finish plot? a/d/f a
 
-Group identifier: versicolor
+Group identifier: versicolor_edit
 
 Group sample size: 50
 
@@ -530,13 +531,27 @@ Type of error: se
 Re-enter error type (y/n) n
 ```
 
-This provides lots of flexibility to edit various aspects of previously digitised functions. This then integrates this corrected data directly into the fully formed data summary and re-writes the .RDS file in the `caldat` folder automatically.
+This provides lots of flexibility to edit various aspects of previously digitised functions. This then integrates this corrected data directly into the fully formed data summary and re-writes the .RDS file in the `caldat/` folder automatically.
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/3505482/32309074-543427ba-bfdd-11e7-9d4b-5aa65c764aef.png" hspace="20" width = "400"/><img src="https://user-images.githubusercontent.com/3505482/32304001-44c9f164-bfc0-11e7-80c6-d36a1f463c2b.png" hspace="20" width = "400"/>
+  <img src="https://user-images.githubusercontent.com/3505482/32355606-b2e9d5d8-c083-11e7-84cc-8a460c9403c2.png" hspace="20" width = "400"/><img src="https://user-images.githubusercontent.com/3505482/32304001-44c9f164-bfc0-11e7-80c6-d36a1f463c2b.png" hspace="20" width = "400"/>
 </p>
 Above, we have just slightly modified versicolor's point to make it overlap a bit better with the black dot. And we can see the slight change in this value:
 
+```
+                    filename        group_id          variable     mean        sd  n         r   plot_type
+1 001_Anderson_1935_Fig1.png          setosa  Sepal width (mm) 3.421871 0.4024572 39 0.7486265 scatterplot
+2 001_Anderson_1935_Fig1.png          setosa Sepal length (mm) 4.999651 0.3830298 39 0.7486265 scatterplot
+3 001_Anderson_1935_Fig1.png      versicolor  Sepal width (mm) 2.765198 0.3233171 44 0.5155360 scatterplot
+4 001_Anderson_1935_Fig1.png      versicolor Sepal length (mm) 5.950621 0.5290171 44 0.5155360 scatterplot
+5      002_Doe_2013_Fig1.png          setosa      Sepal length 5.000336 0.7828656 50        NA  mean_error
+6      002_Doe_2013_Fig1.png      viriginica      Sepal length 6.588705 1.2608173 50        NA  mean_error
+7      002_Doe_2013_Fig1.png versicolor_edit      Sepal length 5.941237 1.0125716 50        NA  mean_error
+8      003_Doe_2013_Fig3.png            <NA>      Sepal length 4.948472 0.3624212 50        NA   histogram
+```
+
+We can see from above that the edit has been integrated (remember we re-names `versicolor` to `versicolor_edit`). These changes have now also re-written the `metaDigitise` object to the `caldat/` folder. Note here, whether the user clicks the lower or upper error bar, it doesn't matter (we've done this to make our changes stand out in the figures above).
+
 # Conclusions <a name="Conclusion"></a>
 
-We are still actively developing `metaDigitise` particularly post-processing functions for reproducibility. We would be more than happy to hear what you think of it, suggestions for possible improvements or to hear about bugs that are found. Please lodge an issue and we can try and deal with these as soon as possible. Also, feel free to email the package maintainers. Our future plans include building in abilities to deal with log-transformed axes, including arguments for calculating standard deviations from 95`%` confidence intervals and standard errors using the t-distribution to correct the t-value for small sample sizes (currently assumed t-values are 1.96 as is normal), dealing with asymmetric error bars and the possibility of zooming in plots such that greater accuracy can be achieved when digitising. 
+We are still actively developing `metaDigitise` particularly post-processing functions for reproducibility. We would be more than happy to hear what you think of it, suggestions for possible improvements or to hear about bugs that are found. Please lodge an issue and we can try and deal with these as soon as possible. Also, feel free to email the package maintainers. Our future plans include building in abilities to deal with log-transformed axes, including arguments for calculating standard deviations from 95`%` confidence intervals and standard errors using the t-distribution to correct the t-value for small sample sizes (currently assumed t-values are 1.96 as is normal), dealing with asymmetric error bars and the possibility of zooming in plots such that greater accuracy can be achieved when digitising. We hope to also provide options for assessing inter-observer reliability in the future.
 
