@@ -64,7 +64,7 @@ Nonetheless, how users set up their directory is really up to them. However, it 
 
 We'll first demonstrate how `metaDigitise` works when the user simply wants to extract data from a single figure. Here, we'll use the `iris` (loaded in R using `data(iris)`) dataset and some plots from this dataset to demonstrate how it works. In this case, we have an `example_figs/` folder in our meta-analysis project directory and a scatter plot of sepal length and width for two species (setosa and versicolor), which we would like to extract relevant statistics from. We've labeled this file 001_Anderson_1935_Fig1.png. Notice our naming of this file. 001 is the paper number followed by author, year (in this case the data was collected by E. Anderson in 1935) and the figure number. This makes it easy to keep track of the figures being digitised. Here is what this figure looks like:
 
-<img align="centre" src="https://user-images.githubusercontent.com/3505482/32259397-651ea5a6-bf14-11e7-8073-a18aa7bd3094.png" hspace="20" width = "300"/>
+<img align="centre" src="https://user-images.githubusercontent.com/3505482/32259397-651ea5a6-bf14-11e7-8073-a18aa7bd3094.png" hspace="20" width = "450"/>
 
 To extract from 001_Anderson_1935_Fig1.png we'll first set the working directory to the folder containing images. While this step isn't completely necessary, it currently is if you would like colleagues to be able to reproduce the digitisations at a later date, which of course we advocate (see below). Our code will therefore be as follows:
 
@@ -527,7 +527,7 @@ Re-enter error type (y/n) n
 
 This provides lots of flexibility to edit various aspects of previously digitised functions. This then integrates this corrected data directly into the fully formed data summary and re-writes the .RDS file in the `caldat` folder automatically.
 
-<img src="https://user-images.githubusercontent.com/3505482/32309074-543427ba-bfdd-11e7-9d4b-5aa65c764aef.png" hspace="20" width = "450"/><img src="https://user-images.githubusercontent.com/3505482/32304001-44c9f164-bfc0-11e7-80c6-d36a1f463c2b.png" hspace="20" width = "450"/>
+<img src="https://user-images.githubusercontent.com/3505482/32309074-543427ba-bfdd-11e7-9d4b-5aa65c764aef.png" hspace="20" width = "300"/><img src="https://user-images.githubusercontent.com/3505482/32304001-44c9f164-bfc0-11e7-80c6-d36a1f463c2b.png" hspace="20" width = "300"/>
 
 Above, we have just slightly modified versicolor's point to make it overlap a bit better with the black dot. And we can see the slight change in this value:
 
