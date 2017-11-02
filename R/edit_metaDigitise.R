@@ -38,7 +38,7 @@ bulk_edit <- function(dir, summary=TRUE){
 			edit_file <- user_options("\nSelect number of file to edit ", 1:length(files))
 			object <- readRDS(filepaths[as.numeric(edit_file)])
 			object <- edit_metaDigitise(object)
-			saveRDS(object, file=filepaths[edit_file])
+			saveRDS(object, file=filepaths[as.numeric(edit_file)])
 			editQ <- readline("\nEdit more files? y/n ")
 		}
 	}
