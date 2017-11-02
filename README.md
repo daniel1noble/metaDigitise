@@ -4,20 +4,20 @@
 [![DOI](https://zenodo.org/badge/106883244.svg)](https://zenodo.org/badge/latestdoi/106883244)
 
 # Table of contents
-1. [Introduction](# Introduction)
-2. [Installation](# Installation) 
-3. [Setting up directory structures](# Setting up directory structures)
-4. [Example of how it works](# Example of how it works)
-5. [Processing batches of figures of different types](# Processing batches of figures of different types)
-6. [Re-importing previously digitised data and accessing raw data](# Re-importing previously digitised data and accessing raw data) 
-7. [Editing and plotting digitised figures](# Editing and plotting digitised figures)
-8. [Conclusion](# Conclusion)
+1. [Introduction](#Introduction)
+2. [Installation](#Installation) 
+3. [Setting up directory structures](#P3)
+4. [Example of how it works](#P2)
+5. [Processing batches of figures of different types](#P3)
+6. [Re-importing previously digitised data and accessing raw data](#P4) 
+7. [Editing and plotting digitised figures](#P5)
+8. [Conclusion](#Conclusion)
 
-# Introduction
+# Introduction <a name="Introduction"></a>
 
 `metaDigitise` is an R package that provides functions for extracting raw data and summary statistics from figures in primary research papers. Often third party applications are used to do this (e.g., *graphClick* or *dataThief*), but the output from these are handled separately from the analysis package, making this process more laborious than it needs to be. `metaDigitise` allows users to extract information from a figure or set of figures all within the R environment making data extraction, analysis and export more streamlined. It also provides users with options to conduct the necessary calculations on raw data immediately after extraction so that comparable summary statistics can be obtained, and will condense multiple figures into data frames or lists (depending on the type of figure) and these objects can easily be exported from R. Conveniently, when bulk processing figures `metaDigitise` will only work on figures not already completed within a directory, so that new figures can be added at anytime without having to specify the specific file types. `metaDigitise` was built for reproducibility in mind. It has functions that allow users to redraw their digitisations on figures, correct anything and access the raw calibration data which is written automatically for each figure that is digitised into a special `caldat` folder within the directory.
 
-# Installation
+# Installation <a name="Installation"></a>
 
 To install `metaDigitise` use the following code in R:
 
@@ -29,7 +29,7 @@ library(metaDigitise)
 
 Installation will make the primary function for data extraction, `metaDigitise`, accessible to users along with its help file. 
 
-# Setting up directory structures
+# Setting up directory structures <a name="P3"></a>
 
 The `metaDigitise` package is quite flexible and is currently being made even more flexible. Users can extract single figures (if this is all they have) using the `metaDigitise` function with a path name to the directory with the file(s). However, often many figures need extracting from a single paper or set of papers. `metaDigitise` will also handle these situations seamlessly by simply cycling through all figures within a directory. This is useful because it expedites digitising figures as it prevents users from having to constantly specify the directories and /or paths where files are stored. `metaDigitise` essentially will bring up each figure within a folder automatically and allow the user to click and enter the relevant information about a figure as you go. This information is then all stored in a data frame or list at the end of the process, saving quite a bit of time. Users can stop mid-way through a folder by simply exiting after the last plot they have digitised.  The data from completed figures will automatically be written to the `caldat/` folder for later use and editing, should the user need to do this.
 
@@ -60,11 +60,11 @@ The above directory structure is probably the easiest in combination with a clea
 
 Nonetheless, how users set up their directory is really up to them. However, it is important for users to think carefully about reproducibility at this stage. Would they like to share the entire project folder with colleagues? Or would they prefer to simply share the image folder. The answers to these questions are important because relative path names are stored in `metaDigitise` objects, meaning that the directory structure (currently at least) needs to be the same for colleagues to re-load previously digitised objects. So, the working directory needs to be set to either the "main project directory" or the "FiguresToExtract" directory and relative path names used. More on this below.
 
-# Example of how it works
+# Example of how it works <a name="P2"></a>
 
 We'll first demonstrate how `metaDigitise` works when the user simply wants to extract data from a single figure. Here, we'll use the `iris` (loaded in R using `data(iris)`) dataset and some plots from this dataset to demonstrate how it works. In this case, we have an `example_figs/` folder in our meta-analysis project directory and a scatter plot of sepal length and width for two species (setosa and versicolor), which we would like to extract relevant statistics from. We've labeled this file 001_Anderson_1935_Fig1.png. Notice our naming of this file. 001 is the paper number followed by author, year (in this case the data was collected by E. Anderson in 1935) and the figure number. This makes it easy to keep track of the figures being digitised. Here is what this figure looks like:
 
-<<center>![001_anderson_1935_fig1](https://user-images.githubusercontent.com/3505482/32259397-651ea5a6-bf14-11e7-8073-a18aa7bd3094.png)
+![001_anderson_1935_fig1](https://user-images.githubusercontent.com/3505482/32259397-651ea5a6-bf14-11e7-8073-a18aa7bd3094.png)
 
 To extract from 001_Anderson_1935_Fig1.png we'll first set the working directory to the folder containing images. While this step isn't completely necessary, it currently is if you would like colleagues to be able to reproduce the digitisations at a later date, which of course we advocate (see below). Our code will therefore be as follows:
 
@@ -187,7 +187,7 @@ Add points, delete points or continue? a/d/c c
 
 Once we are done digitising all the groups our plot will look something like this:
 
-<<center>![rplot](https://user-images.githubusercontent.com/3505482/32259894-071cdcc6-bf18-11e7-8e19-c8d449f9fe01.png)
+![rplot](https://user-images.githubusercontent.com/3505482/32259894-071cdcc6-bf18-11e7-8e19-c8d449f9fe01.png)
 
 `meta-Digitise` will conveniently print on the figure the calibration details along with group names and sample sizes. It will also print the figure name, which is useful if the user needs to go back and find the paper to obtain information. Printing this information on the figure is useful so that input can be checked with actual values on the figure, and any mistakes can then be corrected if found.  Don't worry if you notice a mistake. Prior to exiting the figure you will be prompted with this:
 
@@ -224,7 +224,7 @@ One thing anyone with a familiarity with the iris dataset will notice is that th
 
 While this is a problem for any program digitising from figures, it is probably the best that can be done. However, for reproducibility, all the calibration and raw data is exported to a special folder `caldat/`, which can be brought back in and edited at any time should new information come to light.
 
-# Processing batches of figures of different types
+# Processing batches of figures of different types <a name="P3"></a>
 
 Often a paper, and especially a single meta-analytic project, contains many figures needing extracting and having to open and re-open new files, save data, analyse or summarize data, make conversions etc takes up a lot of unnecessary time. `metaDigitise` solves this problem by gradually working through all files within a directory, allowing users to digitise from them and then save the output from all digitsiations to a single data frame – providing summary statistics by default. `metaDigitise` automatically does this for the meta-analyst without having to use a different function or special set of arguments. 
 
@@ -376,7 +376,7 @@ One trick to digitising all kinds of figures all at once is to include the figur
 
 The fact that `metaDigitise` only processes and digitises new figures from an image folder means there are two additional benefits afforded to meta-analysts. First, it is easy to update the meta-analysis in the future and integrate all the data together, providing that the image folder and / or project directory is shared. Second, if there are collaborators on the project, if the project folder and images are shared, then co-author can pick up from where another colleague left off. 
 
-# Re-importing previously digitised data and accessing raw data
+# Re-importing previously digitised data and accessing raw data <a name="P4"></a>
 
 Now that all the relevant figures from papers included in the meta-analysis are digitised we can easily re-import these data if at any point in the future there is a need to view them again. But also, in case we need to get raw data and process this in a unique way, as may be necessary from scatter plots. Again, this is seamless and easy with `metaDigitise`:
 
@@ -440,6 +440,7 @@ anderson <- do.call(rbind, data$scatterplot)
 # OR a slightly cleaner version
 
 anderson <- plyr::ldply(data$scatterplot, row.names=FALSE)
+
 ```
 
 To get the final scatter plot data back as a data frame:
@@ -452,11 +453,11 @@ To get the final scatter plot data back as a data frame:
 4 001_Anderson_1935_Fig1.png setosa 3.004389 4.300789     1 red  19 Sepal length (mm)   Sepal width (mm)
 5 001_Anderson_1935_Fig1.png setosa 3.003907 4.801037     1 red  19 Sepal length (mm)   Sepal width (mm)
 6 001_Anderson_1935_Fig1.png setosa 3.003289 4.904720     1 red  19 Sepal length (mm)   Sepal width (mm)
- ```
+```
 
 We can now do whatever we need with these data as all the x and y values for sepal length and width are available.
 
-# Editing and plotting digitised figures
+# Editing and plotting digitised figures <a name="P5"></a>
 
 A particularly useful feature of `metaDigitise` is its ability to re-plot previously digitised figures and edit them. Lets assume that for some reason the user noticed that some one of the groups in 002_Doe_2013_Fig1.png wasn't quite correctly placed. This can be modified rather simply as follows:
 
@@ -468,7 +469,8 @@ Do you want to...
 2: Import existing data
 3: Edit existing data
 
-Selection: 3```
+Selection: 3
+```
 
 Selecting option `3` will bring up a new set of prompts that provide quite a bit of flexibility for users:
 
@@ -488,6 +490,7 @@ Here, users can choose `1` and `metaDigitise` will cycle through all the digitis
 
 Select number of file to edit 2
 ```
+
 The user can then just select the relevant figure that needs editing. After the selection, the similar (but a slightly expanded) set of prompts that would be used to edit during digitisation are provided to walk the user through what specifically would like to be modified:
 
 ```
@@ -530,9 +533,7 @@ This provides lots of flexibility to edit various aspects of previously digitise
 
 Above, we have just slightly modified versicolor's point to make it overlap a bit better with the black dot. And we can see the slight change in this value:
 
-
-
-# Conclusions
+# Conclusions <a name="Conclusion"></a>
 
 We are still actively developing `metaDigitise` particularly post-processing functions for reproducibility. We would be more than happy to hear what you think of it, possible improvements or bugs that are found. Please lodge an issue and we can try and deal with these as soon as possible. Also feel free to email the package maintainers.
 
