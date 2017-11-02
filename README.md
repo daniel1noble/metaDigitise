@@ -232,8 +232,7 @@ Lets assume now that, after digitising our scatter plot, we have added two new f
 
 In this specific example, we now have different types of figures (different types from above to demonstrate the flexibility of `metaDigitise`) in our directory, a mean error plot and a histogram:
 
-<img src="https://user-images.githubusercontent.com/3505482/32300779-3283752c-bfaf-11e7-9c75-05b2438fa528.png" hspace="20" width = "100"/>
-<img src="https://user-images.githubusercontent.com/3505482/32300780-32b0f218-bfaf-11e7-8d1b-a0618c3b094e.png" hspace="20" width = "100"/>
+<img src="https://user-images.githubusercontent.com/3505482/32300779-3283752c-bfaf-11e7-9c75-05b2438fa528.png" hspace="20" width = "300"/><img src="https://user-images.githubusercontent.com/3505482/32300780-32b0f218-bfaf-11e7-8d1b-a0618c3b094e.png" hspace="20" width = "300"/>
 
 Now that we have added two new figures from Doe (2013), our directory looks like this:
 
