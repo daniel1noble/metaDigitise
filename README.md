@@ -234,9 +234,9 @@ Often a paper, and especially a single meta-analytic project, contains many figu
 Lets assume now that, after digitising our scatter plot, we have added two new figures from a different study from a research group conducting experiments on the same species. Both figures contain data on sepal length and width for the same species but on a sample taken from different populations. Here, we have added two new figures (002_Doe_2013_Fig1.png and 003_Doe_2013_Fig3.png) from this paper to the same folder containing 001_Anderson_1935_Fig1.png. The folder now contains our original scatter plot, but also a histogram of sepal width for a fourth species (`catana` – a hypothetical species). 
 
 In this specific example, we now have different types of figures (different types from above to demonstrate the flexibility of `metaDigitise`) in our directory, a mean error plot and a histogram:
-
-<img src="https://user-images.githubusercontent.com/3505482/32300779-3283752c-bfaf-11e7-9c75-05b2438fa528.png" hspace="20" width = "300"/><img src="https://user-images.githubusercontent.com/3505482/32300780-32b0f218-bfaf-11e7-8d1b-a0618c3b094e.png" hspace="20" width = "300"/>
-
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/3505482/32300779-3283752c-bfaf-11e7-9c75-05b2438fa528.png" hspace="20" width = "300"/><img src="https://user-images.githubusercontent.com/3505482/32300780-32b0f218-bfaf-11e7-8d1b-a0618c3b094e.png" hspace="20" width = "300"/>
+</p>
 Now that we have added two new figures from Doe (2013), our directory looks like this:
 
 ```
@@ -531,9 +531,9 @@ Re-enter error type (y/n) n
 ```
 
 This provides lots of flexibility to edit various aspects of previously digitised functions. This then integrates this corrected data directly into the fully formed data summary and re-writes the .RDS file in the `caldat` folder automatically.
-
-<img src="https://user-images.githubusercontent.com/3505482/32309074-543427ba-bfdd-11e7-9d4b-5aa65c764aef.png" hspace="20" width = "400"/><img src="https://user-images.githubusercontent.com/3505482/32304001-44c9f164-bfc0-11e7-80c6-d36a1f463c2b.png" hspace="20" width = "400"/>
-
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/3505482/32309074-543427ba-bfdd-11e7-9d4b-5aa65c764aef.png" hspace="20" width = "400"/><img src="https://user-images.githubusercontent.com/3505482/32304001-44c9f164-bfc0-11e7-80c6-d36a1f463c2b.png" hspace="20" width = "400"/>
+</p>
 Above, we have just slightly modified versicolor's point to make it overlap a bit better with the black dot. And we can see the slight change in this value:
 
 # Conclusions <a name="Conclusion"></a>
