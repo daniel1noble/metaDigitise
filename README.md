@@ -7,10 +7,10 @@
 1. [Introduction](#Introduction)
 2. [Installation](#Installation) 
 3. [Setting up directory structures](#P3)
-4. [Example of how it works](#P2)
-5. [Processing batches of figures of different types](#P3)
-6. [Re-importing previously digitised data and accessing raw data](#P4) 
-7. [Editing and plotting digitised figures](#P5)
+4. [Example of how it works](#P4)
+5. [Processing batches of figures of different types](#P5)
+6. [Re-importing previously digitised data and accessing raw data](#P6) 
+7. [Editing and plotting digitised figures](#P7)
 8. [Conclusion](#Conclusion)
 
 # Introduction <a name="Introduction"></a>
@@ -60,7 +60,7 @@ The above directory structure is probably the easiest in combination with a clea
 
 Nonetheless, how users set up their directory is really up to them. However, it is important for users to think carefully about reproducibility at this stage. Would they like to share the entire project folder with colleagues? Or would they prefer to simply share the image folder. The answers to these questions are important because relative path names are stored in `metaDigitise` objects, meaning that the directory structure (currently at least) needs to be the same for colleagues to re-load previously digitised objects. So, the working directory needs to be set to either the "main project directory" or the "FiguresToExtract" directory and relative path names used. More on this below.
 
-# Example of how it works <a name="P2"></a>
+# Example of how it works <a name="P4"></a>
 
 We'll first demonstrate how `metaDigitise` works when the user simply wants to extract data from a single figure. Here, we'll use the `iris` (loaded in R using `data(iris)`) dataset and some plots from this dataset to demonstrate how it works. In this case, we have an `example_figs/` folder in our meta-analysis project directory and a scatter plot of sepal length and width for two species (setosa and versicolor), which we would like to extract relevant statistics from. We've labeled this file 001_Anderson_1935_Fig1.png. Notice our naming of this file. 001 is the paper number followed by author, year (in this case the data was collected by E. Anderson in 1935) and the figure number. This makes it easy to keep track of the figures being digitised. Here is what this figure looks like:
 
@@ -224,7 +224,7 @@ One thing anyone with a familiarity with the iris dataset will notice is that th
 
 While this is a problem for any program digitising from figures, it is probably the best that can be done. However, for reproducibility, all the calibration and raw data is exported to a special folder `caldat/`, which can be brought back in and edited at any time should new information come to light.
 
-# Processing batches of figures of different types <a name="P3"></a>
+# Processing batches of figures of different types <a name="P5"></a>
 
 Often a paper, and especially a single meta-analytic project, contains many figures needing extracting and having to open and re-open new files, save data, analyse or summarize data, make conversions etc takes up a lot of unnecessary time. `metaDigitise` solves this problem by gradually working through all files within a directory, allowing users to digitise from them and then save the output from all digitsiations to a single data frame – providing summary statistics by default. `metaDigitise` automatically does this for the meta-analyst without having to use a different function or special set of arguments. 
 
@@ -232,9 +232,8 @@ Lets assume now that, after digitising our scatter plot, we have added two new f
 
 In this specific example, we now have different types of figures (different types from above to demonstrate the flexibility of `metaDigitise`) in our directory, a mean error plot and a histogram:
 
-<img src="https://user-images.githubusercontent.com/3505482/32300779-3283752c-bfaf-11e7-9c75-05b2438fa528.png" hspace="20" width = "425"/>
-<img src="https://user-images.githubusercontent.com/3505482/32300780-32b0f218-bfaf-11e7-8d1b-a0618c3b094e.png" hspace="20" width = "425"/>
-
+<img src="https://user-images.githubusercontent.com/3505482/32300779-3283752c-bfaf-11e7-9c75-05b2438fa528.png" hspace="20" width = "100"/>
+<img src="https://user-images.githubusercontent.com/3505482/32300780-32b0f218-bfaf-11e7-8d1b-a0618c3b094e.png" hspace="20" width = "100"/>
 
 Now that we have added two new figures from Doe (2013), our directory looks like this:
 
@@ -377,7 +376,7 @@ One trick to digitising all kinds of figures all at once is to include the figur
 
 The fact that `metaDigitise` only processes and digitises new figures from an image folder means there are two additional benefits afforded to meta-analysts. First, it is easy to update the meta-analysis in the future and integrate all the data together, providing that the image folder and / or project directory is shared. Second, if there are collaborators on the project, if the project folder and images are shared, then co-author can pick up from where another colleague left off. 
 
-# Re-importing previously digitised data and accessing raw data <a name="P4"></a>
+# Re-importing previously digitised data and accessing raw data <a name="P6"></a>
 
 Now that all the relevant figures from papers included in the meta-analysis are digitised we can easily re-import these data if at any point in the future there is a need to view them again. But also, in case we need to get raw data and process this in a unique way, as may be necessary from scatter plots. Again, this is seamless and easy with `metaDigitise`:
 
@@ -458,7 +457,7 @@ To get the final scatter plot data back as a data frame:
 
 We can now do whatever we need with these data as all the x and y values for sepal length and width are available.
 
-# Editing and plotting digitised figures <a name="P5"></a>
+# Editing and plotting digitised figures <a name="P7"></a>
 
 A particularly useful feature of `metaDigitise` is its ability to re-plot previously digitised figures and edit them. Lets assume that for some reason the user noticed that some one of the groups in 002_Doe_2013_Fig1.png wasn't quite correctly placed. This can be modified rather simply as follows:
 
@@ -536,5 +535,5 @@ Above, we have just slightly modified versicolor's point to make it overlap a bi
 
 # Conclusions <a name="Conclusion"></a>
 
-We are still actively developing `metaDigitise` particularly post-processing functions for reproducibility. We would be more than happy to hear what you think of it, possible improvements or bugs that are found. Please lodge an issue and we can try and deal with these as soon as possible. Also feel free to email the package maintainers.
+We are still actively developing `metaDigitise` particularly post-processing functions for reproducibility. We would be more than happy to hear what you think of it, possible improvements or bugs that are found. Please lodge an issue and we can try and deal with these as soon as possible. Also feel free to email the package maintainers. Our future plans include abilities to deal with log-transformed axes, including arguments for calculating standard deviations from 95%CI's and standard errors using the t-distribution to correct the t-value for small sample sizes (currently assumed t-values are 1.96 as is normal), dealing with asymmetric error bars and the possibility of zooming in plots such that greater accuracy can be achieved when digitising. 
 
