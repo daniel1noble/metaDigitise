@@ -15,7 +15,7 @@
 
 # Introduction <a name="Introduction"></a>
 
-`metaDigitise` is an R package that provides functions for extracting raw data and summary statistics from figures in primary research papers. Often third party applications are used to do this (e.g., *graphClick* or *dataThief*), but the output from these are handled separately from the analysis package, making this process more laborious than it needs to be. `metaDigitise` allows users to extract information from a figure or set of figures all within the R environment making data extraction, analysis and export more streamlined. It also provides users with options to conduct the necessary calculations on raw data immediately after extraction so that comparable summary statistics can be obtained, and will condense multiple figures into data frames or lists (depending on the type of figure) and these objects can easily be exported from R. Conveniently, when bulk processing figures `metaDigitise` will only work on figures not already completed within a directory, so that new figures can be added at anytime without having to specify the specific file types. `metaDigitise` was built for reproducibility in mind. It has functions that allow users to redraw their digitisations on figures, correct anything and access the raw calibration data which is written automatically for each figure that is digitised into a special `caldat` folder within the directory.
+`metaDigitise` is an R package that provides functions for extracting raw data and summary statistics from figures in primary research papers. Often third party applications are used to do this (e.g., `graphClick` or `dataThief`), but the output from these are handled separately from the analysis package, making this process more laborious than it needs to be. `metaDigitise` allows users to extract information from a figure or set of figures all within the R environment making data extraction, analysis and export more streamlined. It also provides users with options to conduct the necessary calculations on raw data immediately after extraction so that comparable summary statistics can be obtained, and will condense multiple figures into data frames or lists (depending on the type of figure) and these objects can easily be exported from R. Conveniently, when bulk processing figures `metaDigitise` will only work on figures not already completed within a directory, so that new figures can be added at anytime without having to specify the specific file types. `metaDigitise` was built for reproducibility in mind. It has functions that allow users to redraw their digitisations on figures, correct anything and access the raw calibration data which is written automatically for each figure that is digitised into a special `caldat` folder within the directory.
 
 # Installation <a name="Installation"></a>
 
@@ -64,7 +64,9 @@ Nonetheless, how users set up their directory is really up to them. However, it 
 
 We'll first demonstrate how `metaDigitise` works when the user simply wants to extract data from a single figure. Here, we'll use the `iris` (loaded in R using `data(iris)`) dataset and some plots from this dataset to demonstrate how it works. In this case, we have an `example_figs/` folder in our meta-analysis project directory and a scatter plot of sepal length and width for two species (setosa and versicolor), which we would like to extract relevant statistics from. We've labeled this file 001_Anderson_1935_Fig1.png. Notice our naming of this file. 001 is the paper number followed by author, year (in this case the data was collected by E. Anderson in 1935) and the figure number. This makes it easy to keep track of the figures being digitised. Here is what this figure looks like:
 
-<img align="centre" src="https://user-images.githubusercontent.com/3505482/32259397-651ea5a6-bf14-11e7-8073-a18aa7bd3094.png" hspace="20" width = "450"/>
+<p align="center">
+  <img align="centre" src="https://user-images.githubusercontent.com/3505482/32259397-651ea5a6-bf14-11e7-8073-a18aa7bd3094.png" hspace="20" width = "450"/>
+</p>
 
 To extract from 001_Anderson_1935_Fig1.png we'll first set the working directory to the folder containing images. While this step isn't completely necessary, it currently is if you would like colleagues to be able to reproduce the digitisations at a later date, which of course we advocate (see below). Our code will therefore be as follows:
 
@@ -186,8 +188,9 @@ Add points, delete points or continue? a/d/c c
 ```
 
 Once we are done digitising all the groups our plot will look something like this:
-
-<img align="centre" src="https://user-images.githubusercontent.com/3505482/32259894-071cdcc6-bf18-11e7-8e19-c8d449f9fe01.png" hspace="20" width = "450"/>
+<p align="center">
+  <img align="centre" src="https://user-images.githubusercontent.com/3505482/32259894-071cdcc6-bf18-11e7-8e19-c8d449f9fe01.png" hspace="20" width = "450"/>
+</p>
 
 `meta-Digitise` will conveniently print on the figure the calibration details along with group names and sample sizes. It will also print the figure name, which is useful if the user needs to go back and find the paper to obtain information. Printing this information on the figure is useful so that input can be checked with actual values on the figure, and any mistakes can then be corrected if found.  Don't worry if you notice a mistake. Prior to exiting the figure you will be prompted with this:
 
@@ -324,9 +327,9 @@ Add group, Delete group or Finish plot? a/d/f a
 The prompts, again, tell the user to calibrate the y-axis, enter these calibration values. After this we now have some new prompts, which tells `metaDigitise` whether we have sample sizes for all the groups in the plot. If `y` we can enter the group name and its sample size straight after. The user can then digitise each of the groups, being prompted after each group whether to add, delete for finish digitising the group. The user can continue adding groups to the plot until they are all completely digitised (see figure below), at which point the user is asked to specify the type of error:
 
 ```Type of error (se, CI95, sd): se```
-
-<img align="centre" src="https://user-images.githubusercontent.com/3505482/32304001-44c9f164-bfc0-11e7-80c6-d36a1f463c2b.png" hspace="20" width = "450"/>
-
+<p align="center">
+  <img align="centre" src="https://user-images.githubusercontent.com/3505482/32304001-44c9f164-bfc0-11e7-80c6-d36a1f463c2b.png" hspace="20" width = "450"/>
+</p>
 When we are done the current plot, beacuse there is another figure left to digitise, we get prompted how many figures are left and whether we want to continue. This allows the user to stop or automatically bring up the next figure for processing:
 
 ```Do you want continue: 1 plots out of 2 plots remaining (y/n) y```
@@ -341,7 +344,9 @@ Add, reclick or continue? a/r/c a
  .... etc....
 ```
 
-<img src="https://user-images.githubusercontent.com/3505482/32304002-44f1fb46-bfc0-11e7-81b0-3b0c5e854cde.png" hspace="20" width = "450"/>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/3505482/32304002-44f1fb46-bfc0-11e7-81b0-3b0c5e854cde.png" hspace="20" width = "450"/>
+</p>
 
 Once the user is finished, `metaDigitise` will sort all the summary data for each of the figures, including the previously digitised figure(s) (001_Anderson_1935_Fig1.png) in the `data` object.
 
@@ -527,7 +532,7 @@ Re-enter error type (y/n) n
 
 This provides lots of flexibility to edit various aspects of previously digitised functions. This then integrates this corrected data directly into the fully formed data summary and re-writes the .RDS file in the `caldat` folder automatically.
 
-<img src="https://user-images.githubusercontent.com/3505482/32309074-543427ba-bfdd-11e7-9d4b-5aa65c764aef.png" hspace="20" width = "300"/><img src="https://user-images.githubusercontent.com/3505482/32304001-44c9f164-bfc0-11e7-80c6-d36a1f463c2b.png" hspace="20" width = "300"/>
+<img src="https://user-images.githubusercontent.com/3505482/32309074-543427ba-bfdd-11e7-9d4b-5aa65c764aef.png" hspace="20" width = "400"/><img src="https://user-images.githubusercontent.com/3505482/32304001-44c9f164-bfc0-11e7-80c6-d36a1f463c2b.png" hspace="20" width = "400"/>
 
 Above, we have just slightly modified versicolor's point to make it overlap a bit better with the black dot. And we can see the slight change in this value:
 
