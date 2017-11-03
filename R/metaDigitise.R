@@ -27,7 +27,7 @@ metaDigitise<-function(dir, summary = TRUE){
 	
 	Q <- menu(c("Process new images", "Import existing data", "Edit existing data"))
 	
-	switch(Q, process_new_files(dir, summary = summary), import_metaDigitise(dir, summary = summary), bulk_edit(dir, summary = summary))
+	switch(Q, process_new_files(dir, summary = summary), import_menu(dir, summary = summary), bulk_edit(dir, summary = summary))
 
 }
 
