@@ -35,6 +35,7 @@ The `metaDigitise` package is quite flexible. Users can extract single figures (
 
 `metaDigitise` can work on a directory with figures (currently .png, .jpg, .tiff, .pdf images can be used) from many different papers and that are of different types. However, users can get creative in how they set up the directories of figures  to facilitate extraction. For example, one might have 3–4 figures from a single paper that need extracting and the user may want to focus on a single paper at a time while the information about a paper is on hand. This could be done by simply setting up a file structure as follows and then using `metaDigitise` with path names (i.e., directory) for each papers folder:
 
+```
 	* Main project directory
 		+ Paper1_P1
 			+ Figure1.png
@@ -44,9 +45,10 @@ The `metaDigitise` package is quite flexible. Users can extract single figures (
 			+ Figure1.png
 			+ Figure2.png
 			+ Figure3.png
-
+```
 An alternative directory structure (and probably the most flexible) would be to simply have a set of different figures with an informative and relevant naming scheme to make it easy to identify the paper and figure the data come from. This cuts out the need to change directories constantly. For example the directory structure could look like:
 
+```
 	* Main project directory
 		+ FiguresToExtract
 			+ P1_Figure1_trait1.png
@@ -55,7 +57,7 @@ An alternative directory structure (and probably the most flexible) would be to 
 			+ P2_Figure1_trait1.png
 			+ P2_Figure2_trait2.png
 			+ P2_Figure3_trait3.png
-
+```
 The above directory structure is probably the easiest in combination with a clear and unambiguous naming scheme for each figure. Even if only figures from a single paper are digitised, one paper at a time, an overall figure directory will work perfectly because `metaDigitise` will only cycle through incomplete figures, so figures can be added at anytime. 
 
 Nonetheless, how users set up their directory is really up to them. However, it is important for users to think carefully about reproducibility at this stage. Would they like to share the entire project folder with colleagues? or would they prefer to simply share the image folder? The answers to these questions are important because relative path names are stored in `metaDigitise` objects, meaning that the directory structure (currently at least) needs to be the same for colleagues to re-load previously digitised objects. Therefore, the working directory needs to be set to either the "main project directory" or the "FiguresToExtract" directory and relative path names (e.g., dir = "./FiguresToExtract/" if setting the working directory to "Main project directory") used as opposed to absolute paths. More on this below.
@@ -549,7 +551,7 @@ Above, we have just slightly modified versicolor's point to make it overlap a bi
 8      003_Doe_2013_Fig3.png            <NA>      Sepal length 4.948472 0.3624212 50        NA   histogram
 ```
 
-We can see from above that the edit has been integrated (remember we re-names `versicolor` to `versicolor_edit`). These changes have now also re-written the `metaDigitise` object to the `caldat/` folder. Note here, whether the user clicks the lower or upper error bar, it doesn't matter (we've done this to make our changes stand out in the figures above).
+We can see from above that the edit has been integrated (remember we re-named `versicolor` to `versicolor_edit`). These changes have now also re-written the `metaDigitise` object to the `caldat/` folder. Note here, whether the user clicks the lower or upper error bar, it doesn't matter (we've done this to make our changes stand out in the figures above).
 
 # Conclusions <a name="Conclusion"></a>
 

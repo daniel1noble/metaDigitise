@@ -2,40 +2,38 @@
 \usepackage[utf8]{inputenc}
 \usepackage{geometry} 
 \geometry{a4paper}  
-\usepackage[parfill]{parskip} 
+%\usepackage[parfill]{parskip} 
 \usepackage{graphicx}	
 \usepackage{amsmath}
 \usepackage{fullpage}
 \usepackage{setspace} 
 \usepackage{lineno}
 \usepackage[none]{hyphenat}
+\usepackage{listings}
 
 \usepackage[round]{natbib}	
 
-\title{Reproducible, flexible and high throughput data extraction from primary literature: The metaDigitise R package}
-\author{? Joel L. Pick ?...? \& Daniel W.A. Noble ?}
+\title{Reproducible, flexible and high throughput data extraction from primary literature for meta-analyses: The metaDigitise R package}
+\author{Joel L. Pick, Shinichi Nakagawa \& Daniel W.A. Noble}
 % \date{}
 
 \begin{document}
 \doublespacing
-\raggedright
-
-
+%\raggedright
 
 \maketitle
-Prepared for: Journal of Statistical Software?
+Prepared for: Journal of Statistical Software
 
 \section*{Abstract}
 
-Keywords: meta-analysis, data extraction, R
+Keywords: meta-analysis, data extraction, R, reproducibility, figures, images, summary statistics
 
 \clearpage
+\section*{Introduction}
 
+Meta-analysis is becoming increasingly common in many research fields. They make use of various summary statistics from studies to generate effect size estimates and their sampling error variance to understand whether particular experimental manipulations, or relationships between variables, show strong overall effects and attempt to explain variation among these effects (Nakagawa et al. 2017). Meta-analysis relies foremost on data extracted from primary literature – more specifically statistics that have been reported in the text or tables of research papers. However, necessary summary statistics are often presented in figures, and so, these need to be manually extracted using digitsiing programs to be used in the final analysis. Although there are several existing tools to perform tasks like this, these tools are not made for this specific purpose (i.e. a meta-analysis). Specifically, they do not differentiate between common plot types that are use to present data, meaning that they require a large amount of downstream data manipulation. For example, extracting often only provides the raw data or values from plots. This means that these data need to be imported into other programs to calculate correlations (if scatter plots) or errors on means (from mean error plots) need to be back calculated by hand to convert them to a common type (e.g., standard errors to standard deviations). Digitising programs often do not allow for different grouping of points to be made, and frequently do not integrate metadata (such as variable names, group names and sample sizes) at the time of data extraction. Additionally, existing stand-alone software does not allow easy import into commonly used statistical software (such as R), or try to optimize the research pipelines to facilitate editing and reproducibility. These are major issues because extracting from figures can be an incredibly time-consuming process. Furthermore, meta-analyses can have a major impact on research fields, and should be expanded upon as more research comes to light. Having a tool that facilitates reproducibility in meta-analyses will increase transparency and go a long way to resolving the reproducibility crises we are seeing in many fields.
 
-
-Meta-analysis is becoming increasingly common in many fields. It relies foremost on data extracted from primary literature. This data if often presented in figures and so needs to be manually extracted. Although there are several existing tools to perform tasks like this, these tools are not made for this specific purpose (i.e. meta-analysis).
-Specifically, they do not differentiate between common types of plot in which are use to present data, meaning they require a large amount of downstream data manipulation. Many exist in stand-alone software and so do not allow easy import into commonly used statistical software (such as R). These softwares often do not allow for different grouping of points to be made, and frequently do not allow metadata (such as variable names, group names, sample sizes) to be entered at the time of data extraction. Furthermore these tools are generally not designed for a high throughput of images. 
-Here, we present an interactive R package designed for large scale data extraction from figures, with meta-analysis in mind. To this end, we provide tools specific to data extraction from common plot types (mean and error plots, box plots, scatter plots and histograms, see Figure \ref{fig:plot_type}) and functions that allow for the summary statistics needed for downstream analysis to be calculated (e.g. mean, standard deviation and sample size). %d? 
+Here, we present an interactive R package, `metaDigitise`, which is designed for large scale data extraction from figures, specifically catering to the the needs of meta-analysts. To this end, we provide tools specific to data extraction from common plot types (mean and error plots, box plots, scatter plots and histograms, see Figure \ref{fig:plot_type}). `metaDigitise` operates within the R environment making data extraction, analysis and export more streamlined. It also provides users with options to conduct the necessary calculations on raw data immediately after extraction so that comparable summary statistics can be obtained quickly. Summaries will condense multiple figures into data frames or lists (depending on the type of figures) and these objects can easily be exported from R, or if using the raw data, analysed in any way the user desires. Conveniently, when needing to process many figures at different times `metaDigitise` will only import figures not already completed within a directory. This makes it easy to add new figures at anytime. `metaDigitise` has also been built for reproducibility in mind. It has functions that allow users to redraw their digitisations on figures, correct anything and access the raw calibration data which is written automatically for each figure that is digitised into a special folder within the directory. This makes sharing figure digitisation and reproducing the work of others simple and easy, and allows meta-analysts to update meta-analyses more easily.
 
 
 \begin{figure}[ht] 
@@ -56,9 +54,11 @@ It then prompts the user to select whether they want to extract from new images,
 
 If the process of data extraction has been finished, or the user wants to reimport summary or processed data ...
 
-
-
-
+\begin{verbatim}
+	install.packages("devtools")
+	devtools::install_github("daniel1noble/metaDigitise")
+	library(metaDigitise)
+\end{verbatim}
 
 
 \subsection{Figure Rotation}
@@ -124,13 +124,54 @@ From all plot types, metaDigitise summarises the data form the figure to a mean,
 % \sigma _{X}&={\sqrt {{\frac {1}{\sum _{i}{N_{X_{i}}-1}}}\left(\sum _{i}{\left[(N_{X_{i}}-1)\sigma _{X_{i}}^{2}+N_{X_{i}}\mu _{X_{i}}^{2}\right]}-\left[\sum _{i}{N_{X_{i}}}\right]\mu _{X}^{2}\right)}}
 % \end{align}
 
-\section{Reproducibility}
+\section{Directory Structure and Reproducibility}
+
+The `metaDigitise` package is quite flexible. Users can extract single figures (if this is all they have) using the `metaDigitise` function with a path name to the directory with the file. However, often many figures need extracting from a single paper or set of papers. `metaDigitise` will also handle these situations seamlessly by simply cycling through all figures within a directory. This is useful because it expedites digitising figures as it prevents users from having to constantly specify the directories and / or paths where files are stored. `metaDigitise` essentially will bring up each figure within a folder automatically and allow the user to click and enter the relevant information about a figure as they go. This information is then all stored in a data frame or list at the end of the process, saving quite a bit of time. Users can stop mid-way through a folder by simply exiting after the last plot they have digitised.  The data from completed figures will automatically be written to the `caldat/` folder for later use and editing, should the user need to do this.
+
+`metaDigitise` can work on a directory with figures (currently .png, .jpg, .tiff, .pdf images can be used) from many different papers and that are of different types. However, users can get creative in how they set up the directories of figures to facilitate extraction. For example, one might have 3–4 figures from a single paper that need extracting and the user may want to focus on a single paper at a time while the information about a paper is on hand. This could be done by simply setting up a file structure as follows and then using `metaDigitise` with path names (i.e., directory) for each papers folder:
+
+
+\begin{lstlisting}
+	* Main project directory
+		+ Paper1_P1
+			+ Figure1.png
+			+ Figure2.png
+			+ Figure3.png
+		+ Paper2_P2
+			+ Figure1.png
+			+ Figure2.png
+			+ Figure3.png
+\end{lstlisting}
+
+An alternative directory structure (and probably the most flexible) would be to simply have a set of different figures with an informative and relevant naming scheme to make it easy to identify the paper and figure the data come from. This cuts out the need to change directories constantly. For example the directory structure could look like:
+
+\begin{lstlisting}
+	* Main project directory
+		+ FiguresToExtract
+			+ P1_Figure1_trait1.png
+			+ P1_Figure2_trait2.png
+			+ P1_Figure3_trait3.png
+			+ P2_Figure1_trait1.png
+			+ P2_Figure2_trait2.png
+			+ P2_Figure3_trait3.png
+\end{lstlisting}
+
+The above directory structure is probably the easiest in combination with a clear and unambiguous naming scheme for each figure. Even if only figures from a single paper are digitised, one paper at a time, an overall figure directory will work perfectly because `metaDigitise` will only cycle through incomplete figures, so figures can be added at anytime. 
+
+Nonetheless, how users set up their directory is really up to them. However, it is important for users to think carefully about reproducibility at this stage. Would they like to share the entire project folder with colleagues? or would they prefer to simply share the image folder? The answers to these questions are important because relative path names are stored in `metaDigitise` objects, meaning that the directory structure (currently at least) needs to be the same for colleagues to re-load previously digitised objects. Therefore, the working directory needs to be set to either the "main project directory" or the "FiguresToExtract" directory and relative path names (e.g., dir = "./FiguresToExtract/" if setting the working directory to "Main project directory") used as opposed to absolute paths. This facilitates reproducibility should colleagues want to see the digitisations or integrate previously digitised figures with newly updated figures. All users need to provide them with is the project or image folder containing the caldat/ folder and the images.
 
 \subsection{Plotting data extraction}
-check extraction
+
+
+
+%check extraction
 
 \subsection{Editing data extraction}
-Including addition of N later
+
+
+
+
+%Including addition of N later
 
 
 \section{Example}
