@@ -31,8 +31,8 @@ test_that("Checking grandSD...", {
 		2, 
 		info = "grandSD failed")
 	expect_equal(
-		grandSD(mean=c(5,5), sd=c(2,2), n=c(1000, 1000), equal=FALSE),
-		1.9995, 
+		round(grandSD(mean=c(5,5), sd=c(2,2), n=c(1000, 1000), equal=FALSE),2),
+		2, 
 		info = "grandSD failed")
 })
 

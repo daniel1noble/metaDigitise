@@ -33,9 +33,7 @@ Otherwise chose continue\n
 		if(rotateQ=="r"){
 			cat("Click left hand then right hand side of x axis\n")
 			
-			rot_angle <- locator(2, col="green")
-			rot_angle$y
-			
+			rot_angle <- locator(2, col="green")			
 			x.dist <- rot_angle$x[2] - rot_angle$x[1]
 			y.dist <- rot_angle$y[2] - rot_angle$y[1]
 			
