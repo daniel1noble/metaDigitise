@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.11.29)  3 NOV 2017 17:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.11.29)  3 NOV 2017 21:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -539,73 +539,88 @@ File: fig_plot_type.pdf Graphic file (type pdf)
 Package pdftex.def Info: fig_plot_type.pdf used on input line 41.
 (pdftex.def)             Requested size: 407.66833pt x 407.67894pt.
 
-[3 <./fig_plot_type.pdf>] <fig_rotate.pdf, id=23, 867.24pt x 1156.32pt>
-File: fig_rotate.pdf Graphic file (type pdf)
-
-<use fig_rotate.pdf>
-Package pdftex.def Info: fig_rotate.pdf used on input line 69.
-(pdftex.def)             Requested size: 407.66833pt x 543.5587pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<fig_calibrate.pdf, id=24, 867.24pt x 578.16pt>
-File: fig_calibrate.pdf Graphic file (type pdf)
- <use fig_calibrate.pdf>
-Package pdftex.def Info: fig_calibrate.pdf used on input line 83.
-(pdftex.def)             Requested size: 407.66833pt x 271.77934pt.
-
-[4]
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-Overfull \hbox (1.76442pt too wide) in paragraph at lines 89--90
-\OT1/cmr/m/n/10 metaDigitise recog-nises 4 main types of plot; Mean and er-ror 
-plots, box plots, scat-ter plots and his-tograms,
- []
-
-<fig_all_extract.pdf, id=29, 867.24pt x 1156.32pt>
-File: fig_all_extract.pdf Graphic file (type pdf)
- <use fig_all_extract.pdf>
-Package pdftex.def Info: fig_all_extract.pdf used on input line 93.
-(pdftex.def)             Requested size: 407.66833pt x 543.5587pt.
-
-[5 <./fig_rotate.pdf>]
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[6 <./fig_calibrate.pdf>] [7 <./fig_all_extract.pdf>] [8]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 135.
-
+[3 <./fig_plot_type.pdf>]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 51.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 135.
- [9] [10]
-(./manuscript.aux) ) 
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 51.
+
+Overfull \hbox (16.783pt too wide) in paragraph at lines 77--78
+\OT1/cmr/m/n/10 "Fig-uresToEx-tract" di-rec-tory and rel-a-tive path names (e.g
+., users should spec-ify dir = "./Fig-uresToEx-tract/"
+ []
+
+[4] <fig_calibrate.pdf, id=27, 867.24pt x 578.16pt>
+File: fig_calibrate.pdf Graphic file (type pdf)
+ <use fig_calibrate.pdf>
+Package pdftex.def Info: fig_calibrate.pdf used on input line 86.
+(pdftex.def)             Requested size: 407.66833pt x 271.77934pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[5] <fig_all_extract.pdf, id=31, 867.24pt x 1156.32pt>
+File: fig_all_extract.pdf Graphic file (type pdf)
+
+<use fig_all_extract.pdf>
+Package pdftex.def Info: fig_all_extract.pdf used on input line 109.
+(pdftex.def)             Requested size: 407.66833pt x 543.5587pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[6 <./fig_calibrate.pdf>] [7 <./fig_all_extract.pdf>] [8] [9]
+<fig_rotate.pdf, id=64, 867.24pt x 1156.32pt>
+File: fig_rotate.pdf Graphic file (type pdf)
+ <use fig_rotate.pdf>
+Package pdftex.def Info: fig_rotate.pdf used on input line 177.
+(pdftex.def)             Requested size: 407.66833pt x 543.5587pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Overfull \hbox (35.27785pt too wide) in paragraph at lines 213--213
+[]  \OT1/cmtt/m/n/10 .. ..$ variable : chr [1:8] "Sepal length" "Sepal length" 
+"Sepal length" "Sepal length" ...[] 
+ []
+
+[10] [11 <./fig_rotate.pdf>]
+Overfull \hbox (150.77684pt too wide) in paragraph at lines 213--213
+[]  \OT1/cmtt/m/n/10 .. ..$ y_variable: chr [1:83] "Sepal length (mm)" "Sepal l
+ength (mm)" "Sepal length (mm)" "Sepal length (mm)" ...[] 
+ []
+
+
+Overfull \hbox (129.77702pt too wide) in paragraph at lines 213--213
+[]  \OT1/cmtt/m/n/10 .. ..$ x_variable: chr [1:83] "Sepal width (mm)" "Sepal wi
+dth (mm)" "Sepal width (mm)" "Sepal width (mm)" ...[] 
+ []
+
+[12] (./manuscript.aux) ) 
 Here is how much of TeX's memory you used:
  5030 strings out of 493089
  67463 string characters out of 6134841
- 144312 words of memory out of 5000000
+ 145313 words of memory out of 5000000
  8444 multiletter control sequences out of 15000+600000
  8737 words of font info for 32 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,6n,32p,2263b,1211s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmbx10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmbx12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmr10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmr12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmr17.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmsy10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mtt10.pfb>
-Output written on manuscript.pdf (10 pages, 394833 bytes).
+ 38i,6n,32p,2263b,1213s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2015/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmbx12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmr10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmr12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmr17.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmsy10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmtt10.pfb>
+Output written on manuscript.pdf (12 pages, 406355 bytes).
 PDF statistics:
- 101 PDF objects out of 1000 (max. 8388607)
- 63 compressed objects within 1 object stream
+ 107 PDF objects out of 1000 (max. 8388607)
+ 67 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)
 

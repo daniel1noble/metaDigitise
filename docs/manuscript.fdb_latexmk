@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1509690072 "manuscript.tex" "manuscript.pdf" "manuscript" 1509690072
+["pdflatex"] 1509705013 "manuscript.tex" "manuscript.pdf" "manuscript" 1509705013
   "./fig_all_extract.pdf" 1509437085 82269 bdb95d5f0823db5735bf6e41e3059088 ""
   "./fig_calibrate.pdf" 1509437085 89021 435057067482cb07a222e05209025e63 ""
   "./fig_plot_type.pdf" 1509437085 6173 ad929f6ade78b1e4224656bdec1c6ace ""
@@ -79,9 +79,9 @@
   "fig_calibrate.pdf" 1509437085 89021 435057067482cb07a222e05209025e63 ""
   "fig_plot_type.pdf" 1509437085 6173 ad929f6ade78b1e4224656bdec1c6ace ""
   "fig_rotate.pdf" 1509437085 109545 a553437ee0c8135f1d0005bcc5de7f63 ""
-  "manuscript.aux" 1509690072 2313 5b84e555b8f79d7240c91f5a606c7d81 ""
-  "manuscript.tex" 1509690071 15485 37de5197832ee40a29fd610272baff7a ""
+  "manuscript.aux" 1509705013 2034 7da9fbc4c7b5d768791b856cd4e54f48 ""
+  "manuscript.tex" 1509705006 21345 e99c8c4cb6c185517a7dc2f0d0b2e3da ""
   (generated)
   "manuscript.log"
-  "manuscript.aux"
   "manuscript.pdf"
+  "manuscript.aux"
