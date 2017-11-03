@@ -1,6 +1,40 @@
 #' @title import_metaDigitise
 #' @description Imports metaDigitise calibration files from a directory that is partially or fully digitised already
 #' @param dir The directory where figures have already been digitised
+#' @param summary Logical indicating whether the imported data should be returned in 
+#' @return Returns a list (summary = FALSE) or data frame (summary = TRUE)
+
+import_menu<-function(dir, summary){
+	caldat <- dir_details(dir)
+	filepaths <- caldat$doneCalFiles
+	files <- caldat$calibrations
+
+	if(length(filepaths) == 0) stop("No digitised files to import!", call. = FALSE)
+
+	cat("Import all extracted data or from one image:\n")
+	Q <- menu(c("All","One"))
+
+# all 
+	if(Q==1) import_metaDigitise(dir=dir, summary = summary)
+
+# one
+	if(Q==2){
+		cat("\n\n")
+		cat_matrix(files, 3)
+		import_file <- user_options("\nSelect number of file to import ", 1:length(files))
+		object <- readRDS(filepaths[as.numeric(import_file)])
+		if(summary){
+			return(summary(object))
+		}else{
+			return(object$processed_data)
+		}
+	}
+}
+
+
+#' @title import_metaDigitise
+#' @description Imports metaDigitise calibration files from a directory that is partially or fully digitised already
+#' @param dir The directory where figures have already been digitised
 #' @param summary Logical indicating whether the imported data should be returned in summarised form ('TRUE') or not ('FALSE')
 #' @return Returns a list (summary = FALSE) or data frame (summary = TRUE)
 #' @author Daniel Noble - daniel.wa.noble@gmail.com

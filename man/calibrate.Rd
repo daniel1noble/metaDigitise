@@ -4,7 +4,7 @@
 \alias{calibrate}
 \title{calibrate}
 \usage{
-calibrate(raw_data, calpoints, point_vals, ...)
+calibrate(raw_data, calpoints, point_vals, xlog = FALSE, ylog = FALSE, ...)
 }
 \arguments{
 \item{raw_data}{The raw data}
@@ -12,6 +12,10 @@ calibrate(raw_data, calpoints, point_vals, ...)
 \item{calpoints}{The calibration points}
 
 \item{point_vals}{The point values}
+
+\item{xlog}{whether x is logged}
+
+\item{ylog}{whether y is logged}
 
 \item{...}{further arguments passed to or from other methods}
 }
