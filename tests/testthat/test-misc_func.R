@@ -39,19 +39,18 @@ test_that("Checking user_options..", {
 })
  
 
-user_unique_tester_func <- function(...) {
-	with_mock(
-		readline = function(question) "d",
-		user_unique (...)
-		)
-}
+
 
 test_that("Checking user_unique..", {
 	expect_equal(
- 		user_unique_tester_func("question", c("a","b","c")), 
+ 		with_mock(
+			readline = function(question) "d",
+ 			user_unique("question", c("a","b","c"))
+ 		), 
 		"d",
 		info = "user_unique failed")
 })
+
 
 
 user_numeric_tester_func <- function(..., user_entry) {

@@ -4,7 +4,8 @@
 \alias{redraw_calibration}
 \title{redraw_calibration}
 \usage{
-redraw_calibration(plot_type, variable, calpoints, point_vals, image_details)
+redraw_calibration(plot_type, variable, calpoints, point_vals, image_details,
+  scalar)
 }
 \arguments{
 \item{plot_type}{plot_type}
@@ -16,6 +17,8 @@ redraw_calibration(plot_type, variable, calpoints, point_vals, image_details)
 \item{point_vals}{The point values}
 
 \item{image_details}{image_details}
+
+\item{scalar}{amount to scale size points/text/lines according to plot size}
 }
 \description{
 plots calibration data on graph

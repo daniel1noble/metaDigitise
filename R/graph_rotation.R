@@ -25,13 +25,10 @@ Otherwise chose continue\n
 	flip=FALSE
 	rotate=0
 
-	internal_redraw(image_file, flip = flip, rotate = rotate)
-
 	rotateQ <- "a"
 	while(rotateQ != "c") {
 		if(rotateQ=="f"){
 			flip <- ifelse(!flip, TRUE, FALSE)
-			internal_redraw(image_file, flip = flip,rotate = rotate)
 		}
 		if(rotateQ=="r"){
 			cat("Click left hand then right hand side of x axis\n")
@@ -44,12 +41,10 @@ Otherwise chose continue\n
 			
 			f <- atan2(y.dist, x.dist) * 180/pi
 			rotate <- rotate + f
-			internal_redraw(image_file, flip = flip, rotate = rotate)	
 		}
+		internal_redraw(image_file, flip = flip, rotate = rotate)	
 		rotateQ <- readline("Flip, rotate or continue f/r/c ")
 	}
-
-	internal_redraw(image_file, flip = flip, rotate = rotate)
 
 	out <- list(flip=flip, rotate=rotate)
 

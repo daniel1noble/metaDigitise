@@ -79,8 +79,11 @@ boxplot(Petal.Length ~ Species, iris, ylab="Sepal Length", xlab="Species", col="
 dev.off()
 
 
+coords <- cal_coords("boxplot")
+vals <- getVals(coords)
+raw <- locator()
 
-
+calibrate(raw,coords,vals)
 
 dat <- metaDigitise("./docs/images/")
 

@@ -4,7 +4,7 @@
 \alias{redraw_points}
 \title{redraw_points}
 \usage{
-redraw_points(plot_type, raw_data, image_details)
+redraw_points(plot_type, raw_data, image_details, scalar)
 }
 \arguments{
 \item{plot_type}{plot_type}
@@ -12,6 +12,8 @@ redraw_points(plot_type, raw_data, image_details)
 \item{raw_data}{The raw data}
 
 \item{image_details}{image_details}
+
+\item{scalar}{amount to scale size points/text/lines according to plot size}
 }
 \description{
 plots clicked data on graph
