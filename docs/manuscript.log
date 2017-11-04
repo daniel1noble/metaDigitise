@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.11.29)  3 NOV 2017 21:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.11.29)  4 NOV 2017 15:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -419,7 +419,14 @@ Package: natbib 2010/09/13 8.31b (PWD, AO)
 LaTeX Info: Redefining \cite on input line 694.
 \c@NAT@ctr=\count118
 )
-(./manuscript.aux)
+(./manuscript.aux
+
+LaTeX Warning: Label `fig:rotate' multiply defined.
+
+
+LaTeX Warning: Label `fig:rotate' multiply defined.
+
+)
 \openout1 = `manuscript.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 20.
@@ -547,25 +554,21 @@ File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 51.
-
+ [4]
 Overfull \hbox (16.783pt too wide) in paragraph at lines 77--78
 \OT1/cmr/m/n/10 "Fig-uresToEx-tract" di-rec-tory and rel-a-tive path names (e.g
 ., users should spec-ify dir = "./Fig-uresToEx-tract/"
  []
 
-[4] <fig_calibrate.pdf, id=27, 867.24pt x 578.16pt>
+[5] <fig_calibrate.pdf, id=30, 867.24pt x 578.16pt>
 File: fig_calibrate.pdf Graphic file (type pdf)
  <use fig_calibrate.pdf>
 Package pdftex.def Info: fig_calibrate.pdf used on input line 86.
 (pdftex.def)             Requested size: 407.66833pt x 271.77934pt.
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[5] <fig_all_extract.pdf, id=31, 867.24pt x 1156.32pt>
+<fig_all_extract.pdf, id=31, 867.24pt x 1156.32pt>
 File: fig_all_extract.pdf Graphic file (type pdf)
-
-<use fig_all_extract.pdf>
+ <use fig_all_extract.pdf>
 Package pdftex.def Info: fig_all_extract.pdf used on input line 109.
 (pdftex.def)             Requested size: 407.66833pt x 543.5587pt.
 
@@ -582,13 +585,13 @@ Package pdftex.def Info: fig_rotate.pdf used on input line 177.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-
+[10]
 Overfull \hbox (35.27785pt too wide) in paragraph at lines 213--213
 []  \OT1/cmtt/m/n/10 .. ..$ variable : chr [1:8] "Sepal length" "Sepal length" 
 "Sepal length" "Sepal length" ...[] 
  []
 
-[10] [11 <./fig_rotate.pdf>]
+[11 <./fig_rotate.pdf>]
 Overfull \hbox (150.77684pt too wide) in paragraph at lines 213--213
 []  \OT1/cmtt/m/n/10 .. ..$ y_variable: chr [1:83] "Sepal length (mm)" "Sepal l
 ength (mm)" "Sepal length (mm)" "Sepal length (mm)" ...[] 
@@ -600,27 +603,154 @@ Overfull \hbox (129.77702pt too wide) in paragraph at lines 213--213
 dth (mm)" "Sepal width (mm)" "Sepal width (mm)" ...[] 
  []
 
-[12] (./manuscript.aux) ) 
+<001_Anderson_1935_Fig1.png, id=80, 415.5525pt x 363.3575pt>
+File: 001_Anderson_1935_Fig1.png Graphic file (type png)
+
+<use 001_Anderson_1935_Fig1.png>
+Package pdftex.def Info: 001_Anderson_1935_Fig1.png used on input line 243.
+(pdftex.def)             Requested size: 407.66833pt x 356.47601pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[12] [13 <./001_Anderson_1935_Fig1.png>]
+Overfull \hbox (195.0387pt too wide) in paragraph at lines 283--284
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][] 
+ []
+
+[14]
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 297.
+
+ (/usr/local/texlive/2015/texmf-dist/tex/latex/base/omlcmr.fd
+File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 297.
+
+Overfull \hbox (0.71817pt too wide) in paragraph at lines 332--333
+[]\OT1/cmr/m/n/10 Often, plots might con-tain mul-ti-ple groups that the meta-a
+nalyst wants to ex-tract from. `metaDigi-tise`
+ []
+
+[15] <001_Anderson_1935_Fig1_digitised.png, id=97, 661.47125pt x 533.995pt>
+File: 001_Anderson_1935_Fig1_digitised.png Graphic file (type png)
+
+<use 001_Anderson_1935_Fig1_digitised.png>
+Package pdftex.def Info: 001_Anderson_1935_Fig1_digitised.png used on input lin
+e 357.
+(pdftex.def)             Requested size: 407.66833pt x 329.10164pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[16]
+Overfull \hbox (135.03809pt too wide) in paragraph at lines 375--376
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (147.03821pt too wide) in paragraph at lines 376--377
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (147.03821pt too wide) in paragraph at lines 377--378
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (147.03821pt too wide) in paragraph at lines 378--379
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (147.03821pt too wide) in paragraph at lines 379--380
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[17 <./001_Anderson_1935_Fig1_digitised.png>] [18]
+Overfull \hbox (31.90161pt too wide) in paragraph at lines 418--419
+\OT1/cmr/m/n/10 time, 001[]-An-der-son[]-1935[]-Fig1.png, is ig-nored and the n
+ew plots cy-cle on screen. First for 002[]-Doe[]-2013[]-Fig1.png
+ []
+
+
+Overfull \hbox (159.03833pt too wide) in paragraph at lines 440--441
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][] 
+ []
+
+[19] [20]
+Overfull \hbox (159.03833pt too wide) in paragraph at lines 496--497
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (153.03827pt too wide) in paragraph at lines 497--498
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (153.03827pt too wide) in paragraph at lines 498--499
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (153.03827pt too wide) in paragraph at lines 499--500
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (153.03827pt too wide) in paragraph at lines 500--501
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (153.03827pt too wide) in paragraph at lines 501--502
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (153.03827pt too wide) in paragraph at lines 502--503
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (153.03827pt too wide) in paragraph at lines 503--504
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (147.03821pt too wide) in paragraph at lines 504--505
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[21] (./manuscript.aux)
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 5030 strings out of 493089
- 67463 string characters out of 6134841
- 145313 words of memory out of 5000000
- 8444 multiletter control sequences out of 15000+600000
- 8737 words of font info for 32 fonts, out of 8000000 for 9000
+ 5061 strings out of 493089
+ 68153 string characters out of 6134841
+ 157334 words of memory out of 5000000
+ 8469 multiletter control sequences out of 15000+600000
+ 9191 words of font info for 34 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,6n,32p,2263b,1213s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2015/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmbx12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmr10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmr12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmr17.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmsy10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmtt10.pfb>
-Output written on manuscript.pdf (12 pages, 406355 bytes).
+ 38i,6n,32p,2277b,1522s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
+></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
+</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
+/usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></u
+sr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr
+/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/l
+ocal/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/lo
+cal/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on manuscript.pdf (21 pages, 501426 bytes).
 PDF statistics:
- 107 PDF objects out of 1000 (max. 8388607)
- 67 compressed objects within 1 object stream
+ 145 PDF objects out of 1000 (max. 8388607)
+ 91 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 31 words of extra memory for PDF output out of 10000 (max. 10000000)
 
