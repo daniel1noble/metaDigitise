@@ -13,7 +13,7 @@ grandSD(mean, sd, n, equal = FALSE)
 
 \item{n}{Sample size}
 
-\item{equal}{Whether to calculate pooled SD assuming groups have the same means (TRUE) or different means (FALSE)}
+\item{equal}{Logical: Whether to calculate pooled SD assuming groups have the same means (TRUE) or different means (FALSE)}
 }
 \value{
 Returns vector of pooled mean
