@@ -49,11 +49,12 @@ bulk_edit <- function(dir, summary=TRUE){
 		if(sum(needed)==0) {
 			cat("\n**** No files need N ****\n\n\n")
 		}else{
-			N_files <- filenames(needed)
+			N_files <- filepaths[needed]
 			for(i in N_files){
 				object <- readRDS(i)
 				plot(object)
 				object$raw_data <- enter_N(object$raw_data)
+				object$entered_N <- TRUE
 				saveRDS(object, file=i)
 			}
 		}
@@ -66,7 +67,7 @@ bulk_edit <- function(dir, summary=TRUE){
 
 
 N_needed <- function(filepaths){
-	metaDig <- load_metaDigitise(filepaths)
+	metaDig <- load_metaDigitise(filepaths, filename(filepaths))
 	no_N <- !sapply(metaDig, function(x) x$entered_N)
 	return(no_N)
 }

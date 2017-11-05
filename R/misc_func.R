@@ -18,10 +18,9 @@ isNumeric <- function(x) !suppressWarnings(is.na(as.numeric(x)))
 #' @description extracts filename from filepath
 
 filename <- function(x) {
-	y <- strsplit(x,"/")[[1]]
-	return(y[length(y)])
+	y <- strsplit(x,"/")
+	sapply(y, function(z) z[length(z)], USE.NAMES = FALSE)
 }
-
 
 #' @title user_options
 #' @param question question
