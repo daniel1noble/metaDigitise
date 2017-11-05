@@ -197,9 +197,10 @@ get_notDone_file_details <- function(dir){
 
 dir_details <- function(dir){
 	detail_list <- list()
+	file_pattern <- "[.][pjt][dnip][fpg]*$"
 
-		  detail_list$images <- list.files(dir, pattern = ".[pjt][dnip][fpg]*")
-		    detail_list$name <- gsub(".[pjt][dnip][fpg]*", "", detail_list$images)
+		  detail_list$images <- list.files(dir, pattern = file_pattern)
+		    detail_list$name <- gsub(file_pattern, "", detail_list$images)
 	       detail_list$paths <- paste0(dir, detail_list$images)
 	     detail_list$cal_dir <- paste0(dir, "caldat/")
 	detail_list$calibrations <- list.files(paste0(dir, "caldat/"))
