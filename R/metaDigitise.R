@@ -65,8 +65,13 @@ process_new_files <- function(dir, summary = TRUE) {
 			         data_list[[i]] <- internal_digitise(details$paths[i], plot_type = plot_types)	
 			    names(data_list)[i] <- details$images[i]
 			 saveRDS(data_list[[i]], file = paste0(details$cal_dir, details$name[i]))
-			breakQ <-  user_options(paste("\n\nDo you want continue:", length(details$paths)- i, "plots out of", length(details$paths), "plots remaining (y/n) "), c("y","n"))
-		 	if(breakQ=="n") break
+			
+			if(length(details$paths)-i>0){
+				breakQ <-  user_options(paste("\n\nDo you want continue:", length(details$paths)- i, "plots out of", length(details$paths), "plots remaining (y/n) "), c("y","n"))
+				if(breakQ=="n") break
+			}else{
+				cat("Congratulations! Looks like you have finished digitising all figures in this directory. If you haven't please delete files from the caldat/ folder and try again!")
+			}
 		 }
 	
 		complete_plot_types <- lapply(data_list, function(x) x$plot_type)
