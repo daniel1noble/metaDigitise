@@ -15,7 +15,7 @@ import_menu<-function(dir, summary){
 	Q <- menu(c("All","One"))
 
 # all 
-	if(Q==1) import_metaDigitise(dir=dir, summary = summary)
+	if(Q==1) return(import_metaDigitise(dir=dir, summary = summary))
 
 # one
 	if(Q==2){
