@@ -47,7 +47,7 @@ test_that("Checking getVals..", {
 
 
 
-test_that("Checking getVals..", {
+test_that("Checking user_calibrate..", {
 	with_mock(
 		`metaDigitise::internal_redraw` = function(...){},
 		`metaDigitise::print_cal_instructions` = function(...){},
@@ -57,7 +57,7 @@ test_that("Checking getVals..", {
 		expect_equal(
 			user_calibrate(object=list()),
 			list(calpoints=data.frame(x=c(0,0,0,100),y=c(0,100,0,0)), point_vals=c(y1=1,y2=2,x1=3,x2=4)), 
-			info = "getVals failed"
+			info = "user_calibrate failed"
 		)
 	)
 
