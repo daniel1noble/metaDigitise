@@ -144,7 +144,7 @@ edit_metaDigitise <- function(object){
 	object$processed_data <- process_data(object)
 
 	## known N
-	if(plot_type %in% c("scatterplot","histogram")) output$knownN <- do.call(knownN,output)
+	if(object$plot_type %in% c("scatterplot","histogram")) object$knownN <- do.call(knownN,object)
 
 	## error type
 	if(object$plot_type %in% c("mean_error")) {

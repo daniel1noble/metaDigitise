@@ -5,7 +5,6 @@
 #' @description Extraction of data from histograms
 histogram_extract <- function(edit=FALSE, raw_data = data.frame(), ...){
 
-	group_id <- readline("\nGroup identifier: ")
 
 	if(edit){ 
 		idQ <- user_options("Change group identifier? (y/n) ",c("y","n"))
@@ -13,7 +12,10 @@ histogram_extract <- function(edit=FALSE, raw_data = data.frame(), ...){
 			group_id <- readline("\nGroup identifier: ")
 			raw_data$id <- group_id
 		}
+	}else{
+		group_id <- readline("\nGroup identifier: ")
 	}
+
 
 	histQ <- if(edit){ "b" }else{ "a" }
 	i <- if(edit){ max(unique(raw_data$bar)) }else{ 0 }

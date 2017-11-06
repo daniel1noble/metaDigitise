@@ -30,8 +30,8 @@ test_that("Checking convert_group_data..", {
 
 test_that("Checking convert_histogram_data..", {
 	expect_equal(
-		convert_histogram_data(cal_data = data.frame(bar=c(1,1), x=c(1,3), y=c(5,5))), 
-		data.frame(midpoints=2, frequency=5),
+		convert_histogram_data(cal_data = data.frame(id=rep("control",2),bar=c(1,1), x=c(1,3), y=c(5,5))), 
+		data.frame(id="control", midpoints=2, frequency=5),
 		info = "convert_histogram_data failed")
 })
 
@@ -48,7 +48,7 @@ test_that("Checking process_data..", {
 		info = "process_data failed")
 
 	expect_equal(
-		process_data(object=list(plot_type="histogram", variable="y", calpoints = data.frame(x=c(0,0,0,100),y=c(0,100,0,0)),point_vals = c(1,3,2,4), raw_data=data.frame(bar=1,x=c(25,75),y=c(50,50)))), 
-		data.frame(midpoints=3, frequency=2, variable="y", stringsAsFactors = FALSE), 
+		process_data(object=list(plot_type="histogram", variable="y", calpoints = data.frame(x=c(0,0,0,100),y=c(0,100,0,0)),point_vals = c(1,3,2,4), raw_data=data.frame(id=rep("control",2), bar=1,x=c(25,75),y=c(50,50)))), 
+		data.frame(id=as.factor("control"), midpoints=3, frequency=2, variable="y", stringsAsFactors = FALSE), 
 		info = "process_data failed")
 })
