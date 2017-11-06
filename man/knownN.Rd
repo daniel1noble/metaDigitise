@@ -4,12 +4,12 @@
 \alias{knownN}
 \title{knownN}
 \usage{
-knownN(plot_type, raw_data, knownN = NULL, ...)
+knownN(plot_type, processed_data, knownN = NULL, ...)
 }
 \arguments{
 \item{plot_type}{plot type}
 
-\item{raw_data}{raw_data}
+\item{processed_data}{raw_data}
 
 \item{knownN}{previously entered N}
 

@@ -140,6 +140,9 @@ edit_metaDigitise <- function(object){
 		object$raw_data <- point_extraction(object, edit=TRUE)	
 	}
 	
+	### re-process data
+	object$processed_data <- process_data(object)
+
 	## known N
 	if(plot_type %in% c("scatterplot","histogram")) output$knownN <- do.call(knownN,output)
 
@@ -151,9 +154,6 @@ edit_metaDigitise <- function(object){
 			object$error_type <- user_options("Type of error (se, CI95, sd): ", c("se","CI95","sd"))
 		}
 	}
-
-	### re-process data
-	object$processed_data <- process_data(object)
 
 	class(object) <- 'metaDigitise'
 	return(object)

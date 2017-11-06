@@ -46,6 +46,10 @@ internal_digitise <- function(image_file, plot_type=NULL, cex=1){
 	### Extract data
 	output$raw_data <- point_extraction(output)
 
+
+	### calibrate and convert data
+	output$processed_data <- process_data(output)
+
 	## known N
 	if(plot_type %in% c("scatterplot","histogram")) output$knownN <- do.call(knownN,output)
 
@@ -53,9 +57,6 @@ internal_digitise <- function(image_file, plot_type=NULL, cex=1){
 	if(plot_type %in% c("mean_error")) {
 		output$error_type <- user_options("\nType of error (se, CI95, sd): ", c("se","CI95","sd"))
 	}
-
-	### calibrate and convert data
-	output$processed_data <- process_data(output)
 
 	class(output) <- 'metaDigitise'
 	return(output)

@@ -115,15 +115,15 @@ cat_matrix<- function(x, cols){
 
 #' @title knownN
 #' @param plot_type plot type
-#' @param raw_data raw_data
+#' @param processed_data raw_data
 #' @param knownN previously entered N
 #' @param ... arguments from other calls
 #' @description prints a vector as a number list of items with a certain number of columns
 
-knownN <- function(plot_type, raw_data, knownN = NULL,...){
-	ids <- 	unique(raw_data$id)
-		cat("\nThe estimated samples sizes for each group are:\n\n")
-		print(with(raw_data, ifelse(plot_type=="histogram", sum(freq), tapply(x,id,length))))
+knownN <- function(plot_type, processed_data, knownN = NULL,...){
+	ids <- 	unique(processed_data$id)
+	cat("\nThe estimated samples sizes for each group are:\n\n")
+	print(if(plot_type=="histogram") sum(processed_data$frequency) else table(processed_data$id))
 	if(is.null(knownN)){
 		cat(paste("\nThe known sample size may differ from that in the extracted data\n",ifelse(plot_type=="histogram", "(e.g. with slight error in clicking)","(e.g. if there are overlaying points)") ))
 		trueN <- user_options( "\nDo you want to enter a different sample size from that estimated? (y/n) ", c("y","n") )
@@ -138,8 +138,8 @@ knownN <- function(plot_type, raw_data, knownN = NULL,...){
 		}
 	}
 	if(trueN=="y"){
-		for (i in ids) knownN[ids]  <- user_count(paste("Group \"", i,"\": Enter sample size "))
-		names(knownN) <- ids
+		knownN = NULL
+		for (i in ids) knownN[i]  <- user_count(paste("Group \"", i,"\": Enter sample size "))
 	}else if(trueN=="c"){
 		knownN <- knownN
 	}else{
