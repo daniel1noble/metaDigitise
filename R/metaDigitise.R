@@ -65,8 +65,13 @@ process_new_files <- function(dir, summary = TRUE) {
 			         data_list[[i]] <- internal_digitise(details$paths[i], plot_type = plot_types)	
 			    names(data_list)[i] <- details$images[i]
 			 saveRDS(data_list[[i]], file = paste0(details$cal_dir, details$name[i]))
-			breakQ <-  user_options(paste("\n\nDo you want continue:", length(details$paths)- i, "plots out of", length(details$paths), "plots remaining (y/n) "), c("y","n"))
-		 	if(breakQ=="n") break
+			
+			if(length(details$paths)-i>0){
+				breakQ <-  user_options(paste("\n\nDo you want continue:", length(details$paths)- i, "plots out of", length(details$paths), "plots remaining (y/n) "), c("y","n"))
+				if(breakQ=="n") break
+			}else{
+				cat("Congratulations! Looks like you have finished digitising all figures in this directory. If you haven't please delete files from the caldat/ folder and try again!")
+			}
 		 }
 	
 		complete_plot_types <- lapply(data_list, function(x) x$plot_type)
@@ -192,9 +197,10 @@ get_notDone_file_details <- function(dir){
 
 dir_details <- function(dir){
 	detail_list <- list()
+	file_pattern <- "[.][pjt][dnip][fpg]*$"
 
-		  detail_list$images <- list.files(dir, pattern = ".[pjt][dnip][fpg]*")
-		    detail_list$name <- gsub(".[pjt][dnip][fpg]*", "", detail_list$images)
+		  detail_list$images <- list.files(dir, pattern = file_pattern)
+		    detail_list$name <- gsub(file_pattern, "", detail_list$images)
 	       detail_list$paths <- paste0(dir, detail_list$images)
 	     detail_list$cal_dir <- paste0(dir, "caldat/")
 	detail_list$calibrations <- list.files(paste0(dir, "caldat/"))

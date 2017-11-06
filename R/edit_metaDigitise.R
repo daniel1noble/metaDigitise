@@ -49,11 +49,12 @@ bulk_edit <- function(dir, summary=TRUE){
 		if(sum(needed)==0) {
 			cat("\n**** No files need N ****\n\n\n")
 		}else{
-			N_files <- filenames(needed)
+			N_files <- filepaths[needed]
 			for(i in N_files){
 				object <- readRDS(i)
 				plot(object)
 				object$raw_data <- enter_N(object$raw_data)
+				object$entered_N <- TRUE
 				saveRDS(object, file=i)
 			}
 		}
@@ -66,7 +67,7 @@ bulk_edit <- function(dir, summary=TRUE){
 
 
 N_needed <- function(filepaths){
-	metaDig <- load_metaDigitise(filepaths)
+	metaDig <- load_metaDigitise(filepaths, filename(filepaths))
 	no_N <- !sapply(metaDig, function(x) x$entered_N)
 	return(no_N)
 }
@@ -102,7 +103,7 @@ edit_metaDigitise <- function(object){
 	plot(object)
 
 	## ROTATION
-	rotQ <- user_options("Edit rotation? If yes, then the whole extraction will be redone (y/n) ", c("y","n"))
+	rotQ <- user_options("\nEdit rotation? If yes, then the whole extraction will be redone (y/n) ", c("y","n"))
 	if(rotQ=="y") output <- metaDigitise(object$image_file)
 
 
@@ -124,7 +125,6 @@ edit_metaDigitise <- function(object){
 		plot(object)
 	}
 	
-
 	### calibration
 	calQ <- user_options("\nEdit calibration? (y/n) ", c("y","n"))
 	if(calQ =="y"){
@@ -140,6 +140,12 @@ edit_metaDigitise <- function(object){
 		object$raw_data <- point_extraction(object, edit=TRUE)	
 	}
 	
+	### re-process data
+	object$processed_data <- process_data(object)
+
+	## known N
+	if(object$plot_type %in% c("scatterplot","histogram")) object$knownN <- do.call(knownN,object)
+
 	## error type
 	if(object$plot_type %in% c("mean_error")) {
 		cat("\nType of error:", object$error_type)
@@ -148,9 +154,6 @@ edit_metaDigitise <- function(object){
 			object$error_type <- user_options("Type of error (se, CI95, sd): ", c("se","CI95","sd"))
 		}
 	}
-
-	### re-process data
-	object$processed_data <- process_data(object)
 
 	class(object) <- 'metaDigitise'
 	return(object)

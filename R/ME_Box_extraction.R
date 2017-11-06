@@ -30,18 +30,6 @@ MB_extract <- function(edit=FALSE, plot_type, entered_N, raw_data = data.frame()
 
 	add_removeQ <- if(edit){ "b" }else{ "a" }
 
-	if(edit){ 
-		idQ <- user_options("Change group identifier? (y/n) ",c("y","n"))
-		if(idQ=="y"){
-			ids <- unique(raw_data$id)
-			rename <- menu(ids)
-			new_id <- user_unique("\nGroup identifier: ", unique(raw_data$id))
-			raw_data[raw_data$id != ids[rename], "id"] <- new_id
-		}
-
-	internal_redraw(plot_type=plot_type, raw_data=raw_data,...)
-	}
-
 	while(add_removeQ != "f"){
 		
 		if(add_removeQ=="a"){
@@ -51,12 +39,37 @@ MB_extract <- function(edit=FALSE, plot_type, entered_N, raw_data = data.frame()
 			raw_data <- rbind(raw_data, data.frame(id=group_id,x=group_points$x,y=group_points$y, n=group_N))
 		}
 
+		if(add_removeQ=="e"){
+			group_id <- unique(raw_data$id)[ menu(unique(raw_data$id)) ]
+			group_data <- subset(raw_data, id==group_id)
+			raw_data <- subset(raw_data, id != group_id)
+			idQ <- user_options("\nChange group identifier? (y/n) ",c("y","n"))
+			if(idQ=="y") {
+				group_data$id <- user_unique("\nGroup identifier: ", unique(raw_data$id))
+				internal_redraw(plot_type=plot_type, raw_data=rbind(raw_data, group_data),...)
+			}
+
+			nQ <- user_options("\nChange group sample size? (y/n) ",c("y","n"))
+			if(nQ=="y") {
+				group_data$n <- user_count("\nGroup sample size: ")
+				internal_redraw(plot_type=plot_type, raw_data=rbind(raw_data, group_data),...)
+			}
+
+			pointsQ <- user_options("\nReclick group points? (y/n) ",c("y","n"))
+			if(pointsQ=="y"){
+				internal_redraw(plot_type=plot_type, raw_data=raw_data,...)
+				group_points <- single_MB_extract(plot_type)
+				group_data$x=group_points$x
+				group_data$y=group_points$y
+			}			
+			raw_data <- rbind(raw_data, group_data)
+		}
+
 		if(add_removeQ=="d") raw_data <- delete_group(raw_data)
-			#delQ <- user_options("\nEnter a group id to delete (displayed beside bars) ", unique(raw_data$id)) 
-			#raw_data <- subset(raw_data, id != delQ)
+
 
 		internal_redraw(plot_type=plot_type, raw_data=raw_data,...)
-		add_removeQ <- readline("Add group, Delete group or Finish plot? a/d/f ")
+		add_removeQ <- readline("Add group, Edit Group, Delete group or Finish plot? a/e/d/f ")
 
 	}
 	return(raw_data)

@@ -63,7 +63,7 @@ convert_histogram_data <- function(cal_data){
 
 	for(i in unique(cal_data$bar)){
 		bar_data <- subset(cal_data, bar==i)
-		convert_data <- rbind( convert_data, data.frame( midpoints=mean(bar_data$x), frequency= round(mean(bar_data$y)) ) )
+		convert_data <- rbind( convert_data, data.frame(id=cal_data$id[1], midpoints=mean(bar_data$x), frequency= round(mean(bar_data$y)) ) )
 	}
 	return(convert_data)
 }
