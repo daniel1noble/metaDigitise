@@ -4,7 +4,7 @@
 \alias{error_to_sd}
 \title{error_to_sd}
 \usage{
-error_to_sd(error, n, error_type = c("se", "CI95", "sd", "range"))
+error_to_sd(error, n, error_type = c("se", "CI95", "sd"))
 }
 \arguments{
 \item{error}{some form of error}
