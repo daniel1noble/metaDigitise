@@ -12,6 +12,7 @@ mock_object <- list(
 	point_vals = c(1,2), 
 	entered_N=TRUE,
 	raw_data = data.frame(id=rep("control",2), x=c(60,60), y=c(75,50), n=rep(20,2)),
+	knownN = NULL,
 	error_type="sd",
 	processed_data=data.frame(id=as.factor("control"),mean=1.5, error=0.25, n=20, variable="y", stringsAsFactors = FALSE)	
 	)

@@ -110,3 +110,46 @@ cat_matrix<- function(x, cols){
 	rows_print <- apply(matrix(files_print, nrow=rows, byrow=TRUE),1,paste,collapse = "\t")
 	cat(rows_print,sep="\n")
 }
+
+
+
+#' @title knownN
+#' @param plot_type plot type
+#' @param raw_data raw_data
+#' @param knownN previously entered N
+#' @param ... arguments from other calls
+#' @description prints a vector as a number list of items with a certain number of columns
+
+knownN <- function(plot_type, raw_data, knownN = NULL,...){
+	ids <- 	unique(raw_data$id)
+		cat("\nThe estimated samples sizes for each group are:\n\n")
+		print(with(raw_data, ifelse(plot_type=="histogram", sum(freq), tapply(x,id,length))))
+	if(is.null(knownN)){
+		cat(paste("\nThe known sample size may differ from that in the extracted data\n",ifelse(plot_type=="histogram", "(e.g. with slight error in clicking)","(e.g. if there are overlaying points)") ))
+		trueN <- user_options( "\nDo you want to enter a different sample size from that estimated? (y/n) ", c("y","n") )
+	}else{
+		cat("\nPreviously entered known sample sizes for each group are:\n\n")
+		print(knownN)
+		if(length(ids)!=length(knownN)){
+			cat("\nThe known samples sizes need to be updated.\n\n")
+			trueN <- user_options( "\nEnter 'y' to re-enter, or 'n' to use estimated sample sizes (y/n) ", c("y","n") )
+		}else{
+			trueN <- user_options( "\nEnter 'y' to re-enter, 'c' to continue using entered N, or 'n' to use estimated sample sizes (y/c/n) ", c("y","c","n") )
+		}
+	}
+	if(trueN=="y"){
+		for (i in ids) knownN[ids]  <- user_count(paste("Group \"", i,"\": Enter sample size "))
+		names(knownN) <- ids
+	}else if(trueN=="c"){
+		knownN <- knownN
+	}else{
+		knownN <- NULL
+	}
+	return(knownN)
+}
+
+
+
+
+
+

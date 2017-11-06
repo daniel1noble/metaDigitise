@@ -103,7 +103,7 @@ edit_metaDigitise <- function(object){
 	plot(object)
 
 	## ROTATION
-	rotQ <- user_options("Edit rotation? If yes, then the whole extraction will be redone (y/n) ", c("y","n"))
+	rotQ <- user_options("\nEdit rotation? If yes, then the whole extraction will be redone (y/n) ", c("y","n"))
 	if(rotQ=="y") output <- metaDigitise(object$image_file)
 
 
@@ -125,7 +125,6 @@ edit_metaDigitise <- function(object){
 		plot(object)
 	}
 	
-
 	### calibration
 	calQ <- user_options("\nEdit calibration? (y/n) ", c("y","n"))
 	if(calQ =="y"){
@@ -141,6 +140,9 @@ edit_metaDigitise <- function(object){
 		object$raw_data <- point_extraction(object, edit=TRUE)	
 	}
 	
+	## known N
+	if(plot_type %in% c("scatterplot","histogram")) output$knownN <- do.call(knownN,output)
+
 	## error type
 	if(object$plot_type %in% c("mean_error")) {
 		cat("\nType of error:", object$error_type)

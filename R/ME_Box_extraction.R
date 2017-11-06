@@ -43,19 +43,19 @@ MB_extract <- function(edit=FALSE, plot_type, entered_N, raw_data = data.frame()
 			group_id <- unique(raw_data$id)[ menu(unique(raw_data$id)) ]
 			group_data <- subset(raw_data, id==group_id)
 			raw_data <- subset(raw_data, id != group_id)
-			idQ <- user_options("Change group identifier? (y/n) ",c("y","n"))
+			idQ <- user_options("\nChange group identifier? (y/n) ",c("y","n"))
 			if(idQ=="y") {
 				group_data$id <- user_unique("\nGroup identifier: ", unique(raw_data$id))
 				internal_redraw(plot_type=plot_type, raw_data=rbind(raw_data, group_data),...)
 			}
 
-			nQ <- user_options("Change group sample size? (y/n) ",c("y","n"))
+			nQ <- user_options("\nChange group sample size? (y/n) ",c("y","n"))
 			if(nQ=="y") {
 				group_data$n <- user_count("\nGroup sample size: ")
 				internal_redraw(plot_type=plot_type, raw_data=rbind(raw_data, group_data),...)
 			}
 
-			pointsQ <- user_options("Change group identifier? (y/n) ",c("y","n"))
+			pointsQ <- user_options("\nReclick group points? (y/n) ",c("y","n"))
 			if(pointsQ=="y"){
 				internal_redraw(plot_type=plot_type, raw_data=raw_data,...)
 				group_points <- single_MB_extract(plot_type)
