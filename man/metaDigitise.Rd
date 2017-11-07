@@ -4,19 +4,34 @@
 \alias{metaDigitise}
 \title{metaDigitise}
 \usage{
-metaDigitise(image_file, plot_type = NULL)
+metaDigitise(dir, summary = TRUE)
 }
 \arguments{
-\item{image_file}{Image file}
+\item{dir}{the path name to the directory / folder where the files are located}
 
-\item{plot_type}{Type of plot from "mean_error","boxplot","scatterplot" or"histogram". Function will prompt if not entered by user.}
+\item{summary}{whether the digitised data should be returned as a summary (TRUE) or as a concatenated list of similar types.}
 }
 \value{
-List of
+A data frame or list containing the raw digitised data or the processed, summary statistics from the digitised data
 }
 \description{
-Extracts points from a figure and generate summary statistics
+Single or batch processing of figures with .png, .jpg, .tiff, .pdf extensions within a set directory. metaDigitise consolidates the data and exports the data for each image and image type. It can also summarise the data, provide the raw data (if scatterplots) and automatically imports previously finished data and merges it with newly digitised data. metaDigitise also allows users to check their calibration along with editing previous digitisations.
+}
+\details{
+metaDigitise can be used on a directory with a whole host of different figure types (mean and error, scatter plots, box plots and histograms) and file types (.jpeg, .png, .tiff, .pdf). There are three major options provided to users:
+
+If the "1: Process new images" option is chosen, it will automatically cycle through all figures not already completed within a directory in order, prompting the user for specific information as they go. At the end of each figure users will be asked if they would like to continue or not, providing flexibility to leave a job should should they need to. As figures are digitised it will automatically write metaDigitise object files (in .RDS format containing processed and calibration data along with directory and file details), into a special caldat/ folder within the directory. Importantly, as new files are added to a directory that has already been "completed", metaDigitise will recognize these unfinished files and only cycle through the digitisation of these new files. This easily allows users to pick up from where they left off. It will also automatically re-merge completed figure with any newly digitised figures at the end of this process keeping everything together throughout the process.
+
+If the "2: Import existing data" is chosen, all existing files that have already been digitised will be automatically imported from the given directory. 
+
+Finally, metDigitise is built for ease of editing and reproducibility in mind. Hence, if "3: Edit existing data" is chosen by the user then users will have the options to "1: Cycle through images" (that are complete), overlaying digitisations with each figure and asking whether they would like to edit each figure or "2: Choose specific file to edit" allowing editing for a specific file. Here a list of all files are provided and the user simply needs to pick the one in the console they would like to view. Alternatively, the "3: Enter previously omitted sample sizes" option allows the user to go back and enter sample sizes that they may not have had on hand at the time of digitisation. This means that, so long as the caldat/ folder along with respective images are maintained, anyone using metaDigitise can simply import existing digitisations, modify them and fix them. This folder can then be shared with colleagues to allow them to reproduce any data extraction.
+}
+\examples{
+# data <- metaDigitise(dir = "./example_figs/", summary = TRUE)
+# data
 }
 \author{
-Joel Pick
+Joel Pick - joel.l.pick@gmail.com
+
+Daniel Noble - daniel.wa.noble@gmail.com
 }

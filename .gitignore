@@ -4,3 +4,7 @@ example_figs/
 metaDigitise.Rproj
 .Rproj.user
 sim_figs.R
+testing-script.R
+find_nearest_point.R
+docs/sim_figs/figs*
+docs/sim_figs/.dropbox
