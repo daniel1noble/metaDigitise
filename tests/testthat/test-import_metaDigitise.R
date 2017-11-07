@@ -70,3 +70,19 @@ test_that("Checking ordered_lists works as expected..", {
 
 	expect_equal(names(list), "mean_error", info = "Checked that plot type names are set up correct in ordered lists")
 })
+
+user_options_tester_func <- function(...) {
+	with_mock(
+		readline = function(question) "a",
+		user_options (...)
+		)
+}
+
+test_that("Checking import_menu works as expected..", {
+	with_mock(
+			menu = function(...) 1,
+			tmp <- import_menu(tmp_dir, summary = TRUE), 
+			expect_equal(tmp$mean[1], 1.5, info="Object 1 loaded and matches mean after import_menu..."),
+			expect_equal(tmp$mean[2], 4, info="Object 2 loaded and matches mean after import_menu...")
+	)
+})
