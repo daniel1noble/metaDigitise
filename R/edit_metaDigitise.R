@@ -58,6 +58,7 @@ bulk_edit <- function(dir, summary=TRUE){
 				plot(object)
 				object$raw_data <- enter_N(object$raw_data)
 				object$entered_N <- TRUE
+				object$processed_data <- process_data(object)
 				saveRDS(object, file=i)
 			}
 		}
