@@ -54,3 +54,18 @@ mock_object <- list(
 	)
 
 class(mock_object) <- 'metaDigitise'
+
+
+test_that("Checking extract_digitised works as expected..", {
+	
+	ob_sum <- extract_digitised(list(mock_object), summary = TRUE)
+	ob_raw <- extract_digitised(list(mock_object), summary = FALSE)
+
+	expect_equal(class(ob_sum), "data.frame", info = "Summary object is indeed a data frame..")
+	expect_equal(ob_sum$mean, 1.5, info = "Summary object mean matches..")
+	expect_equal(class(ob_raw), "list", info = "Raw object is indeed a list..")
+	expect_equal(names(ob_raw), "image.png", info = "Raw object name is correct..")
+	expect_equal(names(ob_raw), "image.png", info = "Raw object name is correct..")
+	expect_equal(ob_raw[[1]]$mean, 1.5, info = "List object mean matches..")
+
+})
