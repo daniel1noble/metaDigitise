@@ -11,7 +11,8 @@
 internal_digitise <- function(image_file, plot_type=NULL, cex=1){
 		
 	output <- list()
-	output$image_file <- paste0("./",filename(image_file))
+	output$image_name <- filename(image_file)
+	output$image_file <-image_file
 
 	output$cex <- cex
 

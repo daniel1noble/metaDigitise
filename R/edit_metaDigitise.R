@@ -19,6 +19,7 @@ bulk_edit <- function(dir, summary=TRUE){
 	if(Q==1){
 		for(i in filepaths){
 			object <- readRDS(i)
+			object$image_file <- paste0(dir,filename(object$image_file))
 			plot(object)
 			editQ <- user_options("\nEdit file? y/n ", c("y","n"))
 			if(editQ == "y") {
@@ -37,6 +38,7 @@ bulk_edit <- function(dir, summary=TRUE){
 			cat_matrix(files, 3)
 			edit_file <- user_options("\nSelect number of file to edit ", 1:length(files))
 			object <- readRDS(filepaths[as.numeric(edit_file)])
+			object$image_file <- paste0(dir,filename(object$image_file))
 			object <- edit_metaDigitise(object)
 			saveRDS(object, file=filepaths[as.numeric(edit_file)])
 			editQ <- readline("\nEdit more files? y/n ")
@@ -52,6 +54,7 @@ bulk_edit <- function(dir, summary=TRUE){
 			N_files <- filepaths[needed]
 			for(i in N_files){
 				object <- readRDS(i)
+				object$image_file <- paste0(dir,filename(object$image_file))
 				plot(object)
 				object$raw_data <- enter_N(object$raw_data)
 				object$entered_N <- TRUE
