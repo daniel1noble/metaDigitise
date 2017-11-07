@@ -4,16 +4,14 @@
 \alias{histogram_extract}
 \title{histogram_extract}
 \usage{
-histogram_extract(image, image_file, calpoints, point_vals)
+histogram_extract(edit = FALSE, raw_data = data.frame(), ...)
 }
 \arguments{
-\item{image}{image}
+\item{edit}{logical; whether in edit mode}
 
-\item{image_file}{image file name}
+\item{raw_data}{raw data}
 
-\item{calpoints}{points used for calibration}
-
-\item{point_vals}{values for calibration}
+\item{...}{arguments to pass to internal_redraw}
 }
 \description{
 Extraction of data from histograms

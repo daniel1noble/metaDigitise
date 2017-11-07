@@ -1,205 +1,213 @@
-
 #' @title metaDigitise
-#' @description Extracts points from a figure and generate summary statistics
-#' @param image_file Image file
-#' @param plot_type Type of plot from "mean_error","boxplot","scatterplot" or"histogram". Function will prompt if not entered by user.
-#' @return List of 
-#' @author Joel Pick
+#' @description Single or batch processing of figures with .png, .jpg, .tiff, .pdf extensions within a set directory. metaDigitise consolidates the data and exports the data for each image and image type. It can also summarise the data, provide the raw data (if scatterplots) and automatically imports previously finished data and merges it with newly digitised data. metaDigitise also allows users to check their calibration along with editing previous digitisations.
+#' @param dir the path name to the directory / folder where the files are located
+#' @param summary whether the digitised data should be returned as a summary (TRUE) or as a concatenated list of similar types. 
+#' @details metaDigitise can be used on a directory with a whole host of different figure types (mean and error, scatter plots, box plots and histograms) and file types (.jpeg, .png, .tiff, .pdf). There are three major options provided to users:
+#' 
+#' If the "1: Process new images" option is chosen, it will automatically cycle through all figures not already completed within a directory in order, prompting the user for specific information as they go. At the end of each figure users will be asked if they would like to continue or not, providing flexibility to leave a job should should they need to. As figures are digitised it will automatically write metaDigitise object files (in .RDS format containing processed and calibration data along with directory and file details), into a special caldat/ folder within the directory. Importantly, as new files are added to a directory that has already been "completed", metaDigitise will recognize these unfinished files and only cycle through the digitisation of these new files. This easily allows users to pick up from where they left off. It will also automatically re-merge completed figure with any newly digitised figures at the end of this process keeping everything together throughout the process.
+#' 
+#' If the "2: Import existing data" is chosen, all existing files that have already been digitised will be automatically imported from the given directory. 
+#' 
+#' Finally, metDigitise is built for ease of editing and reproducibility in mind. Hence, if "3: Edit existing data" is chosen by the user then users will have the options to "1: Cycle through images" (that are complete), overlaying digitisations with each figure and asking whether they would like to edit each figure or "2: Choose specific file to edit" allowing editing for a specific file. Here a list of all files are provided and the user simply needs to pick the one in the console they would like to view. Alternatively, the "3: Enter previously omitted sample sizes" option allows the user to go back and enter sample sizes that they may not have had on hand at the time of digitisation. This means that, so long as the caldat/ folder along with respective images are maintained, anyone using metaDigitise can simply import existing digitisations, modify them and fix them. This folder can then be shared with colleagues to allow them to reproduce any data extraction.
+#' @author Joel Pick - joel.l.pick@gmail.com
+#' @author Daniel Noble - daniel.wa.noble@gmail.com
+#' @examples
+#' # data <- metaDigitise(dir = "./example_figs/", summary = TRUE)
+#' # data
+#' @return A data frame or list containing the raw digitised data or the processed, summary statistics from the digitised data
 #' @export
 
-metaDigitise <- function(image_file, plot_type=NULL){
+metaDigitise<-function(dir, summary = TRUE){
+		# Check dir has a / at the end.
+	if( (substring(dir, nchar(dir)) == "/") == FALSE){
+		dir <- paste0(dir, "/")
+	}
+
+	cat("Do you want to...\n")
 	
-	op <- par(mar=c(3,0,1,0))
+	Q <- menu(c("Process new images", "Import existing data", "Edit existing data"))
 	
-	output <- list()
-	output$image_file <- image_file
+	switch(Q, process_new_files(dir, summary = summary), import_menu(dir, summary = summary), bulk_edit(dir, summary = summary))
 
-	rotate_image <- user_rotate_graph(image_file)
-	image <- rotate_image$image
-	output$flip <- rotate_image$flip
-	output$rotate <- rotate_image$rotate
+}
 
-	flush.console()
 
-	image_width <- magick::image_info(image)["width"][[1]]
-	image_height <- magick::image_info(image)["height"][[1]]
+#' @title process_new_files
+#' @description Batch processes image files within a set directory, consolidates the data and exports the data for each image and type
+#' @param dir the path name to the directory / folder where the files are located
+#' @param summary summary = TRUE or FALSE is most relevant as it will print a simple summary statistics that are the same across all files
+#' @author Joel Pick - joel.l.pick@gmail.com
+#' @author Daniel Noble - daniel.wa.noble@gmail.com
+#' @export
+process_new_files <- function(dir, summary = TRUE) {
 
-	output$plot_type <- plot_type <- if(is.null(plot_type)){specify_type()}else{plot_type}
-	stopifnot(plot_type %in% c("mean_error","boxplot","scatterplot","histogram"))
+			       setup_calibration_dir(dir)
+			      done_details <- dir_details(dir)
+	     details <- get_notDone_file_details(dir)
+		   type <- user_options("Are all plot types the same? (diff/same)\n" , c("diff", "same"))
+	
+	if(length(done_details$calibrations) >= 1){	
+		done_objects <- load_metaDigitise(done_details$doneCalFiles, done_details$names)
+		done_plot_types <- lapply(done_objects, function(x) x$plot_type)
+		names <- lapply(done_objects, function(x) filename(x$image_file))
+		names(done_plot_types) <- names
+	} else{
+		done_objects = NULL
+		done_plot_types = NULL
+		names = NULL
+	}
 
-	### ask what the variable is
-	if(plot_type == "scatterplot"){
-		x_variable <- readline("\nWhat is the x variable? ")
-		y_variable <- readline("\nWhat is the y variable? ")
+	 plot_types <-  if (type == "diff") {NULL} else { specify_type() }
+		 
+		 data_list <- list()
+
+		 for (i in 1:length(details$paths)) {
+			         data_list[[i]] <- internal_digitise(details$paths[i], plot_type = plot_types)	
+			    names(data_list)[i] <- details$images[i]
+			 saveRDS(data_list[[i]], file = paste0(details$cal_dir, details$name[i]))
+			
+			if(length(details$paths)-i>0){
+				breakQ <-  user_options(paste("\n\nDo you want continue:", length(details$paths)- i, "plots out of", length(details$paths), "plots remaining (y/n) "), c("y","n"))
+				if(breakQ=="n") break
+			}else{
+				cat("Congratulations! Looks like you have finished digitising all figures in this directory. If you haven't please delete files from the caldat/ folder and try again!")
+			}
+		 }
+	
+		complete_plot_types <- lapply(data_list, function(x) x$plot_type)
+
+		if( length(done_plot_types) == 0){
+			plot_type <- complete_plot_types
+		} else{
+			plot_type <- c(done_plot_types, complete_plot_types)
+		}
+
+	if(summary == TRUE){
+		if(length(done_objects) == 0){
+			return(do.call(rbind, lapply(data_list, function(x) summary(x))))
+		} else{
+			sum_dat <- do.call(rbind, c(lapply(done_objects, function(x) summary(x)), lapply(data_list, function(x) summary(x))))
+			rownames(sum_dat) <- 1:nrow(sum_dat)
+			return(sum_dat)
+		}
+
 	}else{
-		variable <- readline("\nWhat is the variable? ")
-	}
+		if(length(done_objects) == 0){
+				new_figs <- extract_digitised(data_list, summary = summary)
+				return(new_figs)
 
-	### Calibrate axes
-	cal_Q <- "y"
-	while(cal_Q!="n"){
-		if(cal_Q == "y"){
-			output$calpoints <- calpoints <- cal_coords(plot_type=plot_type)	
-			output$point_vals <- point_vals <- getVals(calpoints=calpoints, image_width=image_width, image_height=image_height) 
-		}
-		cal_Q <- readline("\nRe-calibrate? (y/n) ")
-		if(cal_Q == "y"){
-			plot(image)
-			mtext(filename(image_file),3, 0)
+		} else{
+				done_figs <- extract_digitised(done_objects,  summary = summary)
+				new_figs <- extract_digitised(data_list, summary = summary)
+			return(order_lists(c(done_figs, new_figs), plot_types = plot_type))
 		}
 	}
 
-	### Ask number of groups
-	if(plot_type != "histogram"){
-		nGroups <- suppressWarnings(as.numeric(readline("\nNumber of groups: ")))
-		while(is.na(nGroups)| nGroups<1 | !is.wholenumber(nGroups)){
-			nGroups <- suppressWarnings(as.numeric(readline("\n**** Number of groups must be an integer above 0 ****\nNumber of groups: ")))
-		}
-	}
+}
 
+#' @title specify_type
+#' @description Function that allows user to interface with function to specific each type of plot prior to digitising
+#' @return The function will return the type of plot specified by the user and feed this argument back into metDigitise 
+#' @author Daniel Noble - daniel.wa.noble@gmail.com
+#' @author Joel Pick - joel.l.pick@gmail.com
+#' @export
 
-	### Extract and calibrate data depending on plot type
-	if(plot_type %in% c("mean_error","boxplot")){
-		askN <- NA
-		while(!askN %in% c("y","n")) askN <- readline("\nEnter sample sizes? y/n ")
-
-		output$raw_data <- raw_data <- groups_extract(plot_type=plot_type, nGroups=nGroups, image=image, image_file=image_file, calpoints=calpoints, point_vals=point_vals, askN=askN)	
-		cal_data <- calibrate(raw_data=raw_data,calpoints=calpoints, point_vals=point_vals)
-		output$processed_data <- convert_group_data(cal_data=cal_data, plot_type=plot_type, nGroups=nGroups)
-		output$processed_data$variable <- variable
-		output$entered_N <- ifelse(askN =="y", TRUE, FALSE)
-		if(plot_type == "mean_error") {
-			error_type <- readline("Type of error (se, CI95, sd): ")
-			while(!error_type %in% c("se","CI95","sd")) error_type <- readline("\n**** Invalid error type ***\nType of error (se, CI95, sd): ")
-			output$error_type <- error_type
-		}
-	}
+specify_type <- function(){
+		#user enters numeric value to specify the plot BEFORE moving on
+	 	pl_type <- NA
+	 	#while keeps asking the user the question until the input is one of the options
+		while(!pl_type %in% c("m","b","s","h")) pl_type <- readline("Please specify the plot_type as either: mean and error, box plot, scatter plot or histogram m/b/s/h: ")
 	
-	if(plot_type == "scatterplot"){
-		output$raw_data <- raw_data <- group_scatter_extract(nGroups,image=image, image_file=image_file, calpoints=calpoints, point_vals=point_vals)
-		output$processed_data <- calibrate(raw_data=raw_data,calpoints=calpoints, point_vals=point_vals)
-		output$processed_data$x_variable <- x_variable
-		output$processed_data$y_variable <- y_variable
-		output$entered_N <- TRUE
-
-	}	
-
-	if(plot_type == "histogram"){
-		output$raw_data <- raw_data <- histogram_extract(image=image, image_file=image_file, calpoints=calpoints, point_vals=point_vals)
-		cal_data <- calibrate(raw_data=raw_data,calpoints=calpoints, point_vals=point_vals)
-		output$processed_data <- convert_histogram_data(cal_data=cal_data)
-		output$processed_data$variable <- variable
-		output$entered_N <- TRUE
-	}
-
-	class(output) <- 'metaDigitise'
-	on.exit(par(op))
-	return(output)
-}
-
-
-
-
-
-#' @title print.metaDigitise
-#' @description Print method for class ‘metaDigitise’
-#' @param x an R object of class ‘metaDigitise’
-#' @param ... further arguments passed to or from other methods.
-#' @author Joel Pick
-#' @export
-
-print.metaDigitise <- function(x, ...){
-	cat(paste("Data extracted from:\n", x$image_file,"\n"))
-	cat(paste0("Figure", ifelse(x$flip, " flipped and ", " "), "rotated ", x$rotate, " degrees"),"\n")
-	cat(paste("Figure identified as", x$plot_type, "with", length(unique(x$processed_data$id)), "groups","\n"))
-}
-
-
-
-
-
-
-#' @title summary.metaDigitise
-#' @description Summary method for class ‘metaDigitise’
-#' @param object an R object of class ‘metaDigitise’
-#' @param ... further arguments passed to or from other methods.
-#' @return Data.frame
-#' @author Joel Pick
-#' @export
-
-summary.metaDigitise<-function(object, ...){
-
-	pd <- object$processed_data
-	fn <- filename(object$image_file)
-
-	if (object$plot_type == "mean_error"){
-		out <- data.frame(
-			filename=fn,
-			group_id=pd$id,
-			variable=pd$variable,
-			mean=pd$mean,
-			sd=error_to_sd(error=pd$error, n=pd$n, error_type=object$error_type),
-			n=pd$n,
-			r=NA
-		)
-	}
+	 	plot_type <- ifelse(pl_type == "m", "mean_error", ifelse(pl_type == "b", "boxplot",ifelse(pl_type == "s", "scatterplot","histogram")))
 	
-	if (object$plot_type == "boxplot"){
-		out <- data.frame(
-			filename=fn,
-			group_id=pd$id,
-			variable=pd$variable,
-			mean=rqm_to_mean(min=pd$min,LQ=pd$q1,median=pd$med,UQ=pd$q3,max=pd$max),
-			sd=rqm_to_sd(min=pd$min,LQ=pd$q1,UQ=pd$q3,max=pd$max,n=pd$n),
-			n=pd$n,
-			r=NA
-		)
-	}
-
-	if (object$plot_type=="scatterplot"){
-		out <- as.data.frame(do.call(rbind, c(lapply(split(pd,pd$id), function(z){ 
-					data.frame(
-						filename=fn,
-						group_id=z$id[1],
-						variable=c(z$x_variable[1],z$y_variable[1]),
-						mean=apply(z[,c("x","y")],2,mean),
-						sd=apply(z[,c("x","y")],2,sd),
-					 	n=nrow(z),
-					 	r=cor(z$x,z$y)
-					)
-				}),make.row.names=FALSE)))
-	}
-
-	if (object$plot_type=="histogram"){
-		hist_data <- rep(pd$midpoints, pd$freq)
-		out <- data.frame(
-			filename=fn,
-			group_id=NA,
-			variable=pd$variable[1],
-			mean=mean(hist_data),
-			sd=sd(hist_data),
-			n=length(hist_data),
-			r=NA
-		)
-	}
-	out$plot_type <- object$plot_type
-	return(out)
+	return(plot_type)
 }
 
-
-
-
-#' @title plot.metaDigitise
-#' @param x an R object of class ‘metaDigitise’ 
-#' @param ... further arguments passed to or from other methods.
-#' @description Re-plots figure and extraction data
-#' @author Joel Pick
+#' @title extract_digitised
+#' @param list A list of objects returned from metaDigitise
+#' @param summary A logical 'TRUE' or 'FALSE' indicating whether metaDigitise should print summary statitics from each figure and group.
+#' @description Function for extracting the data from a metaDigitise list
+#' @return The function will return a data frame with the data across all the digitised files 
 #' @export
 
-plot.metaDigitise <- function(x,...){
-	op <- par(mar=c(3,0,1,0))
-	image <- magick::image_read(x$image_file)
-	new_image <- rotate_graph(image=image, flip=x$flip, rotate=x$rotate)
-	internal_redraw(image=new_image, image_file=x$image_file, plot_type=x$plot_type, calpoints=x$calpoints, point_vals=x$point_vals, raw_data=x$raw_data)
-	on.exit(par(op))
+extract_digitised <- function(list, summary = TRUE) {
+
+	if(summary == TRUE) {
+		data <- do.call(rbind, lapply (list, function(x) summary(x)))
+		rownames(data) <- 1:nrow(data)
+		return(data)
+	} else {
+		tmp <- lapply (list, function(x) x$processed_data)
+		names(tmp) <- unlist(lapply(list, function(x) filename(x$image_file)))
+		return(tmp)
+	}
+}
+
+#' @title setup_calibration_dir
+#' @param dir Path name to the directory / folder where the files are located.
+#' @description Function will check whether the calibration directory has been setup and if not, create one. 
+#' @return Returns a caldat/ folder within the directory where all metaDigitise objects are stored.
+#' @author Daniel Noble - daniel.wa.noble@gmail.com
+#' @export
+
+setup_calibration_dir <- function(dir){
+
+	cal_dir <- paste0(dir, "caldat")
+
+	if (dir.exists(cal_dir) == FALSE){
+		dir.create(cal_dir)
+	}
+}
+
+#' @title get_notDone_file_details
+#' @param dir Path name to the directory / folder where the figure files are located.
+#' @description Function will get file information from the directory and the calibration files. It will also exclude files that have already been processed, as is judged by the match between file names in the calibration folder and the imported details object
+#' @return Returns a list containing details on the images names and their paths, the calibration file names (or files already completed) as well as the paths to these files.
+#' @author Daniel Noble - daniel.wa.noble@gmail.com
+#' @export
+
+get_notDone_file_details <- function(dir){
+	
+	      details <- dir_details(dir)
+
+	# Check whether there are new files still needing to be done.
+
+	if(length(details$calibrations) == length(details$name)) {
+		stop("Congratulations! Looks like you have finished digitising all figures in this directory. If you haven't please delete files from the caldat/ folder and try again!", call. = FALSE)
+	}
+
+	# Find what files are already done. Remove these from our list
+	if (length(details$calibrations) >= 1){
+		done_figures <- match(details$calibrations, details$name)
+	
+	# Remove the files that are already done.
+		details$images <- details$images[-done_figures]
+		  details$name <- details$name[-done_figures]
+		 details$paths <- details$paths[-done_figures]
+	}
+
+	return(details)
+}
+
+#' @title dir_details
+#' @param dir the path name to the directory / folder where the files are located
+#' @description Function will gather important directory details about calibration files and figures needed for processing
+#' @author Daniel Noble - daniel.wa.noble@gmail.com
+#' @export
+
+dir_details <- function(dir){
+	detail_list <- list()
+	file_pattern <- "[.][pjt][dnip][fpg]*$"
+
+		  detail_list$images <- list.files(dir, pattern = file_pattern)
+		    detail_list$name <- gsub(file_pattern, "", detail_list$images)
+	       detail_list$paths <- paste0(dir, detail_list$images)
+	     detail_list$cal_dir <- paste0(dir, "caldat/")
+	detail_list$calibrations <- list.files(paste0(dir, "caldat/"))
+	detail_list$doneCalFiles <- if(length(detail_list$calibrations)==0) { vector(mode="character") 
+	} else{ 
+		paste0(detail_list$cal_dir, detail_list$calibrations) 
+	}
+
+	return(detail_list)
 }

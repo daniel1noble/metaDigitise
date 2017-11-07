@@ -20,3 +20,20 @@ test_that("Checking rqm_to_sd...", {
 test_that("Checking range_to_sd...", {
 	expect_equal(round(range_to_sd(3, 10, 8), digits = 2), 2.44, info = "range_to_sd failed")
 })
+
+test_that("Checking grandMean...", {
+	expect_equal(grandMean(mean=c(3,5), n=c(10, 10)), 4, info = "grandMean failed")
+})
+
+test_that("Checking grandSD...", {
+	expect_equal(
+		grandSD(mean=c(5,5), sd=c(2,2), n=c(1000, 1000), equal=TRUE), 
+		2, 
+		info = "grandSD failed")
+	expect_equal(
+		round(grandSD(mean=c(5,5), sd=c(2,2), n=c(1000, 1000), equal=FALSE),2),
+		2, 
+		info = "grandSD failed")
+})
+
+

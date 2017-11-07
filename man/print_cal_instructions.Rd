@@ -4,10 +4,12 @@
 \alias{print_cal_instructions}
 \title{print_cal_instructions}
 \usage{
-print_cal_instructions(plot_type)
+print_cal_instructions(plot_type, ...)
 }
 \arguments{
 \item{plot_type}{plot type}
+
+\item{...}{further arguments passed to or from other methods.}
 }
 \description{
 Prints instructions for calibration

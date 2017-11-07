@@ -7,11 +7,10 @@
 #' @author Joel Pick
 #' @export
 
-error_to_sd <- function(error, n, error_type=c("se","CI95","sd","range")){
+error_to_sd <- function(error, n, error_type=c("se","CI95","sd")){
 	if(error_type=="se") sd <- se_to_sd(error, n)
 	if(error_type=="CI95") sd <- CI95_to_sd(error, n)
 	if(error_type=="sd") sd <- error
-	if(error_type=="range") sd <- range_to_sd(error, n)
 	return(sd)
 }
 
@@ -134,7 +133,7 @@ grandMean <- function(mean,n)	sum(mean*n)/sum(n)
 #' @param mean Mean
 #' @param sd standard deviation
 #' @param n Sample size
-#' @param equal Whether to calculate pooled SD assuming groups have the same means (TRUE) or different means (FALSE) 
+#' @param equal Logical: Whether to calculate pooled SD assuming groups have the same means (TRUE) or different means (FALSE) 
 #' @return Returns vector of pooled mean
 #' @author Joel Pick
 #' @export

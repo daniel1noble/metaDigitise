@@ -4,18 +4,14 @@
 \alias{group_scatter_extract}
 \title{group_scatter_extract}
 \usage{
-group_scatter_extract(nGroups, image, image_file, calpoints, point_vals)
+group_scatter_extract(edit = FALSE, raw_data = data.frame(), ...)
 }
 \arguments{
-\item{nGroups}{The number of groups}
+\item{edit}{logical; whether in edit mode}
 
-\item{image}{image}
+\item{raw_data}{raw data}
 
-\item{image_file}{image file name}
-
-\item{calpoints}{points used for calibration}
-
-\item{point_vals}{values for calibration}
+\item{...}{arguments passed to internal_redraw}
 }
 \description{
 Extraction of data from scatterplots
