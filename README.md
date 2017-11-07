@@ -365,7 +365,7 @@ data
 8      003_Doe_2013_Fig3.png       <NA>      Sepal length 4.948472 0.3624212 50        NA  histogram
 ```
 
-Here, the output has all the relevant summary statistics we digitsied for each figure and specifies the plot type. The `caldat` folder also now contains files for the newly digitised figures (see below). We can continue adding and digitising as new figures come up and it will automatically integrate these new statistics into the dataset, which can then be exported using `write` from R.
+Here, the output has all the relevant summary statistics we digitsied for each figure and specifies the plot type. The `caldat` folder also now contains files for the newly digitised figures (see below). We can continue adding and digitising as new figures come up and it will automatically integrate these new statistics into the dataset, which can then be exported using `write.csv(data, file = "filename")` from R.
 
 ```
   *example_figs
@@ -535,7 +535,7 @@ Re-enter error type (y/n) n
 
 This provides lots of flexibility to edit various aspects of previously digitised functions. This then integrates this corrected data directly into the fully formed data summary and re-writes the .RDS file in the `caldat/` folder automatically.
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/3505482/32355606-b2e9d5d8-c083-11e7-84cc-8a460c9403c2.png" hspace="20" width = "400"/><img src="https://user-images.githubusercontent.com/3505482/32304001-44c9f164-bfc0-11e7-80c6-d36a1f463c2b.png" hspace="20" width = "400"/>
+  <img src="https://user-images.githubusercontent.com/3505482/32355606-b2e9d5d8-c083-11e7-84cc-8a460c9403c2.png" hspace="20" width = "380"/><img src="https://user-images.githubusercontent.com/3505482/32304001-44c9f164-bfc0-11e7-80c6-d36a1f463c2b.png" hspace="20" width = "380"/>
 </p>
 Above, we have just slightly modified versicolor's point to make it overlap a bit better with the black dot. And we can see the slight change in this value:
 
