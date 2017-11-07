@@ -84,7 +84,7 @@ process_new_files <- function(dir, summary = TRUE) {
 
 	if(summary == TRUE){
 		if(length(done_objects) == 0){
-			return(lapply(data_list, function(x) summary(x)))
+			return(do.call(rbind, lapply(data_list, function(x) summary(x))))
 		} else{
 			sum_dat <- do.call(rbind, c(lapply(done_objects, function(x) summary(x)), lapply(data_list, function(x) summary(x))))
 			rownames(sum_dat) <- 1:nrow(sum_dat)
