@@ -1,0 +1,81 @@
+\begin{thebibliography}{11}
+\newcommand{\enquote}[1]{``#1''}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+\providecommand{\eprint}[2][]{\url{#2}}
+
+\bibitem[{Cameron and Trivedi(2013)}]{Cameron+Trivedi:2013}
+Cameron AC, Trivedi PK (2013).
+\newblock \emph{Regression Analysis of Count Data}.
+\newblock 2nd edition. Cambridge University Press, Cambridge.
+
+\bibitem[{Chambers and Hastie(1992)}]{Chambers+Hastie:1992}
+Chambers JM, Hastie TJ (eds.) (1992).
+\newblock \emph{Statistical Models in \proglang{S}}.
+\newblock Chapman \& Hall, London.
+
+\bibitem[{Jackman(2015)}]{Jackman:2015}
+Jackman S (2015).
+\newblock \emph{\pkg{pscl}: Classes and Methods for \proglang{R} Developed in
+  the Political Science Computational Laboratory, Stanford University}.
+\newblock \proglang{R} package version 1.4.9,
+  \urlprefix\url{https://CRAN.R-project.org/package=pscl}.
+
+\bibitem[{McCullagh and Nelder(1989)}]{McCullagh+Nelder:1989}
+McCullagh P, Nelder JA (1989).
+\newblock \emph{Generalized Linear Models}.
+\newblock 2nd edition. Chapman \& Hall, London.
+\newblock \doi{10.1007/978-1-4899-3242-6}.
+
+\bibitem[{Mullahy(1986)}]{Mullahy:1986}
+Mullahy J (1986).
+\newblock \enquote{Specification and Testing of Some Modified Count Data
+  Models.}
+\newblock \emph{Journal of Econometrics}, \textbf{33}(3), 341--365.
+\newblock \doi{10.1016/0304-4076(86)90002-3}.
+
+\bibitem[{{\proglang{R} Core Team}(2017)}]{R}
+{\proglang{R} Core Team} (2017).
+\newblock \emph{\proglang{R}: {A} Language and Environment for Statistical
+  Computing}.
+\newblock \proglang{R} Foundation for Statistical Computing, Vienna, Austria.
+\newblock \urlprefix\url{https://www.R-project.org/}.
+
+\bibitem[{Stasinopoulos and Rigby(2007)}]{Stasinopoulos+Rigby:2007}
+Stasinopoulos DM, Rigby RA (2007).
+\newblock \enquote{Generalized Additive Models for Location Scale and Shape
+  ({GAMLSS}) in \proglang{R}.}
+\newblock \emph{Journal of Statistical Software}, \textbf{23}(7), 1--46.
+\newblock \doi{10.18637/jss.v023.i07}.
+
+\bibitem[{Venables and Ripley(2002)}]{Venables+Ripley:2002}
+Venables WN, Ripley BD (2002).
+\newblock \emph{Modern Applied Statistics with \proglang{S}}.
+\newblock 4th edition. Springer-Verlag, New York.
+\newblock \doi{10.1007/978-0-387-21706-2}.
+
+\bibitem[{Wood(2006)}]{Wood:2006}
+Wood SN (2006).
+\newblock \emph{Generalized Additive Models: An Introduction with
+  \proglang{R}}.
+\newblock Chapman \& Hall/CRC, Boca Raton.
+
+\bibitem[{Yee(2010)}]{Yee:2009}
+Yee TW (2010).
+\newblock \enquote{The \pkg{VGAM} Package for Categorical Data Analysis.}
+\newblock \emph{Journal of Statistical Software}, \textbf{32}(10), 1--34.
+\newblock \doi{10.18637/jss.v032.i10}.
+
+\bibitem[{Zeileis \emph{et~al.}(2008)Zeileis, Kleiber, and
+  Jackman}]{Zeileis+Kleiber+Jackman:2008}
+Zeileis A, Kleiber C, Jackman S (2008).
+\newblock \enquote{Regression Models for Count Data in \proglang{R}.}
+\newblock \emph{Journal of Statistical Software}, \textbf{27}(8), 1--25.
+\newblock \doi{10.18637/jss.v027.i08}.
+
+\end{thebibliography}

@@ -1,0 +1,22 @@
+\begin{thebibliography}{1}
+\newcommand{\enquote}[1]{``#1''}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+\providecommand{\eprint}[2][]{\url{#2}}
+
+\bibitem[{Wan \emph{et~al.}(2014)Wan, Wang, Liu, and Tong}]{Wan2014}
+Wan X, Wang W, Liu J, Tong T (2014).
+\newblock \enquote{{Estimating the sample mean and standard deviation from the
+  sample size, median, range and/or interquartile range.}}
+\newblock \emph{BMC medical research methodology}, \textbf{14}(1), 135.
+\newblock ISSN 1471-2288.
+\newblock \doi{10.1186/1471-2288-14-135}.
+\newblock \eprint{arXiv:1407.8038v3},
+  \urlprefix\url{http://www.ncbi.nlm.nih.gov/pubmed/25524443}.
+
+\end{thebibliography}
