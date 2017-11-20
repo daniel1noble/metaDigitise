@@ -1,47 +1,47 @@
-This is BibTeX, Version 0.99d (TeX Live 2015)
-Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+This is BibTeX, Version 0.99d (TeX Live 2017)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: manuscript.aux
 The style file: jss.bst
 Database file #1: metaDigitise.bib
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
-You've used 8 entries,
+You've used 14 entries,
             3215 wiz_defined-function locations,
-            701 strings with 6686 characters,
-and the built_in function-call counts, 8401 in all, are:
-= -- 803
-> -- 214
-< -- 2
-+ -- 80
-- -- 73
-* -- 639
-:= -- 1015
-add.period$ -- 35
-call.type$ -- 8
-change.case$ -- 56
-chr.to.int$ -- 9
-cite$ -- 8
-duplicate$ -- 851
-empty$ -- 680
-format.name$ -- 92
-if$ -- 1697
+            735 strings with 7409 characters,
+and the built_in function-call counts, 12068 in all, are:
+= -- 1144
+> -- 274
+< -- 8
++ -- 104
+- -- 91
+* -- 853
+:= -- 1508
+add.period$ -- 56
+call.type$ -- 14
+change.case$ -- 86
+chr.to.int$ -- 15
+cite$ -- 14
+duplicate$ -- 1234
+empty$ -- 1008
+format.name$ -- 116
+if$ -- 2439
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 92
-newline$ -- 54
-num.names$ -- 32
-pop$ -- 411
+missing$ -- 136
+newline$ -- 85
+num.names$ -- 56
+pop$ -- 587
 preamble$ -- 1
-purify$ -- 56
+purify$ -- 86
 quote$ -- 0
-skip$ -- 146
+skip$ -- 247
 stack$ -- 0
-substring$ -- 881
-swap$ -- 218
+substring$ -- 1185
+swap$ -- 317
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 72
+type$ -- 126
 warning$ -- 0
-while$ -- 55
+while$ -- 82
 width$ -- 0
-write$ -- 119
+write$ -- 194

@@ -3,10 +3,9 @@
 %% -- LaTeX packages and custom commands ---------------------------------------
 
 %% recommended packages
-\usepackage{thumbpdf,lmodern,amssymb}
+\usepackage{thumbpdf,lmodern,amssymb,rotating} 
 
-
-% \usepackage[utf8]{inputenc}
+% \usepackage[utf8]{inputenc},
 % \usepackage{geometry} 
 % \geometry{a4paper}  
 % %\usepackage[parfill]{parskip} 
@@ -16,7 +15,7 @@
 % \usepackage{setspace} 
 % \usepackage{lineno}
 % \usepackage[none]{hyphenat}
- \usepackage{listings}
+% \usepackage{listings}
 % \usepackage[round]{natbib}	
 
 
@@ -86,8 +85,7 @@
 
 \section{Introduction}
 
-In many different contexts, researchers need to make use of data presented in primary literature. Most notably, this includes meta-analysis, which is becoming increasingly common in many research fields. Meta-analysis uses effect size estimates and their sampling variance, taken from many studies, to understand whether particular effects are common across studies and to explain variation among these effects \citep{Naka2017, Glass1976, Koricheva2013, Borenstein2009}. Meta-analysis therefore relies foremost on data extracted from primary literature and more specifically statistics that have been reported in the text or tables of research papers. These summary statistics are also, however, frequently presented in figures and so need to be manually extracted using digitising programs. Although there are several existing tools to perform tasks like this (e.g. DataThief (REF), GraphClick (REF), WebPlotDigitizer (REF))
-, these tools are not designed this specific purpose (i.e. a meta-analysis). 
+In many different contexts, researchers need to make use of data presented in primary literature. Most notably, this includes meta-analysis, which is becoming increasingly common in many research fields. Meta-analysis uses effect size estimates and their sampling variance, taken from many studies, to understand whether particular effects are common across studies and to explain variation among these effects \citep{Naka2017, Glass1976, Koricheva2013, Borenstein2009}. Meta-analysis therefore relies foremost on data extracted from primary literature and more specifically statistics that have been reported in the text or tables of research papers. These summary statistics are also, however, frequently presented in figures and so need to be manually extracted using digitising programs. Although there are several existing tools to perform tasks like this (e.g. DataThief \citep{DataThief}, GraphClick \citep{GraphClick}, WebPlotDigitizer \citep{WebPlotDigitizer}), these tools are not designed this specific purpose (i.e. a meta-analysis). 
 %% need to spell out clear points
 %% 1 - dont manipulate data/allow different plot types
 Firstly, they typically only provide the user with calibrated x,y coordinates from imported figures, and do not differentiate between common plot types that are use to present data. This means that a large amount of downstream data manipulation is subsequently required. For example, data are frequently presented in mean and error plots (Figure \ref{fig:plot_type}A), for which the user wants a mean and error estimate for each group presented in the figure. With existing programs, x,y coordinates of means and errors are returned, to which the user must manually discern between mean and error coordinates and assign points to groups. The error then needs to be calculated as the deviation from the mean, and then transformed to a standard deviation, depending on the type of error presented.
@@ -108,30 +106,6 @@ It also provides users with options to conduct the necessary calculations on raw
 \label{fig:plot_type}
 \end{figure}
 
-\begin{table}[t!]
-\centering
-\begin{tabular}{lcccc}
-\hline
-Function                  & metaDigitise & GraphClick & DataThief  & WebPlotDigitizer\\
-\hline
-Groups                    & \checkmark   & \checkmark & $\times$   & \checkmark  \\
-Scatterplots              & \checkmark   & \checkmark & \checkmark & \checkmark  \\
-Mean and error plots      & \checkmark   &            & \checkmark & \\
-Boxplots                  & \checkmark   &            & $\times$    & \\
-Histograms                & \checkmark   && $\times$    &\\
-Graph rotation            & \checkmark   &&&\\
-Asymmetric error bars     & $\times$     &&&\\
-Log axis                  & $\times$     &&&\\
-Dates                     & $\times$     && \checkmark &\\
-Entry of metadata         & \checkmark   &&&\\
-Calculation of mean/sd/n  & \checkmark   & $\times$    &            & \\
-Automated point detection & $\times$     &            &            & \\
-\hline
-\end{tabular}
-
-\caption{\label{tab:comparison} Comparison of functionality between different digitisation softwares.}
-
-\end{table}
 
 %%%---------------------------------
 %%%---------------------------------
@@ -190,13 +164,6 @@ In order to correctly extract data from figures \fct{metaDigitise} always requir
 % \label{fig:calibrate}
 % \end{figure}
 
-
-\begin{figure}[!h] 
- \includegraphics[width=0.9\textwidth]{fig_all_extract.pdf} 
- \caption{Demonstration of data extraction from different plot types}
-\label{fig:all_extract}
-\end{figure}
-
 \subsection{Mean and error plots} 
 \fct{metaDigitise} prompts the user to enter groups names and allows the user to enter sample sizes ($n$), which are used in downstream processing. The user is then prompted to click on an error bar followed by the mean. Error bars above or below the mean can be clicked - sometimes one is clearer than the other. \fct{metaDigitise} assumes that the error bars are symmetrical. Where the user has clicked the error is displayed in a different colour to the mean (Figure \ref{fig:all_extract}A). The user can subsequently add more groups, edit groups or remove groups. Finally the user is asked what type of error was used in the figure: standard deviation (SD, $\sigma$), standard error (SE) or 95\% confidence intervals (CI95). Standard deviation is calculated from standard error as
 \begin{equation}
@@ -222,24 +189,31 @@ As with mean and error plots, \fct{metaDigitise} prompts the user to enter group
 , where $\Phi^{-1}(z)$ is the upper zth percentile of the standard normal distribution, following \citet{Wan2014}. As with mean and error plots, if the user does not enter a sample size at the time of data extraction the SD is not calculated.
 
 \subsection{Scatter plots}
-\fct{metaDigitise} prompts the user to enter groups names and then to click on points. Points added by mistake can be deleted. The user can subsequently add groups, edit groups (add or remove points) or delete groups. Different groups are plotted in different colours and shapes, with a legend at the bottom of the figure (Figure \ref{fig:all_extract}C). Mean, SD and sample size (n) are calculated from the clicked points, for each group. In the case that the sample size from the clicked points does not match a known sample size (e.g. if there are overlaid points), the user can enter a alternate sample size.
+\fct{metaDigitise} prompts the user to enter groups names and then to click on points. Points added by mistake can be deleted. The user can subsequently add groups, edit groups (add or remove points) or delete groups. Different groups are plotted in different colours and shapes, with a legend at the bottom of the figure (Figure \ref{fig:all_extract}C). Mean, SD and sample size (n) are calculated from the clicked points, for each group. In the case that the sample size from the clicked points does not match a known sample size (e.g. if there are overlaid points), the user can enter an alternate sample size.
 
 \subsection{Histograms}
 \fct{metaDigitise} prompts the user to click on the top corners of each bar. Bars can subsequently be deleted. 
-For each bar a midpoint (mean x coordinates) and a frequency (mean y coordinates, rounded to the nearest integer) is calculated. The sample size is calculated as the sum of the frequencies., the mean as
+For each bar a midpoint (m; mean x coordinates) and a frequency (f; mean y coordinates, rounded to the nearest integer) is calculated. The sample size, mean and SD were calculated as:
 \begin{equation}
-\sigma = SE * \sqrt{n}
-\end{equation}
-and from 95\% confidence intervals as
-\begin{equation}
-\sigma = \frac{CI}{1.96} * \sqrt{n}
+n = \sum_{i=1}^n{f_i}
 \end{equation}
 
+\begin{equation}
+\mu = \frac{\sum_{i=1}^n{m_i f_i}}{n}
+\end{equation}
+
+\begin{equation}
+\sigma = \sqrt{\frac{\sum_{i=1}^n{(m_i f_i - \mu f_i)^2}}{n-1}}
+\end{equation}
+
+As with the scatterplots, If the sample size from the extracted data does not match a known sample size, the user can enter an alternate sample size.
 
 
-
-
-Using the x coordinates, \fct{metaDigitise} then calculates the midpoint and the frequency for each bar. 
+\begin{figure}[!h] 
+ \includegraphics[width=0.9\textwidth]{fig_all_extract.pdf} 
+ \caption{Demonstration of data extraction from different plot types}
+\label{fig:all_extract}
+\end{figure}
 
 
 %%%---------------------------------
@@ -251,7 +225,7 @@ Using the x coordinates, \fct{metaDigitise} then calculates the midpoint and the
 %% scatterplot from airquality data
 
 
-We'll now demonstrate how \fct{metaDigitise} works using figures generated from the well known iris data set. Users can install the \pkg{metaDigitise} package from GitHub as follows:
+We will now demonstrate how \fct{metaDigitise} works using figures generated from the well known iris data set. Users can install the \pkg{metaDigitise} package from GitHub as follows:
 
 \begin{CodeChunk}
 \begin{CodeInput}
@@ -849,11 +823,70 @@ Here, the user can easily access the list of raw scatter plot data by simply ext
 %% simulated data
 %% x people doing y plots
 
-\section{Conclusions and Future Enhancements}
+\section{Discussion and Conclusions}
 
-\pkg{metaDigitise} is available through GitHub. WHile it is incredibly flexible already, our future plans include building in abilities to deal with log-transformed axes, including arguments for calculating standard deviations from 95\% confidence intervals and standard errors using the t-distribution to correct the t-value for small sample sizes (currently assumed t-values are 1.96 as is normal), dealing with asymmetric error bars and the possibility of zooming in plots such that greater accuracy can be achieved when digitising. We hope to also provide options for assessing inter-observer reliability in the future. 
+%% discuss specifically everything it can't do, and jsutify it slightly
 
-% maybe something about automated point detection - from our experience, as calibration needs to be done for each plot, and often points are not detected, it is much more reliable, and sometimes even quicker to manuslly select the points
+\begin{sidewaystable}[t!]
+\centering
+\begin{tabular}{lccccccc}
+\hline
+Function                  & metaDigitise & GraphClick$^1$ & DataThief$^2$  & DigitizeIt$^3$ & WebPlotDigitizer$^4$ & metagear$^5$ & digitize$^6$\\
+\hline
+Scatterplots              & \checkmark   & \checkmark & \checkmark & \checkmark & \checkmark     & \checkmark$^7$ & \checkmark \\
+Mean and error plots      & \checkmark   & \checkmark & \checkmark & $\times$   & $\times$       & \checkmark$^7$ & $\times$    \\
+Boxplots                  & \checkmark   & $\times$   & $\times$   & $\times$   & $\times$       & $\times$       & $\times$    \\
+Histograms                & \checkmark   & $\times$   & $\times$   & $\times$   & \checkmark$^7$ & $\times$       & $\times$    \\
+Graph rotation$^8$        & \checkmark   & \checkmark & \checkmark & \checkmark & \checkmark     & $\times$       & $\times$    \\
+Groups                    & \checkmark   & \checkmark & $\times$   & \checkmark & \checkmark     & $\times$       & $\times$    \\
+Entry of metadata         & \checkmark   & $\times$   & $\times$   & $\times$   & $\times$       & $\times$       & $\times$    \\
+Summarising data          & \checkmark   & $\times$   & $\times$   & $\times$   & $\times$       & $\times$       & $\times$    \\
+Multiple image processing & \checkmark   & $\times$   & $\times$   & $\times$   & $\times$       & $\times$       & $\times$    \\
+Editing digitisation$^9$  & \checkmark   & \checkmark & \checkmark & $\times$   & \checkmark     & $\times$       & $\times$    \\
+Automated point detection & $\times$     & \checkmark &     ?      & \checkmark & \checkmark     & \checkmark     & $\times$    \\
+Line extraction           & $\times$     & \checkmark & \checkmark & \checkmark & \checkmark     & $\times$       & $\times$    \\
+Zoom                      & $\times$     & \checkmark & \checkmark & \checkmark &       ?        & $\times$       & $\times$    \\
+Log axis                  & $\times$ *   & \checkmark & \checkmark & \checkmark & \checkmark     & $\times$       & $\times$    \\
+Dates                     & $\times$ *   & $\times$   & \checkmark & $\times$   & \checkmark     & $\times$       & $\times$    \\
+Asymmetric error bars     & $\times$     & $\times$   & \checkmark & $\times$   & $\times$       & $\times$       & $\times$    \\
+Freeware                  & \checkmark$^{10}$ & \checkmark$^{11}$ & \checkmark$^{11}$ & $\times$$^{11}$ & \checkmark$^{11}$ & \checkmark$^{10}$ & \checkmark$^{10}$\\
+\hline
+
+%http://datathief.org/DatathiefManual.pdf
+%http://www.digitizeit.de/#Features
+%https://automeris.io/WebPlotDigitizer/userManual.pdf
+
+\end{tabular}
+
+$^1$ \citet{GraphClick}
+$^2$ \citet{DataThief}
+$^3$ \citet{DigitizeIt}
+$^4$ \citet{WebPlotDigitizer}
+$^5$ \citet{Lajeunesse2016}
+$^6$ \citet{Poisot2011}
+$^7$ Only automated, no manual extraction.
+$^8$ Or handles rotated graphs. 
+$^9$ Allows saving, re-plotting and editing of data extraction.
+$^{10}$ \proglang{R} package.
+$^{11}$ Standalone software.
+
+
+\caption{\label{tab:comparison} Comparison of functionality between different digitisation softwares.}
+
+\end{sidewaystable}
+
+
+%\pkg{metaDigitise} is available through GitHub. WHile it is incredibly flexible already, our future plans include building in abilities to deal with log-transformed axes, including arguments for calculating standard deviations from 95\% confidence intervals and standard errors using the t-distribution to correct the t-value for small sample sizes (currently assumed t-values are 1.96 as is normal), dealing with asymmetric error bars and the possibility of zooming in plots such that greater accuracy can be achieved when digitising. We hope to also provide options for assessing inter-observer reliability in the future. 
+
+Although \pkg{metaDigitise} is already very flexible, and provides functionality not seen in any other package, from comparison with other packages (Table \ref{tab:comparison}) it is clear that there are some functions that it does not perform. A notable feature that \pkg{metaDigitise} lacks is automated point detection. This is available in several packages (Table \ref{tab:comparison}). However, from our experience of using these functions, as calibration (for point detection) needs to be done for each plot individually, and often some points are not detected, it is much more reliable, and sometimes even quicker to manually select the points. From the testing of our package (see above) figures can be extracted in around 1-2 minutes, including entry of metadata. We do not think that current automation methods give substantial benefits to this. 
+
+Another feature that \pkg{metaDigitise} (currently) lacks, if a zoom function. This may enable users to gain greater accuracy when clicking on points. However, from our own experience, if you are using a reasonably sized screen then the accuracy is already high from these programs (see results above for example), and not much gain is to be had from zooming in on points.
+
+\pkg{metaDigitise} also does not extract lines from figures, as many other packages do. In our own experience, this is not particularly useful for meta-analysis, although we recognise that it may be useful in other fields. In this case we would recommend extracting data as a scatter plot, and clicking along the line in question. A model can then be fitted to these points to estimate the parameters needed.
+
+Finally, \pkg{metaDigitise} does not allow for asymmetric error bars. At present this is a deliberate omission, as it is not clear how best to derive SD from such data, given also that such asymmetric error bars may represent different things in different figures. 
+
+
 
 \section*{Acknowledgments}
 We thanks the i-deel group at UNSW for useful feedback, and ...

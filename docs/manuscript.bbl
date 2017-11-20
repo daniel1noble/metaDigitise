@@ -1,4 +1,4 @@
-\begin{thebibliography}{8}
+\begin{thebibliography}{14}
 \newcommand{\enquote}[1]{``#1''}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
@@ -9,11 +9,22 @@
   \urlstyle{rm}\Url}\fi
 \providecommand{\eprint}[2][]{\url{#2}}
 
+\bibitem[{{Arizona-Software}(2008)}]{GraphClick}
+{Arizona-Software} (2008).
+\newblock \emph{\proglang{GraphClick} Software, Version~3.0}.
+\newblock \urlprefix\url{http://www.arizona-software.ch/graphclick}.
+
 \bibitem[{Borenstein \emph{et~al.}(2009)Borenstein, Hedges, Higgens, and
   Rothstein}]{Borenstein2009}
 Borenstein M, Hedges L, Higgens J, Rothstein H (2009).
 \newblock \enquote{Introduction to meta-analysis.}
 \newblock \emph{John Wily Sons. Ltd. West Sussex, UK}.
+
+\bibitem[{Bormann(2012)}]{DigitizeIt}
+Bormann I (2012).
+\newblock \emph{\proglang{DigitizeIt} Software, Version~2.0}.
+\newblock Braunschweig, Germany.
+\newblock \urlprefix\url{http://www.digitizeit.de/}.
 
 \bibitem[{Glass(1976)}]{Glass1976}
 Glass G (1976).
@@ -25,6 +36,12 @@ Glass G (1976).
 Koricheva J, Gurevitch J, Mengersen K (2013).
 \newblock \enquote{Handbook of Meta-Analysis in Ecology and Evolution.}
 \newblock \emph{Princeton University Press, Princeton, New Jersey.}
+
+\bibitem[{Lajeunesse(2016)}]{Lajeunesse2016}
+Lajeunesse MJ (2016).
+\newblock \enquote{Facilitating systematic reviews, data extraction, and
+  meta-analysis with the metagear package for R.}
+\newblock \emph{Methods in Ecology and Evolution}, \textbf{7}, 323--330.
 
 \bibitem[{Nakagawa \emph{et~al.}(2017)Nakagawa, Noble, Senior, and
   Lagisz}]{Naka2017}
@@ -45,20 +62,36 @@ Peng RD, Dominici F, Zeger SL (2006).
 \newblock \enquote{Reproducible epidemiologic research.}
 \newblock \emph{American journal of epidemiology}, \textbf{163}(9), 783--789.
 
+\bibitem[{Poisot(2011)}]{Poisot2011}
+Poisot T (2011).
+\newblock \enquote{{The digitize package: extracting numerical data from
+  scatterplots}.}
+\newblock \emph{The R Journal}, \textbf{3}(1), 25--26.
+\newblock
+  \urlprefix\url{http://rjournal.github.io/archive/2011-1/RJournal{\_}2011-1.pdf{\#}page=25}.
+
+\bibitem[{Rohatgi(2017)}]{WebPlotDigitizer}
+Rohatgi A (2017).
+\newblock \emph{\proglang{WebPlotDigitizer} Software, Version~4.0}.
+\newblock Austin, Texas, USA.
+\newblock \urlprefix\url{https://automeris.io/WebPlotDigitizer}.
+
 \bibitem[{Sandve \emph{et~al.}(2013)Sandve, Nekrutenko, Taylor, and
   Hovig}]{sandve_ten_2013}
 Sandve GK, Nekrutenko A, Taylor J, Hovig E (2013).
 \newblock \enquote{Ten simple rules for reproducible computational research.}
 \newblock \emph{PLoS computational biology}, \textbf{9}(10), e1003285.
 
+\bibitem[{Tummers(2006)}]{DataThief}
+Tummers B (2006).
+\newblock \emph{\proglang{DataThief} Software, Version~3.0}.
+\newblock \urlprefix\url{http://www.arizona-software.ch/graphclick}.
+
 \bibitem[{Wan \emph{et~al.}(2014)Wan, Wang, Liu, and Tong}]{Wan2014}
 Wan X, Wang W, Liu J, Tong T (2014).
 \newblock \enquote{{Estimating the sample mean and standard deviation from the
   sample size, median, range and/or interquartile range.}}
 \newblock \emph{BMC medical research methodology}, \textbf{14}(1), 135.
-\newblock ISSN 1471-2288.
 \newblock \doi{10.1186/1471-2288-14-135}.
-\newblock \eprint{arXiv:1407.8038v3},
-  \urlprefix\url{http://www.ncbi.nlm.nih.gov/pubmed/25524443}.
 
 \end{thebibliography}
