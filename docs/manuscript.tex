@@ -63,12 +63,12 @@
 %%   (in the same first line, separated by comma).
 \Address{
   Joel L. Pick, Shinichi Nakagawa, Daniel W.A. Noble\\
-  Ecology and Evolution Research Center\\
+  Ecology and Evolution Research Centre\\
   \emph{and}\\
   School of Biological, Earth and Environmental Sciences\\
   University of New South Wales\\
-  b\\
-  b\\
+  Kensington, NSW 2052\\
+  Sydney, AUSTRALIA\\
   E-mail: \email{joel.l.pick@gmail.com}\\
   URL: \url{https://eeecon.uibk.ac.at/~zeileis/}
 }
@@ -85,7 +85,8 @@
 
 
 \section{Introduction}
-In many different contexts, researchers need to make use of data presented in primary literature. Most notably, this includes meta-analysis, which is becoming increasingly common in many research fields. Meta-analysis uses effect size estimates and their sampling variance, taken from many studies, to understand whether particular effects are common across studies and to explain variation among these effects (Nakagawa et al. 2017). Meta-analysis therefore relies foremost on data extracted from primary literature and more specifically statistics that have been reported in the text or tables of research papers. These summary statistics are also, however, frequently presented in figures and so need to be manually extracted using digitising programs. Although there are several existing tools to perform tasks like this (e.g. DataThief (REF), GraphClick (REF), WebPlotDigitizer (REF))
+
+In many different contexts, researchers need to make use of data presented in primary literature. Most notably, this includes meta-analysis, which is becoming increasingly common in many research fields. Meta-analysis uses effect size estimates and their sampling variance, taken from many studies, to understand whether particular effects are common across studies and to explain variation among these effects \citep{Naka2017, Glass1976, Koricheva2013, Borenstein2009}. Meta-analysis therefore relies foremost on data extracted from primary literature and more specifically statistics that have been reported in the text or tables of research papers. These summary statistics are also, however, frequently presented in figures and so need to be manually extracted using digitising programs. Although there are several existing tools to perform tasks like this (e.g. DataThief (REF), GraphClick (REF), WebPlotDigitizer (REF))
 , these tools are not designed this specific purpose (i.e. a meta-analysis). 
 %% need to spell out clear points
 %% 1 - dont manipulate data/allow different plot types
@@ -93,7 +94,7 @@ Firstly, they typically only provide the user with calibrated x,y coordinates fr
 %% 2- adding metadata
 Secondly, digitising programs do not easily allow the integration of metadata at the time of data extraction, such as  grouping points or adding variable names, group names and sample sizes.
 %% 3 - not in statistical software
-Additionally, existing stand-alone software does not allow easy import into commonly used statistical software (such as \proglang{R}), or try to optimize the research pipelines to facilitate editing and reproducibility. These are major issues because extracting from figures can be an incredibly time-consuming process. Furthermore, although meta-analysis is an important tool in consolidating the data from many studies, relying on transparency of those studies, many of the processes involved in data extraction are opaque and difficult to reproduce, making extending studies problematic. Having a tool that facilitates reproducibility in meta-analyses will increase transparency and go a long way to resolving the reproducibility crises we are seeing in many fields (REF).
+Additionally, existing stand-alone software does not allow easy import into commonly used statistical software (such as \proglang{R}), or try to optimize the research pipelines to facilitate editing and reproducibility. These are major issues because extracting from figures can be an incredibly time-consuming process. Furthermore, although meta-analysis is an important tool in consolidating the data from many studies, relying on transparency of those studies, many of the processes involved in data extraction are opaque and difficult to reproduce, making extending studies problematic. Having a tool that facilitates reproducibility in meta-analyses will increase transparency and go a long way to resolving the reproducibility crises we are seeing in many fields \citep{peng_reproducible_2006, peng_reproducible_2011, sandve_ten_2013}.
 
 Here, we present an interactive \proglang{R} package, \pkg{metaDigitise}, which is designed for large scale data extraction from figures, specifically catering to the the needs of meta-analysts. To this end, we provide tools specific to data extraction from common plot types (mean and error plots, box plots, scatter plots and histograms, see Figure \ref{fig:plot_type}). \pkg{metaDigitise} operates within the \proglang{R} environment making data extraction, analysis and export more streamlined. 
 %% need to be careful abiou th use of the term 'raw data' as internally this means uncalibrated data
