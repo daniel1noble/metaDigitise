@@ -83,6 +83,10 @@ INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/thumbpdf/thumbpdf.sty
 INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/thumbpdf/thumbpdf.sty
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/lm/lmodern.sty
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/lm/lmodern.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/amssymb.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/amssymb.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/amsfonts.sty
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/listings/listings.sty
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/listings/listings.sty
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/listings/lstmisc.sty
@@ -149,6 +153,16 @@ INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/lm/lmsy6.tfm
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/lm/omxlmex.fd
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/lm/omxlmex.fd
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/lm/lmex10.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsa.fd
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsa.fd
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam7.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsb.fd
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsb.fd
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/lm/ec-lmr12.tfm
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/lm/ec-lmbx12.tfm
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/lm/ec-lmr10.tfm
@@ -216,4 +230,5 @@ INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmsy10.pfb
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmsy8.pfb
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmtt10.pfb
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmtto10.pfb
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/urw/zapfchan/uzcmi8a.pfb
