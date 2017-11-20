@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{8}
 \newcommand{\enquote}[1]{``#1''}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
@@ -8,6 +8,48 @@
   \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
   \urlstyle{rm}\Url}\fi
 \providecommand{\eprint}[2][]{\url{#2}}
+
+\bibitem[{Borenstein \emph{et~al.}(2009)Borenstein, Hedges, Higgens, and
+  Rothstein}]{Borenstein2009}
+Borenstein M, Hedges L, Higgens J, Rothstein H (2009).
+\newblock \enquote{Introduction to meta-analysis.}
+\newblock \emph{John Wily Sons. Ltd. West Sussex, UK}.
+
+\bibitem[{Glass(1976)}]{Glass1976}
+Glass G (1976).
+\newblock \enquote{Primary, secondary, and meta-analysis research.}
+\newblock \emph{Educational Researcher}, \textbf{5}, 3--8.
+
+\bibitem[{Koricheva \emph{et~al.}(2013)Koricheva, Gurevitch, and
+  Mengersen}]{Koricheva2013}
+Koricheva J, Gurevitch J, Mengersen K (2013).
+\newblock \enquote{Handbook of Meta-Analysis in Ecology and Evolution.}
+\newblock \emph{Princeton University Press, Princeton, New Jersey.}
+
+\bibitem[{Nakagawa \emph{et~al.}(2017)Nakagawa, Noble, Senior, and
+  Lagisz}]{Naka2017}
+Nakagawa S, Noble DW, Senior AM, Lagisz M (2017).
+\newblock \enquote{Meta-evaluation of meta-analysis: ten appraisal questions
+  for biologists.}
+\newblock \emph{BMC Biology}, \textbf{15}, 18; DOI
+  10.1186/s12915--017--0357--7.
+
+\bibitem[{Peng(2011)}]{peng_reproducible_2011}
+Peng RD (2011).
+\newblock \enquote{Reproducible research in computational science.}
+\newblock \emph{Science (New York, Ny)}, \textbf{334}(6060), 1226.
+
+\bibitem[{Peng \emph{et~al.}(2006)Peng, Dominici, and
+  Zeger}]{peng_reproducible_2006}
+Peng RD, Dominici F, Zeger SL (2006).
+\newblock \enquote{Reproducible epidemiologic research.}
+\newblock \emph{American journal of epidemiology}, \textbf{163}(9), 783--789.
+
+\bibitem[{Sandve \emph{et~al.}(2013)Sandve, Nekrutenko, Taylor, and
+  Hovig}]{sandve_ten_2013}
+Sandve GK, Nekrutenko A, Taylor J, Hovig E (2013).
+\newblock \enquote{Ten simple rules for reproducible computational research.}
+\newblock \emph{PLoS computational biology}, \textbf{9}(10), e1003285.
 
 \bibitem[{Wan \emph{et~al.}(2014)Wan, Wang, Liu, and Tong}]{Wan2014}
 Wan X, Wang W, Liu J, Tong T (2014).
