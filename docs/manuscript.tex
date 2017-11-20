@@ -88,23 +88,25 @@
 In many different contexts, researchers need to make use of data presented in primary literature. Most notably, this includes meta-analysis, which is becoming increasingly common in many research fields. Meta-analysis uses effect size estimates and their sampling variance, taken from many studies, to understand whether particular effects are common across studies and to explain variation among these effects \citep{Naka2017, Glass1976, Koricheva2013, Borenstein2009}. Meta-analysis therefore relies foremost on data extracted from primary literature and more specifically statistics that have been reported in the text or tables of research papers. These summary statistics are also, however, frequently presented in figures and so need to be manually extracted using digitising programs. Although there are several existing tools to perform tasks like this (e.g. DataThief \citep{DataThief}, GraphClick \citep{GraphClick}, WebPlotDigitizer \citep{WebPlotDigitizer}), these tools are not designed this specific purpose (i.e. a meta-analysis). 
 %% need to spell out clear points
 %% 1 - dont manipulate data/allow different plot types
-Firstly, they typically only provide the user with calibrated x,y coordinates from imported figures, and do not differentiate between common plot types that are use to present data. This means that a large amount of downstream data manipulation is subsequently required. For example, data are frequently presented in mean and error plots (Figure \ref{fig:plot_type}A), for which the user wants a mean and error estimate for each group presented in the figure. With existing programs, x,y coordinates of means and errors are returned, to which the user must manually discern between mean and error coordinates and assign points to groups. The error then needs to be calculated as the deviation from the mean, and then transformed to a standard deviation, depending on the type of error presented.
+Firstly, they typically only provide the user with calibrated x,y coordinates from imported figures, and do not differentiate between common plot types that are use to present data. This means that a large amount of downstream data manipulation is subsequently required, that differs for different plots types. For example, data are frequently presented in mean and error plots (Figure \ref{fig:plot_type}A), for which the user wants a mean and error estimate for each group presented in the figure. With existing programs, x,y coordinates of means and errors are returned, to which the user must manually discern between mean and error coordinates and assign points to groups. The error then needs to be calculated as the deviation from the mean, and then transformed to a standard deviation, depending on the type of error presented.
 %% 2- adding metadata
-Secondly, digitising programs do not easily allow the integration of metadata at the time of data extraction, such as  grouping points or adding variable names, group names and sample sizes.
-%% 3 - not in statistical software
-Additionally, existing stand-alone software does not allow easy import into commonly used statistical software (such as \proglang{R}), or try to optimize the research pipelines to facilitate editing and reproducibility. These are major issues because extracting from figures can be an incredibly time-consuming process. Furthermore, although meta-analysis is an important tool in consolidating the data from many studies, relying on transparency of those studies, many of the processes involved in data extraction are opaque and difficult to reproduce, making extending studies problematic. Having a tool that facilitates reproducibility in meta-analyses will increase transparency and go a long way to resolving the reproducibility crises we are seeing in many fields \citep{peng_reproducible_2006, peng_reproducible_2011, sandve_ten_2013}.
-
-Here, we present an interactive \proglang{R} package, \pkg{metaDigitise}, which is designed for large scale data extraction from figures, specifically catering to the the needs of meta-analysts. To this end, we provide tools specific to data extraction from common plot types (mean and error plots, box plots, scatter plots and histograms, see Figure \ref{fig:plot_type}). \pkg{metaDigitise} operates within the \proglang{R} environment making data extraction, analysis and export more streamlined. 
-%% need to be careful abiou th use of the term 'raw data' as internally this means uncalibrated data
-It also provides users with options to conduct the necessary calculations on raw data immediately after extraction so that comparable summary statistics can be obtained quickly. Summaries will condense multiple figures into data frames or lists (depending on the type of figures) and these objects can easily be exported from \proglang{R}, or if using the raw data, analysed in any way the user desires. Conveniently, when needing to process many figures at different times \pkg{metaDigitise} will only import figures not already completed within a directory. This makes it easy to add new figures at any time. \pkg{metaDigitise} has also been built for reproducibility in mind. It has functions that allow users to redraw their digitisations on figures, make corrections and access the raw calibration data which is written automatically for each figure that is digitised into a special folder within the directory. This makes sharing figure digitisation and reproducing the work of others simple and easy, and allows meta-analysts to update meta-analyses more easily.
+Secondly, digitising programs do not easily allow the integration of metadata at the time of data extraction, such as grouping points or adding variable names, group names and sample sizes. This makes the downstream calculations more laborious, as the information has to be added later, in most cases using different software.
+%% 3 - in same statistical software and high throughput
+Finally, existing programs do not import a set of images and allow the user to systematically work through them. Instead they require the user to manually import images one by one, and export data into individual files, that need to be imported and edited using different software. In essence, existing software does not provide an optimized research pipeline to facilitate data extraction, editing and reproducibility. These are major issues because extracting from figures can be an incredibly time-consuming process. Furthermore, although meta-analysis is an important tool in consolidating the data from many studies, relying on transparency of those studies, many of the processes involved in data extraction are opaque and difficult to reproduce, making extending studies problematic. Having a tool that facilitates reproducibility in meta-analyses will increase transparency and go a long way to resolving the reproducibility crises we are seeing in many fields \citep{peng_reproducible_2006, peng_reproducible_2011, sandve_ten_2013}.
 
 
-\begin{figure}[b!] 
-%\onehalfspacing
- \includegraphics[width=0.9\textwidth]{fig_plot_type.pdf} 
+\begin{figure}[bt!] 
+\centering
+ \includegraphics[width=0.75\textwidth]{fig_plot_type.pdf} 
  \caption{Four plot types that \pkg{metaDigitise} is designed to extract data from: A) mean and error plot, B) box plot, C) scatter plot and D) histogram. Data is taken from the iris dataset in R. A and B are plotted with the whole dataset, C and D are just the data for the species setosa.}
 \label{fig:plot_type}
 \end{figure}
+
+Here, we present an interactive \proglang{R} package, \pkg{metaDigitise}, which is designed for large scale data extraction from figures, specifically catering to the the needs of meta-analysts. To this end, we provide tools specific to data extraction from common plot types (mean and error plots, box plots, scatter plots and histograms, see Figure \ref{fig:plot_type}). \pkg{metaDigitise} operates within the \proglang{R} environment making data extraction, analysis and export more streamlined. 
+%% need to be careful abiou th use of the term 'raw data' as internally this means uncalibrated data
+It also provides users with options to conduct the necessary calculations on processed data immediately after extraction so that comparable summary statistics can be obtained quickly. \pkg{metaDigitise} condenses data extracted from multiple figures into a single data frame which can be can easily be used in downstream analysis within \proglang{R} or exported from \proglang{R}. Processed data can also be easily extracted and analysed in any way the user desires. Conveniently, when needing to process many figures at different times \pkg{metaDigitise} will only import figures not already completed within a directory. This makes it easy to add new figures at any time. \pkg{metaDigitise} has also been built for reproducibility in mind. It has functions that allow users to redraw their digitisations on figures, make corrections and access the raw calibration data which is written automatically for each figure that is digitised into a special folder within the directory. This makes sharing figure digitisation and reproducing the work of others simple and easy, and allows meta-analysts to update meta-analyses more easily.
+
+
 
 
 %%%---------------------------------
@@ -154,15 +156,8 @@ In the case of scatter plots, \fct{metaDigitise} also returns the correlation co
 
 %% where to put calibration???
 
-In order to correctly extract data from figures \fct{metaDigitise} always requires the user to calibrate the axes in the figure. To do this, the user is required to click on two known points on the axis in question, and then enter the value of those points in the figure
-%(Figure \ref{fig:calibrate})
-. Using this information, \fct{metaDigitise} then calculates the value of any clicked points in terms of the figure axes. In the case of mean and error plots and box plots, it calibrates only the y axis (assuming the x axis is redundant). For scatter plots and histograms both axes are calibrated.
+In order to correctly extract data from figures \fct{metaDigitise} always requires the user to calibrate the axes in the figure. To do this, the user is required to click on two known points on the axis in question, and then enter the value of those points in the figure. Using this information, \fct{metaDigitise} then calculates the value of any clicked points in terms of the figure axes. In the case of mean and error plots and box plots, it calibrates only the y axis (assuming the x axis is redundant). For scatter plots and histograms both axes are calibrated.
 
-% \begin{figure}[!h] 
-%  \includegraphics[width=0.9\textwidth]{fig_calibrate.pdf} 
-%  \caption{Axis calibration. The user defines two points on each axis and labels them according to the values shown in the figure.}
-% \label{fig:calibrate}
-% \end{figure}
 
 \subsection{Mean and error plots} 
 \fct{metaDigitise} prompts the user to enter groups names and allows the user to enter sample sizes ($n$), which are used in downstream processing. The user is then prompted to click on an error bar followed by the mean. Error bars above or below the mean can be clicked - sometimes one is clearer than the other. \fct{metaDigitise} assumes that the error bars are symmetrical. Where the user has clicked the error is displayed in a different colour to the mean (Figure \ref{fig:all_extract}A). The user can subsequently add more groups, edit groups or remove groups. Finally the user is asked what type of error was used in the figure: standard deviation (SD, $\sigma$), standard error (SE) or 95\% confidence intervals (CI95). Standard deviation is calculated from standard error as
@@ -209,8 +204,9 @@ n = \sum_{i=1}^n{f_i}
 As with the scatterplots, If the sample size from the extracted data does not match a known sample size, the user can enter an alternate sample size.
 
 
-\begin{figure}[!h] 
- \includegraphics[width=0.9\textwidth]{fig_all_extract.pdf} 
+\begin{figure}[!h]
+\centering 
+ \includegraphics[width=0.75\textwidth]{fig_all_extract.pdf} 
  \caption{Demonstration of data extraction from different plot types}
 \label{fig:all_extract}
 \end{figure}
@@ -235,7 +231,7 @@ R> library(metaDigitise)
 \end{CodeInput}
 \end{CodeChunk}
 
-Assume that we would like to extract summary statistics from studies measuring sepal length or width in iris species for a fictitious project. There are a few studies that only present these data in figures. As we read papers found from a systematic search we can add in figures with relevant data to a "FiguresToExtract" folder as follows
+Assume that the user would like to extract summary statistics from studies measuring sepal length or width in iris species for a fictitious project. There are a few studies that only present these data in figures. As the user readds papers found from a systematic search, they add figures with relevant data to a "FiguresToExtract" folder as follows
 
 \begin{CodeChunk}
 \begin{CodeOutput}
@@ -245,12 +241,12 @@ Assume that we would like to extract summary statistics from studies measuring s
 \end{CodeChunk}
 
 \begin{figure}[!h] 
- \includegraphics[width=0.9\textwidth]{001_Anderson_1935_Fig1.png} 
+ \includegraphics[width=0.75\textwidth]{001_Anderson_1935_Fig1.png} 
  \caption{Example scatterplot (001\_Anderson\_1935\_Fig1.png) of sepal length and width for two species of iris (setosa and versicolor)}
-\label{fig:rotate}
+\label{fig:Anderson}
 \end{figure}
 
-Here, the naming of the files placed in the folder will contain the paper number, first author and the figure number to keep data uniquely associated with figures. We can use \fct{metaDigitise} to begin processing the image from the first paper. Running \fct{metaDigitise} brings up a series of prompts for the user using a main menu that provides access to a number of its features: 
+Here, the naming of the files placed in the folder will contain the paper number, first author and the figure number to keep data uniquely associated with figures. At first there is one figure in the folder, shown in Figure \ref{fig:Anderson}. Running \fct{metaDigitise} brings up a series of prompts for the user using a main menu that provides access to a number of its features: 
 
 \begin{CodeChunk}
 \begin{CodeInput}
@@ -265,10 +261,7 @@ Selection:
 \end{CodeOutput}
 \end{CodeChunk}
 
-The user simply enters in the numeric value that corresponds to what they would like to do. In this case we want to "Process new images".
-
-
-As soon as \fct{metaDigitise} is executed, it will bring the user to the main menu (see "Re-importing, Editing and Plotting Previously Digitised data" above). When the user selects option one ("Process new images"), we are asked whether we have different types of plot(s) in the folder. This question is most relevant when there are lots of different figures in the folder because it will then ask us for the type of figure as they are cycled through.
+The user simply enters in the numeric value that corresponds to what they would like to do. In this case they want to "Process new images". The user is then asked whether there is different types of plot(s) in the folder. This question is most relevant when there are lots of different figures in the folder because it will then ask the user for the type of figure as they are cycled through.
 
 \begin{CodeChunk}
 \begin{CodeOutput}
@@ -353,7 +346,7 @@ On the Figure, click IN ORDER:
 \end{CodeOutput}
 \end{CodeChunk}
 
-The user can just follow the instructions on screen step-by-step (instructions above have been truncated by `...` to simplify), and in the order specified. Before moving on, the user is forced to check whether or not the calibration has been set up correctly. If `n` is chosen because something needs to be fixed then the user can re-calibrate.
+The user can just follow the instructions on screen step-by-step (instructions above have been truncated by `...' to simplify), and in the order specified. Before moving on, the user is forced to check whether or not the calibration has been set up correctly. If \code{n} is chosen because something needs to be fixed then the user can re-calibrate.
 
 \begin{CodeChunk}
 \begin{CodeOutput}
@@ -385,7 +378,7 @@ Re-calibrate? (y/n)
 \end{CodeOutput}
 \end{CodeChunk}
 
-Often, plots might contain multiple groups that the meta-analyst wants to extract from. \fct{metaDigitise} handles this nicely by prompting the user to enter the group first, followed by the digitisation of this groups data. After digitising the first group, and having exited (i.e., hit `esc` from plot window), \fct{metaDigitise} will ask the user whether they would like to add another group. Users can continually add groups (\code{a}), or simply continue to the next plot (\code{c} - if another plot exists). 
+Often, plots might contain multiple groups that the meta-analyst wants to extract from. \fct{metaDigitise} handles this nicely by prompting the user to enter the group first, followed by the digitisation of this groups data. After digitising the first group, and having exited (e.g., hit `esc' on mac from plot window), \fct{metaDigitise} will ask the user whether they would like to add another group. Users can continually add groups (\code{a}), delete groups (\code{d}), edit group (\code{e}) or finish plot and continue to the next one (\code{f} - if another plot exists). 
 %%% This needs checking - think it is now different
 The number of groups are not really limited and users can just keep adding in groups to accommodate the different numbers that may be presented across figures (although it can get complicated with too many).
 
@@ -428,7 +421,7 @@ When completed \pkg{metaDigitise} will write the digitised data to the caldat di
 
 \begin{CodeChunk}
 \begin{CodeOutput}
-*figs_to_extract
+*FiguresToExtract
     + caldat
         + 001_Anderson_1935_Fig1
     + 001_Anderson_1935_Fig1.png
@@ -472,16 +465,13 @@ One thing anyone with a familiarity with the iris dataset will notice is that th
 
 
 
-
-
-
 \subsection{Adding new figures}
 
 Users can add additional figures as new papers with relevant information are found. Each figure should be in its own file with unique naming, even if a single paper has multiple figures for extraction. For example, another paper on different populations (and one new species) of iris contained two additional figures where important data could be extracted. These figures can simply be named accordingly and added directly to the same extraction folder: 
 
 \begin{CodeChunk}
 \begin{CodeOutput}
-*figs_to_extract
+*FiguresToExtract
 	+ caldat
 	  	+ 001_Anderson_1935_Fig1
     + 001_Anderson_1935_Fig1.png
@@ -490,16 +480,15 @@ Users can add additional figures as new papers with relevant information are fou
 \end{CodeOutput}
 \end{CodeChunk}
 
-We have already processed one figure (001\_Anderson\_1935\_Fig1.png) and we can tell because it has digitised data (caldat/001\_Anderson\_1935\_Fig1), but now we have our two new figures that have not yet been digitised. This example will nicely demonstrate how users can easily pick up from where they left off and how all previous data gets re-integrated. It will also demonstrate how different plot types are handled. All we have to do to begin, is again, provide the directory where all the figures are located:
+The user has already processed one figure (001\_Anderson\_1935\_Fig1.png). We can tell this because the caldat folder has digitised data in it (caldat/001\_Anderson\_1935\_Fig1). Now the user has two new figures that have not yet been digitised. This example will nicely demonstrate how users can easily pick up from where they left off and how all previous data gets re-integrated. It will also demonstrate how different plot types are handled. All we have to do to begin, is again, provide the directory where all the figures are located:
 
 \begin{CodeChunk}
 \begin{CodeInput}
-R> setwd("~/figs_to_extract")
-R> digitised_data <- metaDigitise(".", summary = TRUE)
+R> digitised_data <- metaDigitise("./FiguresToExtract", summary = TRUE)
 \end{CodeInput}
 \end{CodeChunk}
 
-The user gets the same set of prompts and simply chooses option one to digitise the new figures. This will permit users to digitise new figures, and will integrate previously completed digitisations along with newly digitised data together at the end of the session, or when the user decides to quit. This time, 001\_Anderson\_1935\_Fig1.png, is ignored and the new plots cycle on screen. First for 002\_Doe\_2013\_Fig1.png and then 002\_Doe\_2013\_Fig3.png. Since there are a few new figures, we answer the first question in the \proglang{R} console as "diff":
+The user gets the same set of prompts and simply chooses option one to digitise the new figures. This will permit users to digitise new figures, and will integrate previously completed digitisations along with newly digitised data together at the end of the session, or when the user decides to quit. This time, 001\_Anderson\_1935\_Fig1.png, is ignored and the new plots cycle on screen. First for 002\_Doe\_2013\_Fig1.png and then 002\_Doe\_2013\_Fig3.png. Since there are a few new figures, the user answers the first question in the \proglang{R} console as "diff":
 
 \begin{CodeChunk}
 \begin{CodeOutput}
@@ -538,7 +527,7 @@ R> m
 \end{CodeInput}
 \end{CodeChunk}
 
-Here, we specify the new plot type as \code{m} for 002\_Doe\_2013\_Fig1.png because we have a plot of the mean and error of sepal length for each of the three species. We're then prompted a bit differently from our scatter plot as the x-axis is not needed for calibration:
+Here, the user specifies the new plot type as \code{m} for 002\_Doe\_2013\_Fig1.png because the user has a plot of the mean and error of sepal length for each of the three species. The user is then prompted a bit differently from our scatter plot as the x-axis is not needed for calibration:
 
 \begin{CodeChunk}
 \begin{CodeOutput}
@@ -770,9 +759,9 @@ Figure may have been extracted from old publications, for example from scanned i
 
 Furthermore, in some figures mean and error, boxplots or histograms may be presented with horizontal bars. \fct{metaDigitise} assumes that the bars are vertical, but allows the user to flip the image so that the bars are vertical (Figure \ref{fig:rotate}C,D).
 
-\subsection{Obtaining Raw Data}
+\subsection{Obtaining Processed Data}
 
-While \fct{metaDigitise} provides users with the summary statistics by default, for all plot types, in many cases the user may actually be interested in obtaining the raw digitised data from scatter plots. This is very easy to do my changing the default \code{summary} argument from TRUE to FALSE in \fct{metaDigitise}. Instead of providing the user with summary statistics it will return a list containing four slots for each of the figure types (mean error, box plot, histogram and scatter plots). An example of a data object returned from digitising figures is as follows:
+While \fct{metaDigitise} provides users with the summary statistics by default, for all plot types, in many cases the user may actually be interested in obtaining the processed digitised data from scatter plots (i.e. calibrated points). This is very easy to do my changing the default \code{summary} argument from TRUE to FALSE in \fct{metaDigitise}. Instead of providing the user with summary statistics it will return a list containing four slots for each of the figure types (mean error, box plot, histogram and scatter plots). An example of a data object returned from digitising figures is as follows:
 
 \begin{CodeChunk}
 
@@ -807,7 +796,7 @@ List of 3
 \end{CodeOutput}
 \end{CodeChunk}
 
-Here, the user can easily access the list of raw scatter plot data by simply extracting the scatter plot slot:
+Here, the user can easily access the list of processed scatter plot data by simply extracting the scatter plot slot:
 
 \begin{CodeChunk}
 \begin{CodeInput}
@@ -815,7 +804,9 @@ Here, the user can easily access the list of raw scatter plot data by simply ext
 \end{CodeInput}
 \end{CodeChunk}
 
-%check extraction
+\subsection{Checking Extraction}
+
+\subsection{Post-hoc adding smaple sizes}
 %Including addition of N later
 
 
@@ -828,7 +819,7 @@ Here, the user can easily access the list of raw scatter plot data by simply ext
 %% discuss specifically everything it can't do, and jsutify it slightly
 
 \begin{sidewaystable}[t!]
-\centering
+{\centering
 \begin{tabular}{lccccccc}
 \hline
 Function                  & metaDigitise & GraphClick$^1$ & DataThief$^2$  & DigitizeIt$^3$ & WebPlotDigitizer$^4$ & metagear$^5$ & digitize$^6$\\
@@ -842,7 +833,7 @@ Groups                    & \checkmark   & \checkmark & $\times$   & \checkmark 
 Entry of metadata         & \checkmark   & $\times$   & $\times$   & $\times$   & $\times$       & $\times$       & $\times$    \\
 Summarising data          & \checkmark   & $\times$   & $\times$   & $\times$   & $\times$       & $\times$       & $\times$    \\
 Multiple image processing & \checkmark   & $\times$   & $\times$   & $\times$   & $\times$       & $\times$       & $\times$    \\
-Editing digitisation$^9$  & \checkmark   & \checkmark & \checkmark & $\times$   & \checkmark     & $\times$       & $\times$    \\
+Reproducable$^9$  & \checkmark   & \checkmark & \checkmark & $\times$   & \checkmark     & $\times$       & $\times$    \\
 Automated point detection & $\times$     & \checkmark &     ?      & \checkmark & \checkmark     & \checkmark     & $\times$    \\
 Line extraction           & $\times$     & \checkmark & \checkmark & \checkmark & \checkmark     & $\times$       & $\times$    \\
 Zoom                      & $\times$     & \checkmark & \checkmark & \checkmark &       ?        & $\times$       & $\times$    \\
@@ -857,19 +848,21 @@ Freeware                  & \checkmark$^{10}$ & \checkmark$^{11}$ & \checkmark$^
 %https://automeris.io/WebPlotDigitizer/userManual.pdf
 
 \end{tabular}
-
+}
+{\footnotesize
+\\
 $^1$ \citet{GraphClick}
 $^2$ \citet{DataThief}
 $^3$ \citet{DigitizeIt}
 $^4$ \citet{WebPlotDigitizer}
 $^5$ \citet{Lajeunesse2016}
 $^6$ \citet{Poisot2011}
-$^7$ Only automated, no manual extraction.
-$^8$ Or handles rotated graphs. 
-$^9$ Allows saving, re-plotting and editing of data extraction.
-$^{10}$ \proglang{R} package.
-$^{11}$ Standalone software.
-
+\\$^7$ Only automated, no manual extraction.
+\\$^8$ Or handles rotated graphs. 
+\\$^9$ Allows saving, re-plotting and editing of data extraction.
+\\$^{10}$ \proglang{R} package.
+\\$^{11}$ Standalone software.
+}
 
 \caption{\label{tab:comparison} Comparison of functionality between different digitisation softwares.}
 

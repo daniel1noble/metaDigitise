@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.8.13)  20 NOV 2017 22:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.8.13)  21 NOV 2017 09:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -529,12 +529,12 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 {/usr/local/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./jsslo
 go.jpg>]
-<fig_plot_type.pdf, id=101, 650.43pt x 650.43pt>
+<fig_plot_type.pdf, id=108, 650.43pt x 650.43pt>
 File: fig_plot_type.pdf Graphic file (type pdf)
  <use fig_plot_type.pdf>
-Package pdftex.def Info: fig_plot_type.pdf used on input line 105.
-(pdftex.def)             Requested size: 398.38567pt x 398.38937pt.
-LaTeX Font Info:    Try loading font information for T1+lmtt on input line 119.
+Package pdftex.def Info: fig_plot_type.pdf used on input line 100.
+(pdftex.def)             Requested size: 331.99031pt x 331.9928pt.
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 120.
 
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/lm/t1lmtt.fd
@@ -559,28 +559,28 @@ Overfull \hbox (5.47499pt too wide) has occurred while \output is active
 [] \T1/lmr/m/n/10.95 5
  []
 
-[5] <fig_all_extract.pdf, id=153, 867.24pt x 1156.32pt>
+[5] <fig_all_extract.pdf, id=162, 867.24pt x 1156.32pt>
 File: fig_all_extract.pdf Graphic file (type pdf)
 
 <use fig_all_extract.pdf>
-Package pdftex.def Info: fig_all_extract.pdf used on input line 214.
-(pdftex.def)             Requested size: 398.38567pt x 531.19026pt.
+Package pdftex.def Info: fig_all_extract.pdf used on input line 209.
+(pdftex.def)             Requested size: 331.99031pt x 442.65266pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<001_Anderson_1935_Fig1.png, id=154, 415.5525pt x 363.3575pt>
+<001_Anderson_1935_Fig1.png, id=163, 415.5525pt x 363.3575pt>
 File: 001_Anderson_1935_Fig1.png Graphic file (type png)
 
 <use 001_Anderson_1935_Fig1.png>
-Package pdftex.def Info: 001_Anderson_1935_Fig1.png used on input line 249.
+Package pdftex.def Info: 001_Anderson_1935_Fig1.png used on input line 244.
 (pdftex.def)             Requested size: 398.38567pt x 348.35904pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-Overfull \hbox (2.14777pt too wide) in paragraph at lines 254--255
+Overfull \hbox (2.14777pt too wide) in paragraph at lines 249--250
 \T1/lmtt/m/n/10.95 metaDigitise() \T1/lmr/m/n/10.95 to be-gin pro-cess-ing the 
 im-age from the first pa-per. Run-ning \T1/lmtt/m/n/10.95 metaDigitise()
  []
@@ -606,7 +606,7 @@ Overfull \hbox (5.47499pt too wide) has occurred while \output is active
  []
 
 [9]
-LaTeX Font Info:    Try loading font information for TS1+lmtt on input line 397
+LaTeX Font Info:    Try loading font information for TS1+lmtt on input line 392
 .
  (/usr/local/texlive/2017/texmf-dist/tex/latex/lm/ts1lmtt.fd
 File: ts1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
@@ -615,28 +615,24 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 \T1/lmr/m/n/10.95 10 []
  []
 
-[10] <001_Anderson_1935_Fig1_digitised.png, id=198, 661.47125pt x 533.995pt>
+[10] <001_Anderson_1935_Fig1_digitised.png, id=208, 661.47125pt x 533.995pt>
 File: 001_Anderson_1935_Fig1_digitised.png Graphic file (type png)
 
 <use 001_Anderson_1935_Fig1_digitised.png>
 Package pdftex.def Info: 001_Anderson_1935_Fig1_digitised.png used on input lin
-e 423.
+e 418.
 (pdftex.def)             Requested size: 398.38567pt x 321.6054pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
 
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 [] \T1/lmr/m/n/10.95 11
  []
 
-[11]
+[11 <./001_Anderson_1935_Fig1_digitised.png>]
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 \T1/lmr/m/n/10.95 12 []
  []
 
-[12 <./001_Anderson_1935_Fig1_digitised.png>]
+[12]
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 [] \T1/lmr/m/n/10.95 13
  []
@@ -656,10 +652,10 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 \T1/lmr/m/n/10.95 16 []
  []
 
-[16] <fig_rotate.pdf, id=230, 867.24pt x 1156.32pt>
+[16] <fig_rotate.pdf, id=239, 867.24pt x 1156.32pt>
 File: fig_rotate.pdf Graphic file (type pdf)
  <use fig_rotate.pdf>
-Package pdftex.def Info: fig_rotate.pdf used on input line 767.
+Package pdftex.def Info: fig_rotate.pdf used on input line 762.
 (pdftex.def)             Requested size: 398.38567pt x 531.19026pt.
 
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
@@ -675,8 +671,10 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
  []
 
 [18 <./fig_rotate.pdf>]
-Underfull \vbox (badness 3407) has occurred while \output is active []
-
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <9> on input line 859.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 859.
 
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 [] \T1/lmr/m/n/10.95 19
@@ -699,8 +697,8 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 
 [20])
 LaTeX Font Info:    Font shape `T1/pzc/m/n' in size <13> not available
-(Font)              Font shape `T1/pzc/mb/it' tried instead on input line 899.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 899.
+(Font)              Font shape `T1/pzc/mb/it' tried instead on input line 896.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 896.
 
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 [] \T1/lmr/m/n/10.95 21
@@ -712,32 +710,32 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
  []
 
 [22]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 899.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 896.
  (./manuscript.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 899.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 899.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 896.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 896.
 Package rerunfilecheck Info: File `manuscript.out' has not changed.
-(rerunfilecheck)             Checksum: FE2323E5FB8EC3AE1B82ED216F7267A0;1517.
+(rerunfilecheck)             Checksum: 88BE747CBF6D860EA657E1F9DC844ED4;1529.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 899.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 896.
  ) 
 Here is how much of TeX's memory you used:
- 7517 strings out of 492995
- 111675 string characters out of 6132704
- 197619 words of memory out of 5000000
- 10844 multiletter control sequences out of 15000+600000
- 78756 words of font info for 57 fonts, out of 8000000 for 9000
+ 7541 strings out of 492995
+ 111925 string characters out of 6132704
+ 196619 words of memory out of 5000000
+ 10858 multiletter control sequences out of 15000+600000
+ 92543 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  35i,12n,34p,1212b,477s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/
-texlive/2017/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/local/texlive/2017/
-texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}{/usr/local/texlive/2017/texmf-dist
-/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2017/texmf-dist/fonts/enc
-/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/lm/
-lm-rm.enc}{/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr
+texlive/2017/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2017/t
+exmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/local/texlive/2017/texmf-dist/fon
+ts/enc/dvips/lm/lm-mathex.enc}{/usr/local/texlive/2017/texmf-dist/fonts/enc/dvi
+ps/lm/lm-mathit.enc}{/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/lm/lm-m
+athsy.enc}{/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr
 /local/texlive/2017/texmf-dist/fonts/type1/public/lm/lmb10.pfb></usr/local/texl
 ive/2017/texmf-dist/fonts/type1/public/lm/lmbo10.pfb></usr/local/texlive/2017/t
 exmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2017/texmf-dist/
@@ -745,21 +743,24 @@ fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2017/texmf-dist/fonts/type
 1/public/lm/lmex10.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/l
 m/lmmi10.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/lm/lmmi8.pf
 b></usr/local/texlive/2017/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/loc
-al/texlive/2017/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2
-017/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2017/texmf-
-dist/fonts/type1/public/lm/lmro10.pfb></usr/local/texlive/2017/texmf-dist/fonts
-/type1/public/lm/lmss10.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/pub
-lic/lm/lmssbx10.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/lm/l
-msso10.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/lm/lmsy10.pfb
-></usr/local/texlive/2017/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/loca
-l/texlive/2017/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/
-2017/texmf-dist/fonts/type1/public/lm/lmtto10.pfb></usr/local/texlive/2017/texm
-f-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2017/
-texmf-dist/fonts/type1/urw/zapfchan/uzcmi8a.pfb>
-Output written on manuscript.pdf (22 pages, 696900 bytes).
+al/texlive/2017/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/2
+017/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2017/texmf-di
+st/fonts/type1/public/lm/lmr9.pfb></usr/local/texlive/2017/texmf-dist/fonts/typ
+e1/public/lm/lmri10.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/
+lm/lmro10.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/lm/lmss10.
+pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/lm/lmss9.pfb></usr/l
+ocal/texlive/2017/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb></usr/local/tex
+live/2017/texmf-dist/fonts/type1/public/lm/lmsso10.pfb></usr/local/texlive/2017
+/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2017/texmf-dis
+t/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2017/texmf-dist/fonts/typ
+e1/public/lm/lmtt10.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/
+lm/lmtto10.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/
+symbols/msam10.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/urw/zapfchan
+/uzcmi8a.pfb>
+Output written on manuscript.pdf (22 pages, 759598 bytes).
 PDF statistics:
- 405 PDF objects out of 1000 (max. 8388607)
- 338 compressed objects within 4 object streams
+ 423 PDF objects out of 1000 (max. 8388607)
+ 353 compressed objects within 4 object streams
  80 named destinations out of 1000 (max. 500000)
  151 words of extra memory for PDF output out of 10000 (max. 10000000)
 
