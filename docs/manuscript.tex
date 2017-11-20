@@ -223,8 +223,22 @@ As with mean and error plots, \fct{metaDigitise} prompts the user to enter group
 \subsection{Scatter plots}
 \fct{metaDigitise} prompts the user to enter groups names and then to click on points. Points added by mistake can be deleted. The user can subsequently add groups, edit groups (add or remove points) or delete groups. Different groups are plotted in different colours and shapes, with a legend at the bottom of the figure (Figure \ref{fig:all_extract}C). Mean, SD and sample size (n) are calculated from the clicked points, for each group. In the case that the sample size from the clicked points does not match a known sample size (e.g. if there are overlaid points), the user can enter a alternate sample size.
 
-\subsubsection{Histograms}
-\fct{metaDigitise} prompts the user to enter groups names and then to click on the top corners of each bar. bars can subsequently be deleted. \fct{metaDigitise} then calculates the midpoint and the frequency for each bar. 
+\subsection{Histograms}
+\fct{metaDigitise} prompts the user to click on the top corners of each bar. Bars can subsequently be deleted. 
+For each bar a midpoint (mean x coordinates) and a frequency (mean y coordinates, rounded to the nearest integer) is calculated. The sample size is calculated as the sum of the frequencies., the mean as
+\begin{equation}
+\sigma = SE * \sqrt{n}
+\end{equation}
+and from 95\% confidence intervals as
+\begin{equation}
+\sigma = \frac{CI}{1.96} * \sqrt{n}
+\end{equation}
+
+
+
+
+
+Using the x coordinates, \fct{metaDigitise} then calculates the midpoint and the frequency for each bar. 
 
 
 %%%---------------------------------
