@@ -36,3 +36,7 @@ rm(list=ls())
 
 	modr2 <- lm(r ~ 1, data = data)
 	anova(modr, modr2)
+
+	# Check out BLUPS
+	coef(modr)
+	ranef(modr)
