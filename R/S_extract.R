@@ -7,6 +7,7 @@ delete_group <- function(raw_data){
 	ids <- unique(raw_data$id)
 	remove <- menu(ids)
 	raw_data <- subset(raw_data, id != ids[remove])
+	raw_data$id <- droplevels(raw_data$id)
 	return(raw_data)
 }
 
