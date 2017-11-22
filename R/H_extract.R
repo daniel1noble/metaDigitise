@@ -11,7 +11,7 @@ histogram_extract <- function(edit=FALSE, raw_data = data.frame(), ...){
 		if(idQ=="y"){
 			group_id <- readline("\nGroup identifier: ")
 			raw_data$id <- group_id
-		}
+		}else{group_id<-raw_data$id}
 	}else{
 		group_id <- readline("\nGroup identifier: ")
 	}
