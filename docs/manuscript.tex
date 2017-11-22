@@ -121,7 +121,7 @@ The \pkg{metaDigitise} package is designed to be flexible, yet simple to use. Th
 \begin{CodeChunk}
 \begin{CodeOutput}
 * Main project directory
-    + FiguresToExtract
+    + FiguresToExtract/
         + Paper1_Figure1_trait1.png
         + Paper1_Figure2_trait2.png
         + Paper1_Figure3_trait3.png
@@ -234,7 +234,7 @@ Assume that the user would like to extract summary statistics from studies measu
 
 \begin{CodeChunk}
 \begin{CodeOutput}
-*FiguresToExtract
+*FiguresToExtract/
     + 001_Anderson_1935_Fig1.png
 \end{CodeOutput}
 \end{CodeChunk}
@@ -423,8 +423,8 @@ When completed \pkg{metaDigitise} will write the digitised data to the caldat di
 
 \begin{CodeChunk}
 \begin{CodeOutput}
-*FiguresToExtract
-    + caldat
+*FiguresToExtract/
+    + caldat/
         + 001_Anderson_1935_Fig1
     + 001_Anderson_1935_Fig1.png
 \end{CodeOutput}
@@ -437,11 +437,11 @@ Users can access the \pkg{metaDigitise} object created (001\_Anderson\_1935\_Fig
 R> digitised_data
 \end{CodeInput}
 \begin{CodeOutput}
- filename   group_id         variable       mean      sd  n         r  plot_type
-1 001_Anderson_1935_Fig1.png     setosa  Sepal Width (mm) 3.420332 0.4034259 39 0.7524909 scatterplot
-2 001_Anderson_1935_Fig1.png     setosa Sepal Length (mm) 4.998267 0.3831294 39 0.7524909 scatterplot
-3 001_Anderson_1935_Fig1.png versicolor  Sepal Width (mm) 2.766857 0.3234723 44 0.5157938 scatterplot
-4 001_Anderson_1935_Fig1.png versicolor Sepal Length (mm) 5.936769 0.5292535 44 0.5157938 scatterplot
+                  filename   group_id         variable  mean  sd  n    r  plot_type
+001_Anderson_1935_Fig1.png     setosa  Sepal Width (mm) 3.42 0.40 39 0.75 scatterplot
+001_Anderson_1935_Fig1.png     setosa Sepal Length (mm) 5.00 0.38 39 0.75 scatterplot
+001_Anderson_1935_Fig1.png versicolor  Sepal Width (mm) 2.77 0.32 44 0.52 scatterplot
+001_Anderson_1935_Fig1.png versicolor Sepal Length (mm) 5.94 0.53 44 0.52 scatterplot
 \end{CodeOutput}
 \end{CodeChunk}
 
@@ -473,8 +473,8 @@ Users can add additional figures as new papers with relevant information are fou
 
 \begin{CodeChunk}
 \begin{CodeOutput}
-*FiguresToExtract
-	+ caldat
+*FiguresToExtract/
+	+ caldat/
 	  	+ 001_Anderson_1935_Fig1
     + 001_Anderson_1935_Fig1.png
     + 002_Doe_2013_Fig1.png
@@ -622,21 +622,17 @@ This continues until users have completed all non-digitised figures in the folde
 \begin{CodeChunk}
 \begin{CodeOutput}
 data
-               filename        group_id         variable     mean        sd   n         r    plot_type
-1 001_Anderson_1935_Fig1.png     setosa  Sepal Width (mm) 3.420332 0.4034259 39 0.7524909 scatterplot
-2 001_Anderson_1935_Fig1.png     setosa Sepal Length (mm) 4.998267 0.3831294 39 0.7524909 scatterplot
-3 001_Anderson_1935_Fig1.png versicolor  Sepal Width (mm) 2.766857 0.3234723 44 0.5157938 scatterplot
-4 001_Anderson_1935_Fig1.png versicolor Sepal Length (mm) 5.936769 0.5292535 44 0.5157938 scatterplot
-5      002_Doe_2013_Fig1.png     setosa      Sepal length 5.000336 0.7828656 50        NA  mean_error
-6      002_Doe_2013_Fig1.png versicolor      Sepal length 5.931340 1.0466177 50        NA  mean_error
-7      002_Doe_2013_Fig1.png viriginica      Sepal length 6.588705 1.2608173 50        NA  mean_error
-8      003_Doe_2013_Fig3.png       <NA>      Sepal length 4.948472 0.3624212 50        NA  histogram
+               filename      group_id         variable  mean  sd   n    r   plot_type
+001_Anderson_1935_Fig1.png     setosa  Sepal Width (mm) 3.42 0.40 39 0.75 scatterplot
+001_Anderson_1935_Fig1.png     setosa Sepal Length (mm) 5.00 0.38 39 0.75 scatterplot
+001_Anderson_1935_Fig1.png versicolor  Sepal Width (mm) 2.77 0.32 44 0.52 scatterplot
+001_Anderson_1935_Fig1.png versicolor Sepal Length (mm) 5.94 0.53 44 0.52 scatterplot
+     002_Doe_2013_Fig1.png     setosa      Sepal length 5.00 0.78 50   NA  mean_error
+     002_Doe_2013_Fig1.png versicolor      Sepal length 5.93 1.05 50   NA  mean_error
+     002_Doe_2013_Fig1.png viriginica      Sepal length 6.59 1.26 50   NA  mean_error
+     003_Doe_2013_Fig3.png       <NA>      Sepal length 4.95 0.36 50   NA  histogram
 \end{CodeOutput}
 \end{CodeChunk}
-
-
-
-
 
 
 \section{Re-importing, Editing and Plotting Previously Digitised data}
@@ -743,13 +739,6 @@ R> a
 A whole host of information can be edited including the rotation, plot type, the variable name(s) that were provided, the calibration and even the digitisation of groups. When editing the \code{metaDigitise} object is re-written to the caldat folder and the edits are immediately integrated into the existing object once complete. 
 
 
-
-
-
-
-
-
-
 \section{Additional Features}
 
 \subsection{Figure Rotation and Adjustment}
@@ -786,17 +775,17 @@ List of 3
   ..$ 003_Doe_2013_Fig3.png:'data.frame': 8 obs. of  3 variables:
   .. ..$ midpoints: num [1:8] 4.3 4.5 4.7 4.9 5.1 ...
   .. ..$ frequency: num [1:8] 4 5 7 12 11 6 2 3
-  .. ..$ variable : chr [1:8] "Sepal length" "Sepal length" "Sepal length" "Sepal length" ...
+  .. ..$ variable : chr [1:8] "Sepal length" "Sepal length" ...
  $ scatterplot:List of 1
   ..$ 001_Anderson_1935_Fig1.png:'data.frame':  83 obs. of  8 variables:
-  .. ..$ id        : Factor w/ 2 levels "setosa","versicolor": 1 1 1 1 1 1 1 1 1 1 ...
+  .. ..$ id        : Factor w/ 2 levels "setosa","versicolor": 1 1 1 1 1 ...
   .. ..$ x         : num [1:83] 2.3 2.9 3 3 3 ...
   .. ..$ y         : num [1:83] 4.5 4.4 4.41 4.3 4.8 ...
   .. ..$ group     : num [1:83] 1 1 1 1 1 1 1 1 1 1 ...
-  .. ..$ col       : Factor w/ 2 levels "red","green": 1 1 1 1 1 1 1 1 1 1 ...
+  .. ..$ col       : Factor w/ 2 levels "red","green": 1 1 1 1 1 1 1 1 1 ...
   .. ..$ pch       : num [1:83] 19 19 19 19 19 19 19 19 19 19 ...
-  .. ..$ y_variable: chr [1:83] "Sepal length (mm)" "Sepal length (mm)" "Sepal length (mm)" "Sepal length (mm)" ...
-  .. ..$ x_variable: chr [1:83] "Sepal width (mm)" "Sepal width (mm)" "Sepal width (mm)" "Sepal width (mm)" ...
+  .. ..$ y_variable: chr [1:83] "Sepal length (mm)" "Sepal length (mm)"  ...
+  .. ..$ x_variable: chr [1:83] "Sepal width (mm)" "Sepal width (mm)"    ...
 \end{CodeOutput}
 \end{CodeChunk}
 
@@ -811,11 +800,15 @@ Here, the user can easily access the list of processed scatter plot data by simp
 \subsection{Adding sample sizes to previous Digitisations}
 %Including addition of N later
 
-\section{Testing}
+\section{Interobserver Variability and Validation}
 %% simulated data
 %% x people doing y plots
+\subsection{Methods}
+We evaluated the consistency of digitisation using \pkg{metaDigitise} and tested how well digitisations estimate the true underlying data. This was accomplished by simulating a dataset with two different groups and two traits, and these data were then used to construct four different plot types (scatterplot, mean and error, histogram and boxplots). Each variable was plotted twice for a given plot type (figures were modified slightly to give users a sense that they were digitising new data) generating a total of 14 figures. We randomised the order of these figures (using the same data) and provdied the entire figure directory to a total of 15 indpendent digitisers. The same data was presented twice for each figure type to estimate between- and within- user variability (i.e., the intra-class correlation coefficient) in the data. Digitisers varied in their level of experience from those having done meta-analyses or comparative work to those not having any experience doing so. We got users to digitise all 14 figures and then send the data on these to evaluate interobserver variablity. 
 
-We evaluated the consistency of digitisation using the \pkg{metaDigitise} by simulating a series of data and using these data in each of the four different plot types (scatterplot, mean and error, histogram and boxplots). Each variable was plotted twice and figures were modified slightly to give users a sense that they were digitising new data. We randomised the order of these same 14 figures (using the same data), and provdied the entire figure directory to a total of 15 indpendent digitisers. Digitisers variaed in their level of experience from those having done meta-analyses or comparative work to those not having any experience doing so. We got users to digitise all 14 figures and then send the data on these to evaluate interobserver variablity for each figure type and to assess the accuracy and differences in digitising data from the same data across different figure types.  
+We analysed these data using linear mixed effect models with user identify as a random effect. The overall model also included plot type to account for the different means across the variables and plots. We used the mean, standard deviation and correlation coeficients as response variables in three seperate models. If digitisations were consistent across all users then we would predict no significant between user variability in the data. We also qualitatively report how close the average digitised mean, SD and correlation coefficient were to the actual mean values of traits presented in the figures. 
+
+\subsection{Results}
 
 
 \section{Discussion and Conclusions}
@@ -873,8 +866,6 @@ $^6$ \citet{Poisot2011}
 \end{sidewaystable}
 
 
-%\pkg{metaDigitise} is available through GitHub. WHile it is incredibly flexible already, our future plans include building in abilities to deal with log-transformed axes, including arguments for calculating standard deviations from 95\% confidence intervals and standard errors using the t-distribution to correct the t-value for small sample sizes (currently assumed t-values are 1.96 as is normal), dealing with asymmetric error bars and the possibility of zooming in plots such that greater accuracy can be achieved when digitising. We hope to also provide options for assessing inter-observer reliability in the future. 
-
 Although \pkg{metaDigitise} is already very flexible, and provides functionality not seen in any other packages (Table \ref{tab:comparison}) it is clear that there are some functions that it does not perform. A notable feature that \pkg{metaDigitise} lacks is automated point detection. This is available in several packages (Table \ref{tab:comparison}). However, from our experience of using these functions, manual digitising is more reliable and often equally as fast. Particularly given that calibration (for point detection) needs to be done for each plot individually in any case. Additionally, auto-detection often misses many points which then subsequently need to be manually added. Bssed on tests of \pkg{metaDigitise} (see above) figures can be extracted in around 1-2 minutes, including the entry of metadata. As a result, we do not belive that current automated point detection provides substantial time saving benefits.
 
 Another feature that \pkg{metaDigitise} (currently) lacks, is an ability to zoom in plots. This may enable users to gain greater accuracy when clicking on points. However, from our own experience (and indeed the results from our inter-observer reliability), if you are using a reasonably sized screen then the accuracy is already high from these programs (see results above for example), and there is not much gain is to be had from zooming in on points in many circumstances.
@@ -887,7 +878,7 @@ Increasing the reproducibility of figure extraction for meta-analysis and making
 
 
 \section*{Acknowledgments}
-We thanks the I-DEEL group at UNSW for increadibly useful feedback, and a host of colleagues for testing, providing feedback and digitising including: Rose O'Dea, Fonti Kar, Malgorzata Lagisz, Julia Riley, Diego Barneche, Erin Macartney, Ivan Beltran, Gihan Samarasinghe, Dax Kellie, Jonathan Noble. DWAN was supported by an Australian Research Council Discovery Early Career Research Award (DE150101774) and UNSW Vice Chancellors Fellowship and SN an Australian Research Council Future Fellowship (FT130100268). 
+We thank the I-DEEL group at UNSW for increadibly useful feedback, and a host of colleagues for testing, providing feedback and digitising including: Rose O'Dea, Fonti Kar, Malgorzata Lagisz, Julia Riley, Diego Barneche, Erin Macartney, Ivan Beltran, Gihan Samarasinghe, Dax Kellie, Jonathan Noble and Yian Noble. DWAN was supported by an Australian Research Council Discovery Early Career Research Award (DE150101774) and UNSW Vice Chancellors Fellowship and SN an Australian Research Council Future Fellowship (FT130100268). 
 
 
 \bibliography{metaDigitise}
