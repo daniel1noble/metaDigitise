@@ -23,6 +23,6 @@ test_that("Checking summary.metaDigitise..", {
 	expect_equal(
 		summary.metaDigitise(mock_object),
 		data.frame(
-			filename=as.factor("image.png"), group_id=as.factor("control"), variable=as.factor("y"), mean=1.5, sd=0.25, n=20, r=NA, plot_type="mean_error", stringsAsFactors = FALSE)
+			filename=as.factor("image.png"), group_id=as.factor("control"), variable=as.factor("y"), mean=1.5, error=0.25, error_type=as.factor("sd"), n=20, r=NA, sd=0.25,plot_type="mean_error", stringsAsFactors = FALSE)
 	)
 })
