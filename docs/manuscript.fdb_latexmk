@@ -1,20 +1,20 @@
 # Fdb version 3
-["bibtex manuscript"] 1511226181 "manuscript.aux" "manuscript.bbl" "manuscript" 1511346768
+["bibtex manuscript"] 1511226181 "manuscript.aux" "manuscript.bbl" "manuscript" 1511431106
   "./jss.bst" 1511128362 32989 20bb38cc9c684ce32025a8fa283a9df6 ""
-  "manuscript.aux" 1511346767 5369 c54c80b4987faea033c47cae69d07f9a ""
+  "manuscript.aux" 1511431105 5369 c54c80b4987faea033c47cae69d07f9a ""
   "manuscript.bcf" 0 -1 0 ""
   "metaDigitise.bib" 1511220808 8473 f19d464d853d616094e385bc3bdf8526 ""
   (generated)
   "manuscript.bbl"
   "manuscript.blg"
-["pdflatex"] 1511346767 "manuscript.tex" "manuscript.pdf" "manuscript" 1511346768
+["pdflatex"] 1511431105 "manuscript.tex" "manuscript.pdf" "manuscript" 1511431106
   "./001_Anderson_1935_Fig1.png" 1510039496 24918 8f303f721fc3d5a5f0acdc2a8891bde9 ""
   "./001_Anderson_1935_Fig1_digitised.png" 1510039496 70091 011c1f6d362f17e4cc0931d660efdf49 ""
   "./fig_all_extract.pdf" 1510039496 82269 bdb95d5f0823db5735bf6e41e3059088 ""
   "./fig_plot_type.pdf" 1510039496 6173 ad929f6ade78b1e4224656bdec1c6ace ""
   "./fig_rotate.pdf" 1510039496 109545 a553437ee0c8135f1d0005bcc5de7f63 ""
   "./jsslogo.jpg" 1511128362 22731 b9564ddd59a06782310989e8f33db55e ""
-  "./manuscript.out" 1511346767 1980 9195334727fbf77bfa205db498e69f61 ""
+  "./manuscript.out" 1511431105 1980 9195334727fbf77bfa205db498e69f61 ""
   "/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc" 1254269338 2375 baa924870cfb487815765f9094cf3728 ""
   "/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc" 1202520719 3486 c7eadf5dcc57b3b2d11736679f6636ba ""
@@ -157,13 +157,13 @@
   "fig_rotate.pdf" 1510039496 109545 a553437ee0c8135f1d0005bcc5de7f63 ""
   "jss.cls" 1511128362 15426 7baa85d872f568b77b27c84ff3f3efee ""
   "jsslogo.jpg" 1511128362 22731 b9564ddd59a06782310989e8f33db55e ""
-  "manuscript.aux" 1511346767 5369 c54c80b4987faea033c47cae69d07f9a ""
+  "manuscript.aux" 1511431105 5369 c54c80b4987faea033c47cae69d07f9a ""
   "manuscript.bbl" 1511226181 4398 5ea182f02eedf6102f533143027ccd20 "bibtex manuscript"
-  "manuscript.out" 1511346767 1980 9195334727fbf77bfa205db498e69f61 ""
-  "manuscript.tex" 1511346763 48824 f8efef3155ae9605fade0cfa66747a0a ""
+  "manuscript.out" 1511431105 1980 9195334727fbf77bfa205db498e69f61 ""
+  "manuscript.tex" 1511431032 49194 03dfdcb92108d47fe3a605dd63539e3f ""
   "manuscript.tpt" 0 -1 0 ""
   (generated)
-  "manuscript.log"
-  "manuscript.aux"
   "manuscript.out"
+  "manuscript.aux"
+  "manuscript.log"
   "manuscript.pdf"

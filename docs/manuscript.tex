@@ -261,11 +261,11 @@ Selection:
 \end{CodeOutput}
 \end{CodeChunk}
 
-The user simply enters in the numeric value that corresponds to what they would like to do. In this case they want to "Process new images". The user is then asked whether there is different types of plot(s) in the folder. This question is most relevant when there are lots of different figures in the folder because it will then ask the user for the type of figure as they are cycled through.
+The user simply enters in the numeric value that corresponds to what they would like to do. In this case they want to "Process new images". The user is then asked whether there are different types of plot(s) in the folder. This question is most relevant when there are lots of different figures in the folder because it will then ask the user for the type of figure as they are cycled through.
 
 \begin{CodeChunk}
 \begin{CodeOutput}
-Are all plot types the same? (diff/same)
+Are all plot types Different or the Same? (d/s)
 \end{CodeOutput}
 \end{CodeChunk}
 
@@ -286,7 +286,7 @@ If figures are wonky, chose rotate.
 
 Otherwise chose continue
 
-Flip, rotate or continue f/r/c 
+Flip, rotate or continue (f/r/c) 
 \end{CodeOutput}
 \begin{CodeInput}
 R> c
@@ -298,8 +298,13 @@ After this, \fct{metaDigitise} will ask the user to specify the plot type. Depen
 
 \begin{CodeChunk}
 \begin{CodeOutput}
-Please specify the plot_type as either: mean and error, box plot,
- scatter plot or histogram m/b/s/h:
+Please specify the plot_type as either:
+
+ m: Mean and error
+ b: Box plot
+ s: Scatter plot 
+ h: Histogram
+
  R> s
 \end{CodeOutput}
 \end{CodeChunk}
@@ -326,7 +331,7 @@ On the Figure, click IN ORDER:
       y1, y2 , x1, x2  
 
 
-    Step 1 ----> Click on y1
+    Step 1 ----> Click on known value on y axis - y1
   |
   |
   |
@@ -335,7 +340,7 @@ On the Figure, click IN ORDER:
   |_________________________
   ....
 
-    Step 3 ----> Click on x1
+    Step 3 ----> Click on known value on x axis - x1
   |
   |
   |
@@ -404,7 +409,7 @@ Click on points you want to add.
 If you want to remove a point, or are finished with a
 group, exit (see above), then follow prompts
 
-Add points, delete points or continue? a/d/c 
+Add points, delete points or continue? (a/d/c) 
 \end{CodeOutput}
 \begin{CodeInput}
 R> c
@@ -437,11 +442,11 @@ Users can access the \pkg{metaDigitise} object created (001\_Anderson\_1935\_Fig
 R> digitised_data
 \end{CodeInput}
 \begin{CodeOutput}
-                  filename   group_id         variable  mean  sd  n    r  plot_type
-001_Anderson_1935_Fig1.png     setosa  Sepal Width (mm) 3.42 0.40 39 0.75 scatterplot
-001_Anderson_1935_Fig1.png     setosa Sepal Length (mm) 5.00 0.38 39 0.75 scatterplot
-001_Anderson_1935_Fig1.png versicolor  Sepal Width (mm) 2.77 0.32 44 0.52 scatterplot
-001_Anderson_1935_Fig1.png versicolor Sepal Length (mm) 5.94 0.53 44 0.52 scatterplot
+                  filename    group_id         variable  mean  error error_type  n     r    sd  plot_type
+001_Anderson_1935_Fig1.png      setosa  Sepal width (mm)  3.42  0.40  sd        39  0.75  0.40  scatterplot
+001_Anderson_1935_Fig1.png      setosa  Sepal length (mm) 5.00  0.38  sd        39  0.75  0.38  scatterplot
+001_Anderson_1935_Fig1.png  versicolor  Sepal width (mm)  2.77  0.32  sd        44  0.52  0.32  scatterplot
+001_Anderson_1935_Fig1.png  versicolor  Sepal length (mm) 5.95  0.53  sd        44  0.52  0.53  scatterplot
 \end{CodeOutput}
 \end{CodeChunk}
 
@@ -622,15 +627,15 @@ This continues until users have completed all non-digitised figures in the folde
 \begin{CodeChunk}
 \begin{CodeOutput}
 data
-               filename      group_id         variable  mean  sd   n    r   plot_type
-001_Anderson_1935_Fig1.png     setosa  Sepal Width (mm) 3.42 0.40 39 0.75 scatterplot
-001_Anderson_1935_Fig1.png     setosa Sepal Length (mm) 5.00 0.38 39 0.75 scatterplot
-001_Anderson_1935_Fig1.png versicolor  Sepal Width (mm) 2.77 0.32 44 0.52 scatterplot
-001_Anderson_1935_Fig1.png versicolor Sepal Length (mm) 5.94 0.53 44 0.52 scatterplot
-     002_Doe_2013_Fig1.png     setosa      Sepal length 5.00 0.78 50   NA  mean_error
-     002_Doe_2013_Fig1.png versicolor      Sepal length 5.93 1.05 50   NA  mean_error
-     002_Doe_2013_Fig1.png viriginica      Sepal length 6.59 1.26 50   NA  mean_error
-     003_Doe_2013_Fig3.png       <NA>      Sepal length 4.95 0.36 50   NA  histogram
+                  filename    group_id         variable   mean  error error_type n    r    sd   plot_type
+001_Anderson_1935_Fig1.png      setosa  Sepal width (mm)  3.42  0.40  sd        39  0.75  0.40  scatterplot
+001_Anderson_1935_Fig1.png      setosa  Sepal length (mm) 5.00  0.38  sd        39  0.75  0.38  scatterplot
+001_Anderson_1935_Fig1.png  versicolor  Sepal width (mm)  2.77  0.32  sd        44  0.52  0.32  scatterplot
+001_Anderson_1935_Fig1.png  versicolor  Sepal length (mm) 5.95  0.53  sd        44  0.52  0.53  scatterplot
+     002_Doe_2013_Fig1.png      setosa  Sepal length      5.00  0.11  se        50  NA    0.78  mean_error
+     002_Doe_2013_Fig1.png  viriginica  Sepal length      6.59  0.18  se        50  NA    1.26  mean_error
+     002_Doe_2013_Fig1.png  versicolor  Sepal length      5.94  0.14  se        50  NA    1.01  mean_error
+     003_Doe_2013_Fig3.png      catana  Sepal length      4.95  0.36  sd        50  NA    0.36  histogram
 \end{CodeOutput}
 \end{CodeChunk}
 
@@ -713,7 +718,7 @@ Change group identifier? (y/n)
 R> n
 \end{CodeInput}
 \begin{CodeOutput}
-Add group, Delete group or Finish plot? a/d/f 
+Add group, Delete group or Finish plot? (a/d/f) 
 \end{CodeOutput}
 \begin{CodeInput}
 R> d
@@ -728,7 +733,7 @@ Selection:
 R> 2
 \end{CodeInput}
 \begin{CodeOutput}
-Add group, Delete group or Finish plot? a/d/f 
+Add group, Delete group or Finish plot? (a/d/f) 
 \end{CodeOutput}
 \begin{CodeInput}
 R> a
