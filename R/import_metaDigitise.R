@@ -11,7 +11,7 @@ import_menu<-function(dir, summary){
 
 	if(length(filepaths) == 0) stop("No digitised files to import!", call. = FALSE)
 
-	cat("Import all extracted data or from one image:\n")
+	cat("\nImport all extracted data or from one image:\n")
 	Q <- menu(c("All","One"))
 
 # all 

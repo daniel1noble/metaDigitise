@@ -47,7 +47,9 @@ edit_group <- function(raw_data, group_id,...){
 		if(add_removeQ=="a"){		
 			cat("\nClick on points you want to add.\nIf you want to remove a point, or are finished with a\ngroup, exit (see above), then follow prompts\n")
 			select_points <- locator(type="p", lwd=2, col=cols[i], pch=pchs[i])
-			group_data <- rbind(group_data, data.frame(id=group_id, x=select_points$x, y=select_points$y, group=i, col=cols[i], pch=pchs[i]) )		
+			if(!is.null(select_points)){
+				group_data <- rbind(group_data, data.frame(id=group_id, x=select_points$x, y=select_points$y, group=i, col=cols[i], pch=pchs[i]) )
+			}		
 		}
 
 		if(add_removeQ=="d"){
@@ -58,7 +60,7 @@ edit_group <- function(raw_data, group_id,...){
 		}
 
 		internal_redraw(...,raw_data=rbind(raw_data, group_data), calibration=TRUE, points=TRUE)
-		add_removeQ <- readline("\nAdd points, delete points or continue? a/d/c \n")
+		add_removeQ <- readline("\nAdd or Delete points to this group, or Continue? (a/d/c) \n")
 	}
 
 	raw_data <- rbind(raw_data, group_data)		
@@ -83,6 +85,7 @@ group_scatter_extract <- function(edit=FALSE, raw_data = data.frame(), ...){
     sep = "\n\n")
 
 	editQ <- if(edit){ "b" }else{ "a" }
+	if(!edit) cat("\nIf there are multiple groups, enter unique group identifiers (otherwise press enter)")
 
 	while(editQ != "f"){
 	
@@ -102,7 +105,7 @@ group_scatter_extract <- function(edit=FALSE, raw_data = data.frame(), ...){
 		if(editQ == "d") raw_data <- delete_group(raw_data)
 	
 		internal_redraw(...,raw_data=raw_data, calibration=TRUE, points=TRUE)
-		editQ <- readline("\nAdd group, Edit group, Delete group, or Finish plot? a/e/d/f \n")
+		editQ <- readline("\nAdd group, Edit group, Delete group, or Finish plot? (a/e/d/f) \n")
 	}
 	return(raw_data)
 }

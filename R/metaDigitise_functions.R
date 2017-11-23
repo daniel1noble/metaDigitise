@@ -104,7 +104,8 @@ summary.metaDigitise<-function(object, ...){
 			group_id=pd$id,
 			variable=pd$variable,
 			mean=pd$mean,
-			sd=error_to_sd(error=pd$error, n=pd$n, error_type=object$error_type),
+			error=pd$error, 
+			error_type=object$error_type,
 			n=pd$n,
 			r=NA
 		)
@@ -116,7 +117,8 @@ summary.metaDigitise<-function(object, ...){
 			group_id=pd$id,
 			variable=pd$variable,
 			mean=rqm_to_mean(min=pd$min,LQ=pd$q1,median=pd$med,UQ=pd$q3,max=pd$max),
-			sd=rqm_to_sd(min=pd$min,LQ=pd$q1,UQ=pd$q3,max=pd$max,n=pd$n),
+			error = rqm_to_sd(min=pd$min,LQ=pd$q1,UQ=pd$q3,max=pd$max,n=pd$n),
+			error_type = "sd",
 			n=pd$n,
 			r=NA
 		)
@@ -129,7 +131,8 @@ summary.metaDigitise<-function(object, ...){
 						group_id=z$id[1],
 						variable=c(z$x_variable[1],z$y_variable[1]),
 						mean=apply(z[,c("x","y")],2,mean),
-						sd=apply(z[,c("x","y")],2,sd),
+						error = apply(z[,c("x","y")],2,sd),
+						error_type = "sd",
 					 	n=ifelse(is.null(object$knownN), nrow(z), object$knownN[z$id[1]]),
 					 	r=cor(z$x,z$y)
 					)
@@ -143,11 +146,13 @@ summary.metaDigitise<-function(object, ...){
 			group_id=pd$id[1],
 			variable=pd$variable[1],
 			mean=mean(hist_data),
-			sd=sd(hist_data),
+			error = sd(hist_data),
+			error_type = "sd",
 			n=ifelse(is.null(object$knownN), length(hist_data), object$knownN),
 			r=NA
 		)
 	}
+	out$sd <- with(out, error_to_sd(error=error,n=n,error_type=error_type))
 	out$plot_type <- object$plot_type
 	return(out)
 }

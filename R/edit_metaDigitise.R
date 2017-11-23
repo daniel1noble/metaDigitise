@@ -12,7 +12,7 @@ bulk_edit <- function(dir, summary=TRUE){
 
 	if(length(filepaths)==0) stop("No files to edit", call.=FALSE)
 
-	cat("Choose how you want to edit files:\n")
+	cat("\nChoose how you want to edit files:\n")
 	Q <- menu(c("Cycle through images","Choose specific file to edit","Enter previously omitted sample sizes"))
 
 # cycle 
@@ -86,7 +86,7 @@ N_needed <- function(filepaths){
 enter_N <- function(raw_data,...){
 	ids <- 	unique(raw_data$id)
 	for (i in ids){
-		raw_data[raw_data$id==i,"n"] <- user_count(paste("Group \"", i,"\": Enter sample size "))
+		raw_data[raw_data$id==i,"n"] <- user_count(paste("\nGroup \"", i,"\": Enter sample size "))
 	}
 	return(raw_data)
 }
@@ -108,12 +108,12 @@ edit_metaDigitise <- function(object){
 
 	## ROTATION
 	rotQ <- user_options("\nEdit rotation? If yes, then the whole extraction will be redone (y/n) ", c("y","n"))
-	if(rotQ=="y") output <- metaDigitise(object$image_file)
+	if(rotQ=="y") output <- internal_digitise(object$image_file)
 
 
 	### plot type
 	ptQ <- user_options("\nChange plot type? If yes, then the whole extraction will be redone (y/n) ", c("y","n"))
-	if(ptQ=="y") output <- metaDigitise(object$image_file)
+	if(ptQ=="y") output <- internal_digitise(object$image_file)
 	
 
 	### variables

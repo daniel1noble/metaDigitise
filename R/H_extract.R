@@ -5,7 +5,6 @@
 #' @description Extraction of data from histograms
 histogram_extract <- function(edit=FALSE, raw_data = data.frame(), ...){
 
-
 	if(edit){ 
 		idQ <- user_options("Change group identifier? (y/n) ",c("y","n"))
 		if(idQ=="y"){
@@ -13,6 +12,7 @@ histogram_extract <- function(edit=FALSE, raw_data = data.frame(), ...){
 			raw_data$id <- group_id
 		}else{group_id<-raw_data$id}
 	}else{
+		cat("\nIf there are multiple groups, enter unique group identifiers (otherwise press enter)")
 		group_id <- readline("\nGroup identifier: \n")
 	}
 

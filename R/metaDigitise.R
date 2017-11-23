@@ -23,7 +23,7 @@ metaDigitise<-function(dir, summary = TRUE){
 		dir <- paste0(dir, "/")
 	}
 
-	cat("Do you want to...\n")
+	cat("\nDo you want to...\n")
 	
 	Q <- menu(c("Process new images", "Import existing data", "Edit existing data"))
 	
@@ -44,7 +44,7 @@ process_new_files <- function(dir, summary = TRUE) {
 			       setup_calibration_dir(dir)
 			      done_details <- dir_details(dir)
 	     details <- get_notDone_file_details(dir)
-		   type <- user_options("Are all plot types Different or the Same? (d/s)" , c("d", "s"))
+		   type <- user_options("\nAre all plot types Different or the Same? (d/s)" , c("d", "s"))
 	
 	if(length(done_details$calibrations) >= 1){	
 		done_objects <- load_metaDigitise(done_details$doneCalFiles, done_details$names)
@@ -70,7 +70,7 @@ process_new_files <- function(dir, summary = TRUE) {
 				breakQ <-  user_options(paste("\n\nDo you want continue:", length(details$paths)- i, "plots out of", length(details$paths), "plots remaining (y/n) "), c("y","n"))
 				if(breakQ=="n") break
 			}else{
-				cat("Congratulations! Looks like you have finished digitising all figures in this directory.\n")
+				cat("\nCongratulations! Looks like you have finished digitising all figures in this directory.\n")
 			}
 		 }
 	
@@ -116,7 +116,7 @@ specify_type <- function(){
 		#user enters numeric value to specify the plot BEFORE moving on
 	 	pl_type <- NA
 	 	#while keeps asking the user the question until the input is one of the options
-		while(!pl_type %in% c("m","b","s","h")) pl_type <- readline("Please specify the plot_type as either:\n\n m: Mean and error\n b: Box plot\n s: Scatter plot \n h: Histogram\n\n ")
+		while(!pl_type %in% c("m","b","s","h")) pl_type <- readline("\nPlease specify the plot_type as either:\n\n m: Mean and error\n b: Box plot\n s: Scatter plot \n h: Histogram\n\n ")
 	
 	 	plot_type <- ifelse(pl_type == "m", "mean_error", ifelse(pl_type == "b", "boxplot",ifelse(pl_type == "s", "scatterplot","histogram")))
 	
@@ -173,7 +173,7 @@ get_notDone_file_details <- function(dir){
 	# Check whether there are new files still needing to be done.
 
 	if(length(details$calibrations) == length(details$name)) {
-		stop("Congratulations! Looks like you have finished digitising all figures in this directory.\n", call. = FALSE)
+		stop("\nCongratulations! Looks like you have finished digitising all figures in this directory.\n", call. = FALSE)
 	}
 
 	# Find what files are already done. Remove these from our list
