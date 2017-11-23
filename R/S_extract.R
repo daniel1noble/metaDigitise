@@ -57,7 +57,7 @@ edit_group <- function(raw_data, group_id,...){
 		}
 
 		internal_redraw(...,raw_data=rbind(raw_data, group_data), calibration=TRUE, points=TRUE)
-		add_removeQ <- readline("\nAdd points, delete points or continue? a/d/c ")
+		add_removeQ <- readline("\nAdd points, delete points or continue? a/d/c \n")
 	}
 
 	raw_data <- rbind(raw_data, group_data)		
@@ -101,7 +101,7 @@ group_scatter_extract <- function(edit=FALSE, raw_data = data.frame(), ...){
 		if(editQ == "d") raw_data <- delete_group(raw_data)
 	
 		internal_redraw(...,raw_data=raw_data, calibration=TRUE, points=TRUE)
-		editQ <- readline("\nAdd group, Edit group, Delete group, or Finish plot? a/e/d/f ")
+		editQ <- readline("\nAdd group, Edit group, Delete group, or Finish plot? a/e/d/f \n")
 	}
 	return(raw_data)
 }

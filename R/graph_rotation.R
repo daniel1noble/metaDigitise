@@ -41,7 +41,7 @@ Otherwise chose continue\n
 			rotate <- rotate + f
 		}
 		internal_redraw(image_file, flip = flip, rotate = rotate)	
-		rotateQ <- readline("Flip, rotate or continue f/r/c ")
+		rotateQ <- readline("Flip, rotate or continue (f/r/c) \n")
 	}
 
 	out <- list(flip=flip, rotate=rotate)

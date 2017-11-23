@@ -9,11 +9,11 @@ histogram_extract <- function(edit=FALSE, raw_data = data.frame(), ...){
 	if(edit){ 
 		idQ <- user_options("Change group identifier? (y/n) ",c("y","n"))
 		if(idQ=="y"){
-			group_id <- readline("\nGroup identifier: ")
+			group_id <- readline("\nGroup identifier: \n")
 			raw_data$id <- group_id
 		}else{group_id<-raw_data$id}
 	}else{
-		group_id <- readline("\nGroup identifier: ")
+		group_id <- readline("\nGroup identifier: \n")
 	}
 
 
@@ -24,7 +24,7 @@ histogram_extract <- function(edit=FALSE, raw_data = data.frame(), ...){
 		
 		if(histQ=="a"){
 			i=i+1
-			cat("Click on left then right upper corners of bar\n")
+			cat("Click on the left followed by the right upper corners of a single bar")
 			bar_points <- locator(2, type="o", col="red", lwd=2, pch=19)
 			raw_data <- rbind(raw_data, data.frame(id=group_id, x=bar_points$x,y=bar_points$y, bar=i))
 		}
@@ -35,7 +35,7 @@ histogram_extract <- function(edit=FALSE, raw_data = data.frame(), ...){
 		}
 
 		internal_redraw(raw_data=raw_data,...)
-		histQ <- readline("Add bar, Delete bar or Finish plot? a/d/f ")
+		histQ <- readline("Add bar, Delete bar or Finish plot? (a/d/f) \n")
 
 	}
 	return(raw_data)

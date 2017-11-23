@@ -38,7 +38,7 @@ internal_digitise <- function(image_file, plot_type=NULL, cex=1){
 
 	### N entered?
 	if(plot_type %in% c("mean_error","boxplot")) {
-		askN <- user_options("\nEnter sample sizes? y/n ",c("y","n"))
+		askN <- user_options("\nDo you know sample sizes? (y/n) ",c("y","n"))
 		output$entered_N <- ifelse(askN =="y", TRUE, FALSE)
 	}else{
 		output$entered_N <- TRUE

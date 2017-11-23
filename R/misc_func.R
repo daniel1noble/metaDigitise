@@ -30,7 +30,7 @@ filename <- function(x) {
 user_options <- function(question, allowed_answers) {
 	input_bad <- TRUE
 	while(input_bad){
-		input <- readline(question)
+		input <- readline(paste(question,"\n"))
 		input_bad <- !input %in% allowed_answers
 		if(input_bad) cat("\n**** Invalid response ****\n")
 	}
@@ -45,7 +45,7 @@ user_options <- function(question, allowed_answers) {
 user_unique <- function(question, previous_answers) {
 	input_bad <- TRUE
 	while(input_bad){
-		input <- readline(question)
+		input <- readline(paste(question,"\n"))
 		input_bad <- input %in% previous_answers
 		if(input_bad) cat("\n**** Response must be unique ****\n")
 	}
@@ -59,7 +59,7 @@ user_unique <- function(question, previous_answers) {
 user_numeric <- function(question) {
 	input_bad <- TRUE
 	while(input_bad){
-    	input <- suppressWarnings(as.numeric(readline(question)))
+    	input <- suppressWarnings(as.numeric(readline(paste(question,"\n"))))
 		input_bad <- is.na(input)
 		if(input_bad) cat("\n**** Input must be numeric ****\n")
 	}
@@ -74,7 +74,7 @@ user_numeric <- function(question) {
 user_count <- function(question) {
 	input_bad <- TRUE
 	while(input_bad){
-		input <- suppressWarnings(as.numeric(readline(question)))
+		input <- suppressWarnings(as.numeric(readline(paste(question,"\n"))))
 		input_bad <- is.na(input)| input<1 | !is.wholenumber(input)
 		if(input_bad) cat("\n**** Input must be an integer above 0 ****\n")
 	}
@@ -89,11 +89,13 @@ user_count <- function(question) {
 
 ask_variable <- function(plot_type){
 	if(plot_type == "scatterplot"){
-		y_variable <- readline("\nWhat is the y variable? ")
-		x_variable <- readline("\nWhat is the x variable? ")
+		y_variable <- readline("\nWhat is the y variable? \n")
+		x_variable <- readline("\nWhat is the x variable? \n")
 		variable <- c(y=y_variable,x=x_variable)
+	}else if(plot_type == "histogram"){
+		variable <- c(readline("\nWhat is the x variable? \n"))
 	}else{
-		variable <- c(readline("\nWhat is the variable? "))
+		variable <- c(readline("\nWhat is the y variable? \n"))
 	}
 	return(variable)
 }

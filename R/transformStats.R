@@ -40,17 +40,6 @@ CI95_to_sd <- function(CI,n) {
 	CI/1.96 * sqrt(n)
 }
 
-# #' @title range_to_sd
-# #' @description Transforms range to standard deviation
-# #' @param CI Interval difference from the mean
-# #' @param n Sample Size
-# #' @return Returns vector of standard deviations
-# #' @author Joel Pick
-# #' @export
-
-# range_to_sd <- function(min,max,n) {
-# 	CI/1.96 * sqrt(n)
-# }
 
 
 #' @title rqm_to_mean

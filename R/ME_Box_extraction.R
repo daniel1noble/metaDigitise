@@ -11,7 +11,7 @@ single_MB_extract <- function(plot_type){
 	if(plot_type=="boxplot"){
 		cat("\nClick on Max, Upper Q, Median, Lower Q, and Minimum\nIn that order\n\n")
 		group_points <- locator(5, type="o", col="red", lwd=2, pch=19)
-		if(group_points$y[1]<group_points$y[5]) warning("max is smaller than min - consider deleting and re-adding group", call. = FALSE, immediate. = TRUE)
+		if(group_points$y[1]<group_points$y[5]) warning("max is smaller than min - consider deleting and re-adding group\n", call. = FALSE, immediate. = TRUE)
 	}
 
 	return(group_points)
@@ -29,6 +29,7 @@ single_MB_extract <- function(plot_type){
 MB_extract <- function(edit=FALSE, plot_type, entered_N, raw_data = data.frame(), ...){
 
 	add_removeQ <- if(edit){ "b" }else{ "a" }
+	if(!edit) cat("\nIf there are multiple groups, enter unique group identifiers (otherwise press enter)")
 
 	while(add_removeQ != "f"){
 		
@@ -69,7 +70,7 @@ MB_extract <- function(edit=FALSE, plot_type, entered_N, raw_data = data.frame()
 
 
 		internal_redraw(plot_type=plot_type, raw_data=raw_data,...)
-		add_removeQ <- readline("Add group, Edit Group, Delete group or Finish plot? a/e/d/f ")
+		add_removeQ <- readline("Add group, Edit Group, Delete group or Finish plot? (a/e/d/f) \n")
 
 	}
 	return(raw_data)

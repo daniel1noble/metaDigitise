@@ -7,7 +7,7 @@ print_cal_instructions <- function(plot_type,...){
   cat( "\nOn the Figure, click IN ORDER: 
       y1, y2",if(!plot_type %in% c("mean_error","boxplot")) ", x1, x2", " \n
 
-    Step 1 ----> Click on y1
+    Step 1 ----> Click on known value on y axis - y1
   |
   |
   |
@@ -15,7 +15,7 @@ print_cal_instructions <- function(plot_type,...){
   y1
   |_________________________
 \n
-    Step 2 ----> Click on y2
+    Step 2 ----> Click on another known value on y axis - y2
   |
   y2
   |
@@ -24,7 +24,7 @@ print_cal_instructions <- function(plot_type,...){
   |_________________________
   \n",
 if(!plot_type %in% c("mean_error","boxplot")) "
-    Step 3 ----> Click on x1
+    Step 3 ----> Click on known value on x axis - x1
   |
   |
   |
@@ -32,7 +32,7 @@ if(!plot_type %in% c("mean_error","boxplot")) "
   |
   |_____x1__________________
 \n
-    Step 4 ----> Click on x2
+    Step 4 ----> Click on another known value on x axis - x2
   |
   |
   |
@@ -76,7 +76,7 @@ cal_coords <- function(plot_type,...) {
 getVals <- function(calpoints,...) {
   names <- if(nrow(calpoints)==2){c("y1","y2")}else{c("y1","y2","x1","x2")}
   vals <- NULL
-  for (i in names) vals[i] <- user_numeric(paste("What is the value of", i, "?\n"))
+  for (i in names) vals[i] <- user_numeric(paste("\nWhat is the value of", i, "?"))
   return(vals)
 }
 
@@ -96,7 +96,7 @@ user_calibrate <- function(object){
       object$point_vals <- do.call(getVals, object)
       do.call(internal_redraw, c(object, calibration=TRUE, points=FALSE))
     }
-    cal_Q <- readline("\nRe-calibrate? (y/n) ")
+    cal_Q <- readline("\nRe-calibrate? (y/n) \n")
   }
   return(object[c("calpoints","point_vals")])
   ##output object?
