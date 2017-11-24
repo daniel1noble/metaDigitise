@@ -807,6 +807,60 @@ Here, the user can easily access the list of processed scatter plot data by simp
 
 \subsection{Adding sample sizes to previous Digitisations}
 %Including addition of N later
+In many cases important information, such as sample sizes, may not be readily available or clear when digitising figures. In these circumstances users will have answered 'no' to the question about whether they have sample sizes or not while digitising. To expedite finding and adding in these sample sizes to do the necssary calculations (if for example a figure presented 95\% CI's or standard errors), \pkg{metaDigitise} has s specific edit option that allows users to enter in previously omitted sample sizes. It works by first identifying the missing sample sizes in the digitised output, re-plotting the relevant figure and then prompting the user to enter the sample sizes for the relevant groups in the figure, 1 by one. As an example, assume that we were missing sample sizes for two groups in 002\_Doe\_2013\_Fig1.png:
+
+\begin{CodeChunk}
+\begin{CodeOutput}
+                  filename    group_id         variable   mean  error error_type n    r    sd   plot_type
+     002_Doe_2013_Fig1.png      setosa  Sepal length      5.00  0.11  se        NA  NA    NA  mean_error
+     002_Doe_2013_Fig1.png  viriginica  Sepal length      6.59  0.18  se        NA  NA    NA  mean_error
+\end{CodeInput}
+\end{CodeChunk}
+
+Here, we can see that we are missing the sample sizes for setosa and viriginica, and as a result, sd is not calculated because \pkg{metaDigitise} needs this information to make the calculation. If the user found this information after contacting the authors for clarification then they can add these back in as follows:
+
+\begin{CodeChunk}
+\begin{CodeInput}
+>R setwd("~/FiguresToExtract")
+>R digitised_data <- metaDigitise(".")
+\end{CodeInput}
+\end{CodeChunk}
+
+\begin{CodeChunk}
+\begin{CodeInput}
+Do you want to...
+
+1: Process new images
+2: Import existing data
+3: Edit existing data
+
+Selection: 3
+\end{CodeInput}
+\end{CodeChunk}
+
+\begin{CodeChunk}
+\begin{CodeInput}
+Choose how you want to edit files:
+
+1: Cycle through images
+2: Choose specific file to edit
+3: Enter previously omitted sample sizes
+
+Selection: 3
+\end{CodeInput}
+\end{CodeChunk}
+
+\pkg{metaDigitise} will replot the figure after this and list, only the groups missing data, for which the user can then update the data. This is then re-integrated back into the data automatically and the sd calculated. 
+
+\begin{CodeChunk}
+\begin{CodeInput}
+Group " setosa ": Enter sample size  
+50
+
+Group " viriginica ": Enter sample size  
+50
+\end{CodeInput}
+\end{CodeChunk}
 
 \section{Interobserver Variability and Validation}
 %% simulated data

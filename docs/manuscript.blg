@@ -4,44 +4,44 @@ The top-level auxiliary file: manuscript.aux
 The style file: jss.bst
 Database file #1: metaDigitise.bib
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
-You've used 15 entries,
+You've used 18 entries,
             3215 wiz_defined-function locations,
-            742 strings with 7724 characters,
-and the built_in function-call counts, 14329 in all, are:
-= -- 1381
-> -- 349
-< -- 8
-+ -- 132
-- -- 118
-* -- 1032
-:= -- 1755
-add.period$ -- 60
-call.type$ -- 15
-change.case$ -- 99
-chr.to.int$ -- 16
-cite$ -- 15
-duplicate$ -- 1476
-empty$ -- 1165
-format.name$ -- 146
-if$ -- 2897
+            761 strings with 8208 characters,
+and the built_in function-call counts, 17396 in all, are:
+= -- 1679
+> -- 421
+< -- 9
++ -- 159
+- -- 142
+* -- 1263
+:= -- 2117
+add.period$ -- 72
+call.type$ -- 18
+change.case$ -- 119
+chr.to.int$ -- 19
+cite$ -- 18
+duplicate$ -- 1797
+empty$ -- 1417
+format.name$ -- 177
+if$ -- 3516
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 154
-newline$ -- 90
-num.names$ -- 60
-pop$ -- 716
+missing$ -- 189
+newline$ -- 105
+num.names$ -- 72
+pop$ -- 866
 preamble$ -- 1
-purify$ -- 99
+purify$ -- 119
 quote$ -- 0
-skip$ -- 271
+skip$ -- 325
 stack$ -- 0
-substring$ -- 1481
-swap$ -- 354
+substring$ -- 1805
+swap$ -- 443
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 135
+type$ -- 162
 warning$ -- 0
-while$ -- 95
+while$ -- 118
 width$ -- 0
-write$ -- 207
+write$ -- 246

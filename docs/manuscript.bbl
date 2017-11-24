@@ -1,4 +1,4 @@
-\begin{thebibliography}{15}
+\begin{thebibliography}{18}
 \newcommand{\enquote}[1]{``#1''}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
@@ -13,6 +13,12 @@
 {Arizona-Software} (2008).
 \newblock \emph{\proglang{GraphClick} Software, Version~3.0}.
 \newblock \urlprefix\url{http://www.arizona-software.ch/graphclick}.
+
+\bibitem[{Bates \emph{et~al.}(2015)Bates, Maechler, Bolker, and
+  Walker}]{bates2015}
+Bates D, Maechler M, Bolker B, Walker S (2015).
+\newblock \enquote{Fitting Linear Mixed-Effects Models Using lme4.}
+\newblock \emph{Journal of Statistical Software}, \textbf{67}(1), 1--48.
 
 \bibitem[{Borenstein \emph{et~al.}(2009)Borenstein, Hedges, Higgens, and
   Rothstein}]{Borenstein2009}
@@ -30,6 +36,12 @@ Bormann I (2012).
 Glass G (1976).
 \newblock \enquote{Primary, secondary, and meta-analysis research.}
 \newblock \emph{Educational Researcher}, \textbf{5}, 3--8.
+
+\bibitem[{Hadfield(2010)}]{hadfield2010}
+Hadfield JD (2010).
+\newblock \enquote{MCMC methods for multi-response Generalised Linear Mixed
+  Models: the MCM Cglmm R package.}
+\newblock \emph{Journal of Statistical Software}, \textbf{33}(2), 1--22.
 
 \bibitem[{Koricheva \emph{et~al.}(2013)Koricheva, Gurevitch, and
   Mengersen}]{Koricheva2013}
@@ -89,6 +101,13 @@ Rohatgi A (2017).
 Sandve GK, Nekrutenko A, Taylor J, Hovig E (2013).
 \newblock \enquote{Ten simple rules for reproducible computational research.}
 \newblock \emph{PLoS computational biology}, \textbf{9}(10), e1003285.
+
+\bibitem[{Stoffel \emph{et~al.}(2017)Stoffel, Nakagawa, and
+  Schielzeth}]{stoffel2017}
+Stoffel MA, Nakagawa S, Schielzeth H (2017).
+\newblock \enquote{rptR: repeatability estimation and variance decomposition by
+  generalized linear mixed-effects models.}
+\newblock \emph{Methods in Ecology and Evolution}, \textbf{8}(11), 1639--1644.
 
 \bibitem[{Tummers(2006)}]{DataThief}
 Tummers B (2006).
