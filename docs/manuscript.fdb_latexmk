@@ -1,12 +1,12 @@
 # Fdb version 3
-["pdflatex"] 1511491775 "manuscript.tex" "manuscript.pdf" "manuscript" 1511491776
+["pdflatex"] 1511493264 "manuscript.tex" "manuscript.pdf" "manuscript" 1511493264
   "./001_Anderson_1935_Fig1.png" 1510039496 24918 8f303f721fc3d5a5f0acdc2a8891bde9 ""
   "./001_Anderson_1935_Fig1_digitised.png" 1510039496 70091 011c1f6d362f17e4cc0931d660efdf49 ""
   "./fig_all_extract.pdf" 1510039496 82269 bdb95d5f0823db5735bf6e41e3059088 ""
   "./fig_plot_type.pdf" 1510039496 6173 ad929f6ade78b1e4224656bdec1c6ace ""
   "./fig_rotate.pdf" 1510039496 109545 a553437ee0c8135f1d0005bcc5de7f63 ""
   "./jsslogo.jpg" 1511128362 22731 b9564ddd59a06782310989e8f33db55e ""
-  "./manuscript.out" 1511491776 1550 801c39590ef5c371109bba892b362fc2 ""
+  "./manuscript.out" 1511493264 1550 801c39590ef5c371109bba892b362fc2 ""
   "/usr/local/texlive/2015/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2015/texmf-dist/fonts/tfm/adobe/zapfchan/pzcmi8r.tfm" 1136768653 3520 74c182562270529cb43f51d7c7d9f1d9 ""
   "/usr/local/texlive/2015/texmf-dist/fonts/tfm/adobe/zapfchan/pzcmi8t.tfm" 1136768653 5096 d41a51208edc0ef3a3b8a2d6da0f98ab ""
@@ -108,12 +108,12 @@
   "fig_rotate.pdf" 1510039496 109545 a553437ee0c8135f1d0005bcc5de7f63 ""
   "jss.cls" 1511128362 15426 7baa85d872f568b77b27c84ff3f3efee ""
   "jsslogo.jpg" 1511128362 22731 b9564ddd59a06782310989e8f33db55e ""
-  "manuscript.aux" 1511491776 3763 ce32a89483bb6dfb6b727467c911fe02 ""
-  "manuscript.out" 1511491776 1550 801c39590ef5c371109bba892b362fc2 ""
-  "manuscript.tex" 1511491774 53130 f22f49ba2d69881b1966c5ad204111d6 ""
+  "manuscript.aux" 1511493264 3763 ce32a89483bb6dfb6b727467c911fe02 ""
+  "manuscript.out" 1511493264 1550 801c39590ef5c371109bba892b362fc2 ""
+  "manuscript.tex" 1511491992 53672 7fd9152946d6eb407f601866304f2e8e ""
   "manuscript.tpt" 0 -1 0 ""
   (generated)
   "manuscript.aux"
-  "manuscript.out"
   "manuscript.pdf"
   "manuscript.log"
+  "manuscript.out"
