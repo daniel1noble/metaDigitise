@@ -11,9 +11,6 @@
 #' Finally, metDigitise is built for ease of editing and reproducibility in mind. Hence, if "3: Edit existing data" is chosen by the user then users will have the options to "1: Cycle through images" (that are complete), overlaying digitisations with each figure and asking whether they would like to edit each figure or "2: Choose specific file to edit" allowing editing for a specific file. Here a list of all files are provided and the user simply needs to pick the one in the console they would like to view. Alternatively, the "3: Enter previously omitted sample sizes" option allows the user to go back and enter sample sizes that they may not have had on hand at the time of digitisation. This means that, so long as the caldat/ folder along with respective images are maintained, anyone using metaDigitise can simply import existing digitisations, modify them and fix them. This folder can then be shared with colleagues to allow them to reproduce any data extraction.
 #' @author Joel Pick - joel.l.pick@gmail.com
 #' @author Daniel Noble - daniel.wa.noble@gmail.com
-#' @examples
-#' # data <- metaDigitise(dir = "./example_figs/", summary = TRUE)
-#' # data
 #' @return A data frame or list containing the raw digitised data or the processed, summary statistics from the digitised data
 #' @examples
 #' \dontrun{# Generate a directory in current working directory and fill with figures
@@ -29,13 +26,13 @@
 #' arrows(1:length(means),means+ses, 1:length(means), means-ses, code=3, angle=90, length=0.1)
 #' axis(1,1:length(means),names(means))
 #' dev.off()
-#' png(filename = paste0("boxplot.png"), width = 480, height = 480)
+#' png(filename = paste0("./prac_figs/boxplot.png"), width = 480, height = 480)
 #' boxplot(x,y, main="Boxplot")
 #' dev.off()
-#' png(filename = paste0("histogram.png"),width = 480, height = 480)
+#' png(filename = paste0("./prac_figs/histogram.png"),width = 480, height = 480)
 #' hist(c(x,y), xlab= "variable", main="Histogram")
 #' dev.off()
-#' png(filename = paste0("scatterplot.png"), width = 480, height = 480)
+#' png(filename = paste0("./prac_figs/scatterplot.png"), width = 480, height = 480)
 #' plot(x,y, main="Scatterplot")
 #' dev.off()
 #' 
