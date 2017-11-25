@@ -164,13 +164,13 @@ Follow the instructions on screen step-by-step (instructions above have been tru
 
 ```
 What is the value of y1 ?
-4.5
+R< 4.5
 What is the value of y2 ?
-7
+R< 7
 What is the value of x1 ?
-2
+R< 2
 What is the value of x2 ?
-4
+R< 4
 
 Re-calibrate? (y/n) 
 ```
@@ -192,7 +192,8 @@ Click on points you want to add.
 If you want to remove a point, or are finished with a
 group, exit (see above), then follow prompts
 
-Add points, delete points or continue? (a/d/c) c
+Add points, delete points or continue? (a/d/c) 
+R< c
 
 ```
 
@@ -204,18 +205,19 @@ Once we are done digitising all the groups our plot will look something like thi
 `meta-Digitise` will conveniently print on the figure the calibration details along with group names and sample sizes. It will also print the figure name, which is useful if the user needs to go back and find the paper to obtain information. Printing this information on the figure is useful so that input can be checked with actual values on the figure, and any mistakes can then be corrected if found.  Don't worry if you notice a mistake. Prior to exiting the figure you will be prompted with this:
 
 ```
-Add group, Edit group, Delete group, or Finish plot? (a/e/d/f) f
+Add group, Edit group, Delete group, or Finish plot? (a/e/d/f) 
+R< f
 ```
 
 Choosing `e` allows the user to go back and edit a group already digitised, but also, `d` allows them to completely delete a group and re-digitise if necessary. In our case, all has gone well and we choose `f` to finish plotting. This will exit `metaDigitise` (since we only have a single figure) and save the summary statistics to the data object that can be conveniently queried by printing the object:
 
 ```
  data
-                   filename    group_id         variable  mean  error error_type  n     r    sd  plot_type
-1 iris_scatter_multigrp.png      setosa  Sepal width (mm)  3.42  0.40  sd        39  0.75  0.40  scatterplot
-2 iris_scatter_multigrp.png      setosa  Sepal length (mm) 5.00  0.38  sd        39  0.75  0.38  scatterplot
-3 iris_scatter_multigrp.png  versicolor  Sepal width (mm)  2.77  0.32  sd        44  0.52  0.32  scatterplot
-4 iris_scatter_multigrp.png  versicolor  Sepal length (mm) 5.95  0.53  sd        44  0.52  0.53  scatterplot
+                     filename    group_id         variable   mean  error error_type n    r   sd   plot_type
+1 001_Anderson_1935_Fig1.png      setosa  Sepal width (mm)  3.42  0.40  sd        39  0.75  0.40  scatterplot
+2 001_Anderson_1935_Fig1.png      setosa  Sepal length (mm) 5.00  0.38  sd        39  0.75  0.38  scatterplot
+3 001_Anderson_1935_Fig1.png  versicolor  Sepal width (mm)  2.77  0.32  sd        44  0.52  0.32  scatterplot
+4 001_Anderson_1935_Fig1.png  versicolor  Sepal length (mm) 5.95  0.53  sd        44  0.52  0.53  scatterplot
 
 ```
 
@@ -225,6 +227,7 @@ Our summary output has all the relevant information about the means and standard
      Species meanSL meanSW
 1     setosa  5.006  3.428
 2 versicolor  5.936  2.770
+
 ```
 
 One thing anyone with a familiarity with the iris dataset will notice is that the sample sizes for each of these species (which are n = 50 each) are quite a bit lower. This is an example of some of the challenges when extracting data from scatter plots, often data points will overlap with each other making it impossible (without having the real data) to know whether this is a problem. However, a meta-analyst will probably realise that the sample sizes here conflict with what is reported in the paper. Hence, we also provide the user with an option to input the sample sizes directly, even for scatterplots and histograms where, strictly speaking, this shouldn't be necessary. Nonetheless, it is important to recognise the impact that overlapping points can have (particularly its effects on SD and SE). In our case, our mean point estimates are nearly bang on, but the SD's are slightly over-estimated:
@@ -233,6 +236,7 @@ One thing anyone with a familiarity with the iris dataset will notice is that th
      Species    meanSL    meanSW
 1     setosa 0.3524897 0.3790644
 2 versicolor 0.5161711 0.3137983
+
 ```
 
 While this is a problem for any program digitising from figures, it is probably the best that can be done. However, for reproducibility, all the calibration and raw data is exported to a special folder `caldat/`, which can be brought back in and edited at any time should new information come to light.
@@ -262,12 +266,14 @@ We have already processed figure (001_Anderson_1935_Fig1.png) and we can tell be
 
 ```
 data <- metaDigitise(dir = "~/example_figs/")
+
 ```
 
-Here, we'll get the same prompts as we seen when digitising our scatter plot above. Given we want to process the new files we have, we'll select `1`. All the prompts after this selection are essentially the same, but we now specify we have `diff` plots and as the figures are loaded in the plotting window we'll be prompted to specify what type of plot we have on screen. 
+Here, we'll get the same prompts as we seen when digitising our scatter plot above. Given we want to process the new files we have, we'll select `1`. All the prompts after this selection are essentially the same, but we now specify we have `d` plots and as the figures are loaded in the plotting window we'll be prompted to specify what type of plot we have on screen. 
 
 ```
 Are all plot types Different or the Same? (d/s)
+
 R< d
 
 Please specify the plot_type as either:
@@ -277,7 +283,7 @@ Please specify the plot_type as either:
  s: Scatter plot 
  h: Histogram
 
- R> m
+R> m
 
 **** NEW PLOT ****
 
@@ -294,7 +300,9 @@ If figures are wonky, chose rotate.
 
 Otherwise chose continue
 
-Flip, rotate or continue (f/r/c) c
+Flip, rotate or continue (f/r/c) 
+
+R< c
 
 ```
 
@@ -326,6 +334,7 @@ On the Figure, click IN ORDER:
   
 What is the value of y1 ?
 R<5
+
 What is the value of y2 ?
 R<6.5
 
@@ -349,8 +358,12 @@ R< a
 
 The prompts, again, tell the user to calibrate the y-axis, enter these calibration values. After this we now have some new prompts, which tells `metaDigitise` whether we have sample sizes for all the groups in the plot. If `y` we can enter the group name and its sample size straight after. This is important for back calculating standard errors, for example, in this plot. The user can then digitise each of the groups, being prompted after each group whether to add, delete for finish digitising the group. The user can continue adding groups to the plot until they are all completely digitised (see figure below), at which point the user is asked to specify the type of error:
 
-```Type of error (se, CI95, sd): 
-R< se```
+```
+Type of error (se, CI95, sd): 
+
+R< se
+```
+
 <p align="center">
   <img align="centre" src="https://user-images.githubusercontent.com/3505482/32304001-44c9f164-bfc0-11e7-80c6-d36a1f463c2b.png" hspace="20" width = "450"/>
 </p>
@@ -526,26 +539,33 @@ The user can then just select the relevant figure that needs editing. After the 
 
 ```
 Edit rotation? If yes, then the whole extraction will be redone (y/n) 
-n
+
+R< n
 
 Change plot type? If yes, then the whole extraction will be redone (y/n) 
-n
+
+R< n
 
 Variable entered as: Sepal length
 Rename Variables (y/n) 
-n
+
+R< n
 
 Edit calibration? (y/n) 
-n
+
+R< n
 
 Re-extract data (y/n) 
-y
+
+R< y
 
 Change group identifier? (y/n) 
-n
+
+R< n
 
 Add group, Delete group or Finish plot? (a/d/f) 
-d
+
+R< d
 
 1: setosa
 2: versicolor
@@ -553,24 +573,30 @@ d
 
 Selection: 2
 Add group, Delete group or Finish plot? (a/d/f) 
-a
+
+R< a
 
 Group identifier: 
-versicolor_edit
+
+R< versicolor_edit
 
 Group sample size: 
-50
+
+R< 50
 
 Click on Error Bar, followed by the Mean
 
 Add group, Delete group or Finish plot? (a/d/f) 
-f
+
+R< f
 
 Type of error: 
-se
+
+R< se
 
 Re-enter error type (y/n) 
-n
+
+R< n
 ```
 
 This provides lots of flexibility to edit various aspects of previously digitised functions. This then integrates this corrected data directly into the fully formed data summary and re-writes the .RDS file in the `caldat/` folder automatically.
