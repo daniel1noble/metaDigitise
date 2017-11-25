@@ -37,11 +37,16 @@ Glass G (1976).
 \newblock \enquote{Primary, secondary, and meta-analysis research.}
 \newblock \emph{Educational Researcher}, \textbf{5}, 3--8.
 
-\bibitem[{Hadfield(2010)}]{hadfield2010}
-Hadfield JD (2010).
-\newblock \enquote{MCMC methods for multi-response Generalised Linear Mixed
-  Models: the MCM Cglmm R package.}
-\newblock \emph{Journal of Statistical Software}, \textbf{33}(2), 1--22.
+\bibitem[{Ihle \emph{et~al.}(2017)Ihle, Winney, Krystalli, and
+  Croucher}]{Ihle2017}
+Ihle M, Winney IS, Krystalli A, Croucher M (2017).
+\newblock \enquote{Striving for transparent and credible research: practical
+  guidelines for behavioral ecologists.}
+\newblock \emph{Behavioral Ecology}, \textbf{28}(2), 348--354.
+\newblock \doi{10.1093/beheco/arx003}.
+\newblock
+  \eprint{/oup/backfile/content_public/journal/beheco/28/2/10.1093_beheco_arx003/1/arx003.pdf},
+  \urlprefix\url{+ http://dx.doi.org/10.1093/beheco/arx003}.
 
 \bibitem[{Koricheva \emph{et~al.}(2013)Koricheva, Gurevitch, and
   Mengersen}]{Koricheva2013}
