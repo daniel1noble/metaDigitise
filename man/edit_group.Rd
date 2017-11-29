@@ -4,12 +4,14 @@
 \alias{edit_group}
 \title{edit_group}
 \usage{
-edit_group(raw_data, group_id, ...)
+edit_group(raw_data, group_id, calpoints, ...)
 }
 \arguments{
 \item{raw_data}{data}
 
 \item{group_id}{group_id}
+
+\item{calpoints}{The calibration points}
 
 \item{...}{other functions to pass to internal_redraw}
 }
