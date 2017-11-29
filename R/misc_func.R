@@ -13,6 +13,14 @@ is.wholenumber <- function(x, tol = .Machine$double.eps^0.5)  abs(x - round(x)) 
 isNumeric <- function(x) !suppressWarnings(is.na(as.numeric(x)))
 
 
+#' @title is.even
+#' @param x integer value
+#' @description Checks whether a integer is even
+
+is.even <- function(x) x %% 2 == 0
+
+
+
 #' @title filename
 #' @param x filepath
 #' @description extracts filename from filepath

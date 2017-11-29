@@ -19,14 +19,19 @@ histogram_extract <- function(edit=FALSE, raw_data = data.frame(), ...){
 
 	histQ <- if(edit){ "b" }else{ "a" }
 	i <- if(edit){ max(unique(raw_data$bar)) }else{ 0 }
-
+	bar_cols <- c("red","orange")
+	
 	while(histQ != "f"){
 		
 		if(histQ=="a"){
+			polygon(box_x,box_y, col="red", border=NA)
+			cat("\nClick on the left followed by the right upper corners of each bar\n Double click on red box in bottom left corner to exit extraction\n")
+		} 
+		while(histQ=="a"){
 			i=i+1
-			cat("Click on the left followed by the right upper corners of a single bar")
-			bar_points <- locator(2, type="o", col="red", lwd=2, pch=19)
-			raw_data <- rbind(raw_data, data.frame(id=group_id, x=bar_points$x,y=bar_points$y, bar=i))
+			bar_points <- locator(2, type="o", col=bar_cols[is.even(i)+1], lwd=2, pch=19)
+			if( mean(bar_points$x)<max(box_x) & mean(bar_points$y)<max(box_y) & mean(bar_points$x)>min(box_x) & mean(bar_points$y)>min(box_y)) histQ <- "b"
+			if(histQ=="a") raw_data <- rbind(raw_data, data.frame(id=group_id, x=bar_points$x,y=bar_points$y, bar=i))
 		}
 
 		if(histQ=="d"){

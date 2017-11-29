@@ -97,11 +97,13 @@ redraw_points <- function(plot_type, raw_data, image_details, scalar){
 	}
 
 	if(plot_type=="histogram"& nrow(raw_data)>0){
+		bar_cols <- c("red","orange")
 		for(i in unique(raw_data$bar)){
 			bar_data <- subset(raw_data, bar==i)
-			points(y~x,bar_data, pch=19, col=point_col, cex=point_cex)
-			lines(y~x, bar_data, lwd=line_width, col=point_col)
-			text(mean(bar_data$x),mean(bar_data$y)+legend_pos,bar_data$bar[1], col=point_col, cex=text_cex)
+			bar_col <- bar_cols[is.even(i)+1]
+			points(y~x,bar_data, pch=19, col=bar_col, cex=point_cex)
+			lines(y~x, bar_data, lwd=line_width, col=bar_col)
+			text(mean(bar_data$x),mean(bar_data$y)+legend_pos,bar_data$bar[1], col=bar_col, cex=text_cex)
 		}
 	}
 }

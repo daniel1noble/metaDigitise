@@ -15,6 +15,13 @@ test_that("Checking isNumeric..", {
 		info = "isNumeric failed")
 })
 
+test_that("Checking is.even..", {
+	expect_equal(
+		is.even(x=1), 
+		FALSE, 
+		info = "is.even failed")
+})
+
 test_that("Checking filename..", {
 	expect_equal(
 		filename(x="~/Dropbox/0_postdoc/10_metaDigitise/example_figs/5_fig2a.png"), 
