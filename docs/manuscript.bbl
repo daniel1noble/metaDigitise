@@ -1,4 +1,4 @@
-\begin{thebibliography}{18}
+\begin{thebibliography}{19}
 \newcommand{\enquote}[1]{``#1''}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
@@ -67,6 +67,13 @@ Nakagawa S, Noble DW, Senior AM, Lagisz M (2017).
   for biologists.}
 \newblock \emph{BMC Biology}, \textbf{15}, 18; DOI
   10.1186/s12915--017--0357--7.
+
+\bibitem[{Noble \emph{et~al.}(2017)Noble, Lagisz, O'Dea, and
+  Nakagawa}]{Noble2017}
+Noble DW, Lagisz M, O'Dea RE, Nakagawa S (2017).
+\newblock \enquote{Nonindependence and sensitivity analyses in ecological and
+  evolutionary meta-analyses.}
+\newblock \emph{Molecular Ecology}, \textbf{26}, 2410--2425.
 
 \bibitem[{Parker \emph{et~al.}(2016)Parker, Forstmeier, Koricheva, Fidler,
   Hadfield, En~Chee, Kelly, Gurevitch, and Nakagawa}]{Parker2016}
