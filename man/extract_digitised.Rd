@@ -9,11 +9,11 @@ extract_digitised(list, summary = TRUE)
 \arguments{
 \item{list}{A list of objects returned from metaDigitise}
 
-\item{summary}{A logical 'TRUE' or 'FALSE' indicating whether metaDigitise should print summary statitics from each figure and group.}
+\item{summary}{A logical 'TRUE' or 'FALSE' indicating whether metaDigitise should print summary statistics from each figure and group.}
 }
 \value{
 The function will return a data frame with the data across all the digitised files
 }
 \description{
-Function for extracting the data from a metaDigitise list
+Function for extracting the data from a metaDigitise list and creating either summary data or a list of the raw data.
 }
