@@ -42,13 +42,16 @@ import_menu<-function(dir, summary){
 
 import_metaDigitise <- function(dir, summary = TRUE ) {
 	
+	# Obtain directory details
 	    details <- dir_details(dir)
 
+	# Check caldat folder for RDS file of completed figures. If have, load metaDigitise objects, if not, STOP and tell user there are no files to import.
 	if(length(details$doneCalFiles) == 0) stop("No digitised files to import!", call. = FALSE)
 
 	    metaDig <- load_metaDigitise(details$doneCalFiles, details$calibrations)
 	 plot_types <- lapply(metaDig, function(x) x$plot_type)
 
+	# Using metaDigitise objects build the summary statistics for each digitised file, or extract the raw data and create a list, depending on the summary argument.
 	if(summary == TRUE){
 	
 		import <- do.call(rbind,lapply(metaDig, function(x) summary(x)))
