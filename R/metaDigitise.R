@@ -64,11 +64,13 @@ metaDigitise<-function(dir, summary = TRUE){
 #' @export
 process_new_files <- function(dir, summary = TRUE) {
 
+	# Set up calibration directory, obtain all the file details within a directory and ascertain which files need to still be completed. Just grabs relevant metadata
 			       setup_calibration_dir(dir)
 			      done_details <- dir_details(dir)
 	     details <- get_notDone_file_details(dir)
 		   type <- user_options("\nAre all plot types Different or the Same? (d/s)" , c("d", "s"))
 	
+	# If there are completed digitised files within the caldat folder load these metaDigitise objects so that they can be appended at the end of the session with the new digitised data. If there are no completed files these objects simply inherit NULL
 	if(length(done_details$calibrations) >= 1){	
 		done_objects <- load_metaDigitise(done_details$doneCalFiles, done_details$names)
 		done_plot_types <- lapply(done_objects, function(x) x$plot_type)
@@ -80,10 +82,13 @@ process_new_files <- function(dir, summary = TRUE) {
 		names = NULL
 	}
 
+	# Ask whether the plots are different or the same to avoid prompting if all the same when digitising
 	 plot_types <-  if (type == "d") {NULL} else { specify_type() }
-		 
+	
+	# Create data list to store previous and current digitisations of figures
 		 data_list <- list()
 
+	# Loops from all non-completed figures and allow uses to digitise. Save the calibration and raw data to the caldat folder
 		 for (i in 1:length(details$paths)) {
 			         data_list[[i]] <- internal_digitise(details$paths[i], plot_type = plot_types)	
 			    names(data_list)[i] <- details$images[i]
@@ -105,6 +110,7 @@ process_new_files <- function(dir, summary = TRUE) {
 			plot_type <- c(done_plot_types, complete_plot_types)
 		}
 
+	# Depending on summary argument, build the final data. If Summary ==TRUE then create condensed summary statistics. If FALSE, then create a list of the raw data grouped by plot type.
 	if(summary == TRUE){
 		if(length(done_objects) == 0){
 			return(do.call(rbind, lapply(data_list, function(x) summary(x))))
@@ -136,9 +142,9 @@ process_new_files <- function(dir, summary = TRUE) {
 #' @export
 
 specify_type <- function(){
-		#user enters numeric value to specify the plot BEFORE moving on
+		#User enters numeric value to specify the plot BEFORE moving on
 	 	pl_type <- NA
-	 	#while keeps asking the user the question until the input is one of the options
+	 	#While keeps asking the user the question until the input is one of the options
 		while(!pl_type %in% c("m","b","s","h")) pl_type <- readline("\nPlease specify the plot_type as either:\n\n m: Mean and error\n b: Box plot\n s: Scatter plot \n h: Histogram\n\n ")
 	
 	 	plot_type <- ifelse(pl_type == "m", "mean_error", ifelse(pl_type == "b", "boxplot",ifelse(pl_type == "s", "scatterplot","histogram")))
@@ -148,8 +154,8 @@ specify_type <- function(){
 
 #' @title extract_digitised
 #' @param list A list of objects returned from metaDigitise
-#' @param summary A logical 'TRUE' or 'FALSE' indicating whether metaDigitise should print summary statitics from each figure and group.
-#' @description Function for extracting the data from a metaDigitise list
+#' @param summary A logical 'TRUE' or 'FALSE' indicating whether metaDigitise should print summary statistics from each figure and group.
+#' @description Function for extracting the data from a metaDigitise list and creating either summary data or a list of the raw data.
 #' @return The function will return a data frame with the data across all the digitised files 
 #' @export
 
