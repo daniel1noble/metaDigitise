@@ -50,7 +50,7 @@ edit_group <- function(raw_data, group_id, calpoints, ...){
 	while(add_removeQ!="c"){
 
 		if(add_removeQ=="a"){
-			polygon(box_x,box_y, col="red", border=NA)
+			polygon(box_x,box_y, col="red", border=NA,xpd=TRUE)
 			cat("\nClick on points you want to add.\nIf you want to remove a point, or are finished with a group, \nexit by clicking on red box in bottom left corner, then follow prompts\n")
 		} 
 		while(add_removeQ=="a"){
