@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.11.29)  29 NOV 2017 13:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.11.29)  13 DEC 2017 11:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -562,7 +562,7 @@ Overfull \hbox (5.47499pt too wide) has occurred while \output is active
 [] \T1/lmr/m/n/10.95 5
  []
 
-[5] <fig_all_extract.pdf, id=187, 867.24pt x 1156.32pt>
+[5] <fig_all_extract.pdf, id=186, 867.24pt x 1156.32pt>
 File: fig_all_extract.pdf Graphic file (type pdf)
 
 <use fig_all_extract.pdf>
@@ -572,7 +572,7 @@ Package pdftex.def Info: fig_all_extract.pdf used on input line 193.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<001_Anderson_1935_Fig1.png, id=188, 415.5525pt x 363.3575pt>
+<001_Anderson_1935_Fig1.png, id=187, 415.5525pt x 363.3575pt>
 File: 001_Anderson_1935_Fig1.png Graphic file (type png)
 
 <use 001_Anderson_1935_Fig1.png>
@@ -613,7 +613,7 @@ LaTeX Font Info:    Try loading font information for TS1+lmtt on input line 383
  (/usr/local/texlive/2015/texmf-dist/tex/latex/lm/ts1lmtt.fd
 File: ts1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-<001_Anderson_1935_Fig1_digitised.png, id=234, 661.47125pt x 533.995pt>
+<001_Anderson_1935_Fig1_digitised.png, id=233, 661.47125pt x 533.995pt>
 File: 001_Anderson_1935_Fig1_digitised.png Graphic file (type png)
 
 <use 001_Anderson_1935_Fig1_digitised.png>
@@ -659,7 +659,7 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 [] \T1/lmr/m/n/10.95 17
  []
 
-[17] <fig_rotate.pdf, id=271, 867.24pt x 1156.32pt>
+[17] <fig_rotate.pdf, id=270, 867.24pt x 1156.32pt>
 File: fig_rotate.pdf Graphic file (type pdf)
  <use fig_rotate.pdf>
 Package pdftex.def Info: fig_rotate.pdf used on input line 753.
@@ -703,6 +703,14 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
  []
 
 [23] (./manuscript.bbl
+Underfull \vbox (badness 7925) has occurred while \output is active []
+
+
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+\T1/lmr/m/n/10.95 24 []
+ []
+
+[24]
 LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <10.95> not available
 (Font)              Font shape `T1/lmss/m/sl' tried instead on input line 14.
 
@@ -714,19 +722,14 @@ m/n/10.95 http : / / www .
 
 
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
-\T1/lmr/m/n/10.95 24 []
+[] \T1/lmr/m/n/10.95 25
  []
 
-[24])
+[25])
 LaTeX Font Info:    Font shape `T1/pzc/m/n' in size <13> not available
 (Font)              Font shape `T1/pzc/mb/it' tried instead on input line 967.
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 967.
 
-Overfull \hbox (10.94998pt too wide) has occurred while \output is active
-[] \T1/lmr/m/n/10.95 25
- []
-
-[25]
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 \T1/lmr/m/n/10.95 26 []
  []
@@ -747,7 +750,7 @@ Here is how much of TeX's memory you used:
  10801 multiletter control sequences out of 15000+600000
  95856 words of font info for 71 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 36i,12n,34p,1495b,499s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 36i,12n,34p,1487b,499s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/
 texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2015/t
 exmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/local/texlive/2015/texmf-dist/fon
@@ -776,10 +779,10 @@ lm/lmtt8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmtto10.
 pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/symbols/msa
 m10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/zapfchan/uzcmi8a.pf
 b>
-Output written on manuscript.pdf (26 pages, 807099 bytes).
+Output written on manuscript.pdf (26 pages, 807854 bytes).
 PDF statistics:
- 491 PDF objects out of 1000 (max. 8388607)
- 415 compressed objects within 5 object streams
+ 493 PDF objects out of 1000 (max. 8388607)
+ 417 compressed objects within 5 object streams
  96 named destinations out of 1000 (max. 500000)
  175 words of extra memory for PDF output out of 10000 (max. 10000000)
 
