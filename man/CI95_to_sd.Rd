@@ -15,7 +15,7 @@ CI95_to_sd(CI, n)
 Returns vector of standard deviations
 }
 \description{
-Transforms standard error to standard deviation
+Transforms symmetrical confidence interval to standard deviation
 }
 \author{
 Joel Pick

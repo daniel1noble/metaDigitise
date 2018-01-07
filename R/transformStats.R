@@ -31,7 +31,7 @@ se_to_sd <- function(se, n) {
 
 
 #' @title CI95_to_sd
-#' @description Transforms standard error to standard deviation
+#' @description Transforms symmetrical confidence interval to standard deviation
 #' @param CI Interval difference from the mean
 #' @param n Sample Size
 #' @return Returns vector of standard deviations
@@ -51,10 +51,11 @@ CI95_to_sd <- function(CI,n) {
 #' @param median Median
 #' @param UQ Upper 75th quartile
 #' @param max Maximum value
+#' @param n Sample size
 #' @return Returns vector of mean
 #' @author Joel Pick
 #' @export
-rqm_to_mean <- function(min,LQ,median,UQ,max){
+rqm_to_mean <- function(min,LQ,median,UQ,max,n){
 	b <- max
 	a <- min
 	q3 <- UQ
@@ -63,6 +64,8 @@ rqm_to_mean <- function(min,LQ,median,UQ,max){
 	
 	##from Wan et al. 2014; equation 10
 	Xbar <- (a + 2*q1 + 2*m + 2*q3 + b)/8
+	## from Bland 2014;
+	#Xbar <- ( (n+3)*(a+b) + 2*(n-1)*(q_1 + m + q_3) )/8n
 	return(Xbar)
 }
 

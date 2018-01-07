@@ -1,4 +1,4 @@
-\begin{thebibliography}{19}
+\begin{thebibliography}{20}
 \newcommand{\enquote}[1]{``#1''}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
@@ -19,6 +19,13 @@
 Bates D, Maechler M, Bolker B, Walker S (2015).
 \newblock \enquote{Fitting Linear Mixed-Effects Models Using lme4.}
 \newblock \emph{Journal of Statistical Software}, \textbf{67}(1), 1--48.
+
+\bibitem[{Bland(2015)}]{Bland2015}
+Bland M (2015).
+\newblock \enquote{{Estimating Mean and Standard Deviation from the Sample
+  Size, Three Quartiles, Minimum, and Maximum}.}
+\newblock \emph{International Journal of Statistics in Medical Research},
+  \textbf{4}, 57--64.
 
 \bibitem[{Borenstein \emph{et~al.}(2009)Borenstein, Hedges, Higgens, and
   Rothstein}]{Borenstein2009}

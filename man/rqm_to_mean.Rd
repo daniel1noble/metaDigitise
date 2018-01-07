@@ -4,7 +4,7 @@
 \alias{rqm_to_mean}
 \title{rqm_to_mean}
 \usage{
-rqm_to_mean(min, LQ, median, UQ, max)
+rqm_to_mean(min, LQ, median, UQ, max, n)
 }
 \arguments{
 \item{min}{Minimum value}
@@ -16,6 +16,8 @@ rqm_to_mean(min, LQ, median, UQ, max)
 \item{UQ}{Upper 75th quartile}
 
 \item{max}{Maximum value}
+
+\item{n}{Sample size}
 }
 \value{
 Returns vector of mean
