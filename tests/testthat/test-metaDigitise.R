@@ -1,11 +1,9 @@
 context("Check various metaDigitise.R functions...")
 
-
-
 test_that("Checking setup_calibration_dir works as expected..", {
 	dir <- paste0(tempdir(), "/")
 	setup_calibration_dir(dir)
-	expect_equal(list.files(dir), "caldat", info = "caldat setup correctly")
+	expect_equal(list.files(dir)[grep("caldat",list.files(dir))], "caldat", info = "caldat setup correctly")
 })
 
 test_that("Checking dir_details works as expected..", {
