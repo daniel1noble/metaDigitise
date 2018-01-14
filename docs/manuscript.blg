@@ -6,7 +6,7 @@ Database file #1: metaDigitise.bib
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 You've used 20 entries,
             3215 wiz_defined-function locations,
-            778 strings with 8843 characters,
+            778 strings with 8828 characters,
 and the built_in function-call counts, 19882 in all, are:
 = -- 1925
 > -- 491
