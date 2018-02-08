@@ -1,0 +1,12 @@
+
+citHeader("To cite metDigitise in publications use:") 
+
+citEntry(entry = "Article", 
+title = "Reproducible, flexible and high throughput data extraction from primary literature: The metaDigitise R package",
+author = personList(as.person("Joel L. Pick"), as.person("Shinichi Nakagawa"), as.person("Daniel W.A. Noble")),
+journal = "BioRxiv",
+year = "2018",
+pages = "1--25",
+doi = "https://doi.org/10.1101/247775", 
+textVersion = paste("Joel L. Pick, Shinichi Nakagawa, Daniel W.A. Noble (2018).", "Reproducible, flexible and high throughput data extraction from primary literature: The metaDigitise R package", "BioRxiv, 1-25.", "DOI https://doi.org/10.1101/247775")
+)
