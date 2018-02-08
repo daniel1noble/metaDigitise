@@ -1,0 +1,97 @@
+\begin{thebibliography}{20}
+\providecommand{\natexlab}[1]{#1}
+
+\bibitem[{{Arizona-Software}(2008)}]{GraphClick}
+{Arizona-Software} (2008) \emph{\proglang{GraphClick} Software, Version~3.0}.
+
+\bibitem[{Bates et~al.(2015)Bates, Maechler, Bolker \& Walker}]{bates2015}
+Bates, D., Maechler, M., Bolker, B. \& Walker, S. (2015) Fitting Linear
+  Mixed-Effects Models Using lme4. \emph{Journal of Statistical Software},
+  \textbf{67}, 1--48.
+
+\bibitem[{Bland(2015)}]{Bland2015}
+Bland, M. (2015) {Estimating Mean and Standard Deviation from the Sample Size,
+  Three Quartiles, Minimum, and Maximum}. \emph{International Journal of
+  Statistics in Medical Research}, \textbf{4}, 57--64.
+
+\bibitem[{Borenstein et~al.(2009)Borenstein, Hedges, Higgens \&
+  Rothstein}]{Borenstein2009}
+Borenstein, M., Hedges, L., Higgens, J. \& Rothstein, H. (2009) Introduction to
+  meta-analysis. \emph{John Wily Sons. Ltd. West Sussex, UK}.
+
+\bibitem[{Bormann(2012)}]{DigitizeIt}
+Bormann, I. (2012) \emph{\proglang{DigitizeIt} Software, Version~2.0}.
+  Braunschweig, Germany.
+
+\bibitem[{Glass(1976)}]{Glass1976}
+Glass, G. (1976) Primary, secondary, and meta-analysis research.
+  \emph{Educational Researcher}, \textbf{5}, 3--8.
+
+\bibitem[{Ihle et~al.(2017)Ihle, Winney, Krystalli \& Croucher}]{Ihle2017}
+Ihle, M., Winney, I.S., Krystalli, A. \& Croucher, M. (2017) Striving for
+  transparent and credible research: practical guidelines for behavioral
+  ecologists. \emph{Behavioral Ecology}, \textbf{28}, 348--354.
+
+\bibitem[{Koricheva, Gurevitch \& Mengersen(2013)}]{Koricheva2013}
+Koricheva, J., Gurevitch, J. \& Mengersen, K. (2013) Handbook of Meta-Analysis
+  in Ecology and Evolution. \emph{Princeton University Press, Princeton, New
+  Jersey.}
+
+\bibitem[{Lajeunesse(2016)}]{Lajeunesse2016}
+Lajeunesse, M.J. (2016) Facilitating systematic reviews, data extraction, and
+  meta-analysis with the metagear package for R. \emph{Methods in Ecology and
+  Evolution}, \textbf{7}, 323--330.
+
+\bibitem[{Nakagawa et~al.(2017)Nakagawa, Noble, Senior \& Lagisz}]{Naka2017}
+Nakagawa, S., Noble, D.W., Senior, A.M. \& Lagisz, M. (2017) Meta-evaluation of
+  meta-analysis: ten appraisal questions for biologists. \emph{BMC Biology},
+  \textbf{15}, 18; DOI 10.1186/s12915--017--0357--7.
+
+\bibitem[{Noble et~al.(2017)Noble, Lagisz, O'Dea \& Nakagawa}]{Noble2017}
+Noble, D.W., Lagisz, M., O'Dea, R.E. \& Nakagawa, S. (2017) Nonindependence and
+  sensitivity analyses in ecological and evolutionary meta-analyses.
+  \emph{Molecular Ecology}, \textbf{26}, 2410--2425.
+
+\bibitem[{Parker et~al.(2016)Parker, Forstmeier, Koricheva, Fidler, Hadfield,
+  En~Chee, Kelly, Gurevitch \& Nakagawa}]{Parker2016}
+Parker, T.H., Forstmeier, W., Koricheva, J., Fidler, F., Hadfield, J., En~Chee,
+  Y., Kelly, C.D., Gurevitch, J. \& Nakagawa, S. (2016) Transparency in Ecology
+  and Evolution: Real Problems, Real Solutions. \emph{Trends in Ecology and
+  Evolution}, \textbf{31}, 711--719.
+
+\bibitem[{Peng(2011)}]{peng_reproducible_2011}
+Peng, R.D. (2011) Reproducible research in computational science.
+  \emph{Science}, \textbf{334}, 1226.
+
+\bibitem[{Peng, Dominici \& Zeger(2006)}]{peng_reproducible_2006}
+Peng, R.D., Dominici, F. \& Zeger, S.L. (2006) Reproducible epidemiologic
+  research. \emph{American Journal of Epidemiology}, \textbf{163}, 783--789.
+
+\bibitem[{Poisot(2011)}]{Poisot2011}
+Poisot, T. (2011) {The digitize package: extracting numerical data from
+  scatterplots}. \emph{The R Journal}, \textbf{3}, 25--26.
+
+\bibitem[{Rohatgi(2017)}]{WebPlotDigitizer}
+Rohatgi, A. (2017) \emph{\proglang{WebPlotDigitizer} Software, Version~4.0}.
+  Austin, Texas, USA.
+
+\bibitem[{Sandve et~al.(2013)Sandve, Nekrutenko, Taylor \&
+  Hovig}]{sandve_ten_2013}
+Sandve, G.K., Nekrutenko, A., Taylor, J. \& Hovig, E. (2013) Ten simple rules
+  for reproducible computational research. \emph{PLoS Computational Biology},
+  \textbf{9}, e1003285.
+
+\bibitem[{Stoffel, Nakagawa \& Schielzeth(2017)}]{stoffel2017}
+Stoffel, M.A., Nakagawa, S. \& Schielzeth, H. (2017) rptR: repeatability
+  estimation and variance decomposition by generalized linear mixed-effects
+  models. \emph{Methods in Ecology and Evolution}, \textbf{8}, 1639--1644.
+
+\bibitem[{Tummers(2006)}]{DataThief}
+Tummers, B. (2006) \emph{\proglang{DataThief} Software, Version~3.0}.
+
+\bibitem[{Wan et~al.(2014)Wan, Wang, Liu \& Tong}]{Wan2014}
+Wan, X., Wang, W., Liu, J. \& Tong, T. (2014) {Estimating the sample mean and
+  standard deviation from the sample size, median, range and/or interquartile
+  range.} \emph{BMC Medical Research Methodology}, \textbf{14}, 135.
+
+\end{thebibliography}

@@ -93,13 +93,13 @@ Parker TH, Forstmeier W, Koricheva J, Fidler F, Hadfield J, En~Chee Y, Kelly
 \bibitem[{Peng(2011)}]{peng_reproducible_2011}
 Peng RD (2011).
 \newblock \enquote{Reproducible research in computational science.}
-\newblock \emph{Science (New York, Ny)}, \textbf{334}(6060), 1226.
+\newblock \emph{Science}, \textbf{334}(6060), 1226.
 
 \bibitem[{Peng \emph{et~al.}(2006)Peng, Dominici, and
   Zeger}]{peng_reproducible_2006}
 Peng RD, Dominici F, Zeger SL (2006).
 \newblock \enquote{Reproducible epidemiologic research.}
-\newblock \emph{American journal of epidemiology}, \textbf{163}(9), 783--789.
+\newblock \emph{American Journal of Epidemiology}, \textbf{163}(9), 783--789.
 
 \bibitem[{Poisot(2011)}]{Poisot2011}
 Poisot T (2011).
@@ -119,7 +119,7 @@ Rohatgi A (2017).
   Hovig}]{sandve_ten_2013}
 Sandve GK, Nekrutenko A, Taylor J, Hovig E (2013).
 \newblock \enquote{Ten simple rules for reproducible computational research.}
-\newblock \emph{PLoS computational biology}, \textbf{9}(10), e1003285.
+\newblock \emph{PLoS Computational Biology}, \textbf{9}(10), e1003285.
 
 \bibitem[{Stoffel \emph{et~al.}(2017)Stoffel, Nakagawa, and
   Schielzeth}]{stoffel2017}
@@ -137,7 +137,7 @@ Tummers B (2006).
 Wan X, Wang W, Liu J, Tong T (2014).
 \newblock \enquote{{Estimating the sample mean and standard deviation from the
   sample size, median, range and/or interquartile range.}}
-\newblock \emph{BMC medical research methodology}, \textbf{14}(1), 135.
+\newblock \emph{BMC Medical Research Methodology}, \textbf{14}(1), 135.
 \newblock \doi{10.1186/1471-2288-14-135}.
 
 \end{thebibliography}
