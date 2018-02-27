@@ -6,17 +6,25 @@
 # Table of contents
 1. [Introduction](#Introduction)
 2. [Installation](#Installation) 
-3. [Setting up directory structures](#P3)
-4. [Example of how it works](#P4)
-5. [Processing batches of figures of different types](#P5)
-6. [Re-importing previously digitised data and accessing raw data](#P6) 
-7. [Editing and plotting digitised figures](#P7)
-8. [Conclusion](#Conclusion)
+3. [Citing metaDigitise](#citing) 
+4. [Setting up directory structures](#P3)
+5. [Example of how it works](#P4)
+6. [Processing batches of figures of different types](#P5)
+7. [Re-importing previously digitised data and accessing raw data](#P6) 
+8. [Editing and plotting digitised figures](#P7)
+9. [Conclusion](#Conclusion)
 
 # Introduction <a name="Introduction"></a>
 
 `metaDigitise` is an R package that provides functions for extracting raw data and summary statistics from figures in primary research papers. Often third party applications are used to do this (e.g., `graphClick` or `dataThief`), but the output from these are handled separately from the analysis package, making this process more laborious than it needs to be. `metaDigitise` allows users to extract information from a figure or set of figures all within the R environment making data extraction, analysis and export more streamlined. It also provides users with options to conduct the necessary calculations on raw data immediately after extraction so that comparable summary statistics can be obtained quickly. Summaries will condense multiple figures into data frames or lists (depending on the type of figure) and these objects can easily be exported from R, or if using the raw data, analysed in any way the user desires. Conveniently, when needing to process many figures at different times `metaDigitise` will only import figures not already completed within a directory. This makes it easy to add new figures at anytime. `metaDigitise` has also been built for reproducibility in mind. It has functions that allow users to redraw their digitisations on figures, correct anything and access the raw calibration data which is written automatically for each figure that is digitised into a special `caldat` folder within the directory. This makes sharing figure digitisation and reproducing the work of others simple and easy and allows meta-analysts to update existing studies more easily.
 
+# Citing metaDigitise <a name="citing"></a>
+
+To cite metaDigitise in publications one can use the following reference:
+
+```
+Pick, J.L., Nakagawa, S., Noble D.W.A. (2018) Reproducible, flexible and high-throughput data extraction from primary literature: The metaDigitise R package. Biorxiv, https://doi.org/10.1101/247775
+```
 # Installation <a name="Installation"></a>
 
 To install `metaDigitise` use the following code in R:
