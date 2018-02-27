@@ -85,17 +85,7 @@ Here, we present an interactive \proglang{R} package, \pkg{metaDigitise} (availa
 %%%---------------------------------
 
 \section{Directory Structure and Reproducibility}
-The \pkg{metaDigitise} package was created with the idea that users would have multiple images to extract from and therefore operates in the same way whether the user has one or multiple images. There is one main function, \fct{metaDigitise}, which interactively takes the user through the process of extracting data from figures. \fct{metaDigitise} works on a directory containing images of figures copied from primary literature, in .png, .jpg, .tiff, .pdf format, specified to \fct{metaDigitise} through the \code{dir} argument. The user needs to think carefully about their directory structure early on in their project, especially if they plan to share the extractions with collaborators or publish the project. Although different directory structures may be used, we would recommend having all files for one project in a single directory with an informative and unambiguous naming scheme for images to help identify the paper and figure that data come from, for example:
-
-\begin{CodeChunk}
-\begin{CodeOutput}
-* Main project directory
-    + FiguresToExtract
-        + Paper1_Figure1_trait1.png
-        + Paper1_Figure2_trait2.png
-        + Paper2_Figure1_trait3.png
-\end{CodeOutput}
-\end{CodeChunk}
+The \pkg{metaDigitise} package was created with the idea that users would have multiple images to extract from and therefore operates in the same way whether the user has one or multiple images. There is one main function, \fct{metaDigitise}, which interactively takes the user through the process of extracting data from figures. \fct{metaDigitise} works on a directory containing images of figures copied from primary literature, in .png, .jpg, .tiff, .pdf format, specified to \fct{metaDigitise} through the \code{dir} argument. The user needs to think carefully about their directory structure early on in their project, especially if they plan to share the extractions with collaborators or publish the project. Although different directory structures may be used, we would recommend having all files for one project in a single directory with an informative and unambiguous naming scheme for images to help identify the paper and figure that data come from (e.g. paper_figure_trait.png).
 
 When \fct{metaDigitise} is run, it recognizes all the images in a directory and automatically imports them one by one, allowing the user to extract the relevant information about a figure as they go. Having all figures in one directory therefore expedites digitising figures by preventing users from having to constantly change directories and / or open new images. The data from each completed image is automatically saved as a \code{metaDigitise} object in a separate .RDS file to a \code{caldat} directory that is created within the parent directory when first executing \fct{metaDigitise}. These files enable re-plotting and editing of images at a later point (see below).
 
