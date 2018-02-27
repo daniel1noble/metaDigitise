@@ -1,0 +1,162 @@
+\documentclass[12pt]{article}
+
+\usepackage{geometry}
+\geometry{a4paper} 
+\usepackage{fullpage}
+
+\usepackage{amssymb,rotating,natbib,graphicx,fancyvrb} 
+
+\usepackage[parfill]{parskip} 
+\usepackage[utf8]{inputenc}
+
+%% double spacing
+\usepackage{setspace}
+ \onehalfspacing
+
+% line numbers
+% \usepackage{lineno}
+% \linenumbers
+% \renewcommand\linenumberfont{\normalfont\small}
+
+%% new custom commands for code formatting
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\class}[1]{`\code{#1}'}
+%\newcommand{\fct}[1]{#1}
+\newcommand{\fct}[1]{\texttt{#1()}}
+\newcommand{\pkg}[1]{{\fontseries{b}\selectfont #1}}
+\let\proglang=\textsf
+
+% remove page numbers
+%\pagenumbering{gobble}
+
+
+
+\title{Reproducible, flexible and high throughput data extraction from primary literature: The \pkg{metaDigitise} \proglang{R} package \vskip15pt Supplementary Materials}
+
+\author{Joel L. Pick, Shinichi Nakagawa \& Daniel W.A. Noble}
+
+
+\begin{document}
+
+\DefineVerbatimEnvironment{Code}{Verbatim}{}
+\DefineVerbatimEnvironment{CodeInput}{Verbatim}{fontshape=sl}
+\DefineVerbatimEnvironment{CodeOutput}{Verbatim}{}
+\newenvironment{CodeChunk}{}{}
+
+\setcounter{equation}{0}
+\setcounter{subsection}{0}
+
+\renewcommand{\thetable}{S\arabic{table}}%
+\renewcommand{\theequation}{S\arabic{equation}}%
+\renewcommand{\thesection}{S\arabic{section}}%
+\renewcommand{\thesubsection}{S\arabic{section}.\arabic{subsection}}%
+
+
+
+\maketitle
+
+\clearpage
+
+
+\section{Comparison with existing software}
+\begin{sidewaystable}[ph!]
+{\centering
+\begin{tabular}{lccccccc}
+\hline
+Function                  & metaDigitise & GraphClick$^1$ & DataThief$^2$  & DigitizeIt$^3$ & WebPlotDigitizer$^4$ & metagear$^5$ & digitize$^6$\\
+\hline
+Scatterplots              & \checkmark   & \checkmark & \checkmark & \checkmark & \checkmark     & \checkmark$^7$ & \checkmark \\
+Mean/error plots      & \checkmark   & \checkmark & \checkmark & $\times$   & $\times$       & \checkmark$^7$ & $\times$    \\
+Boxplots                  & \checkmark   & $\times$   & $\times$   & $\times$   & $\times$       & $\times$       & $\times$    \\
+Histograms                & \checkmark   & $\times$   & $\times$   & $\times$   & \checkmark$^7$ & $\times$       & $\times$    \\
+Graph rotation$^8$        & \checkmark   & \checkmark & \checkmark & \checkmark & \checkmark     & $\times$       & $\times$    \\
+Groups                    & \checkmark   & \checkmark & $\times$   & \checkmark & \checkmark     & $\times$       & $\times$    \\
+Entry of metadata         & \checkmark   & $\times$   & $\times$   & $\times$   & $\times$       & $\times$       & $\times$    \\
+Summarising data          & \checkmark   & $\times$   & $\times$   & $\times$   & $\times$       & $\times$       & $\times$    \\
+Multiple image processing & \checkmark   & $\times$   & $\times$   & $\times$   & $\times$       & $\times$       & $\times$    \\
+Reproducable$^9$  & \checkmark   & \checkmark & \checkmark & $\times$   & \checkmark     & $\times$       & $\times$    \\
+Automated point detection & $\times$     & \checkmark &     $\times$      & \checkmark & \checkmark     & \checkmark     & $\times$    \\
+Line extraction           & $\times$     & \checkmark & \checkmark & \checkmark & \checkmark     & $\times$       & $\times$    \\
+Zoom                      & $\times$     & \checkmark & \checkmark & \checkmark & \checkmark     & $\times$       & $\times$    \\
+Log axis                  & $\times$   & \checkmark & \checkmark & \checkmark & \checkmark     & $\times$       & $\times$    \\
+Dates                     & $\times$   & $\times$   & \checkmark & $\times$   & \checkmark     & $\times$       & $\times$    \\
+Asymmetric error bars     & $\times$     & $\times$   & \checkmark & $\times$   & $\times$       & $\times$       & $\times$    \\
+Freeware                  & \checkmark$^{10}$ & \checkmark$^{11}$ & \checkmark$^{11}$ & $\times$$^{11}$ & \checkmark$^{11}$ & \checkmark$^{10}$ & \checkmark$^{10}$\\
+\hline
+
+%http://datathief.org/DatathiefManual.pdf
+%http://www.digitizeit.de/#Features
+%https://automeris.io/WebPlotDigitizer/userManual.pdf
+
+\end{tabular}
+}
+{\footnotesize
+\\
+$^1$ \citet{GraphClick}
+$^2$ \citet{DataThief}
+$^3$ \citet{DigitizeIt}
+$^4$ \citet{WebPlotDigitizer}
+$^5$ \citet{Lajeunesse2016}
+$^6$ \citet{Poisot2011}
+\\$^7$ Only automated, no manual extraction.
+\\$^8$ Or handles rotated graphs. 
+\\$^9$ Allows saving, re-plotting and editing of data extraction.
+\\$^{10}$ \proglang{R} package.
+\\$^{11}$ Standalone software.
+}
+
+\caption{\label{tab:comparison} Comparison of functionality between different digitisation softwares.}
+
+\end{sidewaystable}
+
+\clearpage
+
+
+
+\section{Derivation of mean, standard deviation and sample size from different plot types}
+
+\subsection{Mean/Error Plots}
+The standard deviation is calculated depending on the type of error presented. The user can choose from standard deviation (SD, $\sigma$), standard error (SE) or 95\% confidence intervals (CI95). Standard deviation is calculated from standard error as
+\begin{equation}
+\sigma = SE \sqrt{n}
+\end{equation}
+and from 95\% confidence intervals as
+\begin{equation}
+\sigma = \frac{CI}{1.96} \sqrt{n}
+\end{equation}
+
+\subsection{Box Plots} 
+The mean ($\mu$) and SD are calculated sing the maximum ($b$), upper quartile ($q_3$), median ($m$), lower quartile ($q_1$) and minimum ($a$) as 
+\begin{equation}
+\mu = \frac{(n+3)(a+b) + 2(n-1)(q_1 + m + q_3)}{8n}
+\end{equation}
+following \citet{Bland2015} and
+\begin{equation}
+\sigma = \frac{b-a}{4\Phi^{-1}(\frac{n-0.375}{n+0.25})} + \frac{q_3-q_1}{4\Phi^{-1}(\frac{0.75n-0.125}{n+0.25})}
+\end{equation}
+where $\Phi^{-1}(z)$ is the upper zth percentile of the standard normal distribution, following \citet{Wan2014}. 
+
+\subsection{Histograms} 
+For each bar, the user click two point (the top of the bar). Using these points, a midpoint (m; mean x coordinates) and a frequency (f; mean y coordinates, rounded to the nearest integer) is calculated for each bar. The sample size, mean and SD are calculated as:
+\begin{equation}
+n = \sum_{i=1}^n{f_i}
+\end{equation}
+
+\begin{equation}
+\mu = \frac{\sum_{i=1}^n{m_i f_i}}{n}
+\end{equation}
+
+\begin{equation}
+\sigma = \sqrt{\frac{\sum_{i=1}^n{(m_i f_i - \mu f_i)^2}}{n-1}}
+\end{equation}
+
+
+\section{Tutorial}
+
+\bibliographystyle{FuncEcol.bst}
+\bibliography{metaDigitise}
+
+
+\end{document}
+
+

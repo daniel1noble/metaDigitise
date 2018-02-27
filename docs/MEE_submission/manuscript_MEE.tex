@@ -1,0 +1,241 @@
+\documentclass[12pt]{article}
+
+\usepackage{geometry}
+\geometry{a4paper} 
+\usepackage{fullpage}
+
+\usepackage{amssymb,rotating,natbib,graphicx,fancyvrb} 
+
+\usepackage[parfill]{parskip} 
+\usepackage[utf8]{inputenc}
+
+%% double spacing
+\usepackage{setspace}
+ \doublespacing
+
+% line numbers
+\usepackage{lineno}
+\linenumbers
+\renewcommand\linenumberfont{\normalfont\small}
+
+%% new custom commands for code formatting
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\class}[1]{`\code{#1}'}
+%\newcommand{\fct}[1]{#1}
+\newcommand{\fct}[1]{\texttt{#1()}}
+\newcommand{\pkg}[1]{{\fontseries{b}\selectfont #1}}
+\let\proglang=\textsf
+
+% remove page numbers
+%\pagenumbering{gobble}
+
+\begin{document}
+
+\DefineVerbatimEnvironment{Code}{Verbatim}{}
+\DefineVerbatimEnvironment{CodeInput}{Verbatim}{fontshape=sl}
+\DefineVerbatimEnvironment{CodeOutput}{Verbatim}{}
+\newenvironment{CodeChunk}{}{}
+
+\raggedright
+
+
+\textbf{Reproducible, flexible and high throughput data extraction from primary literature: The \pkg{metaDigitise} \proglang{R} package}
+
+Joel L. Pick$^{1,*}$, Shinichi Nakagawa$^1$, Daniel W.A. Noble$^1$
+
+$^1$
+  Ecology and Evolution Research Centre, School of Biological, Earth and Environmental Sciences,  University of New South Wales, Kensington, NSW 2052, Sydney, AUSTRALIA
+
+ $^*$Corresponding Author: joel.l.pick@gmail.com\\
+
+
+
+
+%% - \Abstract{} almost as usual
+\section*{Abstract}
+Research synthesis, especially in the form of meta-analysis, requires data extraction from primary studies. Meta-analysis synthesizes effect sizes, often calculated from summary statistics of studies. However, exact values of such statistics are commonly hidden in figures. The R package \pkg{metaDigitise} extracts descriptive statistics such as means, standard deviations and, if applicable, correlations from the four types of plots: 1) mean/error plots (e.g. bar graphs with standard errors), 2) box plots, 3) scatter plots and 4) histograms. The package interactively guides the user through data extraction process. Notably, it enables a large-scale extraction using image files, letting the user stop processing, edit and add to the resulting data fame at any point. Further, it facilitates reproducible data extraction from plots with little inter-observer bias, thus, allowing a group of people to participate the extraction of data collaboratively.
+
+
+ Keywords: meta-analysis, comparative analysis, data extraction, \proglang{R}, reproducibility, figures, images, summary statistics
+
+
+%%%---------------------------------
+%%%---------------------------------
+%%%---------------------------------
+
+
+
+\section{Introduction}
+
+In many different contexts, researchers need to make use of data presented in primary literature. Most notably, this includes meta-analysis, which is becoming increasingly common in many research fields. Meta-analysis uses effect size estimates and their sampling variance, taken from many studies, to understand whether particular effects are common across studies and to explain variation among these effects \citep{Glass1976,Borenstein2009,Koricheva2013,Naka2017}. Meta-analysis therefore relies foremost on data extracted from primary literature, and more specifically, descriptive statistics (e.g. means, standard deviations, sample sizes, correlation coefficients) that have been reported in the text or tables of research papers. Descriptive statistics are also, however, frequently presented in figures and so need to be manually extracted using digitising programs. While inferential statistics (e.g., \textit{t}- and \textit{F}-statistics) are often presented along side descriptive statistics and can be used to derive effect sizes, descriptive statistics are much more appropriate to use because sources of non-independence in experimental designs can be dealt with more easily \citep{Noble2017}. Although there are several existing tools to perform tasks like this (e.g. \proglang{DataThief} \citep{DataThief}, \proglang{GraphClick} \citep{GraphClick}, \proglang{WebPlotDigitizer} \citep{WebPlotDigitizer}), these tools are not appropriate for the needs of meta-analysis for three main reasons. 
+
+First, they typically only provide the user with calibrated \textit{x,y} coordinates from imported figures, and do not differentiate between common plot types that are used to present data. This means that a large amount of downstream data manipulation is required, that is different across plots types. For example, data are frequently presented in mean/error plots (Figure \ref{fig:all_extract}A), for which the user wants a mean and error estimate for each group presented in the figure. With existing programs, \textit{x,y} coordinates of means and errors are returned, to which the user must manually discern between mean and error coordinates and assign points to groups. The error then needs to be calculated as the deviation from the mean, and then transformed to a standard deviation, depending on the type of error presented. Second, digitising programs do not easily allow the integration of metadata at the time of data extraction, such as experimental group or variable names, and sample sizes. This makes the downstream calculations more laborious, as the information has to be added later, in most cases using different software. Finally, existing programs do not import a set of images and allow the user to systematically work through them. Instead they require the user to manually import images one by one, and export data into individual files, that need to be imported and edited using different software. In essence, existing software does not provide an optimized research pipeline to facilitate data extraction, editing and reproducibility. 
+
+These present major issues because extracting from figures can be an incredibly time-consuming process. Furthermore, although meta-analysis is an important tool in consolidating the data from multiple studies, many of the processes involved in data extraction are opaque and difficult to reproduce, making extending studies problematic. Having a tool that facilitates reproducibility in meta-analyses will increase transparency and aid in resolving the reproducibility crises seen in many fields \citep{peng_reproducible_2006, peng_reproducible_2011, sandve_ten_2013, Parker2016,Ihle2017}.
+
+
+%%% This paragraph could be shorter as it is all said in the main text
+Here, we present an interactive \proglang{R} package, \pkg{metaDigitise} (available at xxx), which is designed for large scale, reproducible data extraction from figures, specifically catering to the the needs of meta-analysts. To this end, we provide tools specific to data extraction from common plot types (mean/error plots, box plots, scatter plots and histograms, see Figure \ref{fig:all_extract}). \pkg{metaDigitise} operates within the \proglang{R} environment making data extraction, analysis and export more streamlined. The necessary calculations are carried out on processed data immediately after extraction so that comparable summary statistics can be obtained quickly. Summary data from multiple figures is returned into a single data frame which can be can easily exported or use in downstream analysis within \proglang{R}. Calibrated data is automatically saved for each digitised figure. Users can therefore redraw their digitisations on figures, make corrections and access calibration and proceeded data. This makes sharing figure digitisation and reproducing the work of others simple and easy, and allows meta-analysts to update meta-analyses more efficiently.
+
+
+%% 724 words
+
+%%%---------------------------------
+%%%---------------------------------
+%%%---------------------------------
+
+\section{Directory Structure and Reproducibility}
+The \pkg{metaDigitise} package was created with the idea that users would have multiple images to extract from and therefore operates in the same way whether the user has one or multiple images. There is one main function, \fct{metaDigitise}, which interactively takes the user through the process of extracting data from figures. \fct{metaDigitise} works on a directory containing images of figures copied from primary literature, in .png, .jpg, .tiff, .pdf format, specified to \fct{metaDigitise} through the \code{dir} argument. The user needs to think carefully about their directory structure early on in their project, especially if they plan to share the extractions with collaborators or publish the project. Although different directory structures may be used, we would recommend having all files for one project in a single directory with an informative and unambiguous naming scheme for images to help identify the paper and figure that data come from, for example:
+
+\begin{CodeChunk}
+\begin{CodeOutput}
+* Main project directory
+    + FiguresToExtract
+        + Paper1_Figure1_trait1.png
+        + Paper1_Figure2_trait2.png
+        + Paper2_Figure1_trait3.png
+\end{CodeOutput}
+\end{CodeChunk}
+
+When \fct{metaDigitise} is run, it recognizes all the images in a directory and automatically imports them one by one, allowing the user to extract the relevant information about a figure as they go. Having all figures in one directory therefore expedites digitising figures by preventing users from having to constantly change directories and / or open new images. The data from each completed image is automatically saved as a \code{metaDigitise} object in a separate .RDS file to a \code{caldat} directory that is created within the parent directory when first executing \fct{metaDigitise}. These files enable re-plotting and editing of images at a later point (see below).
+
+\fct{metaDigitise} also identifies images within a directory that have been previously digitised and only import images that have not been digitised in previous calls of the function. All figures do not, therefore, need to be extracted at one time and new figures can be added to the directory as the project develops. After each image is extracted, the user is asked whether they wish to continue or quit the extraction process. Upon rerunning \fct{metaDigitise}, previously digitised figures are ignored during processing, but their data is automatically integrated into the final output. 
+
+This directory structure allows the complete digitisation process to be reproduced at a later stage, shared with collaborators and presented as supplementary materials for a publication. As long as all the images and the caldat directory are still in the directory, \fct{metaDigitise} will be able to reproduce all figure extractions, regardless of the computer it is run on. For an analysis to be updated, new figures can simply be added to the directory and \fct{metaDigitise} run to incorporate the new data. 
+
+%% 460 words
+%%%---------------------------------
+%%%---------------------------------
+%%%---------------------------------
+
+
+\section{Image Processing}
+Running \fct{metaDigitise} presents the user with three options; `Process new images', `Import existing data' or `Edit existing data'. Selecting `Process New Images' starts the digitisation process on images within the directory that have not preciously been digitised; the other functions are discussed below.
+
+For all plot types, \fct{metaDigitise} requires the user to calibrate the axes in the figure, by clicking on two known points on the axis in question, and entering the value of those points (Figure \ref{fig:all_extract}). \fct{metaDigitise} then calculates the value of any clicked points in terms of the figure axes. For mean/error and box plots, only the y-axis is calibrated (Figure \ref{fig:all_extract}A,B), assuming the x-axis is redundant. For scatter plots and histograms both axes are calibrated (Figure \ref{fig:all_extract}C,D).
+
+As figures may have been copied from older, scanned publications, they may not be perfectly orientated. This makes calibration of the points in the figure problematic. \fct{metaDigitise} allows users to rotate the image (Figure \ref{fig:rotate}A,B). Furthermore, mean/error plots, box plots and histograms, may be presented with horizontal bars. \fct{metaDigitise} assumes that bars are vertical, but allows the user to flip the image to make the bars are vertical (Figure \ref{fig:rotate}C,D).
+
+\pkg{metaDigitise} recognises four main types of plot; Mean/error plots, box plots, scatter plots and histograms, shown in Figure \ref{fig:all_extract}. All plot types can be extracted in a single call of \fct{metaDigitise} and integrated into one output. Alternatively, users can process different plot types separately, using separate directories. All four plot type are extracted slightly differently (outlined below). After completing all images, or upon quitting, either summarised or processed data is returned (specified by the user). From all plot types, summarised data consists of a mean, standard deviation and sample size, for each identified group within the plot (should multiple groups exist). In the case of scatter plots, the correlation coefficient between the points within each identified group is also returned. Alternatively choosing processed data will return a list with a slots for each of the four figure types, containing the calibrated points that the user has clicked. This may be particularly useful in the case of scatter plots. 
+
+\subsection{Mean/Error and Box Plots} 
+\fct{metaDigitise} handles mean/error and box plots in a very similar way. For each mean/box, the user is enters group names and sample sizes. If the user does not enter a sample size at the time of data extraction (if, for example, the information is not readily available) a standard deviation (SD) is not calculated. This can, however, be entered at a later time (see below). For mean/error plots, the user clicks on an error bar and the mean. Error bars above or below the mean can be clicked, as sometimes one is clearer than the other. \fct{metaDigitise} assumes that the error bars are symmetrical. This is deliberate as it is not clear how best to derive SD from asymmetrical error bars, not least as they represent different things in different figures. Points are displayed where the user has clicked, with the error in a different colour to the mean (Figure \ref{fig:all_extract}A). The user also enters the type of error used in the figure: standard deviation (SD), standard error (SE) or 95\% confidence intervals (CI95). For box plots, the user clicks on the maximum, upper quartile, median, lower quartile and minimum. \fct{metaDigitise} will return a warning if the maximum is not greater than the minimum. For both plot types, the user can add, edit or remove groups. Three functions, \fct{error\_to\_sd}, \fct{rqm\_to\_mean} and \fct{rqm\_to\_sd}, that convert different error types to SD, box plot data to mean and box plot data SD, respectively, are also available in the package (see SM for further details of these conversions).
+
+
+\subsection{Scatter plots}
+Users can extract points from multiple groups from scatter plots. Points added by mistake can be deleted. The user can add more groups, edit groups (add or remove points) or delete groups. Different groups are plotted in different colours and shapes to enable them to be distinguished, with a legend at the bottom of the figure (Figure \ref{fig:all_extract}C). Mean, SD and sample size are calculated from the clicked points, for each group. Often data points will overlap with each other making it impossible to know whether points have been missed. However, a user may realise that the sample size from the digitisation conflicts with what is reported in the paper. For example, in Figure \ref{fig:all_extract}C only 49 points have been clicked when the sample size is known to be 50. Hence, \pkg{metaDigitise} also provides the user with the option to input a known sample sizes directly. Nonetheless, it is important to recognise the impact that overlapping points can have on summary statistics, and in particular on sampling variance.
+
+\subsection{Histograms}
+The user clicks on the top corners of each bar. A line is drawn, in alternate colours, at the top of these bars (Figure \ref{fig:all_extract}D). These are numbered to allow the the user to edit them. As with scatter plots, if the sample size from the extracted data does not match a known sample size, the user can enter an alternate sample size. The calculation of mean and SD from this data is shown in the SM.
+
+
+%% 1000 words
+
+%%%---------------------------------
+%%%---------------------------------
+%%%---------------------------------
+
+
+
+\section{Importing and Editing Previously Digitised data}
+\pkg{metaDigitise} is also able to re-import, edit and re-plot previously digitised figures. When running \fct{metaDigitise}, the user can choose to `Import existing data', which returns previously digitised data, for single or all images. Users can also choose to `Edit existing data' which allows them to re-plot or edit information or digitisations that have previously be done.
+
+
+\subsection{Adding Sample Sizes to Previous Digitisations}
+In many cases important information, such as sample sizes, may not be readily available when digitising figures. Such information does not, therefore, have to be added a the time of digitisation. To expedite finding and adding these sample sizes at a later point, \fct{metaDigitise} has a specific edit option that allows users to enter previously omitted sample sizes. This first identifies missing sample sizes in the digitised output, re-plots the relevant figures and prompts the user to enter the sample sizes for the relevant groups in the figure, one by one. 
+
+
+%% 150 words
+
+
+%%%---------------------------------
+%%%---------------------------------
+%%%---------------------------------
+
+
+
+
+
+\section{Software Validation}
+
+\subsection{Inter-observer variability in digitisations}
+
+In order to evaluate the consistency of digitisation using \pkg{metaDigitise} between users, we simulated a dataset of two variables with two groups ($n=10$ within groups). Each variable was plotted twice for each plot type (figures were modified slightly to give users a sense that they were digitising new data) generating a total of 14 figures. 14 independent digitisers (including the authors) were provided with a directory with all 14 figures in a randomised order. Digitisers ran \pkg{metaDigistise} on their own computers, across different operating systems (including Mac, Windows and Linux). Digitisers varied in their level of experience, from people with experience of meta-analyses or comparative work to those without any science background. We asked users to digitise all 14 figures and collected the mean, standard deviation and correlation coefficient ($r$, for scatter plots) generated by \fct{metaDigitise} for every plot digitised ($n=28$ per digitiser per metric, $n=4$ for $r$). 
+
+As a measure of bias, we calculated the percentage differences from the true summary statistics as
+
+\begin{equation}
+\frac{\theta - \hat{\theta}}{\hat{\theta}}
+\end{equation}
+
+where $\theta$ is the estimate and $\hat{\theta}$ is the true value. The deviation from the true value of $r$ was not further standardised, as it is already on a standardised scale. We also took the absolute values of these standardised differences as a measure of precision. The resulting data was used to assess between- and within- user variability (i.e., the intra-class correlation coefficient - ICC). This was done using linear mixed effect models with user identify as a random effect using \pkg{lme4} \citep{bates2015} in \proglang{R}. Standardised mean, standard deviation and correlation coefficients were used as response variables in separate models. Sampling variance for ICC estimates was generated based on 1000 parametric bootstraps of the model and the significance was tested using likelihood ratio tests, using \pkg{rptR} \citep{stoffel2017}.  
+
+If digitisations were consistent across users then we should find no significant between user variability in the data. Indeed, across plot types we found no evidence for any inter-observer variability in digitisations for the mean (ICC = 0, 95\% CI = 0 to 0.029, \textit{p} = 1), standard deviation (ICC = 0, 95\% CI = 0 to 0.033, \textit{p} = 0.5) or correlation coefficient (ICC = 0.053, 95\% CI = 0 to 0.296, \textit{p} = 0.377). There were was little bias between digitised and true values, on average 1.63\% (mean = 0.02\%, SD = 4.9\%, \textit{r} = -0.03\%) and overall there were only small absolute differences between digitised and true values, deviating, on average 2.18\% (mean = 0.40\%, SD = 5.81\%, \textit{r} = 0.33\%) across all three summary statistics. SD estimates from digitisations are clearly more prone to error than means or correlation coefficients. If the mean absolute difference is calculated for each plot type, we can see that this effect is driven mainly by extraction from box plots and histograms (\% difference; box plot: 15.805, histogram: 5.210, mean/error: 1.500, scatter plot: 0.433). SD estimation from box plot summary statistics is known to be more error prone, especially at small sample sizes \citep{Wan2014}.
+
+\subsection{Testing the accuracy of digitisations}
+To test how accurate \pkg{metaDigitise} is at matching clicked points to their true values, we generated four random scatterplots, each with 20 data points, and digitised these with \fct{metaDigitise}. This was done by one digitiser (J.L.P.), as there is no detectable between user variation. Data digitised using \pkg{metaDigitise} was essentially perfectly correlated with the true simulated data for both the \textit{x}-variable (Pearson's correlation; \textit{r} = 0.9999915, \textit{t} = 2137.4, \textit{df} = 78, $p < 0.001$) and \textit{y}-variable (\textit{r} = 0.9999892, \textit{t} = 1897.8, \textit{df} = 78, $p < 0.001$).
+
+
+%% 552 words
+
+
+%%%---------------------------------
+%%%---------------------------------
+%%%---------------------------------
+
+
+\section{Limitations and Future Extensions}
+
+Although \pkg{metaDigitise} is already very flexible, and provides functionality not seen in any other package (Table S1), it is clear that there are some functions that it does not perform. Notably \pkg{metaDigitise} lacks is automated point detection, available in several packages (Table S1). However, from our experience, manual digitising is more reliable and often equally as fast. Given the variation in image quality, calibration for automatic point detection needs to be done for each plot individually. Additionally, auto-detection often misses points which then need to be manually added. Based on tests of \pkg{metaDigitise} (see above), figures can be extracted in around 1-2 minutes, including the entry of metadata. As a result, we do not believe that current automated point detection techniques provides substantial benefits in terms of time or accuracy.
+
+\pkg{metaDigitise} also (currently) lacks the ability to zoom in on plots. Zooming may enable users to gain greater accuracy when clicking on points. However, from our own experience (and indeed from the results above), if you are using a reasonably sized screen then the accuracy is already high, and so there is not much gain to be had from zooming in on points.
+
+In contrast to some other packages, \pkg{metaDigitise} does not extract lines from figures. In our own experience, line extraction is not particularly useful for meta-analysis, although we recognise that it may be useful in other fields. Should a user like to extract lines with \pkg{metaDigitise}, we would recommend extracting data as a scatter plot, and clicking along the line in question. A model can then be fitted to these points (accessed by choosing to return processed rather than summary data) to estimate the parameters needed.
+
+
+Descriptive statistics are usually the most robust sources of information for calculating effect size statistics \citep{Noble2017}. These are most often presented in figures. Users may therefore also want to compare effect size estimates from inferential statistics with those derived from descriptive statistics (obtained for example using \pkg{metaDigitise}) from a paper. Comparing these different effects sizes can be useful in identifying uncertainties and problems within a paper. In the future, we hope to provide functions to easily convert inferential statistics to standardised effect size estimates, which can seamlessly be integrated with summary statistics from \pkg{metaDigitise}, to calculate equivalent standardised effect size estimates and sampling variance.
+
+
+%% 416 words
+
+
+%%%---------------------------------
+%%%---------------------------------
+%%%---------------------------------
+
+
+\section{Conclusions}
+Increasing the reproducibility of figure extraction for meta-analysis and making this laborious process more streamlined, flexible and integrated with existing statistical software will go a long way in facilitating the production of high quality meta-analytic studies that can be updated in the future. We believe that \pkg{metaDigitise} will improve this research synthesis pipeline, and will hopefully become an integral package that can be added to the meta-analysts toolkit.
+
+
+\section*{Acknowledgments}
+We thank the I-DEEL group and colleagues at UNSW for for testing, providing feedback and digitising including: Rose O'Dea, Fonti Kar, Malgorzata Lagisz, Julia Riley, Diego Barneche, Erin Macartney, Ivan Beltran, Gihan Samarasinghe, Dax Kellie, Jonathan Noble, Yian Noble and Alison Pick. J.L.P. was supported by a Swiss National Science Foundation Early Mobility grant (P2ZHP3\_164962), D.W.A.N. was supported by an Australian Research Council Discovery Early Career Research Award (DE150101774) and UNSW Vice Chancellors Fellowship and S.N. an Australian Research Council Future Fellowship (FT130100268). 
+
+\section*{Author Contributions}
+J.L.P. and D.W.A.N. conceived the study and J.L.P., S.N. and D.W.A.N. developed the idea. J.L.P. and D.W.A.N. developed the R-package. J.L.P. and D.W.A.N. wrote the first draft of the paper and J.L.P., S.N. and D.W.A.N. contributed substantially to subsequent revisions of the manuscript and gave final approval for publication.
+
+\bibliographystyle{FuncEcol.bst}
+\bibliography{metaDigitise}
+
+
+
+\section*{Figures}
+
+\begin{figure}[!h]
+\centering 
+ \includegraphics[width=0.75\textwidth]{fig_all_extract.pdf} 
+ \caption{Four plot types that \pkg{metaDigitise} is designed to extract data from: A) mean/error plot, B) box plot, C) scatter plot and D) histogram. Data is taken from the iris dataset in R. A and B are plotted with the whole dataset, C and D are just the data for the species \textit{setosa}. Digitisation of the images is shown. All figures are clearly labelled at the top to remind users of the filename and plot type. This reduces errors throughout the digitisation process. Names of the variables and calibration (in blue) are plotted alongside the digitised points. In A) and B), user entered group names and sample sizes are displayed beside the relevant points. In C) the names and sample sizes for each group are shown below the figure.}
+\label{fig:all_extract}
+\end{figure}
+
+
+\begin{figure}[!b] 
+\centering
+ \includegraphics[width=0.75\textwidth]{fig_rotate.pdf} 
+ \caption{Figure rotation. A) and B) show how non-aligned images can be realigned through user defined rotation. C) and D) show how figures can be re-orientated so as to aid data input.}
+\label{fig:rotate}
+\end{figure}
+
+
+
+\end{document}
