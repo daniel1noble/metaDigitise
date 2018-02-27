@@ -5,8 +5,8 @@
 
 # Table of contents
 1. [Introduction](#Introduction)
-2. [Installation](#Installation) 
-3. [Citing metaDigitise](#citing) 
+2. [Citing metaDigitise](#citing)
+3. [Installation](#Installation) 
 4. [Setting up directory structures](#P3)
 5. [Example of how it works](#P4)
 6. [Processing batches of figures of different types](#P5)
