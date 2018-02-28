@@ -54,10 +54,10 @@ $^1$
 %% - \Abstract{} almost as usual
 \section*{Abstract}
 1. Research synthesis requires data extraction from primary studies with effect sizes for meta-analyses being calculated from summary statistics. However, exact values of such statistics are commonly hidden in figures. 
-2. Extracting summary statistics from figures can be a slow process that is not easily reproducible. Additionally, current software lacks an ability to incorporate important meta-data (e.g., sample sizes, treatment names) about experiments. Furthermore, extraction software is often independent of analytical software preventing the automatic calculation of effect size statistics and making it more challenging to implement user defined analytical pipelines.
+2. Extracting summary statistics from figures can be a slow process that is not easily reproducible. Additionally, current software lacks an ability to incorporate important meta-data (e.g., sample sizes, treatment / variable names) about experiments and is not integrated with other software to streamline analysis pipelines.
 3. Here we present the R package \pkg{metaDigitise} which extracts descriptive statistics such as means, standard deviations and correlations from the four plot types: 1) mean/error plots (e.g. bar graphs with standard errors), 2) box plots, 3) scatter plots and 4) histograms. \pkg{metaDigitise} is user-friendly and easy to learn as it interactively guides the user through the data extraction process. Notably, it enables large-scale extraction by automatically loading image files, letting the user stop processing, edit and add to the resulting data fame at any point. 
-4. Digitised data can be easily re-plotted and checked, facilitating reproducible data extraction from plots with little inter-observer bias. Such approaches allow collaborative extraction of data. We hope that by making the process of figure extraction more flexible and easy to conduct it will improve transparency and quality of meta-analyses in the future.
-%% 230 words
+4. Digitised data can be easily re-plotted and checked, facilitating reproducible data extraction from plots with little inter-observer bias. We hope that by making the process of figure extraction more flexible and easy to conduct it will improve the transparency and quality of meta-analyses in the future.
+%% 209 words
  Keywords: meta-analysis, comparative analysis, data extraction, \proglang{R}, reproducibility, figures, images, summary statistics
 
 
@@ -94,7 +94,7 @@ When \fct{metaDigitise} is run, it recognizes all the images in a directory and 
 
 This directory structure allows the complete digitisation process to be reproduced at a later stage, shared with collaborators and presented as supplementary materials for a publication. As long as all the images and the caldat directory are still in the directory, \fct{metaDigitise} will be able to reproduce all figure extractions, regardless of the computer it is run on. For an analysis to be updated, new figures can simply be added to the directory and \fct{metaDigitise} run to incorporate the new data. 
 
-%% 414 words
+%% 410 words
 %%%---------------------------------
 %%%---------------------------------
 %%%---------------------------------
@@ -119,7 +119,7 @@ Users can extract points from multiple groups from scatter plots. Different grou
 The user clicks on the top corners of each bar and alternating colours are used across bars (Figure \ref{fig:all_extract}D). Bars are numbered to allow the the user to edit them. As with scatter plots, if the sample size from the extracted data does not match a known sample size, the user can enter an alternate sample size. The calculation of mean and SD from this data is shown in the SM.
 
 
-%% 779 words
+%% 777 words
 
 %%%---------------------------------
 %%%---------------------------------
@@ -132,7 +132,7 @@ The user clicks on the top corners of each bar and alternating colours are used 
 In many cases important information, such as sample sizes, may not be readily available when digitising figures. Such information does not need to be added a the time of digitisation. To expedite finding and adding these sample sizes at a later point, \fct{metaDigitise} has a specific edit option that allows users to enter previously omitted sample sizes. This first identifies missing sample sizes in the digitised output, re-plots the relevant figures and prompts the user to enter the sample sizes for the relevant groups in the figure, one by one. 
 
 
-%% 183 words
+%% 171 words
 
 
 %%%---------------------------------
@@ -159,7 +159,7 @@ Across plot types we found no evidence for any inter-observer variability in dig
 To test how accurate \pkg{metaDigitise} is at matching clicked points to their true values, we generated four random scatterplots, each with 20 data points, and digitised these with \fct{metaDigitise}. This was done by one digitiser (J.L.P.), as there is no detectable between user variation. Data digitised using \pkg{metaDigitise} was essentially perfectly correlated with the true simulated data for both the \textit{x}-variable (Pearson's correlation; \textit{r} = 0.9999915, \textit{t} = 2137.4, \textit{df} = 78, $p < 0.001$) and \textit{y}-variable (\textit{r} = 0.9999892, \textit{t} = 1897.8, \textit{df} = 78, $p < 0.001$).
 
 
-%% 577 words
+%% 571 words
 
 
 %%%---------------------------------
@@ -175,7 +175,7 @@ Although \pkg{metaDigitise} is already very flexible, and provides functionality
 
 In contrast to some other packages (Table S1), \pkg{metaDigitise} does not extract lines from figures. Line extraction may not particularly useful for most meta-analyses, although we recognise that it may be useful in other fields. Should a user like to extract lines with \pkg{metaDigitise}, we would recommend extracting data as a scatter plot, and clicking along the line in question. A model can then be fitted to these points (accessed by choosing to return processed rather than summary data) to estimate the parameters needed.
 
-%% 275 words
+%% 271 words
 
 
 %%%---------------------------------
@@ -186,7 +186,7 @@ In contrast to some other packages (Table S1), \pkg{metaDigitise} does not extra
 \section{Conclusions}
 Increasing the reproducibility of figure extraction for meta-analysis and making this laborious process more streamlined, flexible and integrated with existing statistical software will go a long way in facilitating the production of high quality meta-analytic studies that can be updated in the future. We believe that \pkg{metaDigitise} will improve this research synthesis pipeline, and will hopefully become an integral package that can be added to the meta-analysts toolkit.
 
-
+% 68
 \section*{Acknowledgments}
 We thank the I-DEEL group and colleagues at UNSW for for testing, providing feedback and digitising including: Rose O'Dea, Fonti Kar, Malgorzata Lagisz, Julia Riley, Diego Barneche, Erin Macartney, Ivan Beltran, Gihan Samarasinghe, Dax Kellie, Jonathan Noble, Yian Noble and Alison Pick. J.L.P. was supported by a Swiss National Science Foundation Early Mobility grant (P2ZHP3\_164962), D.W.A.N. was supported by an Australian Research Council Discovery Early Career Research Award (DE150101774) and UNSW Vice Chancellors Fellowship and S.N. an Australian Research Council Future Fellowship (FT130100268). 
 
