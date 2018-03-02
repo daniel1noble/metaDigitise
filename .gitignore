@@ -10,3 +10,17 @@ docs/sim_figs/figs*
 docs/sim_figs/.dropbox
 docs/sim_figs
 docs/images2/data.csv
+docs/MEE_sumission/manuscript_MEE.bbl
+docs/MEE_sumission/manuscript_MEE.blg
+docs/MEE_sumission/manuscript_MEE.fdb_latexmk
+docs/MEE_sumission/manuscript_MEE.fls
+docs/MEE_sumission/manuscript_MEE.log
+docs/MEE_sumission/manuscript_MEE.aux
+docs/MEE_sumission/manuscript_MEE.synctex.gz
+docs/MEE_sumission/supplements.bbl
+docs/MEE_sumission/supplements.blg
+docs/MEE_sumission/supplements.fdb_latexmk
+docs/MEE_sumission/supplements.fls
+docs/MEE_sumission/supplements.log
+docs/MEE_sumission/supplements.aux
+docs/MEE_sumission/supplements.synctex.gz
