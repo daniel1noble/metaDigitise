@@ -5,6 +5,9 @@
 #' @return Returns a list (summary = FALSE) or data frame (summary = TRUE)
 
 import_menu<-function(dir, summary){
+
+	if(substring(dir, nchar(dir)) != "/") dir <- paste0(dir, "/")
+
 	caldat <- dir_details(dir)
 	filepaths <- caldat$doneCalFiles
 	files <- caldat$calibrations
