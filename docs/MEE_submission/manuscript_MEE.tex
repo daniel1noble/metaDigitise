@@ -11,12 +11,16 @@
 
 %% double spacing
 \usepackage{setspace}
-  \doublespacing
+\doublespacing
 
 % line numbers
 \usepackage{lineno}
 \linenumbers
 \renewcommand\linenumberfont{\normalfont\small}
+
+% remove page numbers
+%\pagenumbering{gobble}
+
 
 %% new custom commands for code formatting
 \newcommand{\code}[1]{\texttt{#1}}
@@ -26,8 +30,6 @@
 \newcommand{\pkg}[1]{{\fontseries{b}\selectfont #1}}
 \let\proglang=\textsf
 
-% remove page numbers
-\pagenumbering{gobble}
 
 \begin{document}
 
@@ -72,11 +74,11 @@ $^1$
 
 \section{Introduction}
 
-In many different contexts, researchers make use of data presented in primary literature. Most notably, this includes meta-analysis, which is becoming increasingly common in many research fields. Meta-analysis uses effect size estimates and their sampling variance, taken from many studies, to understand whether particular effects are common across studies and to explain variation among these effects \citep{Glass1976,Borenstein2009,Koricheva2013,Naka2017}. Meta-analysis relies on descriptive statistics (e.g. means, standard deviations (SD), sample sizes, correlation coefficients) extracted from primary literature that have been reported in the text or tables of research papers. Descriptive statistics are also, however, frequently presented in figures and so need to be manually extracted using digitising programs. While inferential statistics (e.g., \textit{t}- and \textit{F}-statistics) are often presented along side descriptive statistics, and can be used to derive effect sizes, descriptive statistics are much more appropriate to use because sources of non-independence in experimental designs can be dealt with more easily \citep{Noble2017}. 
+In many different contexts, researchers make use of data presented in primary literature. Most notably, this includes meta-analysis, which is becoming increasingly common in many research fields. Meta-analysis uses effect size estimates and their sampling variance, taken from many studies, to understand whether particular effects are common across studies and to explain variation among these effects \citep{Glass1976,Koricheva2013,Naka2017}. Meta-analysis relies on descriptive statistics (e.g. means, standard deviations (SD), sample sizes, correlation coefficients) extracted from primary literature that have been reported in the text or tables of research papers. Descriptive statistics are also, however, frequently presented in figures and so need to be manually extracted using digitising programs. While inferential statistics (e.g., \textit{t}- and \textit{F}-statistics) are often presented along side descriptive statistics, and can be used to derive effect sizes, descriptive statistics are much more appropriate to use because sources of non-independence in experimental designs can be dealt with more easily \citep{Noble2017}. 
 
 Although there are several tools that data extraction from figures (e.g. \proglang{DataThief} \citep{DataThief}, \proglang{GraphClick} \citep{GraphClick}, \proglang{WebPlotDigitizer} \citep{WebPlotDigitizer}), these tools do not cater to needs of meta-analysis for three main reasons. First, they typically only provide the user with calibrated \textit{x,y} coordinates from imported figures, and do not differentiate between common plot types that are used to present data. Consequently a large amount of downstream data manipulation is required, that is different across plots types. For example, data are frequently presented in mean/error plots (Figure \ref{fig:all_extract}A), from which the user wants a mean and SD for each group presented. From \textit{x,y} coordinates, users must manually discern between mean and error coordinates and assign points to groups. Error then needs to be calculated as the deviation from the mean, and then transformed to SD, according to the type of error presented. Second, digitising programs do not allow the integration of metadata at the time of data extraction, such as experimental group or variable names, and sample sizes. This makes the downstream calculations laborious, as information has to be added later using different software. Finally, existing programs do not import sets of images for the user to systematically work through. Instead they require the user to manually import images one by one, and export data into individual files, that need to be imported and edited using different software. 
 
-Data extraction from figures is therefore an incredibly time-consuming process as existing software does not provide an optimized research pipeline to facilitate data extraction and editing. Furthermore, although meta-analysis is an important tool in consolidating the data from multiple studies, many of the processes involved in data extraction are opaque and difficult to reproduce, making extending studies problematic. Having a tool that facilitates reproducibility in meta-analyses will increase transparency and aid in resolving the reproducibility crises seen in many fields \citep{peng_reproducible_2006, peng_reproducible_2011, sandve_ten_2013, Parker2016,Ihle2017}.
+Data extraction from figures is therefore an incredibly time-consuming process as existing software does not provide an optimized research pipeline to facilitate data extraction and editing. Furthermore, although meta-analysis is an important tool in consolidating the data from multiple studies, many of the processes involved in data extraction are opaque and difficult to reproduce, making extending studies problematic. Having a tool that facilitates reproducibility in meta-analyses will increase transparency and aid in resolving the reproducibility crises seen in many fields \citep{peng_reproducible_2006, peng_reproducible_2011, Parker2016}.
 
 Here, we present an interactive \proglang{R} package, \pkg{metaDigitise} (available at https://github.com/daniel1noble/metaDigitise), which is designed for large scale, reproducible data extraction from figures, specifically catering to the the needs of meta-analysts. To this end, we provide tools to extract data from common plot types (mean/error plots, box plots, scatter plots and histograms, see Figure \ref{fig:all_extract}). \pkg{metaDigitise} operates within the \proglang{R} environment making data extraction, analysis and export more streamlined. The necessary calculations are carried out on processed data immediately after extraction so that comparable summary statistics can be obtained quickly. Summary data from multiple figures is returned into a single data frame which can be can easily exported or use in downstream analysis within \proglang{R}. Completed digitisations are automatically saved for each figure, meaning users can redraw their digitisations on figures, make corrections and access calibration and proceeded data. This makes sharing figure digitisation and reproducing the work of others simple and easy, and allows meta-analyses to be updated more efficiently.
 
