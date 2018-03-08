@@ -4,7 +4,7 @@
 \alias{import_metaDigitise}
 \title{import_metaDigitise}
 \usage{
-import_metaDigitise(dir, summary = TRUE)
+import_metaDigitise(dir, summary)
 }
 \arguments{
 \item{dir}{The directory where figures have already been digitised}

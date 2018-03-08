@@ -1,7 +1,7 @@
 #' @title print_cal_instructions
 #' @param plot_type plot type
 #' @param ... further arguments passed to or from other methods.
-#' @description Prints instructions for calibration
+#' @description Prints instructions for calibration. Modified from the digitize package
 
 print_cal_instructions <- function(plot_type,...){
   cat( "\nOn the Figure, click IN ORDER: 

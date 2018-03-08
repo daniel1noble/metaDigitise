@@ -9,7 +9,7 @@ import_menu(dir, summary)
 \arguments{
 \item{dir}{The directory where figures have already been digitised}
 
-\item{summary}{Logical indicating whether the imported data should be returned in}
+\item{summary}{Logical indicating whether the imported data should be returned in summarised or processed form.}
 }
 \value{
 Returns a list (summary = FALSE) or data frame (summary = TRUE)

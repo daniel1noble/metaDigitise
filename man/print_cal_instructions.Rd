@@ -12,5 +12,5 @@ print_cal_instructions(plot_type, ...)
 \item{...}{further arguments passed to or from other methods.}
 }
 \description{
-Prints instructions for calibration
+Prints instructions for calibration. Modified from the digitize package
 }

@@ -1,12 +1,30 @@
+#' @title getExtracted
+#' @description Extracts data from a directory that has been previous digitised using metaDigitise
+#' @param dir The directory where figures have already been digitised. There
+#' @param summary Logical indicating whether summarised (default) or calibrated data should be returned. 
+#' @return Returns a data frame (summary = TRUE) or a list with slots for each plot type (summary = FALSE)
+#' @export
+
+getExtracted <- function(dir, summary=TRUE){
+
+	if(substring(dir, nchar(dir)) != "/") dir <- paste0(dir, "/")
+
+	if(length(dir_details(dir)$doneCalFiles) == 0) stop("No digitised files to import!", call. = FALSE)
+
+	import <- import_metaDigitise(dir=dir, summary=summary)
+	
+	return(import)
+}
+
+
+
 #' @title import_metaDigitise
 #' @description Imports metaDigitise calibration files from a directory that is partially or fully digitised already
 #' @param dir The directory where figures have already been digitised
-#' @param summary Logical indicating whether the imported data should be returned in 
+#' @param summary Logical indicating whether the imported data should be returned in summarised or processed form.
 #' @return Returns a list (summary = FALSE) or data frame (summary = TRUE)
 
 import_menu<-function(dir, summary){
-
-	if(substring(dir, nchar(dir)) != "/") dir <- paste0(dir, "/")
 
 	caldat <- dir_details(dir)
 	filepaths <- caldat$doneCalFiles
@@ -43,7 +61,7 @@ import_menu<-function(dir, summary){
 #' @author Daniel Noble - daniel.wa.noble@gmail.com
 #' @export
 
-import_metaDigitise <- function(dir, summary = TRUE ) {
+import_metaDigitise <- function(dir, summary) {
 	
 	# Obtain directory details
 	    details <- dir_details(dir)
