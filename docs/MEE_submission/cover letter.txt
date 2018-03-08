@@ -1,0 +1,10 @@
+Dear Editor,
+
+Thank you for considering our paper 'Reproducible, flexible and high throughput data extraction from primary literature: The metaDigitise R package' for review at Methods in Ecology and Evolution.
+
+Data extraction during meta-analysis is time-consuming and often lacks transparency and reproducibility. Here we present an interactive R package that aims to address these issues. metaDigitise is a package that facilitates the extraction of data from figures. It allows the importation of multiple images, the addition of metadata at the time of extraction and the subsequent editing of these data extractions. Furthermore, it allows users to extract data from the four most common plot types (mean/error plots, boxplots, scatterplots and histograms), in a form that is most useful for further analysis.
+
+We believe that this software provides a substantial advance on existing tools, and would be of interest to a broad readership. The manuscript is available in its submitted form on BioRxiv, where it has received considerable interest. It is not under consideration at any other journal, all authors have approved the submission for publication of this version of this manuscript, and all persons entitled to authorship have been so named.
+
+Your Sincerely
+Dr Joel Pick and co-authors
