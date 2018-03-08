@@ -599,9 +599,9 @@ R> a
 
 A whole host of information can be edited including the rotation, plot type, the variable name(s) that were provided, the calibration and even the digitisation of groups. When editing the \code{metaDigitise} object is re-written to the caldat folder and the edits are immediately integrated into the existing object once complete. 
 
-\subsection{Obtaining Processed Data}
+\subsection{Obtaining Calibrated Data}
 
-While \fct{metaDigitise} provides you with the summary statistics by default, for all plot types, in many cases the user may actually be interested in obtaining the processed digitised data from scatter plots (i.e. calibrated points). This is very easy to do by changing the default \code{summary} argument from TRUE to FALSE in \fct{metaDigitise}. Instead of providing you with summary statistics it will return a list containing four slots for each of the figure types (mean error, box plot, histogram and scatter plots). An example of a data object returned from digitising figures is as follows:
+While \fct{metaDigitise} provides you with the summary statistics by default, for all plot types, in many cases the user may actually be interested in obtaining the calibrated data from scatter plots (i.e. all calibrated points). This is very easy to do by changing the default \code{summary} argument from TRUE to FALSE in \fct{metaDigitise}. Instead of providing you with summary statistics it will return a list containing four slots for each of the figure types (mean error, box plot, histogram and scatter plots). An example of a data object returned from digitising figures is as follows:
 
 \begin{CodeChunk}
 
@@ -636,7 +636,7 @@ List of 3
 \end{CodeOutput}
 \end{CodeChunk}
 
-Here, the user can easily access the list of processed scatter plot data by simply extracting the scatter plot slot:
+Here, the user can easily access the list of calibrated scatter plot data by simply extracting the scatter plot slot:
 
 \begin{CodeChunk}
 \begin{CodeInput}
@@ -645,11 +645,11 @@ Here, the user can easily access the list of processed scatter plot data by simp
 \end{CodeChunk}
 
 
-Additionally there is another function, \fct{import\_metaDigitise}, that imports all digitised data from a directory, as either summarised or processed data. For example,
+Additionally there is another function, \fct{getExtracted}, that imports all digitised data from a directory, as either summarised or calibrated data. For example,
 
 \begin{CodeChunk}
 \begin{CodeInput}
->R import_metaDigitise(".../FiguresToExtract", summary=TRUE)
+>R getExtracted(".../FiguresToExtract", summary=TRUE)
 \end{CodeInput}
 {\scriptsize
 \begin{CodeOutput}
