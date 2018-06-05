@@ -1,9 +1,15 @@
 language: R
-sudo: false
-cache: packages
+sudo: required
+
 warnings_are_errors: true
+
+apt_packages:
+  - libmagick++-dev
+
 r_packages:
   - covr
+
 after_success:
   - Rscript -e 'library(covr); codecov()'
   - bash <(curl -s https://codecov.io/bash)
+
