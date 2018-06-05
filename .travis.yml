@@ -6,3 +6,7 @@ r_packages:
 after_success:
   - Rscript -e 'library(covr); codecov()'
   - bash <(curl -s https://codecov.io/bash)
+
+## Use patched devtools
+r_github_packages:
+  - hadley/devtools@efa894ffa
