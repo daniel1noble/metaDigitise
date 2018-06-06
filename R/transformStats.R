@@ -86,8 +86,8 @@ rqm_to_sd <- function(min,LQ,UQ,max,n) {
 	q1 <- LQ
 	
 	##from Wan et al. 2014; equation 13
-	S <- (b-a) / ( 4*qnorm( (n-0.375)/(n+0.25) ) ) + 
-		(q3-q1) / ( 4*qnorm( (0.75*n-0.125)/(n+0.25) ) )
+	S <- (b-a) / ( 4*stats::qnorm( (n-0.375)/(n+0.25) ) ) + 
+		(q3-q1) / ( 4*stats::qnorm( (0.75*n-0.125)/(n+0.25) ) )
 		
 	return(S)
 }
@@ -106,7 +106,7 @@ range_to_sd <- function(min,max,n) {
 	b <- max
 	
 	##from Wan et al. 2014; equation 9
-	S <- (b-a) / ( 2*qnorm( (n-0.375)/(n+0.25) ) ) 
+	S <- (b-a) / ( 2*stats::qnorm( (n-0.375)/(n+0.25) ) ) 
 
 	return(S)
 }

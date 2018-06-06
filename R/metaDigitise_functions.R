@@ -21,7 +21,7 @@ internal_digitise <- function(image_file, plot_type=NULL, cex=1){
 	output$flip <- rotate_image$flip
 	output$rotate <- rotate_image$rotate
 
-	flush.console()
+	utils::flush.console()
 	
 	### plot type
 	output$plot_type <- plot_type <- if(is.null(plot_type)){specify_type()}else{plot_type}
@@ -131,10 +131,10 @@ summary.metaDigitise<-function(object, ...){
 						group_id=z$id[1],
 						variable=c(z$x_variable[1],z$y_variable[1]),
 						mean=apply(z[,c("x","y")],2,mean),
-						error = apply(z[,c("x","y")],2,sd),
+						error = apply(z[,c("x","y")],2,stats::sd),
 						error_type = "sd",
 					 	n=ifelse(is.null(object$knownN), nrow(z), object$knownN[z$id[1]]),
-					 	r=cor(z$x,z$y)
+					 	r=stats::cor(z$x,z$y)
 					)
 				}),make.row.names=FALSE)))
 	}
@@ -146,7 +146,7 @@ summary.metaDigitise<-function(object, ...){
 			group_id=pd$id[1],
 			variable=pd$variable[1],
 			mean=mean(hist_data),
-			error = sd(hist_data),
+			error = stats::sd(hist_data),
 			error_type = "sd",
 			n=ifelse(is.null(object$knownN), length(hist_data), object$knownN),
 			r=NA

@@ -28,12 +28,12 @@ histogram_extract <- function(edit=FALSE, raw_data = data.frame(), calpoints, ..
 	while(histQ != "f"){
 		
 		if(histQ=="a"){
-			polygon(box_x,box_y, col="red", border=NA)
+			graphics::polygon(box_x,box_y, col="red", border=NA)
 			cat("\nClick on the left followed by the right upper corners of each bar\n Double click on red box in bottom left corner to exit extraction\n")
 		} 
 		while(histQ=="a"){
 			i=i+1
-			bar_points <- locator(2, type="o", col=bar_cols[is.even(i)+1], lwd=2, pch=19)
+			bar_points <- graphics::locator(2, type="o", col=bar_cols[is.even(i)+1], lwd=2, pch=19)
 			if( mean(bar_points$x)<max(box_x) & mean(bar_points$y)<max(box_y) & mean(bar_points$x)>min(box_x) & mean(bar_points$y)>min(box_y)){
 					histQ <- "b"
 					i=i-1
@@ -43,7 +43,7 @@ histogram_extract <- function(edit=FALSE, raw_data = data.frame(), calpoints, ..
 
 		if(histQ=="d"){
 			delQ <- user_options("\nEnter a bar number to delete (displayed above bars) ", unique(raw_data$bar)) 
-			raw_data <- subset(raw_data, bar != delQ)
+			raw_data <- subset(raw_data, raw_data$bar != delQ)
 		}
 
 		internal_redraw(raw_data=raw_data, calpoints=calpoints, ...)

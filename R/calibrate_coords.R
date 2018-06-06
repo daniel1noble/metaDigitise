@@ -54,14 +54,14 @@ if(!plot_type %in% c("mean_error","boxplot")) "
 #' @description Prompts user to enter axis coordinates, and their values. Modified from the digitize package
 
 cal_coords <- function(plot_type,...) {
-	calpoints_y <- locator(2, type="o", col="blue", pch=3, lwd = 2)
+	calpoints_y <- graphics::locator(2, type="o", col="blue", pch=3, lwd = 2)
 
   calpoints_x <- NULL
   if(!plot_type %in% c("mean_error","boxplot")){
-    calpoints_x <- locator(2, type="o", col="blue", pch=3, lwd = 2)
+    calpoints_x <- graphics::locator(2, type="o", col="blue", pch=3, lwd = 2)
   }
 
-  flush.console()
+  utils::flush.console()
 
   return(rbind(as.data.frame(calpoints_y),as.data.frame(calpoints_x)))
 }

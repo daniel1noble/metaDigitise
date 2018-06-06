@@ -5,12 +5,12 @@ single_MB_extract <- function(plot_type){
 	
 	if(plot_type=="mean_error"){
 		cat("\nClick on Error Bar, followed by the Mean\n\n")
-		group_points <- locator(2, type="o", col="red", lwd=2, pch=19)
+		group_points <- graphics::locator(2, type="o", col="red", lwd=2, pch=19)
 	}
 
 	if(plot_type=="boxplot"){
 		cat("\nClick on Max, Upper Q, Median, Lower Q, and Minimum\nIn that order\n\n")
-		group_points <- locator(5, type="o", col="red", lwd=2, pch=19)
+		group_points <- graphics::locator(5, type="o", col="red", lwd=2, pch=19)
 		if(group_points$y[1]<group_points$y[5]) warning("max is smaller than min - consider deleting and re-adding group\n", call. = FALSE, immediate. = TRUE)
 	}
 
@@ -41,9 +41,9 @@ MB_extract <- function(edit=FALSE, plot_type, entered_N, raw_data = data.frame()
 		}
 
 		if(add_removeQ=="e"){
-			group_id <- unique(raw_data$id)[ menu(unique(raw_data$id)) ]
-			group_data <- subset(raw_data, id==group_id)
-			raw_data <- subset(raw_data, id != group_id)
+			group_id <- unique(raw_data$id)[ utils::menu(unique(raw_data$id)) ]
+			group_data <- subset(raw_data, raw_data$id==group_id)
+			raw_data <- subset(raw_data, raw_data$id != group_id)
 			idQ <- user_options("\nChange group identifier? (y/n) ",c("y","n"))
 			if(idQ=="y") {
 				group_data$id <- user_unique("\nGroup identifier: ", unique(raw_data$id))

@@ -5,8 +5,8 @@
  
 delete_group <- function(raw_data){
 	ids <- unique(raw_data$id)
-	remove <- menu(ids)
-	raw_data <- subset(raw_data, id != ids[remove])
+	remove <- utils::menu(ids)
+	raw_data <- subset(raw_data, raw_data$id != ids[remove])
 	raw_data$id <- droplevels(raw_data$id)
 	return(raw_data)
 }
@@ -33,11 +33,11 @@ edit_group <- function(raw_data, group_id, calpoints, ...){
 		i <- if(nrow(raw_data)==0){ 1 }else{ max(raw_data$group) + 1 }
 		add_removeQ <- "a"
 	}else{
-		group_id <- unique(raw_data$id)[ menu(unique(raw_data$id)) ]
-		group_data <- subset(raw_data, id==group_id)
+		group_id <- unique(raw_data$id)[ utils::menu(unique(raw_data$id)) ]
+		group_data <- subset(raw_data, raw_data$id==group_id)
 		i <- unique(group_data$group)
 		add_removeQ <- "b"
-		raw_data <- subset(raw_data, id != group_id)
+		raw_data <- subset(raw_data, raw_data$id != group_id)
 		
 		idQ <- user_options("Change group identifier? (y/n) ",c("y","n"))
 		if(idQ=="y"){
@@ -50,11 +50,11 @@ edit_group <- function(raw_data, group_id, calpoints, ...){
 	while(add_removeQ!="c"){
 
 		if(add_removeQ=="a"){
-			polygon(box_x,box_y, col="red", border=NA,xpd=TRUE)
+			graphics::polygon(box_x,box_y, col="red", border=NA,xpd=TRUE)
 			cat("\nClick on points you want to add.\nIf you want to remove a point, or are finished with a group, \nexit by clicking on red box in bottom left corner, then follow prompts\n")
 		} 
 		while(add_removeQ=="a"){
-			select_points <- locator(1,type="p", lwd=2, col=cols[i], pch=pchs[i])			
+			select_points <- graphics::locator(1,type="p", lwd=2, col=cols[i], pch=pchs[i])			
 			if( select_points$x<max(box_x) & select_points$y<max(box_y) & select_points$x>min(box_x) & select_points$y>min(box_y)) {
 				add_removeQ <- "b"
 			}
@@ -65,9 +65,9 @@ edit_group <- function(raw_data, group_id, calpoints, ...){
 
 		if(add_removeQ=="d"){
 			cat("\nClick on point you want to delete\n")
-			remove <- identify(group_data$x,group_data$y, n=1)
+			remove <- graphics::identify(group_data$x,group_data$y, n=1)
 			if(length(remove)>0) {
-				points(group_data$x[remove], group_data$y[remove],cex=2, col="white", pch=19)
+				graphics::points(group_data$x[remove], group_data$y[remove],cex=2, col="white", pch=19)
 				group_data <- group_data[-remove,]
 			}
 		}

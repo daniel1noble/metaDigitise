@@ -4,7 +4,7 @@
 \alias{plot.metaDigitise}
 \title{plot.metaDigitise}
 \usage{
-plot.metaDigitise(x, ...)
+\method{plot}{metaDigitise}(x, ...)
 }
 \arguments{
 \item{x}{an R object of class ‘metaDigitise’}

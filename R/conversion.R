@@ -12,11 +12,11 @@ calibrate <- function(raw_data, calpoints, point_vals, xlog=FALSE, ylog=FALSE, .
 	if(ylog) point_vals[1:2] <- log(point_vals[1:2])
 	if(xlog) point_vals[3:4] <- log(point_vals[3:4])
 
-	cy <- lm(formula = point_vals[1:2] ~ calpoints$y[1:2])$coeff
+	cy <- stats::lm(formula = point_vals[1:2] ~ calpoints$y[1:2])$coeff
  	raw_data$y <- raw_data$y * cy[2] + cy[1]
 
  	if(nrow(calpoints)==4){
-		cx <- lm(formula = point_vals[3:4] ~ calpoints$x[3:4])$coeff
+		cx <- stats::lm(formula = point_vals[3:4] ~ calpoints$x[3:4])$coeff
 		raw_data$x <- raw_data$x * cx[2] + cx[1]
 	}else{
 		raw_data$x <- raw_data$x 
@@ -39,7 +39,7 @@ convert_group_data <- function(cal_data, plot_type){
 	convert_data <- data.frame()
 
 	for(i in unique(cal_data$id)) {
-		group_data <- subset(cal_data,id==i)
+		group_data <- subset(cal_data,cal_data$id==i)
 
 		if(plot_type == "mean_error") {
 			convert_data <- rbind(convert_data, data.frame(id=i, mean=group_data$y[2], error=abs(group_data$y[1] - group_data$y[2]), n=group_data$n[1]))
@@ -62,7 +62,7 @@ convert_histogram_data <- function(cal_data){
 	convert_data <- data.frame()
 
 	for(i in unique(cal_data$bar)){
-		bar_data <- subset(cal_data, bar==i)
+		bar_data <- subset(cal_data, cal_data$bar==i) # need to have object that bar is from
 		convert_data <- rbind( convert_data, data.frame(id=cal_data$id[1], midpoints=mean(bar_data$x), frequency= round(mean(bar_data$y)) ) )
 	}
 	return(convert_data)
