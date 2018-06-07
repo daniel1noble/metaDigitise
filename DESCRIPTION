@@ -5,7 +5,7 @@ Authors@R: c(person("Joel", "Pick", email = "joel.l.pick@gmail.com", role = c("a
 Description: High-throughput, flexible and reproducible extraction of data from figures in primary research papers. metaDigitise can extract data and / or automatically calculate summary statistics for users from box plots, bar plots (e.g., mean and errors), scatter plots and histograms.
 Maintainer: Joel Pick <joel.l.pick@gmail.com>
 Depends: R (>= 3.4)
-License: GPL-3 + file LICENSE
+License: GPL (>=2)
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
