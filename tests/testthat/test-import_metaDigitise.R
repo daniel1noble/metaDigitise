@@ -49,37 +49,37 @@ doneCalFiles <- paste0(tmp_dir, "caldat/", list.files(paste0(tmp_dir, "/caldat/"
 names <- list("mock_object1", "mock_object2")
 	
 
-test_that("Checking load_metaDigitise works as expected..", {
+testthat::test_that("Checking load_metaDigitise works as expected..", {
 	loaded <- load_metaDigitise(doneCalFiles, names)
 	summaries <- lapply(loaded, function(x) summary(x))
-	expect_equal(summaries$mock_object1$mean, 1.5, info="Object 1 loaded and matches mean..")
-	expect_equal(summaries$mock_object2$mean, 4, info="Object 2 loaded and matches mean..")
+	testthat::expect_equal(summaries$mock_object1$mean, 1.5, info="Object 1 loaded and matches mean..")
+	testthat::expect_equal(summaries$mock_object2$mean, 4, info="Object 2 loaded and matches mean..")
 })
 
-test_that("Checking import_metaDigitise works as expected..", {
+testthat::test_that("Checking import_metaDigitise works as expected..", {
 	summaries <- import_metaDigitise(tmp_dir, summary=TRUE)
-	expect_equal(summaries$mean[1], 1.5, info="Object 1 loaded and matches mean after import_metaDigitis..")
-	expect_equal(summaries$mean[2], 4, info="Object 2 loaded and matches mean after import_metaDigitis..")
+	testthat::expect_equal(summaries$mean[1], 1.5, info="Object 1 loaded and matches mean after import_metaDigitis..")
+	testthat::expect_equal(summaries$mean[2], 4, info="Object 2 loaded and matches mean after import_metaDigitis..")
 })
 
 
 
 
-test_that("Checking getExtracted works as expected..", {
+testthat::test_that("Checking getExtracted works as expected..", {
 	
-	expect_equal(getExtracted(tmp_dir, summary=TRUE), 
+	testthat::expect_equal(getExtracted(tmp_dir, summary=TRUE), 
 		rbind(summary(mock_object1),summary(mock_object2)), 
 		info="Problem with summary=TRUE")
 	
-	expect_equal(getExtracted(tmp_dir_no_slash, summary=TRUE), 
+	testthat::expect_equal(getExtracted(tmp_dir_no_slash, summary=TRUE), 
 		rbind(summary(mock_object1),summary(mock_object2)), 
 		info="Problem with directory input")
 	
-	expect_equal(getExtracted(tmp_dir, summary=FALSE)[[1]][[1]], 
+	testthat::expect_equal(getExtracted(tmp_dir, summary=FALSE)[[1]][[1]], 
 		mock_object1$processed_data, 
 		info="Problem with summary=FALSE")
 
-	expect_equal(getExtracted(tmp_dir_no_slash, summary=FALSE)[[1]][[1]], 
+	testthat::expect_equal(getExtracted(tmp_dir_no_slash, summary=FALSE)[[1]][[1]], 
 		mock_object1$processed_data, 
 		info="Problem with directory input")
 

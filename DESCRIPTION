@@ -9,12 +9,11 @@ License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
-Imports: digitize,
-    magick,
+Imports: magick,
     stats,
     graphics,
     utils,
-    testthat,
     purrr,
-    mockery
+Suggests:mockery,
+	testthat	
 BugReports: https://github.com/daniel1noble/metaDigitise/issues

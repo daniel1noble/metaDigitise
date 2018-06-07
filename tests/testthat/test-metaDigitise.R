@@ -1,36 +1,36 @@
 context("Check various metaDigitise.R functions...")
 
-test_that("Checking setup_calibration_dir works as expected..", {
+testthat::test_that("Checking setup_calibration_dir works as expected..", {
 	dir <- paste0(tempdir(), "/")
 	setup_calibration_dir(dir)
-	expect_equal(list.files(dir)[grep("caldat",list.files(dir))], "caldat", info = "caldat setup correctly")
+	testthat::expect_equal(list.files(dir)[grep("caldat",list.files(dir))], "caldat", info = "caldat setup correctly")
 })
 
-test_that("Checking dir_details works as expected..", {
+testthat::test_that("Checking dir_details works as expected..", {
 	dir <- paste0(tempdir(), "/")
 	setup_calibration_dir(dir)
 	list <- dir_details(dir)
 
-	expect_equal(length(list$images), 0, info = "No images in directory as expected..")
-	expect_equal(list$paths, dir, info = "Directory in paths matches..")
-	expect_equal(list$cal_dir, paste0(dir, "caldat/"), info = "Directory in paths to cal_dat folder matches as expected..")
+	testthat::expect_equal(length(list$images), 0, info = "No images in directory as expected..")
+	testthat::expect_equal(list$paths, dir, info = "Directory in paths matches..")
+	testthat::expect_equal(list$cal_dir, paste0(dir, "caldat/"), info = "Directory in paths to cal_dat folder matches as expected..")
 
 })
 
-test_that("Checking specify_type works as expected..", {
-	with_mock(
+testthat::test_that("Checking specify_type works as expected..", {
+	testthat::with_mock(
 		readline = function(...) "m",
-		expect_equal(specify_type(), "mean_error", info = "specify_type not working correctly does not match mean_error")
+		testthat::expect_equal(specify_type(), "mean_error", info = "specify_type not working correctly does not match mean_error")
 	)
 
-	with_mock(
+	testthat::with_mock(
 		readline = function(...) "s",
-		expect_equal(specify_type(), "scatterplot", info = "specify_type not working correctly does not match scatterplot")
+		testthat::expect_equal(specify_type(), "scatterplot", info = "specify_type not working correctly does not match scatterplot")
 	)
 
-	with_mock(
+	testthat::with_mock(
 		readline = function(...) "b",
-		expect_equal(metaDigitise::specify_type(), "boxplot", info = "specify_type not working correctly does not match boxplot")
+		testthat::expect_equal(metaDigitise::specify_type(), "boxplot", info = "specify_type not working correctly does not match boxplot")
 	)
 	
 })
@@ -54,16 +54,16 @@ mock_object <- list(
 class(mock_object) <- 'metaDigitise'
 
 
-test_that("Checking extract_digitised works as expected..", {
+testthat::test_that("Checking extract_digitised works as expected..", {
 	
 	ob_sum <- extract_digitised(list(mock_object), summary = TRUE)
 	ob_raw <- extract_digitised(list(mock_object), summary = FALSE)
 
-	expect_equal(class(ob_sum), "data.frame", info = "Summary object is indeed a data frame..")
-	expect_equal(ob_sum$mean, 1.5, info = "Summary object mean matches..")
-	expect_equal(class(ob_raw), "list", info = "Raw object is indeed a list..")
-	expect_equal(names(ob_raw), "image.png", info = "Raw object name is correct..")
-	expect_equal(names(ob_raw), "image.png", info = "Raw object name is correct..")
-	expect_equal(ob_raw[[1]]$mean, 1.5, info = "List object mean matches..")
+	testthat::expect_equal(class(ob_sum), "data.frame", info = "Summary object is indeed a data frame..")
+	testthat::expect_equal(ob_sum$mean, 1.5, info = "Summary object mean matches..")
+	testthat::expect_equal(class(ob_raw), "list", info = "Raw object is indeed a list..")
+	testthat::expect_equal(names(ob_raw), "image.png", info = "Raw object name is correct..")
+	testthat::expect_equal(names(ob_raw), "image.png", info = "Raw object name is correct..")
+	testthat::expect_equal(ob_raw[[1]]$mean, 1.5, info = "List object mean matches..")
 
 })
