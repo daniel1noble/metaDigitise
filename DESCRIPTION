@@ -13,7 +13,7 @@ Imports: magick,
     stats,
     graphics,
     utils,
-    purrr,
-Suggests:mockery,
+    purrr
+Suggests: mockery,
 	testthat	
 BugReports: https://github.com/daniel1noble/metaDigitise/issues
