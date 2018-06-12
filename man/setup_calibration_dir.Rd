@@ -15,6 +15,16 @@ Returns a caldat/ folder within the directory where all metaDigitise objects are
 \description{
 Function will check whether the calibration directory has been setup and if not, create one.
 }
+\examples{
+\dontrun{
+# temporary directory
+tmp_dir <- tempdir()
+
+#Create the calibration folder in the directory specified that is used to store files.
+setup_calibration_dir(paste0(tmp_dir, "/"))
+
+}
+}
 \author{
 Daniel Noble - daniel.wa.noble@gmail.com
 }

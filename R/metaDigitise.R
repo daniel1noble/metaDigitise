@@ -183,13 +183,13 @@ extract_digitised <- function(list, summary = TRUE) {
 #' @description Function will check whether the calibration directory has been setup and if not, create one. 
 #' @return Returns a caldat/ folder within the directory where all metaDigitise objects are stored.
 #' @author Daniel Noble - daniel.wa.noble@gmail.com
-#' @example
+#' @examples
 #' \dontrun{
 #' # temporary directory
 #' tmp_dir <- tempdir()
 #' 
 #' #Create the calibration folder in the directory specified that is used to store files.
-#' setup_calibration_dir(tmp_dir)
+#' setup_calibration_dir(paste0(tmp_dir, "/"))
 #'
 #' }
 #' @export
@@ -208,7 +208,7 @@ setup_calibration_dir <- function(dir){
 #' @description Function will get file information from the directory and the calibration files. It will also exclude files that have already been processed, as is judged by the match between file names in the calibration folder and the imported details object
 #' @return Returns a list containing details on the images names and their paths, the calibration file names (or files already completed) as well as the paths to these files.
 #' @author Daniel Noble - daniel.wa.noble@gmail.com
-#' @example
+#' @examples
 #' \dontrun{
 #' # temporary directory
 #' tmp_dir <- tempdir()
