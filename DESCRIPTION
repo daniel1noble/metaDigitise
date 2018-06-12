@@ -1,8 +1,8 @@
-Package: metaDigitise
+Package: 'metaDigitise'
 Title: Extract and Summarise Data from Published Figures
 Version: 1.0.0
 Authors@R: c(person("Joel", "Pick", email = "joel.l.pick@gmail.com", role = c("aut")), person("Shinichi", "Nakagawa", email = "s.nakagawa@unsw.edu.au", role = c("aut")), person("Daniel", "Noble", email = "daniel.wa.noble@gmail.com", role = c("aut", "cre")))
-Description: High-throughput, flexible and reproducible extraction of data from figures in primary research papers. metaDigitise can extract data and / or automatically calculate summary statistics for users from box plots, bar plots (e.g., mean and errors), scatter plots and histograms.
+Description: High-throughput, flexible and reproducible extraction of data from figures in primary research papers. metaDigitise() can extract data and / or automatically calculate summary statistics for users from box plots, bar plots (e.g., mean and errors), scatter plots and histograms.
 Depends: R (>= 3.4)
 License: GPL (>=2)
 Encoding: UTF-8
