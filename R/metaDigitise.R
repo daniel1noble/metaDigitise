@@ -1,14 +1,14 @@
 #' @title metaDigitise
-#' @description Single or batch processing of figures with .png, .jpg, .tiff, .pdf extensions within a set directory. metaDigitise consolidates the data and exports the data for each image and image type. It can also summarise the data, provide the raw data (if scatterplots) and automatically imports previously finished data and merges it with newly digitised data. metaDigitise also allows users to check their calibration along with editing previous digitisations.
+#' @description Single or batch processing of figures with .png, .jpg, .tiff, .pdf extensions within a set directory. metaDigitise() consolidates the data and exports the data for each image and image type. It can also summarise the data, provide the raw data (if scatterplots) and automatically imports previously finished data and merges it with newly digitised data. metaDigitise() also allows users to check their calibration along with editing previous digitisations.
 #' @param dir the path name to the directory / folder where the files are located
 #' @param summary whether the digitised data should be returned as a summary (TRUE) or as a concatenated list of similar types. 
-#' @details metaDigitise can be used on a directory with a whole host of different figure types (mean and error, scatter plots, box plots and histograms) and file types (.jpeg, .png, .tiff, .pdf). There are three major options provided to users:
+#' @details metaDigitise() can be used on a directory with a whole host of different figure types (mean and error, scatter plots, box plots and histograms) and file types (.jpeg, .png, .tiff, .pdf). There are three major options provided to users:
 #' 
-#' If the "1: Process new images" option is chosen, it will automatically cycle through all figures not already completed within a directory in order, prompting the user for specific information as they go. At the end of each figure users will be asked if they would like to continue or not, providing flexibility to leave a job should should they need to. As figures are digitised it will automatically write metaDigitise object files (in .RDS format containing processed and calibration data along with directory and file details), into a special caldat/ folder within the directory. Importantly, as new files are added to a directory that has already been "completed", metaDigitise will recognize these unfinished files and only cycle through the digitisation of these new files. This easily allows users to pick up from where they left off. It will also automatically re-merge completed figure with any newly digitised figures at the end of this process keeping everything together throughout the process.
+#' If the "1: Process new images" option is chosen, it will automatically cycle through all figures not already completed within a directory in order, prompting the user for specific information as they go. At the end of each figure users will be asked if they would like to continue or not, providing flexibility to leave a job should should they need to. As figures are digitised it will automatically write metaDigitise() object files (in .RDS format containing processed and calibration data along with directory and file details), into a special caldat/ folder within the directory. Importantly, as new files are added to a directory that has already been "completed", metaDigitise() will recognize these unfinished files and only cycle through the digitisation of these new files. This easily allows users to pick up from where they left off. It will also automatically re-merge completed figure with any newly digitised figures at the end of this process keeping everything together throughout the process.
 #' 
 #' If the "2: Import existing data" is chosen, all existing files that have already been digitised will be automatically imported from the given directory. 
 #' 
-#' Finally, metDigitise is built for ease of editing and reproducibility in mind. Hence, if "3: Edit existing data" is chosen by the user then users will have the options to "1: Cycle through images" (that are complete), overlaying digitisations with each figure and asking whether they would like to edit each figure or "2: Choose specific file to edit" allowing editing for a specific file. Here a list of all files are provided and the user simply needs to pick the one in the console they would like to view. Alternatively, the "3: Enter previously omitted sample sizes" option allows the user to go back and enter sample sizes that they may not have had on hand at the time of digitisation. This means that, so long as the caldat/ folder along with respective images are maintained, anyone using metaDigitise can simply import existing digitisations, modify them and fix them. This folder can then be shared with colleagues to allow them to reproduce any data extraction.
+#' Finally, metDigitise is built for ease of editing and reproducibility in mind. Hence, if "3: Edit existing data" is chosen by the user then users will have the options to "1: Cycle through images" (that are complete), overlaying digitisations with each figure and asking whether they would like to edit each figure or "2: Choose specific file to edit" allowing editing for a specific file. Here a list of all files are provided and the user simply needs to pick the one in the console they would like to view. Alternatively, the "3: Enter previously omitted sample sizes" option allows the user to go back and enter sample sizes that they may not have had on hand at the time of digitisation. This means that, so long as the caldat/ folder along with respective images are maintained, anyone using metaDigitise() can simply import existing digitisations, modify them and fix them. This folder can then be shared with colleagues to allow them to reproduce any data extraction.
 #' @author Joel Pick - joel.l.pick@gmail.com
 #' @author Daniel Noble - daniel.wa.noble@gmail.com
 #' @return A data frame or list containing the raw digitised data or the processed, summary statistics from the digitised data
@@ -16,11 +16,15 @@
 #' \dontrun{
 #' # temporary directory
 #' tmp_dir <- tempdir()
+#' 
+#' # Simulate data
 #' set.seed(103)
 #' x <- rnorm(20,0,1)
 #' y <- rnorm(20,0,1)
 #' means <- c(mean(x),mean(y))
 #' ses <- c(sd(x)/sqrt(length(x))*1.96, sd(y)/sqrt(length(y))*1.96)
+#' 
+#' #Generate mock figures
 #' png(filename = paste0(tmp_dir,"/mean_error.png"), width = 480, height = 480)
 #' plot(means, ylim = c(min(means-ses)-0.1,max(means+ses)+0.1), xlim=c(0.5,2.5), 
 #' xaxt="n", pch=19, cex=2, ylab="Variable +/- SE", xlab="Treatment", main="Mean Error")
@@ -37,6 +41,7 @@
 #' plot(x,y, main="Scatterplot")
 #' dev.off()
 #' 
+#' #metaDigitise figures
 #' data <- metaDigitise(tmp_dir)
 #' }
 #' @export
@@ -178,6 +183,15 @@ extract_digitised <- function(list, summary = TRUE) {
 #' @description Function will check whether the calibration directory has been setup and if not, create one. 
 #' @return Returns a caldat/ folder within the directory where all metaDigitise objects are stored.
 #' @author Daniel Noble - daniel.wa.noble@gmail.com
+#' @example
+#' \dontrun{
+#' # temporary directory
+#' tmp_dir <- tempdir()
+#' 
+#' #Create the calibration folder in the directory specified that is used to store files.
+#' setup_calibration_dir(tmp_dir)
+#'
+#' }
 #' @export
 
 setup_calibration_dir <- function(dir){
@@ -194,6 +208,38 @@ setup_calibration_dir <- function(dir){
 #' @description Function will get file information from the directory and the calibration files. It will also exclude files that have already been processed, as is judged by the match between file names in the calibration folder and the imported details object
 #' @return Returns a list containing details on the images names and their paths, the calibration file names (or files already completed) as well as the paths to these files.
 #' @author Daniel Noble - daniel.wa.noble@gmail.com
+#' @example
+#' \dontrun{
+#' # temporary directory
+#' tmp_dir <- tempdir()
+#' 
+#' # Simulate data
+#' set.seed(103)
+#' x <- rnorm(20,0,1)
+#' y <- rnorm(20,0,1)
+#' means <- c(mean(x),mean(y))
+#' ses <- c(sd(x)/sqrt(length(x))*1.96, sd(y)/sqrt(length(y))*1.96)
+#' 
+#' #Generate mock figures
+#' png(filename = paste0(tmp_dir,"/mean_error.png"), width = 480, height = 480)
+#' plot(means, ylim = c(min(means-ses)-0.1,max(means+ses)+0.1), xlim=c(0.5,2.5), 
+#' xaxt="n", pch=19, cex=2, ylab="Variable +/- SE", xlab="Treatment", main="Mean Error")
+#' arrows(1:length(means),means+ses, 1:length(means), means-ses, code=3, angle=90, length=0.1)
+#' axis(1,1:length(means),names(means))
+#' dev.off()
+#' png(filename = paste0(tmp_dir, "/boxplot.png"), width = 480, height = 480)
+#' boxplot(x,y, main="Boxplot")
+#' dev.off()
+#' png(filename = paste0(tmp_dir, "/histogram.png"),width = 480, height = 480)
+#' hist(c(x,y), xlab= "variable", main="Histogram")
+#' dev.off()
+#' png(filename = paste0(tmp_dir, "/scatterplot.png"), width = 480, height = 480)
+#' plot(x,y, main="Scatterplot")
+#' dev.off()
+#' 
+#' #Obtain file names that are incomplete within the tmp directory
+#' data <- get_notDone_file_details(tmp_dir)
+#' }
 #' @export
 
 get_notDone_file_details <- function(dir){
@@ -223,6 +269,38 @@ get_notDone_file_details <- function(dir){
 #' @param dir the path name to the directory / folder where the files are located
 #' @description Function will gather important directory details about calibration files and figures needed for processing
 #' @author Daniel Noble - daniel.wa.noble@gmail.com
+#' @examples
+#'  \dontrun{
+#' # temporary directory
+#' tmp_dir <- tempdir()
+#' 
+#' # Simulate data
+#' set.seed(103)
+#' x <- rnorm(20,0,1)
+#' y <- rnorm(20,0,1)
+#' means <- c(mean(x),mean(y))
+#' ses <- c(sd(x)/sqrt(length(x))*1.96, sd(y)/sqrt(length(y))*1.96)
+#' 
+#' #Generate mock figures
+#' png(filename = paste0(tmp_dir,"/mean_error.png"), width = 480, height = 480)
+#' plot(means, ylim = c(min(means-ses)-0.1,max(means+ses)+0.1), xlim=c(0.5,2.5), 
+#' xaxt="n", pch=19, cex=2, ylab="Variable +/- SE", xlab="Treatment", main="Mean Error")
+#' arrows(1:length(means),means+ses, 1:length(means), means-ses, code=3, angle=90, length=0.1)
+#' axis(1,1:length(means),names(means))
+#' dev.off()
+#' png(filename = paste0(tmp_dir, "/boxplot.png"), width = 480, height = 480)
+#' boxplot(x,y, main="Boxplot")
+#' dev.off()
+#' png(filename = paste0(tmp_dir, "/histogram.png"),width = 480, height = 480)
+#' hist(c(x,y), xlab= "variable", main="Histogram")
+#' dev.off()
+#' png(filename = paste0(tmp_dir, "/scatterplot.png"), width = 480, height = 480)
+#' plot(x,y, main="Scatterplot")
+#' dev.off()
+#' 
+#' #Obtain details on directory structure that are used for metaDigitise
+#' data <- dir_details(tmp_dir)
+#' }
 #' @export
 
 dir_details <- function(dir){
