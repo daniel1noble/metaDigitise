@@ -1,4 +1,4 @@
-Package: 'metaDigitise'
+Package: metaDigitise
 Title: Extract and Summarise Data from Published Figures
 Version: 1.0.0
 Authors@R: c(person("Joel", "Pick", email = "joel.l.pick@gmail.com", role = c("aut")), person("Shinichi", "Nakagawa", email = "s.nakagawa@unsw.edu.au", role = c("aut")), person("Daniel", "Noble", email = "daniel.wa.noble@gmail.com", role = c("aut", "cre")))
