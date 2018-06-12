@@ -23,6 +23,9 @@ Returns vector of standard deviation
 \description{
 Calculate the standard deviation from box plots
 }
+\examples{
+rqm_to_sd(min = 2, LQ = 3, UQ = 6, max = 9, n = 30)
+}
 \author{
 Joel Pick
 }

@@ -23,6 +23,7 @@ error_to_sd <- function(error, n, error_type=c("se","CI95","sd",NA)){
 #' @param n Sample Size
 #' @return Returns vector of standard errors
 #' @author Joel Pick
+#' @examples se_to_sd(se = 5, n = 10)
 #' @export
 
 se_to_sd <- function(se, n) {
@@ -36,6 +37,7 @@ se_to_sd <- function(se, n) {
 #' @param n Sample Size
 #' @return Returns vector of standard deviations
 #' @author Joel Pick
+#' @examples CI95_to_sd(CI = 2, n = 10)
 #' @export
 
 CI95_to_sd <- function(CI,n) {
@@ -54,6 +56,7 @@ CI95_to_sd <- function(CI,n) {
 #' @param n Sample size
 #' @return Returns vector of mean
 #' @author Joel Pick
+#' @examples rqm_to_mean(min = 2, LQ = 3, median = 5, UQ = 6, max = 9, n = 30)
 #' @export
 rqm_to_mean <- function(min,LQ,median,UQ,max,n){
 	b <- max
@@ -78,6 +81,7 @@ rqm_to_mean <- function(min,LQ,median,UQ,max,n){
 #' @param n Sample size
 #' @return Returns vector of standard deviation
 #' @author Joel Pick
+#' @examples rqm_to_sd(min = 2, LQ = 3, UQ = 6, max = 9, n = 30)
 #' @export
 rqm_to_sd <- function(min,LQ,UQ,max,n) {
 	b <- max
@@ -99,6 +103,7 @@ rqm_to_sd <- function(min,LQ,UQ,max,n) {
 #' @param n Sample size
 #' @return Returns vector of standard deviation
 #' @author Joel Pick
+#' @examples range_to_sd(min = 3, max = 8, n = 40)
 #' @export
 
 range_to_sd <- function(min,max,n) {
@@ -117,6 +122,7 @@ range_to_sd <- function(min,max,n) {
 #' @param n Sample size
 #' @return Returns vector of pooled mean
 #' @author Joel Pick
+#' @examples grandMean(mean = 10, n = 30)
 #' @export
 
 grandMean <- function(mean,n)	sum(mean*n)/sum(n)
@@ -130,6 +136,7 @@ grandMean <- function(mean,n)	sum(mean*n)/sum(n)
 #' @param equal Logical: Whether to calculate pooled SD assuming groups have the same means (TRUE) or different means (FALSE) 
 #' @return Returns vector of pooled mean
 #' @author Joel Pick
+#' @examples grandSD(mean = 10, sd = 3, n = 40)
 #' @export
 ## for non-overlapping SDs
 ## https://en.wikipedia.org/w/index.php?title=Standard_deviation&oldid=724302220#Combining_standard_deviations

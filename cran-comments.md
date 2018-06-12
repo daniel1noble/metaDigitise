@@ -1,5 +1,7 @@
 
 ## CRAN revisions
+	- Fixed package name style in DESCRIPTION
+	- Fixed metaDIgitise example to ensure example writes to temp directory
 	- Fixed package title
 	- Fixed up notes across the board
 		- changed testthat and mockery to suggests and removed digitize package, which is no longer used

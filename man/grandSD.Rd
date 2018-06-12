@@ -21,6 +21,9 @@ Returns vector of pooled mean
 \description{
 Pooled standard deviation of a set of groups
 }
+\examples{
+grandSD(mean = 10, sd = 3, n = 40)
+}
 \author{
 Joel Pick
 }

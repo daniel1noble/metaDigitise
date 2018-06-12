@@ -25,6 +25,9 @@ Returns vector of mean
 \description{
 Calculate the mean from the box plots
 }
+\examples{
+rqm_to_mean(min = 2, LQ = 3, median = 5, UQ = 6, max = 9, n = 30)
+}
 \author{
 Joel Pick
 }

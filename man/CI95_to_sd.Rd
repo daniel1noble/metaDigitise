@@ -17,6 +17,9 @@ Returns vector of standard deviations
 \description{
 Transforms symmetrical confidence interval to standard deviation
 }
+\examples{
+CI95_to_sd(CI = 2, n = 10)
+}
 \author{
 Joel Pick
 }

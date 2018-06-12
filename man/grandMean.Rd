@@ -17,6 +17,9 @@ Returns vector of pooled mean
 \description{
 Pooled mean of a set of group means
 }
+\examples{
+grandMean(mean = 10, n = 30)
+}
 \author{
 Joel Pick
 }

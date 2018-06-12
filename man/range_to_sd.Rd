@@ -19,6 +19,9 @@ Returns vector of standard deviation
 \description{
 Converts a range to a standard deviation
 }
+\examples{
+range_to_sd(min = 3, max = 8, n = 40)
+}
 \author{
 Joel Pick
 }

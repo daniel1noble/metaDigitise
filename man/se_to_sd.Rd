@@ -17,6 +17,9 @@ Returns vector of standard errors
 \description{
 Transforms standard error to standard deviation
 }
+\examples{
+se_to_sd(se = 5, n = 10)
+}
 \author{
 Joel Pick
 }
