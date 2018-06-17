@@ -1,5 +1,5 @@
 #' @title getExtracted
-#' @description Extracts data from a directory that has been previous digitised using metaDigitise
+#' @description Extracts data from a directory that has been previously digitised using metaDigitise()
 #' @param dir The directory where figures have already been digitised. There
 #' @param summary Logical indicating whether summarised (default) or calibrated data should be returned. 
 #' @return Returns a data frame (summary = TRUE) or a list with slots for each plot type (summary = FALSE)
@@ -18,13 +18,13 @@ getExtracted <- function(dir, summary=TRUE){
 
 
 
-#' @title import_metaDigitise
-#' @description Imports metaDigitise calibration files from a directory that is partially or fully digitised already
+#' @title import_menu
+#' @description Imports metaDigitise() calibration files from a directory that is partially or fully digitised already
 #' @param dir The directory where figures have already been digitised
 #' @param summary Logical indicating whether the imported data should be returned in summarised or processed form.
 #' @return Returns a list (summary = FALSE) or data frame (summary = TRUE)
 
-import_menu<-function(dir, summary){
+import_menu <- function(dir, summary){
 
 	caldat <- dir_details(dir)
 	filepaths <- caldat$doneCalFiles
@@ -54,12 +54,11 @@ import_menu<-function(dir, summary){
 
 
 #' @title import_metaDigitise
-#' @description Imports metaDigitise calibration files from a directory that is partially or fully digitised already
+#' @description Imports metaDigitise() calibration files from a directory that is partially or fully digitised already
 #' @param dir The directory where figures have already been digitised
 #' @param summary Logical indicating whether the imported data should be returned in summarised form ('TRUE') or not ('FALSE')
 #' @return Returns a list (summary = FALSE) or data frame (summary = TRUE)
 #' @author Daniel Noble - daniel.wa.noble@gmail.com
-#' @export
 
 import_metaDigitise <- function(dir, summary) {
 	

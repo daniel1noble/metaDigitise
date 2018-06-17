@@ -274,6 +274,8 @@ get_notDone_file_details <- function(dir){
 #' # temporary directory
 #' tmp_dir <- tempdir()
 #' 
+#' setup_calibration_dir(paste0(tmp_dir, "/"))
+#' 
 #' # Simulate data
 #' set.seed(103)
 #' x <- rnorm(20,0,1)
