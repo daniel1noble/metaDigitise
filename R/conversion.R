@@ -8,12 +8,12 @@
 
 calibrate <- function(raw_data, calpoints, point_vals, log_axes, ...) {
 	
-	ylog <- "y" %in% log_axes
-	xlog <- "x" %in% log_axes
+	ylog <- "y" %in% log_axes[1]
+	xlog <- "x" %in% log_axes[1]
 	base <- as.numeric(if(length(log_axes)>1 & log_axes[2]=="e"){ exp(1) }else{log_axes[2]})
 
-	if(ylog) point_vals[1:2] <- log(point_vals[1:2], base=base)
-	if(xlog) point_vals[3:4] <- log(point_vals[3:4], base=base)
+#	if(ylog) point_vals[1:2] <- log(point_vals[1:2], base=base)
+#	if(xlog) point_vals[3:4] <- log(point_vals[3:4], base=base)
 
 	cy <- stats::lm(formula = point_vals[1:2] ~ calpoints$y[1:2])$coeff
  	raw_data$y <- raw_data$y * cy[2] + cy[1]
