@@ -121,7 +121,9 @@ process_new_files <- function(dir, summary = TRUE, cex) {
 	# Depending on summary argument, build the final data. If Summary ==TRUE then create condensed summary statistics. If FALSE, then create a list of the raw data grouped by plot type.
 	if(summary == TRUE){
 		if(length(done_objects) == 0){
-			return(do.call(rbind, lapply(data_list, function(x) summary(x))))
+			sum_dat <- do.call(rbind, lapply(data_list, function(x) summary(x)))
+			rownames(sum_dat) <- 1:nrow(sum_dat)
+			return(sum_dat)
 		} else{
 			sum_dat <- do.call(rbind, c(lapply(done_objects, function(x) summary(x)), lapply(data_list, function(x) summary(x))))
 			rownames(sum_dat) <- 1:nrow(sum_dat)

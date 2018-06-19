@@ -85,7 +85,7 @@ getVals <- function(calpoints,...) {
 #' @description Ask user for information about whether axes are on log scale
 
 logAxes <- function(...){
-  log_axes <- user_options("Are any axes on a log scale? Enter n if none or combination of log axes (x/y/xy)", c("n","x","y","xy","yx"))
+  log_axes <- user_options("\nAre any axes on a log scale? Enter n if none or combination of log axes (x/y/xy)", c("n","x","y","xy","yx"))
   base <- if(log_axes == "n"){ NULL } else{ user_base() }
   return(c(log_axes,base))
 }

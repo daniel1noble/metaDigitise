@@ -26,9 +26,9 @@ calibrate <- function(raw_data, calpoints, point_vals, log_axes, ...) {
 	}
 
 	if(ylog & log_axes[2]=="e") raw_data$y <- exp(raw_data$y)
-	if(ylog & log_axes[2]!="e") raw_data$y <- raw_data$y^base
+	if(ylog & log_axes[2]!="e") raw_data$y <- base^raw_data$y
 	if(xlog & log_axes[2]=="e") raw_data$x <- exp(raw_data$x)
-	if(xlog & log_axes[2]!="e") raw_data$x <- raw_data$x^base
+	if(xlog & log_axes[2]!="e") raw_data$x <- base^raw_data$x
 
 	return(raw_data)
 }
