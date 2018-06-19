@@ -4,12 +4,14 @@
 \alias{process_new_files}
 \title{process_new_files}
 \usage{
-process_new_files(dir, summary = TRUE)
+process_new_files(dir, summary = TRUE, cex)
 }
 \arguments{
 \item{dir}{the path name to the directory / folder where the files are located}
 
 \item{summary}{summary = TRUE or FALSE is most relevant as it will print a simple summary statistics that are the same across all files}
+
+\item{cex}{relative size of points and text in replotting of digitisation.}
 }
 \description{
 Batch processes image files within a set directory, consolidates the data and exports the data for each image and type

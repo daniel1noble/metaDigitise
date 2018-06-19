@@ -4,12 +4,14 @@
 \alias{metaDigitise}
 \title{metaDigitise}
 \usage{
-metaDigitise(dir, summary = TRUE)
+metaDigitise(dir, summary = TRUE, cex = 1)
 }
 \arguments{
 \item{dir}{the path name to the directory / folder where the files are located}
 
 \item{summary}{whether the digitised data should be returned as a summary (TRUE) or as a concatenated list of similar types.}
+
+\item{cex}{relative size of points and text in replotting of digitisation. Default is 1.}
 }
 \value{
 A data frame or list containing the raw digitised data or the processed, summary statistics from the digitised data

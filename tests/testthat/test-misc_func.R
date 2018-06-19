@@ -90,6 +90,17 @@ testthat::test_that("Checking user_count..", {
 })
 
 
+testthat::test_that("Checking user_base..", {
+ 
+testthat::with_mock( readline = function(question) "1",	testthat::expect_equal(user_base(),"1", info = "user_base failed"))
+testthat::with_mock( readline = function(question) "e", testthat::expect_equal(user_base(),"e", info = "user_base failed"))
+
+})
+ 
+
+
+
+
 ask_variable_tester_func <- function(...) {
 	testthat::with_mock(
 		readline = function(question) "x",

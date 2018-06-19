@@ -19,9 +19,10 @@ redraw_rotation <- function(image, flip, rotate){
 #' @param point_vals The point values
 #' @param image_details image_details
 #' @param scalar amount to scale size points/text/lines according to plot size
+#' @param cex relative size of points and text
 #' @description plots calibration data on graph
 
-redraw_calibration <- function(plot_type, variable, calpoints,point_vals,image_details, scalar){
+redraw_calibration <- function(plot_type, variable, calpoints,point_vals,image_details, scalar,cex){
 	x_shift <- image_details["width"]/30
 	y_shift <- image_details["height"]/30
 	text_cex <- 2*scalar
@@ -52,9 +53,10 @@ redraw_calibration <- function(plot_type, variable, calpoints,point_vals,image_d
 #' @param raw_data The raw data
 #' @param image_details image_details
 #' @param scalar amount to scale size points/text/lines according to plot size
+#' @param cex relative size of points and text
 #' @description plots clicked data on graph
 
-redraw_points <- function(plot_type, raw_data, image_details, scalar){
+redraw_points <- function(plot_type, raw_data, image_details, scalar,cex){
 	image_width <- image_details["width"]
 	image_height <- image_details["height"]
 	legend_pos <- image_height/40
@@ -115,6 +117,7 @@ redraw_points <- function(plot_type, raw_data, image_details, scalar){
 #' @param rotate how much to rotate figure
 #' @param plot_type plot_type
 #' @param variable variable
+#' @param cex relative size of points and text
 #' @param calpoints The calibration points
 #' @param point_vals The point values
 #' @param raw_data The raw data
@@ -128,7 +131,7 @@ redraw_points <- function(plot_type, raw_data, image_details, scalar){
 
 #image_file, flip, rotate, image_details, plot_type, calpoints, point_vals, raw_data
 
-internal_redraw <- function(image_file, flip=FALSE, rotate=0, plot_type=NULL, variable=NULL, calpoints=NULL, point_vals=NULL, raw_data=NULL, rotation=TRUE, calibration=TRUE, points=TRUE, ...){
+internal_redraw <- function(image_file, flip=FALSE, rotate=0, plot_type=NULL, variable=NULL, cex=NULL, calpoints=NULL, point_vals=NULL, raw_data=NULL, rotation=TRUE, calibration=TRUE, points=TRUE, ...){
 
 	op <- graphics::par(mar=c(3,0,2,0), mfrow=c(1,1))
 	on.exit(graphics::par(op))
@@ -148,9 +151,9 @@ internal_redraw <- function(image_file, flip=FALSE, rotate=0, plot_type=NULL, va
 	if(!is.null(plot_type)) graphics::mtext(plot_type,3, 0, cex=text_cex)
 
 	if(is.null(calpoints)) calibration=FALSE
-	if(calibration) redraw_calibration(plot_type=plot_type, variable=variable, calpoints=calpoints,point_vals=point_vals,image_details=image_details, scalar=scalar)
+	if(calibration) redraw_calibration(plot_type=plot_type, variable=variable, calpoints=calpoints,point_vals=point_vals,image_details=image_details, scalar=scalar, cex=cex)
 
 	if(is.null(raw_data)) points=FALSE
-	if(points) redraw_points(plot_type=plot_type,raw_data=raw_data,image_details=image_details, scalar=scalar)
+	if(points) redraw_points(plot_type=plot_type,raw_data=raw_data,image_details=image_details, scalar=scalar, cex=cex)
 
 }

@@ -2,15 +2,18 @@
 #' @param raw_data The raw data
 #' @param calpoints The calibration points
 #' @param point_vals The point values
-#' @param xlog whether x is logged
-#' @param ylog whether y is logged
+#' @param log_axes whether x or y is logged
 #' @param ... further arguments passed to or from other methods
 #' @description Converts x and y coordinates from original plot coords to actual coords using previous identified coordinates. Modified from digitise package
 
-calibrate <- function(raw_data, calpoints, point_vals, xlog=FALSE, ylog=FALSE, ...) {
+calibrate <- function(raw_data, calpoints, point_vals, log_axes, ...) {
 	
-	if(ylog) point_vals[1:2] <- log(point_vals[1:2])
-	if(xlog) point_vals[3:4] <- log(point_vals[3:4])
+	ylog <- "y" %in% log_axes["axes"]
+	xlog <- "x" %in% log_axes["axes"]
+	base <- as.numeric(if(length(log_axes)>1 & log_axes["base"]=="e"){ exp(1) }else{log_axes["base"]})
+
+	if(ylog & log_axes["transformed"]=="s") point_vals[1:2] <- log(point_vals[1:2], base=base)
+	if(xlog & log_axes["transformed"]=="s") point_vals[3:4] <- log(point_vals[3:4], base=base)
 
 	cy <- stats::lm(formula = point_vals[1:2] ~ calpoints$y[1:2])$coeff
  	raw_data$y <- raw_data$y * cy[2] + cy[1]
@@ -22,8 +25,10 @@ calibrate <- function(raw_data, calpoints, point_vals, xlog=FALSE, ylog=FALSE, .
 		raw_data$x <- raw_data$x 
 	}
 
-	if(ylog) raw_data$y <- exp(raw_data$y)
-	if(xlog) raw_data$x <- exp(raw_data$x)
+	if(ylog & log_axes["base"]=="e") raw_data$y <- exp(raw_data$y)
+	if(ylog & log_axes["base"]!="e") raw_data$y <- base^raw_data$y
+	if(xlog & log_axes["base"]=="e") raw_data$x <- exp(raw_data$x)
+	if(xlog & log_axes["base"]!="e") raw_data$x <- base^raw_data$x
 
 	return(raw_data)
 }

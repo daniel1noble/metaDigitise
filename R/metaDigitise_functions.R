@@ -4,15 +4,14 @@
 #' @param image_file Image file
 #' @param plot_type Type of plot from "mean_error","boxplot","scatterplot" or"histogram". Function will prompt if not entered by user.
 #' @param cex point size for replotting
-#' @return List of 
+#' @return List of user inputs and transformed data from digitisation
 #' @author Joel Pick
-#' @export
 
-internal_digitise <- function(image_file, plot_type=NULL, cex=1){
+internal_digitise <- function(image_file, plot_type=NULL, cex){
 		
 	output <- list()
 	output$image_name <- filename(image_file)
-	output$image_file <-image_file
+	output$image_file <- image_file
 
 	output$cex <- cex
 
@@ -34,6 +33,7 @@ internal_digitise <- function(image_file, plot_type=NULL, cex=1){
 	cal <- user_calibrate(output)
 	output$calpoints <- cal$calpoints
 	output$point_vals <- cal$point_vals
+	output$log_axes <- cal$log_axes
 
 
 	### N entered?
@@ -154,7 +154,12 @@ summary.metaDigitise<-function(object, ...){
 	}
 	out$sd <- with(out, error_to_sd(error=error,n=n,error_type=error_type))
 	out$plot_type <- object$plot_type
-	return(out)
+
+	out$se <- ifelse( out$error_type=="se", out$error,
+			  ifelse( out$error_type=="CI95", out$error/1.96,
+              ifelse( out$error_type=="sd" & !is.na(out$n), out$error/sqrt(out$n), NA)))
+
+	return(out[,c("filename", "variable","group_id","mean","sd","n","r","se","error_type","plot_type")])
 }
 
 
