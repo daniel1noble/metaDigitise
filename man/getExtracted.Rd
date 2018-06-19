@@ -15,5 +15,5 @@ getExtracted(dir, summary = TRUE)
 Returns a data frame (summary = TRUE) or a list with slots for each plot type (summary = FALSE)
 }
 \description{
-Extracts data from a directory that has been previous digitised using metaDigitise
+Extracts data from a directory that has been previously digitised using metaDigitise()
 }

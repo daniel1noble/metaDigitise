@@ -2,7 +2,7 @@
 % Please edit documentation in R/import_metaDigitise.R
 \name{import_menu}
 \alias{import_menu}
-\title{import_metaDigitise}
+\title{import_menu}
 \usage{
 import_menu(dir, summary)
 }
@@ -15,5 +15,5 @@ import_menu(dir, summary)
 Returns a list (summary = FALSE) or data frame (summary = TRUE)
 }
 \description{
-Imports metaDigitise calibration files from a directory that is partially or fully digitised already
+Imports metaDigitise() calibration files from a directory that is partially or fully digitised already
 }

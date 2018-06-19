@@ -15,7 +15,7 @@ import_metaDigitise(dir, summary)
 Returns a list (summary = FALSE) or data frame (summary = TRUE)
 }
 \description{
-Imports metaDigitise calibration files from a directory that is partially or fully digitised already
+Imports metaDigitise() calibration files from a directory that is partially or fully digitised already
 }
 \author{
 Daniel Noble - daniel.wa.noble@gmail.com
