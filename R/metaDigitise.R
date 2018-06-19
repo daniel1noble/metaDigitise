@@ -1,7 +1,8 @@
 #' @title metaDigitise
 #' @description Single or batch processing of figures with .png, .jpg, .tiff, .pdf extensions within a set directory. metaDigitise() consolidates the data and exports the data for each image and image type. It can also summarise the data, provide the raw data (if scatterplots) and automatically imports previously finished data and merges it with newly digitised data. metaDigitise() also allows users to check their calibration along with editing previous digitisations.
 #' @param dir the path name to the directory / folder where the files are located
-#' @param summary whether the digitised data should be returned as a summary (TRUE) or as a concatenated list of similar types. 
+#' @param summary whether the digitised data should be returned as a summary (TRUE) or as a concatenated list of similar types.
+#' @param cex relative size of points and text in replotting of digitisation. Default is 1.
 #' @details metaDigitise() can be used on a directory with a whole host of different figure types (mean and error, scatter plots, box plots and histograms) and file types (.jpeg, .png, .tiff, .pdf). There are three major options provided to users:
 #' 
 #' If the "1: Process new images" option is chosen, it will automatically cycle through all figures not already completed within a directory in order, prompting the user for specific information as they go. At the end of each figure users will be asked if they would like to continue or not, providing flexibility to leave a job should should they need to. As figures are digitised it will automatically write metaDigitise() object files (in .RDS format containing processed and calibration data along with directory and file details), into a special caldat/ folder within the directory. Importantly, as new files are added to a directory that has already been "completed", metaDigitise() will recognize these unfinished files and only cycle through the digitisation of these new files. This easily allows users to pick up from where they left off. It will also automatically re-merge completed figure with any newly digitised figures at the end of this process keeping everything together throughout the process.
@@ -46,7 +47,7 @@
 #' }
 #' @export
 
-metaDigitise<-function(dir, summary = TRUE){
+metaDigitise<-function(dir, summary = TRUE, cex=1){
 		# Check dir has a / at the end.
 	if( (substring(dir, nchar(dir)) == "/") == FALSE){
 		dir <- paste0(dir, "/")
@@ -56,7 +57,7 @@ metaDigitise<-function(dir, summary = TRUE){
 	
 	Q <- utils::menu(c("Process new images", "Import existing data", "Edit existing data"))
 	
-	switch(Q, process_new_files(dir, summary = summary), import_menu(dir, summary = summary), bulk_edit(dir, summary = summary))
+	switch(Q, process_new_files(dir, summary = summary,cex=cex), import_menu(dir, summary = summary), bulk_edit(dir, summary = summary,cex=cex))
 
 }
 
@@ -65,10 +66,11 @@ metaDigitise<-function(dir, summary = TRUE){
 #' @description Batch processes image files within a set directory, consolidates the data and exports the data for each image and type
 #' @param dir the path name to the directory / folder where the files are located
 #' @param summary summary = TRUE or FALSE is most relevant as it will print a simple summary statistics that are the same across all files
+#' @param cex relative size of points and text in replotting of digitisation.
 #' @author Joel Pick - joel.l.pick@gmail.com
 #' @author Daniel Noble - daniel.wa.noble@gmail.com
 #' @export
-process_new_files <- function(dir, summary = TRUE) {
+process_new_files <- function(dir, summary = TRUE, cex) {
 
 	# Set up calibration directory, obtain all the file details within a directory and ascertain which files need to still be completed. Just grabs relevant metadata
 			       setup_calibration_dir(dir)
@@ -96,7 +98,7 @@ process_new_files <- function(dir, summary = TRUE) {
 
 	# Loops from all non-completed figures and allow uses to digitise. Save the calibration and raw data to the caldat folder
 		 for (i in 1:length(details$paths)) {
-			         data_list[[i]] <- internal_digitise(details$paths[i], plot_type = plot_types)	
+			         data_list[[i]] <- internal_digitise(details$paths[i], plot_type = plot_types, cex=cex)	
 			    names(data_list)[i] <- details$images[i]
 			 saveRDS(data_list[[i]], file = paste0(details$cal_dir, details$name[i]))
 			

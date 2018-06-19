@@ -2,9 +2,10 @@
 #' @description Function for bulk editing previous data extraction through `metaDigitise`
 #' @param dir parent directory
 #' @param summary logical; whether summary is returned
+#' @param cex relative size of text and points in replotting
 #' @author Joel Pick
 
-bulk_edit <- function(dir, summary=TRUE){
+bulk_edit <- function(dir, summary=TRUE, cex){
 #list caldat_files
 	caldat <- dir_details(dir)
 	filepaths <- caldat$doneCalFiles

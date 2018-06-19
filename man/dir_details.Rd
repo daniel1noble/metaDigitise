@@ -17,6 +17,8 @@ Function will gather important directory details about calibration files and fig
 # temporary directory
 tmp_dir <- tempdir()
 
+setup_calibration_dir(paste0(tmp_dir, "/"))
+
 # Simulate data
 set.seed(103)
 x <- rnorm(20,0,1)

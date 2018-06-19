@@ -4,12 +4,14 @@
 \alias{bulk_edit}
 \title{bulk_edit}
 \usage{
-bulk_edit(dir, summary = TRUE)
+bulk_edit(dir, summary = TRUE, cex)
 }
 \arguments{
 \item{dir}{parent directory}
 
 \item{summary}{logical; whether summary is returned}
+
+\item{cex}{relative size of text and points in replotting}
 }
 \description{
 Function for bulk editing previous data extraction through `metaDigitise`

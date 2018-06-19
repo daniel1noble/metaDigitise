@@ -13,7 +13,7 @@ mock_object <- list(
 	entered_N=TRUE,
 	raw_data = data.frame(id=rep("control",2), x=c(60,60), y=c(75,50), n=rep(20,2)),
 	knownN = NULL,
-	error_type="sd",
+	error_type="se",
 	processed_data=data.frame(id=as.factor("control"),mean=1.5, error=0.25, n=20, variable="y", stringsAsFactors = FALSE)	
 	)
 
@@ -23,6 +23,6 @@ testthat::test_that("Checking summary.metaDigitise..", {
 	testthat::expect_equal(
 		summary.metaDigitise(mock_object),
 		data.frame(
-			filename=as.factor("image.png"), group_id=as.factor("control"), variable=as.factor("y"), mean=1.5, error=0.25, error_type=as.factor("sd"), n=20, r=NA, sd=0.25,plot_type="mean_error", stringsAsFactors = FALSE)
+			filename=as.factor("image.png"), variable=as.factor("y"), group_id=as.factor("control"), mean=1.5, sd=1.118034, n=20, r=NA, se=0.25, error_type=as.factor("se"), plot_type="mean_error", stringsAsFactors = FALSE)
 	)
 })

@@ -90,6 +90,20 @@ user_count <- function(question) {
 }
 
 
+#' @title user_base
+#' @param ... arguments passed to other functions
+#' @description asks user for base of logarithm, accept numeric or "e"
+
+user_base <- function(...) {
+  input_bad <- TRUE
+  while(input_bad){
+    input <- readline("To what base? Enter e for LN or a numeric\n")
+    input_bad <- !(input == "e" | isNumeric(input) )
+    if(input_bad) cat("\n**** Input must be 'e' or numeric ****\n")
+  }
+  return(input)
+}
+
 
 #' @title ask_variable
 #' @param plot_type plot_type

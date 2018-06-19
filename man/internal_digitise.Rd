@@ -4,7 +4,7 @@
 \alias{internal_digitise}
 \title{internal_digitise}
 \usage{
-internal_digitise(image_file, plot_type = NULL, cex = 1)
+internal_digitise(image_file, plot_type = NULL, cex)
 }
 \arguments{
 \item{image_file}{Image file}
@@ -14,7 +14,7 @@ internal_digitise(image_file, plot_type = NULL, cex = 1)
 \item{cex}{point size for replotting}
 }
 \value{
-List of
+List of user inputs and transformed data from digitisation
 }
 \description{
 Extracts points from a single figure and processes data

@@ -80,6 +80,15 @@ getVals <- function(calpoints,...) {
   return(vals)
 }
 
+#' @title getVals
+#' @param ... further arguments passed to or from other methods.
+#' @description Ask user for information about whether axes are on log scale
+
+logAxes <- function(...){
+  log_axes <- user_options("Are any axes on a log scale? Enter n if none or combination of log axes (x/y/xy)", c("n","x","y","xy","yx"))
+  base <- if(log_axes == "n"){ NULL } else{ user_base() }
+  return(c(log_axes,base))
+}
 
 
 #' @title user_calibrate
@@ -95,10 +104,10 @@ user_calibrate <- function(object){
       object$calpoints <- do.call(cal_coords, object)
       object$point_vals <- do.call(getVals, object)
       do.call(internal_redraw, c(object, calibration=TRUE, points=FALSE))
+      object$log_axes <- logAxes()
     }
     cal_Q <- readline("\nRe-calibrate? (y/n) \n")
   }
-  return(object[c("calpoints","point_vals")])
-  ##output object?
+  return(object[c("calpoints","point_vals","log_axes")])
 }
 

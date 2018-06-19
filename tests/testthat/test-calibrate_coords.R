@@ -49,14 +49,15 @@ testthat::test_that("Checking getVals..", {
 
 testthat::test_that("Checking user_calibrate..", {
 	testthat::with_mock(
-		`metaDigitise::internal_redraw` = function(...){},
-		`metaDigitise::print_cal_instructions` = function(...){},
+		`metaDigitise::internal_redraw` = function(...) "",
+		`metaDigitise::print_cal_instructions` = function(...) "",
 		`metaDigitise::cal_coords` = function(...) data.frame(x=c(0,0,0,100),y=c(0,100,0,0)),
 		`metaDigitise::getVals` = function(...) c(y1=1,y2=2,x1=3,x2=4),
+		`metaDigitise::logAxes` = function(...) "n",
 		readline = function(...) "n",
 		testthat::expect_equal(
 			user_calibrate(object=list()),
-			list(calpoints=data.frame(x=c(0,0,0,100),y=c(0,100,0,0)), point_vals=c(y1=1,y2=2,x1=3,x2=4)), 
+			list(calpoints=data.frame(x=c(0,0,0,100),y=c(0,100,0,0)), point_vals=c(y1=1,y2=2,x1=3,x2=4), log_axes="n"), 
 			info = "user_calibrate failed"
 		)
 	)
