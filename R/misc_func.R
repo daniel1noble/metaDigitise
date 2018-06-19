@@ -97,7 +97,7 @@ user_count <- function(question) {
 user_base <- function(...) {
   input_bad <- TRUE
   while(input_bad){
-    input <- readline("To what base? Enter e for LN or a numeric\n")
+    input <- readline("\nTo what base? Enter e for LN or a numeric\n")
     input_bad <- !(input == "e" | isNumeric(input) )
     if(input_bad) cat("\n**** Input must be 'e' or numeric ****\n")
   }

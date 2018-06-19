@@ -86,8 +86,9 @@ getVals <- function(calpoints,...) {
 
 logAxes <- function(...){
   log_axes <- user_options("\nAre any axes on a log scale? Enter n if none or combination of log axes (x/y/xy)", c("n","x","y","xy","yx"))
+  transformed <- if(log_axes == "n"){ NULL } else{ user_options("\nAre these log axes transformed or stretched (t/s)? \nTransformed means the axis is on the log scale, \nstretched means the axis is on the same scale but has been streched out to show log transformation \n(see Readme for examples).", c("t","s")) }
   base <- if(log_axes == "n"){ NULL } else{ user_base() }
-  return(c(log_axes,base))
+  return(c(axes=log_axes,transformed=transformed,base=base))
 }
 
 
