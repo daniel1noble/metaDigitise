@@ -11,6 +11,9 @@ is.wholenumber(x, tol = .Machine$double.eps^0.5)
 
 \item{tol}{tolerance}
 }
+\value{
+Logical value (TRUE or FALSE)
+}
 \description{
 Checks whether value is a whole number
 }

@@ -1,7 +1,8 @@
 
 #' @title delete_points
-#' @param raw_data data
 #' @description Delete groups from scatterplots
+#' @param raw_data data
+
  
 delete_group <- function(raw_data){
 	ids <- unique(raw_data$id)
@@ -13,11 +14,12 @@ delete_group <- function(raw_data){
 
 
 #' @title edit_group
+#' @description Edit group points in scatterplots
 #' @param raw_data data
 #' @param group_id group_id
 #' @param calpoints The calibration points
 #' @param ... other functions to pass to internal_redraw
-#' @description Edit group points in scatterplots
+
  
 edit_group <- function(raw_data, group_id, calpoints, ...){
 	
@@ -82,10 +84,11 @@ edit_group <- function(raw_data, group_id, calpoints, ...){
 
 
 #' @title group_scatter_extract
+#' @description Extraction of data from scatterplots
 #' @param edit logical; whether in edit mode 
 #' @param raw_data raw data
 #' @param ... arguments passed to internal_redraw
-#' @description Extraction of data from scatterplots
+
 
 group_scatter_extract <- function(edit=FALSE, raw_data = data.frame(), ...){
 

@@ -10,9 +10,8 @@ redraw_rotation <- function(image, flip, rotate){
 	return(image)
 }
 
-
-
 #' @title redraw_calibration
+#' @description plots calibration data on graph
 #' @param plot_type plot_type
 #' @param variable variable
 #' @param calpoints The calibration points
@@ -20,7 +19,7 @@ redraw_rotation <- function(image, flip, rotate){
 #' @param image_details image_details
 #' @param scalar amount to scale size points/text/lines according to plot size
 #' @param cex relative size of points and text
-#' @description plots calibration data on graph
+
 
 redraw_calibration <- function(plot_type, variable, calpoints,point_vals,image_details, scalar,cex){
 	x_shift <- image_details["width"]/30
@@ -49,12 +48,13 @@ redraw_calibration <- function(plot_type, variable, calpoints,point_vals,image_d
 
 
 #' @title redraw_points
+#' @description plots clicked data on graph
 #' @param plot_type plot_type
 #' @param raw_data The raw data
 #' @param image_details image_details
 #' @param scalar amount to scale size points/text/lines according to plot size
 #' @param cex relative size of points and text
-#' @description plots clicked data on graph
+
 
 redraw_points <- function(plot_type, raw_data, image_details, scalar,cex){
 	image_width <- image_details["width"]
@@ -112,6 +112,7 @@ redraw_points <- function(plot_type, raw_data, image_details, scalar,cex){
 
 
 #' @title internal_redraw
+#' @description Redraws figure and extraction data
 #' @param image_file Image filename
 #' @param flip whether to flip figure
 #' @param rotate how much to rotate figure
@@ -125,9 +126,6 @@ redraw_points <- function(plot_type, raw_data, image_details, scalar,cex){
 #' @param calibration logical, should calibration be redrawn
 #' @param points logical, should points be redrawn
 #' @param ... further arguments passed to or from other methods.
-#' @description Redraws figure and extraction data
-
-
 
 #image_file, flip, rotate, image_details, plot_type, calpoints, point_vals, raw_data
 

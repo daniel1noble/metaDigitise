@@ -1,29 +1,30 @@
 #' @title is.wholenumber
+#' @description Checks whether value is a whole number
 #' @param x object to be  tested
 #' @param tol tolerance
-#' @description Checks whether value is a whole number
+#' @return Logical value (TRUE or FALSE)
 
 is.wholenumber <- function(x, tol = .Machine$double.eps^0.5)  abs(x - round(x)) < tol
 
-
 #' @title isNumeric
-#' @param x character to be tested
 #' @description Checks whether a character is a number
+#' @param x character to be tested
+#' @return Logical (TRUE or FALSE) indicating whether value is numeric or not
 
 isNumeric <- function(x) !suppressWarnings(is.na(as.numeric(x)))
 
 
 #' @title is.even
-#' @param x integer value
 #' @description Checks whether a integer is even
+#' @param x integer value
+#' @return Logical (TRUE or FALSE) indicating whether value is an even number or not
 
 is.even <- function(x) x %% 2 == 0
 
-
-
 #' @title filename
-#' @param x filepath
 #' @description extracts filename from filepath
+#' @param x filepath
+
 
 filename <- function(x) {
 	y <- strsplit(x,"/")
@@ -31,9 +32,9 @@ filename <- function(x) {
 }
 
 #' @title user_options
+#' @description asks user for option from specified list
 #' @param question question
 #' @param allowed_answers allowed answers
-#' @description asks user for option from specified list
 
 user_options <- function(question, allowed_answers) {
 	input_bad <- TRUE
@@ -46,9 +47,10 @@ user_options <- function(question, allowed_answers) {
 }
 
 #' @title user_unique
+#' @description asks user for option from specified list
 #' @param question question
 #' @param previous_answers allowed answers
-#' @description asks user for option from specified list
+
 
 user_unique <- function(question, previous_answers) {
 	input_bad <- TRUE
@@ -61,8 +63,8 @@ user_unique <- function(question, previous_answers) {
 }
 
 #' @title user_numeric
-#' @param question question
 #' @description asks user for numeric
+#' @param question question
 
 user_numeric <- function(question) {
 	input_bad <- TRUE
@@ -76,8 +78,8 @@ user_numeric <- function(question) {
 
 
 #' @title user_count
-#' @param question question
 #' @description asks user for count
+#' @param question question
 
 user_count <- function(question) {
 	input_bad <- TRUE
@@ -91,8 +93,8 @@ user_count <- function(question) {
 
 
 #' @title user_base
-#' @param ... arguments passed to other functions
 #' @description asks user for base of logarithm, accept numeric or "e"
+#' @param ... arguments passed to other functions
 
 user_base <- function(...) {
   input_bad <- TRUE
@@ -106,8 +108,8 @@ user_base <- function(...) {
 
 
 #' @title ask_variable
-#' @param plot_type plot_type
 #' @description asks user what variable(s) is depending on plot type
+#' @param plot_type plot_type
 
 ask_variable <- function(plot_type){
 	if(plot_type == "scatterplot"){
@@ -124,9 +126,9 @@ ask_variable <- function(plot_type){
 
 
 #' @title cat_matrix
+#' @description prints a vector as a number list of items with a certain number of columns
 #' @param x vector
 #' @param cols number of columns
-#' @description prints a vector as a number list of items with a certain number of columns
 
 cat_matrix<- function(x, cols){
 	rows <- ceiling(length(x)/cols)
@@ -138,11 +140,12 @@ cat_matrix<- function(x, cols){
 
 
 #' @title knownN
+#' @description prints a vector as a number list of items with a certain number of columns
 #' @param plot_type plot type
 #' @param processed_data raw_data
 #' @param knownN previously entered N
 #' @param ... arguments from other calls
-#' @description prints a vector as a number list of items with a certain number of columns
+
 
 knownN <- function(plot_type, processed_data, knownN = NULL,...){
 	ids <- 	unique(processed_data$id)

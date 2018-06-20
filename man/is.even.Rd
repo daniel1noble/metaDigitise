@@ -9,6 +9,9 @@ is.even(x)
 \arguments{
 \item{x}{integer value}
 }
+\value{
+Logical (TRUE or FALSE) indicating whether value is an even number or not
+}
 \description{
 Checks whether a integer is even
 }

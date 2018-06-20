@@ -1,5 +1,6 @@
 
 ## CRAN revisions
+	- Added more examples in functions. Please note that not all functions have examples as they are helper functions used in the major functions of the package. We have now tried to remove export of these. We do not anticipate users adopting them in normal use.
 	- Fixed package name style in DESCRIPTION
 	- Fixed metaDIgitise example to ensure example writes to temp directory
 	- Fixed package title

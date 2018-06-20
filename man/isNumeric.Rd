@@ -9,6 +9,9 @@ isNumeric(x)
 \arguments{
 \item{x}{character to be tested}
 }
+\value{
+Logical (TRUE or FALSE) indicating whether value is numeric or not
+}
 \description{
 Checks whether a character is a number
 }

@@ -149,7 +149,6 @@ process_new_files <- function(dir, summary = TRUE, cex) {
 #' @return The function will return the type of plot specified by the user and feed this argument back into metDigitise 
 #' @author Daniel Noble - daniel.wa.noble@gmail.com
 #' @author Joel Pick - joel.l.pick@gmail.com
-#' @export
 
 specify_type <- function(){
 		#User enters numeric value to specify the plot BEFORE moving on
@@ -167,7 +166,6 @@ specify_type <- function(){
 #' @param summary A logical 'TRUE' or 'FALSE' indicating whether metaDigitise should print summary statistics from each figure and group.
 #' @description Function for extracting the data from a metaDigitise list and creating either summary data or a list of the raw data.
 #' @return The function will return a data frame with the data across all the digitised files 
-#' @export
 
 extract_digitised <- function(list, summary = TRUE) {
 

@@ -3,7 +3,7 @@
 #' @param dir The directory where figures have already been digitised. There
 #' @param summary Logical indicating whether summarised (default) or calibrated data should be returned. 
 #' @return Returns a data frame (summary = TRUE) or a list with slots for each plot type (summary = FALSE)
-#' @example
+#' @examples
 #' \dontrun{
 #' # Make some mock metaDigitise object
 #' 	mock_metaDig <- list(
@@ -15,11 +15,20 @@
 #' 			calpoints = data.frame(x=c(0,0),y=c(0,100)), 
 #' 			point_vals = c(1,2), 
 #' 			entered_N=TRUE,
-#' 			raw_data = data.frame(id=rep("control",2), x=c(60,60), y=c(75,50), n=rep(20,2)),
-#' 			knownN = NULL,
-#' 			error_type="sd",
-#' 			processed_data=data.frame(id=as.factor("control"),mean=1.5, error=0.25, n=20, 	variable="y", stringsAsFactors = FALSE)	
-#' 		)
+#' 			raw_data = data.frame(id=rep("control",2), 
+#' 						x=c(60,60), 
+#' 						y=c(75,50), 
+#' 						n=rep(20,2)),
+#' 						knownN = NULL,
+#' 						error_type="sd",
+#' 					processed_data=data.frame(
+#' 						id=as.factor("control"),
+#' 						mean=1.5, 
+#' 						error=0.25, 
+#' 						n=20, 	
+#' 						variable="y", 
+#' 						stringsAsFactors = FALSE)	
+#' 					)
 #' class(mock_metaDig) <- 'metaDigitise'
 #' 
 #' # write image file to tmpdir()

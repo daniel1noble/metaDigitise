@@ -1,3 +1,9 @@
+#' @title point_extraction
+#' @description Extracts or edits point of a digitisation
+#' @param object Object
+#' @param edit Logical (TRUE or FALSE) indicating whether a point would like to be edited
+
+
 point_extraction <-function(object, edit=FALSE){
 
 	plot_type <- object$plot_type
