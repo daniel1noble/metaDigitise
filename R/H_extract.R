@@ -1,9 +1,10 @@
 #' @title histogram_extract
+#' @description Extraction of data from histograms
 #' @param edit logical; whether in edit mode 
 #' @param raw_data raw data
 #' @param calpoints The calibration points
 #' @param ... arguments to pass to internal_redraw
-#' @description Extraction of data from histograms
+
 histogram_extract <- function(edit=FALSE, raw_data = data.frame(), calpoints, ...){
 
 	if(edit){ 

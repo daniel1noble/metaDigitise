@@ -79,9 +79,9 @@ N_needed <- function(filepaths){
 
 
 #' @title enter_N
-#' @description ...
+#' @description Enter sample sizes for a group
 #' @param raw_data raw_data
-#' @param ... ...
+#' @param ... Pass additional arguments
 #' @author Joel Pick
 
 enter_N <- function(raw_data,...){
@@ -93,16 +93,11 @@ enter_N <- function(raw_data,...){
 }
 
 
-
-
-
-
 #' @title edit_metaDigitise
 #' @description Function for editing previous data extraction through `metaDigitise`
 #' @param object an R object of class ‘metaDigitise’
 #' @return Data.frame
 #' @author Joel Pick
-#' @export
 
 edit_metaDigitise <- function(object){
 	graphics::plot(object)
