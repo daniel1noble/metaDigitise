@@ -9,10 +9,10 @@ enter_N(raw_data, ...)
 \arguments{
 \item{raw_data}{raw_data}
 
-\item{...}{...}
+\item{...}{Pass additional arguments}
 }
 \description{
-...
+Enter sample sizes for a group
 }
 \author{
 Joel Pick
