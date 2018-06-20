@@ -30,7 +30,7 @@ testthat::test_that("Checking specify_type works as expected..", {
 
 	testthat::with_mock(
 		readline = function(...) "b",
-		testthat::expect_equal(metaDigitise::specify_type(), "boxplot", info = "specify_type not working correctly does not match boxplot")
+		testthat::expect_equal(specify_type(), "boxplot", info = "specify_type not working correctly does not match boxplot")
 	)
 	
 })
