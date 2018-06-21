@@ -69,6 +69,29 @@ metaDigitise<-function(dir, summary = TRUE, cex=1){
 #' @param cex relative size of points and text in replotting of digitisation.
 #' @author Joel Pick - joel.l.pick@gmail.com
 #' @author Daniel Noble - daniel.wa.noble@gmail.com
+#' @examples
+#' \dontrun{
+#' # temporary directory
+#' tmp_dir <- tempdir()
+#' 
+#' # Simulate data
+#' set.seed(103)
+#' x <- rnorm(20,0,1)
+#' y <- rnorm(20,0,1)
+#' means <- c(mean(x),mean(y))
+#' ses <- c(sd(x)/sqrt(length(x))*1.96, sd(y)/sqrt(length(y))*1.96)
+#' 
+#' #Generate mock mean error plot
+#' png(filename = paste0(tmp_dir,"/mean_error.png"), width = 480, height = 480)
+#' plot(means, ylim = c(min(means-ses)-0.1,max(means+ses)+0.1), xlim=c(0.5,2.5), 
+#' xaxt="n", pch=19, cex=2, ylab="Variable +/- SE", xlab="Treatment", main="Mean Error")
+#' arrows(1:length(means),means+ses, 1:length(means), means-ses, code=3, angle=90, length=0.1)
+#' axis(1,1:length(means),names(means))
+#' dev.off()
+#' 
+#' #metaDigitise figures
+#' 	data <- process_new_files(paste0(tmp_dir, "/"), summary = TRUE, cex = 2)
+#' }
 #' @export
 process_new_files <- function(dir, summary = TRUE, cex) {
 
@@ -96,7 +119,7 @@ process_new_files <- function(dir, summary = TRUE, cex) {
 	# Create data list to store previous and current digitisations of figures
 		 data_list <- list()
 
-	# Loops from all non-completed figures and allow uses to digitise. Save the calibration and raw data to the caldat folder
+	# Loops from all non-completed figures and allow users to digitise. Save the calibration and raw data to the caldat folder
 		 for (i in 1:length(details$paths)) {
 			         data_list[[i]] <- internal_digitise(details$paths[i], plot_type = plot_types, cex=cex)	
 			    names(data_list)[i] <- details$images[i]

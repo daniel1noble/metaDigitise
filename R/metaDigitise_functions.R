@@ -6,6 +6,7 @@
 #' @param cex point size for replotting
 #' @return List of user inputs and transformed data from digitisation
 #' @author Joel Pick
+#' @export
 
 internal_digitise <- function(image_file, plot_type=NULL, cex){
 		
