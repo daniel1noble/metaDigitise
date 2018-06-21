@@ -5,7 +5,6 @@
 \usepackage{fullpage}
 
 \usepackage{amssymb,rotating,natbib,graphicx,fancyvrb,booktabs} 
-
 \usepackage[parfill]{parskip} 
 \usepackage[utf8]{inputenc}
 
@@ -120,7 +119,18 @@ Are all plot types Different or the Same? (d/s)
 \end{CodeOutput}
 \end{CodeChunk}
 
-\fct{metaDigitise} then asks whether the figure needs to be rotated or flipped. This can be needed when box plots and mean and error plots are not orientated correctly. In some cases, older papers can give slightly off angled images which can be corrected by rotating. In this prompt the user has three options: \code{f} for ``Flip'', \code{r} for ``rotate'' or \code{c} for ``continue''. 
+\fct{metaDigitise} then asks whether the figure needs to be rotated or flipped. This can be needed when box plots and mean and error plots are not orientated correctly (as shown in Figure \ref{fig:rotate}). In some cases, older papers can give slightly off angled images which can be corrected by rotating. In this prompt the user has three options: \code{f} for ``Flip'', \code{r} for ``rotate'' or \code{c} for ``continue''. 
+
+
+\begin{figure}[!b] 
+\centering
+ \includegraphics[width=0.75\textwidth]{fig_rotate.pdf} 
+ \caption{Figure rotation. A) and B) show how non-aligned images can be realigned through user defined rotation. C) and D) show how figures can be re-orientated so as to aid data input.}
+\label{fig:rotate}
+\end{figure}
+
+
+
 
 \begin{CodeChunk}
 \begin{CodeOutput}
@@ -797,61 +807,6 @@ where $\theta$ is the estimate and $\hat{\theta}$ is the true value. The deviati
 \subsection{Testing the accuracy of digitisations}
 To test how accurate \pkg{metaDigitise} is at matching clicked points to their true values, we generated four random scatterplots, each with 20 data points, and digitised these with \fct{metaDigitise}. This was done by one digitiser (J.L.P.), as there is no detectable between user variation.
 
-
-\clearpage
-
-\section{Comparison with existing software}
-\begin{table}[h!]
-\centering
-\rotatebox{90}{%
-\begin{minipage}{1.35\textwidth}
-\small
-\begin{tabular}{lccccccc}
-\hline
-Function                  & metaDigitise & GraphClick$^1$ & DataThief$^2$  & DigitizeIt$^3$ & WebPlotDigitizer$^4$ & metagear$^5$ & digitize$^6$\\
-\hline
-Scatterplots              & \checkmark   & \checkmark & \checkmark & \checkmark & \checkmark     & \checkmark$^7$ & \checkmark \\
-Mean/error plots      & \checkmark   & \checkmark & \checkmark & $\color{red}\times$   & $\color{red}\times$       & \checkmark$^7$ & $\color{red}\times$    \\
-Boxplots                  & \checkmark   & $\color{red}\times$   & $\color{red}\times$   & $\color{red}\times$   & $\color{red}\times$       & $\color{red}\times$       & $\color{red}\times$    \\
-Histograms                & \checkmark   & $\color{red}\times$   & $\color{red}\times$   & $\color{red}\times$   & \checkmark$^7$ & $\color{red}\times$       & $\color{red}\times$    \\
-Graph rotation$^8$        & \checkmark   & \checkmark & \checkmark & \checkmark & \checkmark     & $\color{red}\times$       & $\color{red}\times$    \\
-Groups                    & \checkmark   & \checkmark & $\color{red}\times$   & \checkmark & \checkmark     & $\color{red}\times$       & $\color{red}\times$    \\
-Entry of metadata         & \checkmark   & $\color{red}\times$   & $\color{red}\times$   & $\color{red}\times$   & $\color{red}\times$       & $\color{red}\times$       & $\color{red}\times$    \\
-Summarising data          & \checkmark   & $\color{red}\times$   & $\color{red}\times$   & $\color{red}\times$   & $\color{red}\times$       & $\color{red}\times$       & $\color{red}\times$    \\
-Multiple image processing & \checkmark   & $\color{red}\times$   & $\color{red}\times$   & $\color{red}\times$   & $\color{red}\times$       & $\color{red}\times$       & $\color{red}\times$    \\
-Reproducable$^9$  & \checkmark   & \checkmark & \checkmark & $\color{red}\times$   & \checkmark     & \checkmark       & $\color{red}\times$    \\
-Automated point detection & $\color{red}\times$     & \checkmark &     $\color{red}\times$      & \checkmark & \checkmark     & \checkmark     & $\color{red}\times$    \\
-Line extraction           & $\color{red}\times$     & \checkmark & \checkmark & \checkmark & \checkmark     & $\color{red}\times$       & $\color{red}\times$    \\
-Zoom                      & $\color{red}\times$     & \checkmark & \checkmark & \checkmark & \checkmark     & $\color{red}\times$       & $\color{red}\times$    \\
-Log axis                  & \checkmark   & \checkmark & \checkmark & \checkmark & \checkmark     & $\color{red}\times$       & $\color{red}\times$    \\
-Dates                     & $\color{red}\times$   & $\color{red}\times$   & \checkmark & $\color{red}\times$   & \checkmark     & $\color{red}\times$       & $\color{red}\times$    \\
-Asymmetric error bars     & $\color{red}\times$     & $\color{red}\times$   & \checkmark & $\color{red}\times$   & $\color{red}\times$       & $\color{red}\times$       & $\color{red}\times$    \\
-Freeware                  & \checkmark$^{10}$ & \checkmark$^{11}$ & \checkmark$^{11}$ & $\color{red}\times$$^{11}$ & \checkmark$^{11}$ & \checkmark$^{10}$ & \checkmark$^{10}$\\
-\hline
-
-%http://datathief.org/DatathiefManual.pdf
-%http://www.digitizeit.de/#Features
-%https://automeris.io/WebPlotDigitizer/userManual.pdf
-
-\end{tabular}
-\\
-$^1$ \citet{GraphClick}
-$^2$ \citet{DataThief}
-$^3$ \citet{DigitizeIt}
-$^4$ \citet{WebPlotDigitizer}
-$^5$ \citet{Lajeunesse2016}
-$^6$ \citet{Poisot2011}
-\\$^7$ Only automated, no manual extraction.
-\\$^8$ Or handles rotated graphs. 
-\\$^9$ Allows saving, re-plotting and editing of data extraction.
-\\$^{10}$ \proglang{R} package.
-\\$^{11}$ Standalone software.
-\caption{\label{tab:comparison} Comparison of functionality between different digitisation softwares.}
-\end{minipage}
-}
-
- 
-\end{table}
 
 \clearpage
 

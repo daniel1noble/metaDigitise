@@ -4,8 +4,7 @@
 \geometry{a4paper} 
 \usepackage{fullpage}
 
-\usepackage{amssymb,rotating,natbib,graphicx,fancyvrb} 
-
+\usepackage{amssymb,rotating,natbib,graphicx,fancyvrb,booktabs,xcolor} 
 \usepackage[parfill]{parskip} 
 \usepackage[utf8]{inputenc}
 
@@ -84,7 +83,7 @@ $^1$
 
 In many different contexts, researchers make use of data presented in primary literature. In the ecology and evolution, this most notably includes comparative and meta-analyses. These techniques rely on descriptive statistics (e.g. means, standard deviations (SD), sample sizes, correlation coefficients) extracted from primary literature. As well as being presented in the text or tables of research papers, descriptive statistics are frequently presented in figures and so need to be manually extracted using digitising programs. 
 
-Although there are several tools that extract data from figures (e.g. \proglang{DataThief} \citep{DataThief}, \proglang{GraphClick} \citep{GraphClick}, \proglang{WebPlotDigitizer} \citep{WebPlotDigitizer}), these tools do not cater to needs of meta-analysis for four main reasons (here we focus on meta-analysis, although many  points apply to extraction for comparative analysis). First, although meta-analysis is an important tool in consolidating the data from multiple studies, many of the processes involved in data extraction are opaque and difficult to reproduce, making extending or replicating studies problematic. Having a tool that facilitates reproducibility in meta-analyses will increase transparency and aid in resolving the reproducibility crises seen in many fields \citep{peng_reproducible_2006, peng_reproducible_2011, Parker2016}. Second, digitising programs do not allow the integration of metadata at the time of data extraction, such as experimental group or variable names, and sample sizes. This makes the downstream calculations laborious, as information has to be added later using different software. Third, existing programs do not import sets of images for the user to systematically work through. Instead they require the user to manually import images one by one, and export data into individual files, that need to be imported and edited using different software. Finally, digitising programs typically only provide the user with calibrated \textit{x,y} coordinates from imported figures, and do not differentiate between common plot types that are used to present data. Consequently a large amount of additional data manipulation is required, that is different across plots types. For example, data are frequently presented in plots with means and standard errors or confidence intervals (Figure \ref{fig:all_extract}A), from which the user wants a mean and SD for each group presented. From \textit{x,y} coordinates, users must manually discern between mean and error coordinates and assign points to groups. The error then needs to be calculated as the deviation from the mean, and then transformed to SD, according to the type of error presented. 
+Although there are several tools that extract data from figures (e.g. \proglang{DataThief} \citep{DataThief}, \proglang{GraphClick} \citep{GraphClick}, \proglang{WebPlotDigitizer} \citep{WebPlotDigitizer}, see Table \ref{tab:comparison}), these tools do not cater to needs of meta-analysis for four main reasons (here we focus on meta-analysis, although many  points apply to extraction for comparative analysis). First, although meta-analysis is an important tool in consolidating the data from multiple studies, many of the processes involved in data extraction are opaque and difficult to reproduce, making extending or replicating studies problematic. Having a tool that facilitates reproducibility in meta-analyses will increase transparency and aid in resolving the reproducibility crises seen in many fields \citep{peng_reproducible_2006, peng_reproducible_2011, Parker2016}. Second, digitising programs do not allow the integration of metadata at the time of data extraction, such as experimental group or variable names, and sample sizes. This makes the downstream calculations laborious, as information has to be added later using different software. Third, existing programs do not import sets of images for the user to systematically work through. Instead they require the user to manually import images one by one, and export data into individual files, that need to be imported and edited using different software. Finally, digitising programs typically only provide the user with calibrated \textit{x,y} coordinates from imported figures, and do not differentiate between common plot types that are used to present data. Consequently a large amount of additional data manipulation is required, that is different across plots types. For example, data are frequently presented in plots with means and standard errors or confidence intervals (Figure \ref{fig:all_extract}A), from which the user wants a mean and SD for each group presented. From \textit{x,y} coordinates, users must manually discern between mean and error coordinates and assign points to groups. The error then needs to be calculated as the deviation from the mean, and then transformed to SD, according to the type of error presented. 
 
 Data extraction from figures is therefore an incredibly time-consuming process as existing software does not provide an optimized, reproducible research pipeline to facilitate data extraction and editing. Here, we present an interactive \proglang{R} package, \pkg{metaDigitise} (available at https://github.com/daniel1noble/metaDigitise), which is designed for large scale, reproducible data extraction from figures, specifically catering to the the needs of meta-analysts. To this end, we provide tools to extract data from common plot types (mean/error plots, box plots, scatter plots and histograms, see Figure \ref{fig:all_extract}). \pkg{metaDigitise} operates within the \proglang{R} environment making data extraction, analysis and export more streamlined. The necessary calculations are carried out on calibrated data immediately after extraction so that comparable summary statistics can be obtained quickly. Summary data from multiple figures is returned into a single data frame which can be can easily exported or use in downstream analysis within \proglang{R}. Completed digitisations are automatically saved for each figure, meaning users can redraw their digitisations on figures, make corrections and access calibration and proceeded data. This makes sharing figure digitisation and reproducing the work of others simple and easy, and allows meta-analyses to be updated more efficiently.
 
@@ -113,7 +112,7 @@ Running \fct{metaDigitise} presents the user with three options; `Process new im
 
 For all plot types, \fct{metaDigitise} requires the user to calibrate the axes in the figure, by clicking on two known points on the axis in question, and entering the value of those points (Figure \ref{fig:all_extract}). \fct{metaDigitise} then calculates the value of any clicked points in terms of the figure axes. This is based on the calibration used in the \pkg{digitize} R package \citep{Poisot2011}. For mean/error and box plots, only the y-axis is calibrated (Figure \ref{fig:all_extract}A,B), assuming the x-axis is redundant. For scatter plots and histograms both axes are calibrated (Figure \ref{fig:all_extract}C,D).
 
-As figures may have been copied from older, scanned publications, they may not be perfectly orientated. This makes calibration of the points in the figure problematic. \fct{metaDigitise} allows users to rotate the image (Figure \ref{fig:rotate}A,B). Furthermore, mean/error plots, box plots and histograms, may be presented with horizontal bars. \fct{metaDigitise} assumes that bars are vertical, but allows the user to flip the image to make the bars are vertical (Figure \ref{fig:rotate}C,D).
+As figures may have been copied from older, scanned publications, they may not be perfectly orientated. This makes calibration of the points in the figure problematic. \fct{metaDigitise} allows users to rotate the image (Figure S2A,B). Furthermore, mean/error plots, box plots and histograms, may be presented with horizontal bars. \fct{metaDigitise} assumes that bars are vertical, but allows the user to flip the image to make the bars are vertical (Figure S2C,D).
 
 \pkg{metaDigitise} recognises four main types of plot; Mean/error plots, box plots, scatter plots and histograms (\ref{fig:all_extract}). All plot types can be extracted in a single call of \fct{metaDigitise} and integrated into one output. Alternatively, users can process different plot types separately, using separate directories. All four plot types are extracted slightly differently (outlined below). Upon completing all images, or quitting, either summarised or calibrated data is returned (specified by the user through the \code{summary} argument). Summarised data consists of a mean, SD and sample size, for each identified group within the plot (should multiple groups exist). In the case of scatter plots, the correlation coefficient between x and y variables within each identified group is also returned. Calibrated data consists of a list with slots for each of the four figure types, containing the calibrated points that the user has clicked. This may be particularly useful in the case of scatter plots. 
 
@@ -203,13 +202,61 @@ J.L.P. and D.W.A.N. conceived the study and J.L.P., S.N. and D.W.A.N. developed 
 \label{fig:all_extract}
 \end{figure}
 
+\clearpage
 
-\begin{figure}[!b] 
+\section*{Tables}
+
+\begin{table}[h!]
 \centering
- \includegraphics[width=0.75\textwidth]{fig_rotate.pdf} 
- \caption{Figure rotation. A) and B) show how non-aligned images can be realigned through user defined rotation. C) and D) show how figures can be re-orientated so as to aid data input.}
-\label{fig:rotate}
-\end{figure}
+\rotatebox{90}{%
+\begin{minipage}{1.35\textwidth}
+\small
+\begin{tabular}{lccccccc}
+\hline
+Function                  & metaDigitise & GraphClick$^1$ & DataThief$^2$  & DigitizeIt$^3$ & WebPlotDigitizer$^4$ & metagear$^5$ & digitize$^6$\\
+\hline
+Scatterplots              & \checkmark   & \checkmark & \checkmark & \checkmark & \checkmark     & \checkmark$^7$ & \checkmark \\
+Mean/error plots      & \checkmark   & \checkmark & \checkmark & $\color{red}\times$   & $\color{red}\times$       & \checkmark$^7$ & $\color{red}\times$    \\
+Boxplots                  & \checkmark   & $\color{red}\times$   & $\color{red}\times$   & $\color{red}\times$   & $\color{red}\times$       & $\color{red}\times$       & $\color{red}\times$    \\
+Histograms                & \checkmark   & $\color{red}\times$   & $\color{red}\times$   & $\color{red}\times$   & \checkmark$^7$ & $\color{red}\times$       & $\color{red}\times$    \\
+Graph rotation$^8$        & \checkmark   & \checkmark & \checkmark & \checkmark & \checkmark     & $\color{red}\times$       & $\color{red}\times$    \\
+Grouped Data            & \checkmark   & \checkmark & $\color{red}\times$   & \checkmark & \checkmark     & $\color{red}\times$       & $\color{red}\times$    \\
+Entry of metadata         & \checkmark   & $\color{red}\times$   & $\color{red}\times$   & $\color{red}\times$   & $\color{red}\times$       & $\color{red}\times$       & $\color{red}\times$    \\
+Summarising data          & \checkmark   & $\color{red}\times$   & $\color{red}\times$   & $\color{red}\times$   & $\color{red}\times$       & $\color{red}\times$       & $\color{red}\times$    \\
+Multiple image processing & \checkmark   & $\color{red}\times$   & $\color{red}\times$   & $\color{red}\times$   & $\color{red}\times$       & $\color{red}\times$       & $\color{red}\times$    \\
+Reproducable$^9$  & \checkmark   & \checkmark & \checkmark & $\color{red}\times$   & \checkmark     & \checkmark       & $\color{red}\times$    \\
+Automated point detection & $\color{red}\times$     & \checkmark &     $\color{red}\times$      & \checkmark & \checkmark     & \checkmark     & $\color{red}\times$    \\
+Line extraction           & $\color{red}\times$     & \checkmark & \checkmark & \checkmark & \checkmark     & $\color{red}\times$       & $\color{red}\times$    \\
+Zoom                      & $\color{red}\times$     & \checkmark & \checkmark & \checkmark & \checkmark     & $\color{red}\times$       & $\color{red}\times$    \\
+Log axis                  & \checkmark   & \checkmark & \checkmark & \checkmark & \checkmark     & $\color{red}\times$       & $\color{red}\times$    \\
+Dates                     & $\color{red}\times$   & $\color{red}\times$   & \checkmark & $\color{red}\times$   & \checkmark     & $\color{red}\times$       & $\color{red}\times$    \\
+Asymmetric error bars     & $\color{red}\times$     & $\color{red}\times$   & \checkmark & $\color{red}\times$   & $\color{red}\times$       & $\color{red}\times$       & $\color{red}\times$    \\
+Freeware                  & \checkmark$^{10}$ & \checkmark$^{11}$ & \checkmark$^{11}$ & $\color{red}\times$$^{11}$ & \checkmark$^{11}$ & \checkmark$^{10}$ & \checkmark$^{10}$\\
+\hline
+
+%http://datathief.org/DatathiefManual.pdf
+%http://www.digitizeit.de/#Features
+%https://automeris.io/WebPlotDigitizer/userManual.pdf
+
+\end{tabular}
+\\
+$^1$ \citet{GraphClick}
+$^2$ \citet{DataThief}
+$^3$ \citet{DigitizeIt}
+$^4$ \citet{WebPlotDigitizer}
+$^5$ \citet{Lajeunesse2016}
+$^6$ \citet{Poisot2011}
+\\$^7$ Only automated, no manual extraction.
+\\$^8$ Or handles rotated graphs. 
+\\$^9$ Allows saving, re-plotting and editing of data extraction.
+\\$^{10}$ \proglang{R} package.
+\\$^{11}$ Standalone software.
+\caption{\label{tab:comparison} Comparison of functionality between different digitisation softwares.}
+\end{minipage}
+}
+
+ 
+\end{table}
 
 
 
