@@ -50,15 +50,18 @@ if(!plot_type %in% c("mean_error","boxplot")) "
 
 #' @title cal_coords
 #' @param plot_type plot type
+#' @param cex size of points
 #' @param ... further arguments passed to or from other methods.
 #' @description Prompts user to enter axis coordinates, and their values. Modified from the digitize package
 
-cal_coords <- function(plot_type,...) {
-	calpoints_y <- graphics::locator(2, type="o", col="blue", pch=3, lwd = 2)
+cal_coords <- function(plot_type,cex,...) {
+	calpoints_y <- locator_mD(2, line=TRUE, col="blue", pch=3, cex=cex)
+# graphics::locator(2, type="o", col="blue", pch=3, lwd = 2)
 
   calpoints_x <- NULL
   if(!plot_type %in% c("mean_error","boxplot")){
-    calpoints_x <- graphics::locator(2, type="o", col="blue", pch=3, lwd = 2)
+    calpoints_x <- locator_mD(2, line=TRUE, col="blue", pch=3, cex=cex)
+# graphics::locator(2, type="o", col="blue", pch=3, lwd = 2)
   }
 
   utils::flush.console()

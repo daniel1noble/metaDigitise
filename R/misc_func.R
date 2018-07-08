@@ -1,3 +1,23 @@
+#' @title locator_mD
+#' @description Wrapper function for locator, with more control over point size etc
+#' @param nPoints number of points in a sequence
+#' @param line logical; plot lines between points
+#' @param col colour of points
+#' @param cex size of points
+#' @param ... further arguments passed to or from other methods.
+#' @return Plots clicked points, and returns their x.y coordinates as a data.frame
+
+locator_mD <- function(nPoints=1,line=TRUE,cex=1,col="red",...){
+	clicked <- NULL
+	for(i in 1:nPoints){
+		clicked <- rbind(clicked,as.data.frame(graphics::locator(1)))
+		graphics::points(clicked$x[i],clicked$y[i],cex=cex,col=col,...)
+		if(line & i>1) graphics::lines(clicked$x[c(i-1,i)],clicked$y[c(i-1,i)],col=col,lwd=2*cex)
+		}
+	return(clicked)
+}
+
+
 #' @title is.wholenumber
 #' @description Checks whether value is a whole number
 #' @param x object to be  tested

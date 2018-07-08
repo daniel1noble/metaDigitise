@@ -17,21 +17,20 @@ redraw_rotation <- function(image, flip, rotate){
 #' @param calpoints The calibration points
 #' @param point_vals The point values
 #' @param image_details image_details
-#' @param scalar amount to scale size points/text/lines according to plot size
 #' @param cex relative size of points and text
 
 
-redraw_calibration <- function(plot_type, variable, calpoints,point_vals,image_details, scalar,cex){
+redraw_calibration <- function(plot_type, variable, calpoints,point_vals,image_details,cex){
 	x_shift <- image_details["width"]/30
 	y_shift <- image_details["height"]/30
-	text_cex <- 2*scalar
-	line_width <- 2*scalar
+	text_cex <- 2*cex
+	line_width <- 2*cex
 	cal_col <- "blue"
 
 	graphics::points(calpoints, pch=3, col=cal_col, lwd=line_width)
-
 	graphics::lines(calpoints[1:2,], col=cal_col, lwd=line_width)
 	graphics::text(calpoints$x[1:2] - rep(x_shift, 2), calpoints$y[1:2], point_vals[1:2], col=cal_col, cex=text_cex)
+
 	if(plot_type=="histogram"){
 		graphics::text(mean(calpoints$x[3:4]), mean(calpoints$y[3:4]) - y_shift*1.5, variable[1], col=cal_col, cex=text_cex)
 	}else{	
@@ -52,18 +51,17 @@ redraw_calibration <- function(plot_type, variable, calpoints,point_vals,image_d
 #' @param plot_type plot_type
 #' @param raw_data The raw data
 #' @param image_details image_details
-#' @param scalar amount to scale size points/text/lines according to plot size
 #' @param cex relative size of points and text
 
 
-redraw_points <- function(plot_type, raw_data, image_details, scalar,cex){
+redraw_points <- function(plot_type, raw_data, image_details, cex){
 	image_width <- image_details["width"]
 	image_height <- image_details["height"]
 	legend_pos <- image_height/40
 
-	text_cex <- 1*scalar
-	line_width <- 2*scalar
-	point_cex <- 1*scalar
+	text_cex <- 1*cex
+	line_width <- 2*cex
+	point_cex <- 1*cex
 	point_col="red"
 
 	## legend
@@ -134,24 +132,21 @@ internal_redraw <- function(image_file, flip=FALSE, rotate=0, plot_type=NULL, va
 	op <- graphics::par(mar=c(3,0,2,0), mfrow=c(1,1))
 	on.exit(graphics::par(op))
 
-	plot_size <- graphics::par("pin")
-	scalar <- plot_size[1]/7
-
 	image <- magick::image_read(image_file)
 	if(rotation) image <- redraw_rotation(image=image, flip=flip, rotate=rotate)
 
 	image_details <- c(width = magick::image_info(image)["width"][[1]], height = magick::image_info(image)["height"][[1]])
 
-	text_cex <- 1*scalar
+	text_cex <- 1*cex
 
 	graphics::plot(image)
 	graphics::mtext(filename(image_file),3, 1, cex=text_cex)
 	if(!is.null(plot_type)) graphics::mtext(plot_type,3, 0, cex=text_cex)
 
 	if(is.null(calpoints)) calibration=FALSE
-	if(calibration) redraw_calibration(plot_type=plot_type, variable=variable, calpoints=calpoints,point_vals=point_vals,image_details=image_details, scalar=scalar, cex=cex)
-
+	if(calibration) redraw_calibration(plot_type=plot_type, variable=variable, calpoints=calpoints,point_vals=point_vals,image_details=image_details, cex=cex)
+ 
 	if(is.null(raw_data)) points=FALSE
-	if(points) redraw_points(plot_type=plot_type,raw_data=raw_data,image_details=image_details, scalar=scalar, cex=cex)
+	if(points) redraw_points(plot_type=plot_type,raw_data=raw_data,image_details=image_details,  cex=cex)
 
 }

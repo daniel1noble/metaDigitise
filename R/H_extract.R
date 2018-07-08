@@ -3,9 +3,10 @@
 #' @param edit logical; whether in edit mode 
 #' @param raw_data raw data
 #' @param calpoints The calibration points
+#' @param cex point size
 #' @param ... arguments to pass to internal_redraw
 
-histogram_extract <- function(edit=FALSE, raw_data = data.frame(), calpoints, ...){
+histogram_extract <- function(edit=FALSE, raw_data = data.frame(), calpoints, cex, ...){
 
 	if(edit){ 
 		idQ <- user_options("Change group identifier? (y/n) ",c("y","n"))
@@ -34,7 +35,8 @@ histogram_extract <- function(edit=FALSE, raw_data = data.frame(), calpoints, ..
 		} 
 		while(histQ=="a"){
 			i=i+1
-			bar_points <- graphics::locator(2, type="o", col=bar_cols[is.even(i)+1], lwd=2, pch=19)
+			bar_points <- locator_mD(2, line=TRUE, col=bar_cols[is.even(i)+1], pch=19,cex=cex)
+			#graphics::locator(2, type="o", col=bar_cols[is.even(i)+1], lwd=2, pch=19)
 			if( mean(bar_points$x)<max(box_x) & mean(bar_points$y)<max(box_y) & mean(bar_points$x)>min(box_x) & mean(bar_points$y)>min(box_y)){
 					histQ <- "b"
 					i=i-1
@@ -47,7 +49,7 @@ histogram_extract <- function(edit=FALSE, raw_data = data.frame(), calpoints, ..
 			raw_data <- subset(raw_data, raw_data$bar != delQ)
 		}
 
-		internal_redraw(raw_data=raw_data, calpoints=calpoints, ...)
+		internal_redraw(raw_data=raw_data, calpoints=calpoints, cex=cex, ...)
 		histQ <- readline("Add bar, Delete bar or Finish plot? (a/d/f) \n")
 
 	}

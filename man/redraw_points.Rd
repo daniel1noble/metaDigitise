@@ -4,7 +4,7 @@
 \alias{redraw_points}
 \title{redraw_points}
 \usage{
-redraw_points(plot_type, raw_data, image_details, scalar, cex)
+redraw_points(plot_type, raw_data, image_details, cex)
 }
 \arguments{
 \item{plot_type}{plot_type}
@@ -12,8 +12,6 @@ redraw_points(plot_type, raw_data, image_details, scalar, cex)
 \item{raw_data}{The raw data}
 
 \item{image_details}{image_details}
-
-\item{scalar}{amount to scale size points/text/lines according to plot size}
 
 \item{cex}{relative size of points and text}
 }

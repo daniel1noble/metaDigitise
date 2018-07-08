@@ -4,7 +4,8 @@
 \alias{MB_extract}
 \title{MB_extract}
 \usage{
-MB_extract(edit = FALSE, plot_type, entered_N, raw_data = data.frame(), ...)
+MB_extract(edit = FALSE, plot_type, entered_N, raw_data = data.frame(), cex,
+  ...)
 }
 \arguments{
 \item{edit}{logical; whether in edit mode}
@@ -15,7 +16,9 @@ MB_extract(edit = FALSE, plot_type, entered_N, raw_data = data.frame(), ...)
 
 \item{raw_data}{raw data}
 
-\item{...}{further arguments to internal_redraw}
+\item{cex}{point size}
+
+\item{...}{further arguments to MB_extract}
 }
 \description{
 Extraction of data from boxplots of mean_error plots, from multiple groups

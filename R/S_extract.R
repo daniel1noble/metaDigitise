@@ -18,10 +18,11 @@ delete_group <- function(raw_data){
 #' @param raw_data data
 #' @param group_id group_id
 #' @param calpoints The calibration points
+#' @param cex point size
 #' @param ... other functions to pass to internal_redraw
 
  
-edit_group <- function(raw_data, group_id, calpoints, ...){
+edit_group <- function(raw_data, group_id, calpoints, cex, ...){
 	
 	cols <- rep(c("red", "green", "purple"),length.out=90)
 	pchs <- rep(rep(c(19, 17, 15),each=3),length.out=90)
@@ -56,7 +57,9 @@ edit_group <- function(raw_data, group_id, calpoints, ...){
 			cat("\nClick on points you want to add.\nIf you want to remove a point, or are finished with a group, \nexit by clicking on red box in bottom left corner, then follow prompts\n")
 		} 
 		while(add_removeQ=="a"){
-			select_points <- graphics::locator(1,type="p", lwd=2, col=cols[i], pch=pchs[i])			
+			select_points <- 
+			locator_mD(1,line=FALSE, lwd=2, col=cols[i], pch=pchs[i], cex=cex)
+			#graphics::locator(1,type="p", lwd=2, col=cols[i], pch=pchs[i])			
 			if( select_points$x<max(box_x) & select_points$y<max(box_y) & select_points$x>min(box_x) & select_points$y>min(box_y)) {
 				add_removeQ <- "b"
 			}
@@ -69,12 +72,12 @@ edit_group <- function(raw_data, group_id, calpoints, ...){
 			cat("\nClick on point you want to delete\n")
 			remove <- graphics::identify(group_data$x,group_data$y, n=1)
 			if(length(remove)>0) {
-				graphics::points(group_data$x[remove], group_data$y[remove],cex=2, col="white", pch=19)
+				graphics::points(group_data$x[remove], group_data$y[remove],cex=cex, col="white", pch=19)
 				group_data <- group_data[-remove,]
 			}
 		}
 
-		internal_redraw(...,calpoints=calpoints,raw_data=rbind(raw_data, group_data), calibration=TRUE, points=TRUE)
+		internal_redraw(...,calpoints=calpoints,cex=cex,raw_data=rbind(raw_data, group_data), calibration=TRUE, points=TRUE)
 		add_removeQ <- readline("\nAdd or Delete points to this group, or Continue? (a/d/c) \n")
 	}
 
@@ -87,10 +90,11 @@ edit_group <- function(raw_data, group_id, calpoints, ...){
 #' @description Extraction of data from scatterplots
 #' @param edit logical; whether in edit mode 
 #' @param raw_data raw data
+#' @param cex point size
 #' @param ... arguments passed to internal_redraw
 
 
-group_scatter_extract <- function(edit=FALSE, raw_data = data.frame(), ...){
+group_scatter_extract <- function(edit=FALSE, raw_data = data.frame(), cex, ...){
 
 	editQ <- if(edit){ "b" }else{ "a" }
 	if(!edit) cat("\nIf there are multiple groups, enter unique group identifiers (otherwise press enter)")
@@ -104,11 +108,11 @@ group_scatter_extract <- function(edit=FALSE, raw_data = data.frame(), ...){
 			editQ <- "e"
 		}
 
-		if(editQ == "e") raw_data <- edit_group(raw_data, group_id, ...)
+		if(editQ == "e") raw_data <- edit_group(raw_data, group_id, cex=cex, ...)
 
 		if(editQ == "d") raw_data <- delete_group(raw_data)
 	
-		internal_redraw(...,raw_data=raw_data, calibration=TRUE, points=TRUE)
+		internal_redraw(...,raw_data=raw_data, calibration=TRUE, points=TRUE, cex=cex)
 		editQ <- readline("\nAdd group, Edit group, Delete group, or Finish plot? (a/e/d/f) \n")
 	}
 	return(raw_data)

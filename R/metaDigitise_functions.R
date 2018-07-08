@@ -164,15 +164,17 @@ summary.metaDigitise<-function(object, ...){
 }
 
 
-
+ 
 
 #' @title plot.metaDigitise
 #' @param x an R object of class ‘metaDigitise’ 
+#' @param cex size of points
 #' @param ... further arguments passed to or from other methods.
 #' @description Re-plots figure and extraction data
 #' @author Joel Pick
 #' @export
 
-plot.metaDigitise <- function(x,...){
+plot.metaDigitise <- function(x,cex=NULL,...){
+	if(!is.null(cex)) x$cex <- cex
 	do.call(internal_redraw, x)
 }

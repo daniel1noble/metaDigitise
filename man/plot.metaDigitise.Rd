@@ -4,10 +4,12 @@
 \alias{plot.metaDigitise}
 \title{plot.metaDigitise}
 \usage{
-\method{plot}{metaDigitise}(x, ...)
+\method{plot}{metaDigitise}(x, cex = NULL, ...)
 }
 \arguments{
 \item{x}{an R object of class ‘metaDigitise’}
+
+\item{cex}{size of points}
 
 \item{...}{further arguments passed to or from other methods.}
 }

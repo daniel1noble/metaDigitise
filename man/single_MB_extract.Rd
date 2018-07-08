@@ -4,10 +4,12 @@
 \alias{single_MB_extract}
 \title{single_MB_extract}
 \usage{
-single_MB_extract(plot_type)
+single_MB_extract(plot_type, cex)
 }
 \arguments{
 \item{plot_type}{Type of plot}
+
+\item{cex}{point size}
 }
 \description{
 Takes points user defined points from a single group mean_error plot or boxplot, in a set order, and returns them.

@@ -4,7 +4,8 @@
 \alias{histogram_extract}
 \title{histogram_extract}
 \usage{
-histogram_extract(edit = FALSE, raw_data = data.frame(), calpoints, ...)
+histogram_extract(edit = FALSE, raw_data = data.frame(), calpoints, cex,
+  ...)
 }
 \arguments{
 \item{edit}{logical; whether in edit mode}
@@ -12,6 +13,8 @@ histogram_extract(edit = FALSE, raw_data = data.frame(), calpoints, ...)
 \item{raw_data}{raw data}
 
 \item{calpoints}{The calibration points}
+
+\item{cex}{point size}
 
 \item{...}{arguments to pass to internal_redraw}
 }

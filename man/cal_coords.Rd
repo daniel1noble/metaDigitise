@@ -4,10 +4,12 @@
 \alias{cal_coords}
 \title{cal_coords}
 \usage{
-cal_coords(plot_type, ...)
+cal_coords(plot_type, cex, ...)
 }
 \arguments{
 \item{plot_type}{plot type}
+
+\item{cex}{size of points}
 
 \item{...}{further arguments passed to or from other methods.}
 }

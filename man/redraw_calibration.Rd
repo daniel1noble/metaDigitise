@@ -5,7 +5,7 @@
 \title{redraw_calibration}
 \usage{
 redraw_calibration(plot_type, variable, calpoints, point_vals, image_details,
-  scalar, cex)
+  cex)
 }
 \arguments{
 \item{plot_type}{plot_type}
@@ -17,8 +17,6 @@ redraw_calibration(plot_type, variable, calpoints, point_vals, image_details,
 \item{point_vals}{The point values}
 
 \item{image_details}{image_details}
-
-\item{scalar}{amount to scale size points/text/lines according to plot size}
 
 \item{cex}{relative size of points and text}
 }

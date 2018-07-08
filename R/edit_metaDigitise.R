@@ -21,7 +21,8 @@ bulk_edit <- function(dir, summary=TRUE, cex){
 		for(i in filepaths){
 			object <- readRDS(i)
 			object$image_file <- paste0(dir,filename(object$image_file))
-			graphics::plot(object)
+			object$cex <- cex
+			plot.metaDigitise(object)
 			editQ <- user_options("\nEdit file? y/n ", c("y","n"))
 			if(editQ == "y") {
 				object <- edit_metaDigitise(object)
@@ -40,6 +41,7 @@ bulk_edit <- function(dir, summary=TRUE, cex){
 			edit_file <- user_options("\nSelect number of file to edit ", 1:length(files))
 			object <- readRDS(filepaths[as.numeric(edit_file)])
 			object$image_file <- paste0(dir,filename(object$image_file))
+			object$cex <- cex
 			object <- edit_metaDigitise(object)
 			saveRDS(object, file=filepaths[as.numeric(edit_file)])
 			editQ <- readline("\nEdit more files? y/n ")
@@ -56,7 +58,8 @@ bulk_edit <- function(dir, summary=TRUE, cex){
 			for(i in N_files){
 				object <- readRDS(i)
 				object$image_file <- paste0(dir,filename(object$image_file))
-				graphics::plot(object)
+				object$cex <- cex
+				plot.metaDigitise(object)
 				object$raw_data <- enter_N(object$raw_data)
 				object$entered_N <- TRUE
 				object$processed_data <- process_data(object)
@@ -100,7 +103,7 @@ enter_N <- function(raw_data,...){
 #' @author Joel Pick
 
 edit_metaDigitise <- function(object){
-	graphics::plot(object)
+	plot.metaDigitise(object)
 
 	## ROTATION
 	rotQ <- user_options("\nEdit rotation? If yes, then the whole extraction will be redone (y/n) ", c("y","n"))
@@ -122,7 +125,7 @@ edit_metaDigitise <- function(object){
 	varQ <- user_options("\nRename Variables (y/n) ", c("y","n")) 
 	if(varQ=="y") {
 		object$variable <- ask_variable(object$plot_type)
-		graphics::plot(object)
+		plot.metaDigitise(object)
 	}
 	
 	### calibration
@@ -131,7 +134,7 @@ edit_metaDigitise <- function(object){
 		cal <- user_calibrate(object)
 		object$calpoints <- cal$calpoints
 		object$point_vals <- cal$point_vals
-		graphics::plot(object)
+		plot.metaDigitise(object)
 	}
 		
 	### Extract data

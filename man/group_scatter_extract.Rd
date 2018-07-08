@@ -4,12 +4,14 @@
 \alias{group_scatter_extract}
 \title{group_scatter_extract}
 \usage{
-group_scatter_extract(edit = FALSE, raw_data = data.frame(), ...)
+group_scatter_extract(edit = FALSE, raw_data = data.frame(), cex, ...)
 }
 \arguments{
 \item{edit}{logical; whether in edit mode}
 
 \item{raw_data}{raw data}
+
+\item{cex}{point size}
 
 \item{...}{arguments passed to internal_redraw}
 }
