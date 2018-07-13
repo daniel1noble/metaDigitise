@@ -269,23 +269,28 @@ setup_calibration_dir <- function(dir){
 
 get_notDone_file_details <- function(dir){
 	
-	      details <- dir_details(dir)
+	details <- dir_details(dir)
 
 	# Check whether there are new files still needing to be done.
+	cal_no_fig <- details$calibrations[!details$calibrations %in% details$name  ]
+	if(length(cal_no_fig)>0){
+	    message("Some calibration files do not have a corresponding figure - a figure has been either deleted or renamed.\n")
+	}
 
-	if(length(details$calibrations) == length(details$name)) {
-		stop("\nCongratulations! Looks like you have finished digitising all figures in this directory.\n", call. = FALSE)
+	if(!any(!details$name %in% details$calibrations)) {
+		stop("\r Congratulations! Looks like you have finished digitising all figures in this directory.\n", call. = FALSE)
 	}
 
 	# Find what files are already done. Remove these from our list
 	if (length(details$calibrations) >= 1){
-		done_figures <- match(details$calibrations, details$name)
-	
-	# Remove the files that are already done.
-		details$images <- details$images[-done_figures]
-		  details$name <- details$name[-done_figures]
-		 details$paths <- details$paths[-done_figures]
+		done_figures <- details$name %in% details$calibrations
+
+		# Remove the files that are already done.
+		details$images <- details$images[!done_figures]
+		details$name <- details$name[!done_figures]
+		details$paths <- details$paths[!done_figures]
 	}
+
 
 	return(details)
 }

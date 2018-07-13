@@ -1,0 +1,10 @@
+Dear Editor,
+
+We thank you for the opportunity to resubmit our manuscript 'Reproducible, flexible and high throughput data extraction from primary literature: The metaDigitise R package', as well as the reviewers for their constructive comments, which have been incorporated into a revised version. 
+
+The reviewers raised some important points. We have taken time to consider and address these comments and hope that the revised manuscript is now suitable for publication in Methods in Ecology and Evolution. Our responses to these comments are included below. 
+
+We believe that this software provides a substantial advance on existing tools, and would be of interest to a broad readership. The manuscript is available in its submitted form on BioRxiv, but is not under consideration at any other journal. All authors have approved the submission for publication of this version of this manuscript, and all persons entitled to authorship have been so named.
+
+Your Sincerely
+Dr Joel Pick and co-authors
