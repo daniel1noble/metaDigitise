@@ -108,7 +108,12 @@ user_calibrate <- function(object){
       object$calpoints <- do.call(cal_coords, object)
       object$point_vals <- do.call(getVals, object)
       do.call(internal_redraw, c(object, calibration=TRUE, points=FALSE))
-      object$log_axes <- logAxes()
+      if(object$plot_type %in% c("boxplot","scatterplot")){
+        object$log_axes <- logAxes()
+      }else{
+        object$log_axes <- c(axes="n",transformed=NULL,base=NULL)
+      }
+      
     }
     cal_Q <- readline("\nRe-calibrate? (y/n) \n")
   }
