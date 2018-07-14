@@ -1,7 +1,7 @@
 # metaDigitise 
 [![Build Status](https://travis-ci.org/daniel1noble/metaDigitise.svg?branch=master)](https://travis-ci.org/daniel1noble/metaDigitise.svg?branch=master) 
 [![codecov](https://codecov.io/gh/daniel1noble/metaDigitise/branch/master/graph/badge.svg)](https://codecov.io/gh/daniel1noble/metaDigitise)
-![Github All Releases](https://img.shields.io/github/downloads/daniel1noble/metaDigitise/total.svg)
+[![Github All Releases](https://img.shields.io/github/downloads/daniel1noble/metaDigitise/total.svg)]()
 
 # Table of contents
 1. [Introduction](#Introduction)
