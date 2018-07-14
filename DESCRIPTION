@@ -14,5 +14,8 @@ Imports: magick,
     utils,
     purrr
 Suggests: mockery,
-	testthat	
+	testthat,
+    knitr,
+    rmarkdown
 BugReports: https://github.com/daniel1noble/metaDigitise/issues
+VignetteBuilder: knitr

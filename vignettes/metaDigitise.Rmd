@@ -1,7 +1,20 @@
-# metaDigitise 
-[![Build Status](https://travis-ci.org/daniel1noble/metaDigitise.svg?branch=master)](https://travis-ci.org/daniel1noble/metaDigitise.svg?branch=master) 
-[![codecov](https://codecov.io/gh/daniel1noble/metaDigitise/branch/master/graph/badge.svg)](https://codecov.io/gh/daniel1noble/metaDigitise)
-[![Github All Releases](https://img.shields.io/github/downloads/daniel1noble/metaDigitise/total.svg)]()
+---
+title: "metaDigitise"
+author: "Joel Pick, Shinichi Nakagawa and Daniel Noble"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
 
 # Table of contents
 1. [Introduction](#Introduction)
@@ -46,27 +59,27 @@ The `metaDigitise` package is quite flexible. Users can extract single figures (
 `metaDigitise()` can work on a directory with figures (currently .png, .jpg, .tiff, .pdf images can be used) from many different papers and that are of different types. However, users can get creative in how they set up the directories of figures to facilitate extraction. For example, one might have 3–4 figures from a single paper that need extracting and the user may want to focus on a single paper at a time while the information about a paper is on hand. This could be done by simply setting up a file structure as follows and then using `metaDigitise()` with path names (i.e., the directory) for each papers folder:
 
 ```
-	* Main project directory
-		+ Paper1_P1
-			+ Figure1.png
-			+ Figure2.png
-			+ Figure3.png
-		+ Paper2_P2
-			+ Figure1.png
-			+ Figure2.png
-			+ Figure3.png
+  * Main project directory
+    + Paper1_P1
+      + Figure1.png
+      + Figure2.png
+      + Figure3.png
+    + Paper2_P2
+      + Figure1.png
+      + Figure2.png
+      + Figure3.png
 ```
 An alternative directory structure (and probably the most flexible) would be to simply have a set of different figures with an informative and relevant naming scheme to make it easy to identify the paper and figure the data come from. This cuts out the need to change directories constantly. For example the directory structure could look like:
 
 ```
-	* Main project directory
-		+ FiguresToExtract
-			+ P1_Figure1_trait1.png
-			+ P1_Figure2_trait2.png
-			+ P1_Figure3_trait3.png
-			+ P2_Figure1_trait1.png
-			+ P2_Figure2_trait2.png
-			+ P2_Figure3_trait3.png
+  * Main project directory
+    + FiguresToExtract
+      + P1_Figure1_trait1.png
+      + P1_Figure2_trait2.png
+      + P1_Figure3_trait3.png
+      + P2_Figure1_trait1.png
+      + P2_Figure2_trait2.png
+      + P2_Figure3_trait3.png
 ```
 The above directory structure is probably the easiest in combination with a clear and unambiguous naming scheme for each figure. Even if only figures from a single paper are digitised, one paper at a time, an overall figure directory will work perfectly because `metaDigitise()` will only cycle through incomplete figures, so figures can be added at anytime. 
 
