@@ -112,8 +112,7 @@ user_calibrate <- function(object){
         object$log_axes <- logAxes()
       }else{
         object$log_axes <- c(axes="n",transformed=NULL,base=NULL)
-      }
-      
+      }      
     }
     cal_Q <- readline("\nRe-calibrate? (y/n) \n")
   }

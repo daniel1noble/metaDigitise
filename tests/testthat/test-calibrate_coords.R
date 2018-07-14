@@ -56,11 +56,10 @@ testthat::test_that("Checking user_calibrate..", {
 		`metaDigitise::logAxes` = function(...) c(axes="n"),
 		readline = function(...) "n",
 		testthat::expect_equal(
-			user_calibrate(object=list()),
+			user_calibrate(object=list(plot_type="scatterplot")),
 			list(calpoints=data.frame(x=c(0,0,0,100),y=c(0,100,0,0)), point_vals=c(y1=1,y2=2,x1=3,x2=4), log_axes=c(axes="n")), 
 			info = "user_calibrate failed"
 		)
 	)
-
 })
 
