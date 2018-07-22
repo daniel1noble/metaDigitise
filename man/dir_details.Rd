@@ -13,7 +13,7 @@ dir_details(dir)
 Function will gather important directory details about calibration files and figures needed for processing
 }
 \examples{
- \dontrun{
+ \donttest{
 # temporary directory
 tmp_dir <- tempdir()
 

@@ -14,7 +14,7 @@
 #' @author Daniel Noble - daniel.wa.noble@gmail.com
 #' @return A data frame or list containing the raw digitised data or the processed, summary statistics from the digitised data
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # temporary directory
 #' tmp_dir <- tempdir()
 #' 
@@ -43,7 +43,9 @@
 #' dev.off()
 #' 
 #' #metaDigitise figures
+#' \dontrun{
 #' data <- metaDigitise(tmp_dir)
+#' }
 #' }
 #' @export
 
@@ -70,7 +72,7 @@ metaDigitise<-function(dir, summary = TRUE, cex=1){
 #' @author Joel Pick - joel.l.pick@gmail.com
 #' @author Daniel Noble - daniel.wa.noble@gmail.com
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # temporary directory
 #' tmp_dir <- tempdir()
 #' 
@@ -89,8 +91,10 @@ metaDigitise<-function(dir, summary = TRUE, cex=1){
 #' axis(1,1:length(means),names(means))
 #' dev.off()
 #' 
+#' \dontrun{
 #' #metaDigitise figures
 #' 	data <- process_new_files(paste0(tmp_dir, "/"), summary = TRUE, cex = 2)
+#' }
 #' }
 #' @export
 process_new_files <- function(dir, summary = TRUE, cex) {
@@ -209,7 +213,7 @@ extract_digitised <- function(list, summary = TRUE) {
 #' @return Returns a caldat/ folder within the directory where all metaDigitise objects are stored.
 #' @author Daniel Noble - daniel.wa.noble@gmail.com
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # temporary directory
 #' tmp_dir <- tempdir()
 #' 
@@ -234,7 +238,7 @@ setup_calibration_dir <- function(dir){
 #' @return Returns a list containing details on the images names and their paths, the calibration file names (or files already completed) as well as the paths to these files.
 #' @author Daniel Noble - daniel.wa.noble@gmail.com
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # temporary directory
 #' tmp_dir <- tempdir()
 #' 
@@ -294,7 +298,7 @@ get_notDone_file_details <- function(dir){
 #' @description Function will gather important directory details about calibration files and figures needed for processing
 #' @author Daniel Noble - daniel.wa.noble@gmail.com
 #' @examples
-#'  \dontrun{
+#'  \donttest{
 #' # temporary directory
 #' tmp_dir <- tempdir()
 #' 

@@ -1,5 +1,7 @@
 
 ## CRAN revisions
+	- Replaced \dontrun{} with donttest{} as requested. Note that metaDigitsie example requires \dontrun{} within example given the function requires user input.
+	- Added vignette
 	- Added more examples in functions. Please note that not all functions have examples as they are helper functions used in the major functions of the package. We have now tried to remove export of these. We do not anticipate users adopting them in normal use.
 	- Fixed package name style in DESCRIPTION
 	- Fixed metaDigitise example to ensure example writes to temp directory as suggested by CRAN maintainers

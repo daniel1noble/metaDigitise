@@ -4,7 +4,7 @@
 #' @param summary Logical indicating whether summarised (default) or calibrated data should be returned. 
 #' @return Returns a data frame (summary = TRUE) or a list with slots for each plot type (summary = FALSE)
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Make some mock metaDigitise object
 #' 	mock_metaDig <- list(
 #' 			image_file = "./image.png",

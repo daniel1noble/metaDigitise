@@ -29,7 +29,7 @@ If the "2: Import existing data" is chosen, all existing files that have already
 Finally, metDigitise is built for ease of editing and reproducibility in mind. Hence, if "3: Edit existing data" is chosen by the user then users will have the options to "1: Cycle through images" (that are complete), overlaying digitisations with each figure and asking whether they would like to edit each figure or "2: Choose specific file to edit" allowing editing for a specific file. Here a list of all files are provided and the user simply needs to pick the one in the console they would like to view. Alternatively, the "3: Enter previously omitted sample sizes" option allows the user to go back and enter sample sizes that they may not have had on hand at the time of digitisation. This means that, so long as the caldat/ folder along with respective images are maintained, anyone using metaDigitise() can simply import existing digitisations, modify them and fix them. This folder can then be shared with colleagues to allow them to reproduce any data extraction.
 }
 \examples{
-\dontrun{
+\donttest{
 # temporary directory
 tmp_dir <- tempdir()
 
@@ -58,7 +58,9 @@ plot(x,y, main="Scatterplot")
 dev.off()
 
 #metaDigitise figures
+\dontrun{
 data <- metaDigitise(tmp_dir)
+}
 }
 }
 \author{

@@ -18,7 +18,7 @@ Returns a data frame (summary = TRUE) or a list with slots for each plot type (s
 Extracts data from a directory that has been previously digitised using metaDigitise()
 }
 \examples{
-\dontrun{
+\donttest{
 # Make some mock metaDigitise object
 	mock_metaDig <- list(
 			image_file = "./image.png",

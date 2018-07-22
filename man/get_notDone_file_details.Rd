@@ -16,7 +16,7 @@ Returns a list containing details on the images names and their paths, the calib
 Function will get file information from the directory and the calibration files. It will also exclude files that have already been processed, as is judged by the match between file names in the calibration folder and the imported details object
 }
 \examples{
-\dontrun{
+\donttest{
 # temporary directory
 tmp_dir <- tempdir()
 

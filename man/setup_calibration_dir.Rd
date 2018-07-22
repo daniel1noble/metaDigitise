@@ -16,7 +16,7 @@ Returns a caldat/ folder within the directory where all metaDigitise objects are
 Function will check whether the calibration directory has been setup and if not, create one.
 }
 \examples{
-\dontrun{
+\donttest{
 # temporary directory
 tmp_dir <- tempdir()
 

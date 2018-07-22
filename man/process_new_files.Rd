@@ -17,7 +17,7 @@ process_new_files(dir, summary = TRUE, cex)
 Batch processes image files within a set directory, consolidates the data and exports the data for each image and type
 }
 \examples{
-\dontrun{
+\donttest{
 # temporary directory
 tmp_dir <- tempdir()
 
@@ -36,8 +36,10 @@ arrows(1:length(means),means+ses, 1:length(means), means-ses, code=3, angle=90, 
 axis(1,1:length(means),names(means))
 dev.off()
 
+\dontrun{
 #metaDigitise figures
 	data <- process_new_files(paste0(tmp_dir, "/"), summary = TRUE, cex = 2)
+}
 }
 }
 \author{
