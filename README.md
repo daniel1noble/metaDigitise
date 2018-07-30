@@ -2,8 +2,8 @@
 [![Build Status](https://travis-ci.org/daniel1noble/metaDigitise.svg?branch=master)](https://travis-ci.org/daniel1noble/metaDigitise.svg?branch=master) 
 [![codecov](https://codecov.io/gh/daniel1noble/metaDigitise/branch/master/graph/badge.svg)](https://codecov.io/gh/daniel1noble/metaDigitise)
 [![](http://www.r-pkg.org/badges/version/metaDigitise)](https://cran.r-project.org/package=metaDigitise)
-![](https://cranlogs.r-pkg.org/badges/metaDigitise)
-![](https://cranlogs.r-pkg.org/badges/grand-total/metaDigitise)
+[![](https://cranlogs.r-pkg.org/badges/metaDigitise)](https://cran.r-project.org/package=metaDigitise)
+[![](https://cranlogs.r-pkg.org/badges/grand-total/metaDigitise)](https://cran.r-project.org/package=metaDigitise)
 
 # Table of contents
 1. [Introduction](#Introduction)
