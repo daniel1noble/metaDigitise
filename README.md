@@ -1,6 +1,8 @@
 # metaDigitise 
 [![Build Status](https://travis-ci.org/daniel1noble/metaDigitise.svg?branch=master)](https://travis-ci.org/daniel1noble/metaDigitise.svg?branch=master) 
 [![codecov](https://codecov.io/gh/daniel1noble/metaDigitise/branch/master/graph/badge.svg)](https://codecov.io/gh/daniel1noble/metaDigitise)
+[![](https://cranlogs.r-pkg.org/badges/metaDigitise)](https://cran.r-project.org/package=metaDigitise)
+[![](https://cranlogs.r-pkg.org/badges/grand-total/metaDigitise)](https://cran.r-project.org/package=metaDigitise)
 
 # Table of contents
 1. [Introduction](#Introduction)
@@ -28,7 +30,14 @@ literature: The metaDigitise R package. Biorxiv, https://doi.org/10.1101/247775
 ```
 # Installation <a name="Installation"></a>
 
-To install `metaDigitise` use the following code in R:
+`metaDigitise` (v1.0.0) is now on CRAN and can be downloaded in R using:
+
+```
+install.packages("metaDigitise")
+library(metaDigitise)
+```
+
+To install the development version of `metaDigitise` use the following code in R:
 
 ```
 install.packages("devtools")
