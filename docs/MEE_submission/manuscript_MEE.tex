@@ -24,7 +24,6 @@
 %% new custom commands for code formatting
 \newcommand{\code}[1]{\texttt{#1}}
 \newcommand{\class}[1]{`\code{#1}'}
-%\newcommand{\fct}[1]{#1}
 \newcommand{\fct}[1]{\texttt{#1()}}
 \newcommand{\pkg}[1]{{\fontseries{b}\selectfont #1}}
 \let\proglang=\textsf
@@ -32,23 +31,23 @@
 
 \begin{document}
 
-\DefineVerbatimEnvironment{Code}{Verbatim}{}
-\DefineVerbatimEnvironment{CodeInput}{Verbatim}{fontshape=sl}
-\DefineVerbatimEnvironment{CodeOutput}{Verbatim}{}
-\newenvironment{CodeChunk}{}{}
-
 \raggedright
 
 
 \textbf{Reproducible, flexible and high-throughput data extraction from primary literature: The \pkg{metaDigitise} \proglang{R} package}
 
-Joel L. Pick$^{1,*}$, Shinichi Nakagawa$^1$, Daniel W.A. Noble$^1$
+Joel L. Pick$^{1,2,*}$, Shinichi Nakagawa$^1$, Daniel W.A. Noble$^1$
 
 $^1$
-  Ecology and Evolution Research Centre, School of Biological, Earth and Environmental Sciences,  University of New South Wales, Kensington, NSW 2052, Sydney, AUSTRALIA
+  Ecology and Evolution Research Centre, School of Biological, Earth and Environmental Sciences, University of New South Wales, Kensington, NSW 2052, Sydney, Australia
+
+$^2$
+  Current Address: Institute of Evolutionary Biology, School of Biological Sciences, University of Edinburgh, Edinburgh EH9 3JT, United Kingdom
 
  $^*$Corresponding Author: joel.l.pick@gmail.com\\
 
+\vskip10pt
+ \textbf{Running Head:} Data extraction from figures with metaDigitise
 
 \clearpage
 \section*{Abstract}
@@ -77,11 +76,11 @@ $^1$
 
 \section{Introduction}
 
-In many different contexts, researchers make use of data presented in primary literature. In the fields of ecology and evolution (E\&E), these data are most commonly used for comparative and meta-analyses. The use of meta-analysis in E\&E in particular, is rapidly growing, not only in terms of the number of meta-analyses (in plant ecology alone the yearly number of published meta-analyses doubled from 2006 to 2012 (20-40); \cite{Koricheva2014}), but also in terms of their size (a recent meta-analysis, for example, included 6440 effect sizes from 175 publications; \cite{Noble2018}). Meta-analyses are extremely important in providing a means of quantitatively synthesizing experimental and/or observational studies to evaluate empirical support for fundamental theory in E\&E \citep{Gurevitch2018}. These techniques rely heavily on descriptive statistics (e.g. means, standard deviations (SD), sample sizes, correlation coefficients) extracted from primary literature. As well as being presented in the text or tables of research papers, descriptive statistics are frequently presented in figures. For example, in some cases up to 42\% of the papers used have one or more figures for data extraction \citep{Noble2018}. These data often need to be manually extracted using digitising programs. 
+In many different contexts, researchers make use of data presented in primary literature. In the fields of ecology and evolution (E\&E), these data are most commonly used for comparative and meta-analyses. The use of meta-analysis in E\&E in particular, is rapidly growing, not only in terms of the number of meta-analyses (in plant ecology alone the yearly number of published meta-analyses doubled from 2006 to 2012 (20-40) \citep{Koricheva2014}), but also in terms of their size (a recent meta-analysis, for example, included 6440 effect sizes from 175 publications \citep{Noble2018}). Meta-analyses are extremely important in providing a means of quantitatively synthesizing experimental and/or observational studies to evaluate empirical support for fundamental theory in E\&E \citep{Gurevitch2018}. These techniques rely heavily on descriptive statistics (e.g. means, standard deviations (SD), sample sizes, correlation coefficients) extracted from primary literature. As well as being presented in the text or tables of research papers, descriptive statistics are frequently presented in figures. For example, 42\% of the papers used in a recent meta-analysis presented some or all of the required data in figures \citep{Noble2018}. These data need to be manually extracted using digitising programs. 
 
 Although there are several tools that extract data from figures, including both standalone programs and \proglang{R} packages (reviewed in Table \ref{tab:comparison}), these tools do not cater to the general needs of meta-analysts for four main reasons (here we focus on meta-analysis, although many points apply to extraction for comparative analysis). First, although meta-analysis is an important tool in consolidating the data from multiple studies, many of the processes involved in data extraction are opaque and difficult to reproduce, making extending or replicating studies problematic. Having a tool that facilitates reproducibility in meta-analyses will increase transparency and aid in resolving the reproducibility crises seen in many fields \citep{peng_reproducible_2006, peng_reproducible_2011, Parker2016}. Second, digitising programs do not allow the integration of metadata at the time of data extraction, such as experimental group or variable names, and sample sizes. This makes the downstream calculations laborious, as information has to be added later, typically using different software. Third, existing programs do not import sets of images for the user to systematically work through. Instead they require the user to manually import images and export the resulting digitised data into individual files one-by-one. These data often subsequently need to be imported and edited using different software. Finally, digitising programs typically only provide the user with calibrated \textit{x,y} coordinates from imported figures, and do not differentiate between common plot types that are used to present data. Consequently, a large amount of additional data manipulation is required, that is different across plots types. For example, in E\&E data are commonly presented in plots with means and standard errors or confidence intervals (Figure \ref{fig:all_extract}A), from which the user wants a mean and SD for each group presented. From \textit{x,y} coordinates, users must manually discern between mean and error coordinates and assign points to groups. The error then needs to be calculated as the deviation from the mean, and then transformed to SD, according to the type of error presented. Histograms and box plots are also frequently used in E\&E to presented data, and whilst their downstream calculations are even more laborious, there are few (if any; see Table \ref{tab:comparison}) tools to extract data from these plot types.
 
-Data extraction from figures is therefore a time-consuming process as existing software does not provide an optimized, reproducible research pipeline to facilitate data extraction and editing. Given the ubiquity of the R platform in E\&E, and that it hosts the most popular meta-analysis software in E\&E (e.g., metafor \citep{Viechtbauer2010} and MCMCglmm \citep{Hadfield2010b}), it is highly likely to be used for some (if not all) stages of the research synthesis process. It is therefore important to have comprehensive, robust and flexible digitisation capabilities in R to make the process of figure extraction more streamline, transparent and easier to reproduce. Here, we present an interactive \proglang{R} package, \pkg{metaDigitise} (available on CRAN), which is designed for large scale, reproducible data extraction from figures, specifically catering to the the needs of meta-analysts. To this end, we provide tools to extract data from common plot types in E\&E (mean/error plots, box plots, scatter plots and histograms, see Figure \ref{fig:all_extract}). \pkg{metaDigitise} operates within the \proglang{R} environment making data extraction, analysis and export more streamlined. The necessary calculations are carried out on calibrated data immediately after extraction so that comparable descriptive statistics can be obtained quickly. Summary data from multiple figures is returned into a single data frame which can be can easily exported or used in downstream analysis within \proglang{R}. Completed digitisations are automatically saved for each figure, meaning users can redraw their digitisations (along with metadata) on figures, make corrections and access calibration and processed (i.e., summarised) data. This makes sharing figure digitisation and reproducing the work of others simple and easy, and allows meta-analyses to be updated more efficiently.
+Data extraction from figures is therefore a time-consuming process as existing software does not provide an optimized, reproducible research pipeline to facilitate data extraction and editing. Given the ubiquity of the \proglang{R} platform in E\&E, and that it hosts the most popular meta-analysis software in E\&E (e.g., metafor \citep{Viechtbauer2010} and MCMCglmm \citep{Hadfield2010b}), it is highly likely to be used for some (if not all) stages of the research synthesis process. It is therefore important to have comprehensive, robust and flexible digitisation capabilities in \proglang{R} to make the process of figure extraction more streamline, transparent and easier to reproduce. Here, we present an interactive \proglang{R} package, \pkg{metaDigitise} (available on CRAN), which is designed for large scale, reproducible data extraction from figures, specifically catering to the the needs of meta-analysts. To this end, we provide tools to extract data from common plot types in E\&E (mean/error plots, box plots, scatter plots and histograms, see Figure \ref{fig:all_extract}). \pkg{metaDigitise} operates within the \proglang{R} environment making data extraction, analysis and export more streamlined. The necessary calculations are carried out on calibrated data immediately after extraction so that comparable descriptive statistics can be obtained quickly. Summary data from multiple figures is returned into a single data frame which can be can easily exported or used in downstream analysis within \proglang{R}. Completed digitisations are automatically saved for each figure, meaning users can redraw their digitisations (along with metadata) on figures, make corrections and access calibration and processed (i.e., summarised) data. This makes sharing figure digitisation and reproducing the work of others simple and easy, and allows meta-analyses to be updated more efficiently.
 
 
 %% 612 words
@@ -179,7 +178,7 @@ Increasing the reproducibility of figure extraction for meta-analysis and making
 
 % 68
 \section*{Acknowledgments}
-We thank the I-DEEL group and colleagues at UNSW for for testing, providing feedback and digitising including: Rose O'Dea, Fonti Kar, Malgorzata Lagisz, Julia Riley, Diego Barneche, Erin Macartney, Ivan Beltran, Gihan Samarasinghe, Dax Kellie, Jonathan Noble, Yian Noble and Alison Pick. J.L.P. was supported by a Swiss National Science Foundation Early Mobility grant (P2ZHP3\_164962), D.W.A.N. was supported by an Australian Research Council Discovery Early Career Research Award (DE150101774) and UNSW Vice Chancellors Fellowship and S.N. an Australian Research Council Future Fellowship (FT130100268). 
+We thank the I-DEEL group and colleagues at UNSW for for testing, providing feedback and digitising including: Rose O'Dea, Fonti Kar, Malgorzata Lagisz, Julia Riley, Diego Barneche, Erin Macartney, Ivan Beltran, Gihan Samarasinghe, Dax Kellie, Jonathan Noble, Yian Noble, Elena Noble and Alison Pick. J.L.P. was supported by a Swiss National Science Foundation Early Mobility grant (P2ZHP3\_164962), D.W.A.N. was supported by an Australian Research Council Discovery Early Career Research Award (DE150101774) and UNSW Vice Chancellors Fellowship and S.N. an Australian Research Council Future Fellowship (FT130100268). 
 
 % 153
 \section*{Author Contributions}
@@ -196,7 +195,7 @@ J.L.P. and D.W.A.N. conceived the study and J.L.P., S.N. and D.W.A.N. developed 
 \begin{figure}[!h]
 \centering 
 \rotatebox{90}{%
-  \includegraphics[width=1.3\textwidth]{Adobe_fig1_V3.png} 
+  \includegraphics[width=1.3\textwidth]{Adobe_fig1_final.pdf} 
  }
  \caption{%\doublespacing
 Functionality of \pkg{metaDigitise}. Using the iris dataset in R, digitisation of different plot types, A) mean/error plot, B) box plot, C) histogram and D) scatter plot, is shown in \pkg{metaDigitise} (left) compared with other common softwares (right). A) and B) are plotted with the whole dataset, C) is just the data for the species \textit{setosa} and D) a subset from all three species. Notable functions of metaDigitise are listed in the center. Other software also perform points 3 and 4 (see Table \ref{tab:comparison}), although these functions are more developed in \pkg{metaDigitise}. As shown on the left hand side of the figure, \pkg{metaDigitise} clearly displays the stages of the digitisation to aid the transparency of the process, and returns concatenated summary data for all images.
