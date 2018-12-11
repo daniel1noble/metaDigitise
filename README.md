@@ -27,7 +27,7 @@ To cite metaDigitise in publications one can use the following reference:
 ```
 Pick, J.L., Nakagawa, S., Noble D.W.A. (2018) 
 Reproducible, flexible and high-throughput data extraction from primary 
-literature: The metaDigitise R package. Biorxiv, https://doi.org/10.1101/247775
+literature: The metaDigitise R package. Methods in Ecology and Evolution, https://doi.org/10.1111/2041-210X.13118
 ```
 # Installation <a name="Installation"></a>
 
