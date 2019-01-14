@@ -60,6 +60,9 @@ internal_digitise <- function(image_file, plot_type=NULL, cex){
 		output$error_type <- user_options("\nType of error (se, CI95, sd): ", c("se","CI95","sd"))
 	}
 
+	askCOMMENT <- user_options("\nAny comments for this plot? (y/n) ",c("y","n"))
+	output$comment <- ifelse(askCOMMENT =="y", readline(), NA)
+
 	class(output) <- 'metaDigitise'
 	return(output)
 }
