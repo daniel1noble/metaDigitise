@@ -11,7 +11,7 @@ error_to_sd <- function(error, n, error_type=c("se","CI95","sd",NA)){
 	 sd <- ifelse(error_type=="se", se_to_sd(error, n),
 			ifelse(error_type=="CI95", CI95_to_sd(error, n),
 			ifelse(error_type=="sd", error,
-			ifelse(is.na(error_type), NA
+			ifelse(is.na(error_type), NA, NA
 			))))
 	return(sd)
 }
