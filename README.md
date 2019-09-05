@@ -4,7 +4,7 @@
 [![Downloads / month](https://cranlogs.r-pkg.org/badges/metaDigitise)](https://cran.r-project.org/package=metaDigitise)
 [![Total Downloads](https://cranlogs.r-pkg.org/badges/grand-total/metaDigitise)](https://cran.r-project.org/package=metaDigitise)
 [![codecov](https://codecov.io/gh/daniel1noble/metaDigitise/branch/master/graph/badge.svg)](https://codecov.io/gh/daniel1noble/metaDigitise)
-![metaDigitiseHex1](https://user-images.githubusercontent.com/3505482/64334607-3ba76a80-d01c-11e9-87ff-de4a5c17cd0a.png =20x20)
+<img src="https://user-images.githubusercontent.com/3505482/64334607-3ba76a80-d01c-11e9-87ff-de4a5c17cd0a.png" width="20" height="20" />
 
 # Table of contents
 1. [Introduction](#Introduction)
