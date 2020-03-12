@@ -10,7 +10,7 @@
 locator_mD <- function(nPoints=1,line=TRUE,cex=1,col="red",...){
 	clicked <- NULL
 	for(i in 1:nPoints){
-		clicked <- rbind(clicked,as.data.frame(graphics::locator(1)))
+		clicked <- rbind(clicked,as.data.frame(graphics::locator(1), stringsAsFactors = TRUE))
 		graphics::points(clicked$x[i],clicked$y[i],cex=cex,col=col,...)
 		if(line & i>1) graphics::lines(clicked$x[c(i-1,i)],clicked$y[c(i-1,i)],col=col,lwd=2*cex)
 		}

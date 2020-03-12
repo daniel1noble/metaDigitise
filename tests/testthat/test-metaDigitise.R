@@ -42,10 +42,10 @@ mock_object <- list(
 	rotate=0,
 	plot_type="mean_error",
 	variable="y",
-	calpoints = data.frame(x=c(0,0),y=c(0,100)), 
+	calpoints = data.frame(x=c(0,0),y=c(0,100), stringsAsFactors = TRUE), 
 	point_vals = c(1,2), 
 	entered_N=TRUE,
-	raw_data = data.frame(id=rep("control",2), x=c(60,60), y=c(75,50), n=rep(20,2)),
+	raw_data = data.frame(id=rep("control",2), x=c(60,60), y=c(75,50), n=rep(20,2), stringsAsFactors = TRUE),
 	knownN = NULL,
 	error_type="sd",
 	processed_data=data.frame(id=as.factor("control"),mean=1.5, error=0.25, n=20, variable="y", stringsAsFactors = FALSE)	

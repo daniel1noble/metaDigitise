@@ -4,8 +4,8 @@
 \alias{histogram_extract}
 \title{histogram_extract}
 \usage{
-histogram_extract(edit = FALSE, raw_data = data.frame(), calpoints, cex,
-  ...)
+histogram_extract(edit = FALSE, raw_data = data.frame(), calpoints,
+  cex, ...)
 }
 \arguments{
 \item{edit}{logical; whether in edit mode}

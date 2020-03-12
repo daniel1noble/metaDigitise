@@ -4,10 +4,10 @@
 \alias{internal_redraw}
 \title{internal_redraw}
 \usage{
-internal_redraw(image_file, flip = FALSE, rotate = 0, plot_type = NULL,
-  variable = NULL, cex = NULL, calpoints = NULL, point_vals = NULL,
-  raw_data = NULL, rotation = TRUE, calibration = TRUE, points = TRUE,
-  ...)
+internal_redraw(image_file, flip = FALSE, rotate = 0,
+  plot_type = NULL, variable = NULL, cex = NULL, calpoints = NULL,
+  point_vals = NULL, raw_data = NULL, rotation = TRUE,
+  calibration = TRUE, points = TRUE, ...)
 }
 \arguments{
 \item{image_file}{Image filename}

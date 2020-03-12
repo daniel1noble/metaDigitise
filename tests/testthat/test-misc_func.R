@@ -132,7 +132,7 @@ testthat::test_that("Checking knownN..", {
 	testthat::with_mock(		
 		`metaDigitise::user_options` = function(...) "n",
 		testthat::evaluate_promise(testthat::expect_equal(
-		 	knownN(plot_type="scatterplot",processed_data=data.frame(id=rep(1,20), x=rep(1,20),y=rep(1,20)), knownN=NULL)
+		 	knownN(plot_type="scatterplot",processed_data=data.frame(id=rep(1,20), x=rep(1,20),y=rep(1,20), stringsAsFactors = TRUE), knownN=NULL)
 		 	,
 			NULL,
 			info = "knownN failed"
@@ -143,7 +143,7 @@ testthat::test_that("Checking knownN..", {
 		`metaDigitise::user_options` = function(...) "y",
 		`metaDigitise::user_count` = mockery::mock(40,30,20,10),
 		 testthat::evaluate_promise(testthat::expect_equal(
-		 	knownN(plot_type="scatterplot",processed_data=data.frame(id=rep(letters[4:1],5), x=rep(1,20),y=rep(1,20)), knownN=NULL)
+		 	knownN(plot_type="scatterplot",processed_data=data.frame(id=rep(letters[4:1],5), x=rep(1,20),y=rep(1,20), stringsAsFactors = TRUE), knownN=NULL)
 		 	,
 			c(d=40,c=30,b=20,a=10),
 			info = "knownN failed"
@@ -153,7 +153,7 @@ testthat::test_that("Checking knownN..", {
 	testthat::with_mock(
 		`metaDigitise::user_options` = function(...) "n",
 		 testthat::evaluate_promise(testthat::expect_equal(
-		 	knownN(plot_type="scatterplot",processed_data=data.frame(id=rep(letters[4:1],5), x=rep(1,20),y=rep(1,20)), knownN=c(40,30,20,10))
+		 	knownN(plot_type="scatterplot",processed_data=data.frame(id=rep(letters[4:1],5), x=rep(1,20),y=rep(1,20), stringsAsFactors = TRUE), knownN=c(40,30,20,10))
 		 	,
 			NULL,
 			info = "knownN failed"
@@ -164,7 +164,7 @@ testthat::test_that("Checking knownN..", {
 		`metaDigitise::user_options` = function(...) "y",
 		`metaDigitise::user_count` = mockery::mock(40,30,20,10),
 		 testthat::evaluate_promise(testthat::expect_equal(
-		 	knownN(plot_type="scatterplot",processed_data=data.frame(id=rep(letters[4:1],5), x=rep(1,20),y=rep(1,20)), knownN=c(10,20,30,40))
+		 	knownN(plot_type="scatterplot",processed_data=data.frame(id=rep(letters[4:1],5), x=rep(1,20),y=rep(1,20), stringsAsFactors = TRUE), knownN=c(10,20,30,40))
 		 	,
 			c(d=40,c=30,b=20,a=10),
 			info = "knownN failed"
@@ -175,7 +175,7 @@ testthat::test_that("Checking knownN..", {
 		`metaDigitise::user_options` = function(...) "c",
 		`metaDigitise::user_count` = mockery::mock(40,30,20,10),
 		 testthat::evaluate_promise(testthat::expect_equal(
-		 	knownN(plot_type="scatterplot",processed_data=data.frame(id=rep(letters[4:1],5), x=rep(1,20),y=rep(1,20)), knownN=c(d=40,c=30,b=20,a=10))
+		 	knownN(plot_type="scatterplot",processed_data=data.frame(id=rep(letters[4:1],5), x=rep(1,20),y=rep(1,20), stringsAsFactors = TRUE), knownN=c(d=40,c=30,b=20,a=10))
 		 	,
 			c(d=40,c=30,b=20,a=10),
 			info = "knownN failed"

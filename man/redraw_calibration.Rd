@@ -4,8 +4,8 @@
 \alias{redraw_calibration}
 \title{redraw_calibration}
 \usage{
-redraw_calibration(plot_type, variable, calpoints, point_vals, image_details,
-  cex)
+redraw_calibration(plot_type, variable, calpoints, point_vals,
+  image_details, cex)
 }
 \arguments{
 \item{plot_type}{plot_type}

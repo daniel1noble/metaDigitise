@@ -41,7 +41,7 @@ Extracts data from a directory that has been previously digitised using metaDigi
 						error=0.25, 
 						n=20, 	
 						variable="y", 
-						stringsAsFactors = FALSE)	
+						stringsAsFactors = TRUE)	
 					)
 class(mock_metaDig) <- 'metaDigitise'
 

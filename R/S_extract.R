@@ -32,7 +32,7 @@ edit_group <- function(raw_data, group_id, calpoints, cex, ...){
 
 
 	if(!is.null(group_id)) {
-		group_data <- data.frame()
+		group_data <- data.frame(stringsAsFactors = TRUE)
 		i <- if(nrow(raw_data)==0){ 1 }else{ max(raw_data$group) + 1 }
 		add_removeQ <- "a"
 	}else{
@@ -64,7 +64,7 @@ edit_group <- function(raw_data, group_id, calpoints, cex, ...){
 				add_removeQ <- "b"
 			}
 			else{ 
-				group_data <- rbind(group_data, data.frame(id=group_id, x=select_points$x, y=select_points$y, group=i, col=cols[i], pch=pchs[i]) )
+				group_data <- rbind(group_data, data.frame(id=group_id, x=select_points$x, y=select_points$y, group=i, col=cols[i], pch=pchs[i], stringsAsFactors = TRUE) )
 			}
 		}
 
@@ -94,7 +94,7 @@ edit_group <- function(raw_data, group_id, calpoints, cex, ...){
 #' @param ... arguments passed to internal_redraw
 
 
-group_scatter_extract <- function(edit=FALSE, raw_data = data.frame(), cex, ...){
+group_scatter_extract <- function(edit=FALSE, raw_data = data.frame(stringsAsFactors = TRUE), cex, ...){
 
 	editQ <- if(edit){ "b" }else{ "a" }
 	if(!edit) cat("\nIf there are multiple groups, enter unique group identifiers (otherwise press enter)")

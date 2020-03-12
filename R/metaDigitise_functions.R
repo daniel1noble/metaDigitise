@@ -108,7 +108,7 @@ summary.metaDigitise<-function(object, ...){
 			error=pd$error, 
 			error_type=object$error_type,
 			n=pd$n,
-			r=NA
+			r=NA, stringsAsFactors = TRUE
 		)
 	}
 	
@@ -121,7 +121,7 @@ summary.metaDigitise<-function(object, ...){
 			error = rqm_to_sd(min=pd$min,LQ=pd$q1,UQ=pd$q3,max=pd$max,n=pd$n),
 			error_type = "sd",
 			n=pd$n,
-			r=NA
+			r=NA, stringsAsFactors = TRUE
 		)
 	}
 
@@ -135,9 +135,9 @@ summary.metaDigitise<-function(object, ...){
 						error = apply(z[,c("x","y")],2,stats::sd),
 						error_type = "sd",
 					 	n=ifelse(is.null(object$knownN), nrow(z), object$knownN[z$id[1]]),
-					 	r=stats::cor(z$x,z$y)
+					 	r=stats::cor(z$x,z$y), stringsAsFactors = TRUE
 					)
-				}),make.row.names=FALSE)))
+				}),make.row.names=FALSE)), stringsAsFactors = TRUE)
 	}
 
 	if (object$plot_type=="histogram"){

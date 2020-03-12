@@ -30,7 +30,7 @@ single_MB_extract <- function(plot_type,cex){
 #' @description Extraction of data from boxplots of mean_error plots, from multiple groups
 
 
-MB_extract <- function(edit=FALSE, plot_type, entered_N, raw_data = data.frame(), cex, ...){
+MB_extract <- function(edit=FALSE, plot_type, entered_N, raw_data = data.frame(stringsAsFactors = TRUE), cex, ...){
 
 	add_removeQ <- if(edit){ "b" }else{ "a" }
 	if(!edit) cat("\nIf there are multiple groups, enter unique group identifiers (otherwise press enter)")
@@ -41,7 +41,7 @@ MB_extract <- function(edit=FALSE, plot_type, entered_N, raw_data = data.frame()
 			group_id <- user_unique(paste("\nGroup identifier: "), unique(raw_data$id))
 			group_N <- if(entered_N){ user_count("\nGroup sample size: ") }else{ NA }
 			group_points <- single_MB_extract(plot_type, cex=cex)
-			raw_data <- rbind(raw_data, data.frame(id=group_id,x=group_points$x,y=group_points$y, n=group_N))
+			raw_data <- rbind(raw_data, data.frame(id=group_id,x=group_points$x,y=group_points$y, n=group_N, stringsAsFactors = TRUE))
 		}
 
 		if(add_removeQ=="e"){

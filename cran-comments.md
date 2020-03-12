@@ -9,6 +9,7 @@
 	- Fixed up notes across the board
 		- changed testthat and mockery to suggests and removed digitize package, which is no longer used
 		- exported functions from various packages in Rcode
+	-12 Mar 2020 - Debian problems. Need to add stringsAsFactors = TRUE to all data.frame, as.data.frame and any read.* functions to be explicit
 
 ## Test environments
 	- local Mac OSX High Sierra x86_64-apple-darwin15.6.0 (64-bit) - passed
