@@ -34,14 +34,14 @@ Extracts data from a directory that has been previously digitised using metaDigi
 						y=c(75,50), 
 						n=rep(20,2)),
 						knownN = NULL,
-						error_type="sd",
+						error_type="sd", 
 					processed_data=data.frame(
 						id=as.factor("control"),
 						mean=1.5, 
 						error=0.25, 
 						n=20, 	
 						variable="y", 
-						stringsAsFactors = TRUE)	
+						stringsAsFactors = FALSE)	
 					)
 class(mock_metaDig) <- 'metaDigitise'
 
