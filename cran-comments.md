@@ -9,7 +9,7 @@
 	- Fixed up notes across the board
 		- changed testthat and mockery to suggests and removed digitize package, which is no longer used
 		- exported functions from various packages in Rcode
-	-12 Mar 2020 - Debian problems. Need to add stringsAsFactors = TRUE to all data.frame, as.data.frame and any read.* functions to be explicit
+	-12 Mar 2020 - Debian problems.CRAN request to add stringsAsFactors = TRUE to all data.frame, as.data.frame and any read.* functions to be explicit. This is now done in anticipation for R 4.0.0 release and updates. Slight version update to 1.0.1
 
 ## Test environments
 	- local Mac OSX High Sierra x86_64-apple-darwin15.6.0 (64-bit) - passed
@@ -18,6 +18,7 @@
 	- Debian Linux x86_64-pc-linux-gnu (64-bit) - passed
 	- Ubuntu Linux 16.04 LTS, R-release, GCC - passed
 	- CentOS 6, stock R from EPEL - passed
+
 
 ## R CMD check results
 
