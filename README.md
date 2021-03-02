@@ -1,6 +1,7 @@
 # metaDigitise 
 [![Build Status](https://travis-ci.org/daniel1noble/metaDigitise.svg?branch=master)](https://travis-ci.org/daniel1noble/metaDigitise.svg?branch=master) 
 [![CRAN version](http://www.r-pkg.org/badges/version/metaDigitise)](https://cran.r-project.org/package=metaDigitise)
+[![Ask Us Anything\!](https://img.shields.io/badge/Ask%20us-anything-1abc9c.svg)](https://github.com/danie1noble/metaDigitise/issues/new)
 [![Downloads / month](https://cranlogs.r-pkg.org/badges/metaDigitise)](https://cran.r-project.org/package=metaDigitise)
 [![Total Downloads](https://cranlogs.r-pkg.org/badges/grand-total/metaDigitise)](https://cran.r-project.org/package=metaDigitise)
 [![codecov](https://codecov.io/gh/daniel1noble/metaDigitise/branch/master/graph/badge.svg)](https://codecov.io/gh/daniel1noble/metaDigitise)
