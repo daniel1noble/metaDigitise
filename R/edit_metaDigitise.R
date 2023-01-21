@@ -107,12 +107,12 @@ edit_metaDigitise <- function(object){
 
 	## ROTATION
 	rotQ <- user_options("\nEdit rotation? If yes, then the whole extraction will be redone (y/n) ", c("y","n"))
-	if(rotQ=="y") output <- internal_digitise(object$image_file)
+	if(rotQ=="y") output <- internal_digitise(object$image_file, cex=object$cex)
 
 
 	### plot type
 	ptQ <- user_options("\nChange plot type? If yes, then the whole extraction will be redone (y/n) ", c("y","n"))
-	if(ptQ=="y") output <- internal_digitise(object$image_file)
+	if(ptQ=="y") output <- internal_digitise(object$image_file, cex=object$cex)
 	
 
 	### variables
