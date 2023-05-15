@@ -1,5 +1,6 @@
 # metaDigitise 
-[![Build Status](https://travis-ci.org/daniel1noble/metaDigitise.svg?branch=master)](https://travis-ci.org/daniel1noble/metaDigitise.svg?branch=master) 
+[![R-CMD-check](https://github.com/daniel1noble/metaDigitise/actions/workflows/check-standard.yaml/badge.svg)](https://github.com/daniel1noble/metaDigitise/actions/workflows/check-standard.yaml)
+[![test-coverage](https://github.com/daniel1noble/metaDigitise/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/daniel1noble/metaDigitise/actions/workflows/test-coverage.yaml)
 [![CRAN version](http://www.r-pkg.org/badges/version/metaDigitise)](https://cran.r-project.org/package=metaDigitise)
 [![Ask Us Anything\ !](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)](https://github.com/daniel1noble/metaDigitise/issues/new)
 [![Downloads / month](https://cranlogs.r-pkg.org/badges/metaDigitise)](https://cran.r-project.org/package=metaDigitise)
