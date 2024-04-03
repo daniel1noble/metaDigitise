@@ -13,7 +13,7 @@
 
 # Table of contents
 1. [Introduction](#Introduction)
-2. [Citing metaDigitise](#citing)
+2. [Citing metaDigitise (and now ShinyDigitise)](#citing)
 3. [Installation](#Installation) 
 4. [Setting up directory structures](#P3)
 5. [Example of how it works](#P4)
@@ -26,7 +26,7 @@
 
 `metaDigitise` is an R package that provides functions for extracting raw data and summary statistics from figures in primary research papers. Often third party applications are used to do this (e.g., `graphClick` or `dataThief`), but the output from these are handled separately from the analysis package, making this process more laborious than it needs to be given that resulting output still requires substantial downstream processing to acquire the relevant statistics of interest. `metaDigitise` allows users to extract information from a figure or set of figures all within the R environment making data extraction, analysis and export more streamlined. It also provides users with options to conduct the necessary calculations on raw data immediately after extraction so that comparable summary statistics can be obtained quickly. Summaries will condense multiple figures into data frames or lists (depending on the type of figure) and these objects can easily be exported from R, or if using the raw data, analysed in any way the user desires. Conveniently, when needing to process many figures at different times `metaDigitise` will only import figures not already completed within a directory. This makes it easy to add new figures at anytime. `metaDigitise` has also been built for reproducibility in mind. It has functions that allow users to redraw their digitisations on figures, correct anything and access the raw calibration data which is written automatically for each figure that is digitised into a special `caldat` folder within the directory. This makes sharing figure digitisation and reproducing the work of others simple and easy and allows meta-analysts to update existing studies more easily.
 
-# Citing metaDigitise <a name="citing"></a>
+# Citing metaDigitise (and now ShinyDigitise) <a name="citing"></a>
 
 To cite metaDigitise in publications one can use the following reference:
 
@@ -35,6 +35,15 @@ Pick, J.L., Nakagawa, S., Noble D.W.A. (2019)
 Reproducible, flexible and high-throughput data extraction from primary 
 literature: The metaDigitise R package. Methods in Ecology and Evolution, 10:426–431 https://doi.org/10.1111/2041-210X.13118
 ```
+
+Note that we now have a sister package `ShinyDigitise` which provides users with a GUI (well Shiny) interface for figure extraction. `ShinyDigitise` makes use of `metaDigitise` under the good. If you would like to install that package please cons. There is also a video [tutorial](https://www.youtube.com/watch?v=b9KvRsO8SPY) that shows you how to use it. 
+
+If you use `ShinyDigitise` please cite the following paper:
+
+```
+ER Ivimey-Cook, DWA Noble, S Nakagawa, MJ Lajeunesse, JL Pick. 2023. Advice for improving the reproducibility of data extraction in meta-analysis. Research Synthesis Methods 14 (6), 911-915 https://doi.org/10.1002/jrsm.1663
+```
+
 # Installation <a name="Installation"></a>
 
 `metaDigitise` (v1.0.0) is now on CRAN and can be downloaded in R using:
