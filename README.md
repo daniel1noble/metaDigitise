@@ -36,12 +36,20 @@ Reproducible, flexible and high-throughput data extraction from primary
 literature: The metaDigitise R package. Methods in Ecology and Evolution, 10:426–431 https://doi.org/10.1111/2041-210X.13118
 ```
 
-Note that we now have a sister package `ShinyDigitise` which provides users with a GUI (well Shiny) interface for figure extraction. `ShinyDigitise` makes use of `metaDigitise` under the good. If you would like to install that package please cons. There is also a video [tutorial](https://www.youtube.com/watch?v=b9KvRsO8SPY) that shows you how to use it. 
+Note that we now have a sister package [`ShinyDigitise`](https://github.com/EIvimeyCook/shinyDigitise) which provides users with a GUI (well Shiny) interface for figure extraction. `ShinyDigitise` makes use of `metaDigitise` under the hood. If you would like to install that package please use the following code:
+
+```
+devtools::install_github("EIvimeyCook/ShinyDigitise")
+```
+
+There is also a video [tutorial](https://www.youtube.com/watch?v=b9KvRsO8SPY) that shows you how to use it. 
 
 If you use `ShinyDigitise` please cite the following paper:
 
 ```
-ER Ivimey-Cook, DWA Noble, S Nakagawa, MJ Lajeunesse, JL Pick. 2023. Advice for improving the reproducibility of data extraction in meta-analysis. Research Synthesis Methods 14 (6), 911-915 https://doi.org/10.1002/jrsm.1663
+ER Ivimey-Cook, DWA Noble, S Nakagawa, MJ Lajeunesse, JL Pick. 2023. 
+Advice for improving the reproducibility of data extraction in meta-analysis. Research Synthesis Methods 
+14 (6), 911-915 https://doi.org/10.1002/jrsm.1663
 ```
 
 # Installation <a name="Installation"></a>
