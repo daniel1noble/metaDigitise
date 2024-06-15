@@ -4,8 +4,14 @@
 \alias{MB_extract}
 \title{MB_extract}
 \usage{
-MB_extract(edit = FALSE, plot_type, entered_N,
-  raw_data = data.frame(stringsAsFactors = TRUE), cex, ...)
+MB_extract(
+  edit = FALSE,
+  plot_type,
+  entered_N,
+  raw_data = data.frame(stringsAsFactors = TRUE),
+  cex,
+  ...
+)
 }
 \arguments{
 \item{edit}{logical; whether in edit mode}
