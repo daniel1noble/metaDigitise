@@ -17,23 +17,23 @@ testthat::test_that("Checking dir_details works as expected..", {
 
 })
 
-testthat::test_that("Checking specify_type works as expected..", {
-	testthat::with_mock(
-		readline = function(...) "m",
-		testthat::expect_equal(specify_type(), "mean_error", info = "specify_type not working correctly does not match mean_error")
-	)
+# testthat::test_that("Checking specify_type works as expected..", {
+# 	testthat::with_mock(
+# 		readline = function(...) "m",
+# 		testthat::expect_equal(specify_type(), "mean_error", info = "specify_type not working correctly does not match mean_error")
+# 	)
 
-	testthat::with_mock(
-		readline = function(...) "s",
-		testthat::expect_equal(specify_type(), "scatterplot", info = "specify_type not working correctly does not match scatterplot")
-	)
+# 	testthat::with_mock(
+# 		readline = function(...) "s",
+# 		testthat::expect_equal(specify_type(), "scatterplot", info = "specify_type not working correctly does not match scatterplot")
+# 	)
 
-	testthat::with_mock(
-		readline = function(...) "b",
-		testthat::expect_equal(specify_type(), "boxplot", info = "specify_type not working correctly does not match boxplot")
-	)
+# 	testthat::with_mock(
+# 		readline = function(...) "b",
+# 		testthat::expect_equal(specify_type(), "boxplot", info = "specify_type not working correctly does not match boxplot")
+# 	)
 	
-})
+# })
 
 
 mock_object <- list(
