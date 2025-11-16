@@ -1,9 +1,9 @@
 
 citHeader("To cite metDigitise in publications use:") 
 
-citEntry(entry = "Article", 
+bibentry(entry = "Article", 
 title = "Reproducible, flexible and high throughput data extraction from primary literature: The metaDigitise R package",
-author = personList(as.person("Joel L. Pick"), as.person("Shinichi Nakagawa"), as.person("Daniel W.A. Noble")),
+author = c(as.person("Joel L. Pick"), as.person("Shinichi Nakagawa"), as.person("Daniel W.A. Noble")),
 journal = "Methods in Ecology and Evolution",
 year = "2019",
 pages = "426–4315",

@@ -1,11 +1,9 @@
 # metaDigitise 
 [![R-CMD-check](https://github.com/daniel1noble/metaDigitise/actions/workflows/check-standard.yaml/badge.svg)](https://github.com/daniel1noble/metaDigitise/actions/workflows/check-standard.yaml)
-[![test-coverage](https://github.com/daniel1noble/metaDigitise/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/daniel1noble/metaDigitise/actions/workflows/test-coverage.yaml)
 [![CRAN version](http://www.r-pkg.org/badges/version/metaDigitise)](https://cran.r-project.org/package=metaDigitise)
 [![Ask Us Anything\ !](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)](https://github.com/daniel1noble/metaDigitise/issues/new)
 [![Downloads / month](https://cranlogs.r-pkg.org/badges/metaDigitise)](https://cran.r-project.org/package=metaDigitise)
 [![Total Downloads](https://cranlogs.r-pkg.org/badges/grand-total/metaDigitise)](https://cran.r-project.org/package=metaDigitise)
-[![codecov](https://codecov.io/gh/daniel1noble/metaDigitise/branch/master/graph/badge.svg)](https://codecov.io/gh/daniel1noble/metaDigitise)
 ![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)
 
 
