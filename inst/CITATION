@@ -6,7 +6,7 @@ title = "Reproducible, flexible and high throughput data extraction from primary
 author = c(as.person("Joel L. Pick"), as.person("Shinichi Nakagawa"), as.person("Daniel W.A. Noble")),
 journal = "Methods in Ecology and Evolution",
 year = "2019",
-pages = "426–4315",
-doi = "https://doi.org/10.1111/2041-210X.13118", 
+pages = "426–431",
+doi = "10.1111/2041-210X.13118",
 textVersion = paste("Pick, J.L., Nakagawa, S., Noble D.W.A. (2019).", "Reproducible, flexible and high throughput data extraction from primary literature: The metaDigitise R package", "Methods in Ecology and Evolution, 10:426–431.", "DOI https://doi.org/10.1111/2041-210X.13118")
 )
